@@ -14,36 +14,75 @@
     return copy;
   }
 
-  function weightedIndex(items, random = Math.random) {
-    const total = items.reduce((sum, item) => sum + Math.max(0, Number(item.count) || 0), 0);
-    if (!items.length) return -1;
-    if (total <= 0) return Math.floor(random() * items.length);
-    let cursor = random() * total;
-    for (let index = 0; index < items.length; index += 1) {
-      cursor -= Math.max(0, Number(items[index].count) || 0);
-      if (cursor < 0) return index;
+  function requestedDifficultyCounts(manifest, roundSize, random) {
+    const shares = manifest.sampling_policy?.difficulty || {};
+    const difficulties = ['basic', 'intermediate', 'advanced'];
+    const rows = difficulties.map(name => {
+      const exact = Math.max(0, Number(shares[name]) || 0) * roundSize;
+      return { name, count: Math.floor(exact), remainder: exact % 1 };
+    });
+    let remaining = roundSize - rows.reduce((sum, row) => sum + row.count, 0);
+    const order = shuffled(rows, random).sort((a, b) => b.remainder - a.remainder);
+    for (const row of order) {
+      if (remaining <= 0) break;
+      row.count += 1;
+      remaining -= 1;
     }
-    return items.length - 1;
+    return Object.fromEntries(rows.map(row => [row.name, row.count]));
   }
 
-  function addCandidates(pool, selectedIds, selectedSentences, recent, target, random) {
-    if (target <= 0) return [];
+  function goldTarget(manifest, roundSize, random) {
+    const exact = Math.max(
+      0,
+      Math.min(1, Number(manifest.sampling_policy?.reviewed_item_weight) || 0)
+    ) * roundSize;
+    return Math.floor(exact) + (random() < exact % 1 ? 1 : 0);
+  }
+
+  function chooseQuestions(pool, {
+    target,
+    difficultyCounts,
+    selectedIds,
+    selectedSentences,
+    recentQuestionIds,
+    recentSentenceIds,
+    random,
+    relaxDifficulty = true
+  }) {
     const chosen = [];
-    const ordered = shuffled(pool, random);
+    const wanted = { ...difficultyCounts };
     const passes = [
-      question => !recent.has(question.id),
+      question => (
+        !recentQuestionIds.has(question.id)
+        && !recentSentenceIds.has(question.sentence_id)
+      ),
       () => true
     ];
-    for (const accept of passes) {
-      for (const question of ordered) {
-        if (chosen.length >= target) return chosen;
+    for (const acceptRecent of passes) {
+      for (const question of shuffled(pool, random)) {
+        if (chosen.length >= target) break;
         if (
-          !question
-          || !question.id
-          || !question.sentence_id
+          !question?.id
+          || !question?.sentence_id
           || selectedIds.has(question.id)
           || selectedSentences.has(question.sentence_id)
-          || !accept(question)
+          || !acceptRecent(question)
+          || (wanted[question.difficulty] ?? 0) <= 0
+        ) continue;
+        selectedIds.add(question.id);
+        selectedSentences.add(question.sentence_id);
+        wanted[question.difficulty] -= 1;
+        chosen.push(question);
+      }
+    }
+    if (relaxDifficulty && chosen.length < target) {
+      for (const question of shuffled(pool, random)) {
+        if (chosen.length >= target) break;
+        if (
+          !question?.id
+          || !question?.sentence_id
+          || selectedIds.has(question.id)
+          || selectedSentences.has(question.sentence_id)
         ) continue;
         selectedIds.add(question.id);
         selectedSentences.add(question.sentence_id);
@@ -53,113 +92,141 @@
     return chosen;
   }
 
-  async function collectFromTier({
-    shards,
-    target,
-    fetchShard,
-    recent,
-    selectedIds,
-    selectedSentences,
-    random
-  }) {
-    const remaining = [...shards];
-    const collected = [];
-    while (remaining.length && collected.length < target) {
-      const index = weightedIndex(remaining, random);
-      const [shard] = remaining.splice(index, 1);
-      const payload = await fetchShard(shard);
-      const questions = Array.isArray(payload?.questions) ? payload.questions : [];
-      collected.push(...addCandidates(
-        questions,
-        selectedIds,
-        selectedSentences,
-        recent,
-        target - collected.length,
-        random
-      ));
+  function takeDifficultyBudget(totalBudget, target) {
+    const total = Object.values(totalBudget).reduce((sum, count) => sum + count, 0);
+    if (!total || target <= 0) {
+      return Object.fromEntries(Object.keys(totalBudget).map(key => [key, 0]));
     }
-    return collected;
+    const rows = Object.entries(totalBudget).map(([name, count]) => ({
+      name,
+      count: Math.floor((count / total) * target),
+      remainder: ((count / total) * target) % 1
+    }));
+    let remaining = target - rows.reduce((sum, row) => sum + row.count, 0);
+    rows.sort((a, b) => b.remainder - a.remainder || a.name.localeCompare(b.name));
+    for (const row of rows) {
+      if (remaining <= 0) break;
+      row.count += 1;
+      remaining -= 1;
+    }
+    return Object.fromEntries(rows.map(row => [row.name, row.count]));
   }
 
   async function createRound({
     manifest,
     modeId,
     fetchShard,
-    recentIds = [],
+    fetchGold,
+    recent = { questionIds: [], sentenceIds: [] },
     random = Math.random
   }) {
     if (!manifest || !Array.isArray(manifest.shards)) {
       throw new Error('The question manifest is unavailable.');
     }
-    if (typeof fetchShard !== 'function') {
-      throw new Error('A shard loader is required.');
+    if (typeof fetchShard !== 'function' || typeof fetchGold !== 'function') {
+      throw new Error('Question loaders are required.');
     }
     const roundSize = Math.max(1, Number(manifest.round_size) || 10);
-    const modeShards = manifest.shards.filter(shard => shard.mode === modeId);
-    if (!modeShards.length) throw new Error('No questions are available for this mode.');
-
-    const reviewedShards = modeShards.filter(shard => shard.tier === 'reviewed-core');
-    const provisionalShards = modeShards.filter(shard => shard.tier !== 'reviewed-core');
-    const share = Math.min(
-      1,
-      Math.max(0, Number(manifest.sampling_policy?.reviewed_core_share) || 0)
+    const modeShards = shuffled(
+      manifest.shards.filter(shard => shard.mode === modeId),
+      random
     );
-    let reviewedTarget = 0;
-    if (reviewedShards.length && provisionalShards.length) {
-      reviewedTarget = Math.round(roundSize * share);
-    } else if (reviewedShards.length) {
-      reviewedTarget = roundSize;
-    }
-    const provisionalTarget = roundSize - reviewedTarget;
-    const recent = new Set(recentIds);
+    const difficultyBudget = requestedDifficultyCounts(manifest, roundSize, random);
     const selectedIds = new Set();
     const selectedSentences = new Set();
+    const recentQuestionIds = new Set(recent.questionIds || []);
+    const recentSentenceIds = new Set(recent.sentenceIds || []);
     const selected = [];
 
-    selected.push(...await collectFromTier({
-      shards: reviewedShards,
-      target: reviewedTarget,
-      fetchShard,
-      recent,
+    let goldQuestions = [];
+    try {
+      const gold = await fetchGold();
+      goldQuestions = (gold.questions || []).filter(question => question.mode === modeId);
+    } catch (_) {
+      goldQuestions = [];
+    }
+    const requestedGold = Math.min(goldTarget(manifest, roundSize, random), goldQuestions.length);
+    const goldBudget = takeDifficultyBudget(difficultyBudget, requestedGold);
+    const selectedGold = chooseQuestions(goldQuestions, {
+      target: requestedGold,
+      difficultyCounts: goldBudget,
       selectedIds,
       selectedSentences,
-      random
-    }));
-    selected.push(...await collectFromTier({
-      shards: provisionalShards,
-      target: provisionalTarget,
-      fetchShard,
-      recent,
-      selectedIds,
-      selectedSentences,
-      random
-    }));
+      recentQuestionIds,
+      recentSentenceIds,
+      random,
+      relaxDifficulty: true
+    });
+    selected.push(...selectedGold);
+    for (const question of selectedGold) {
+      difficultyBudget[question.difficulty] = Math.max(
+        0,
+        (difficultyBudget[question.difficulty] || 0) - 1
+      );
+    }
 
-    if (selected.length < roundSize) {
-      selected.push(...await collectFromTier({
-        shards: modeShards,
+    const shardPool = [];
+    const failures = [];
+    for (const shard of modeShards) {
+      if (selected.length >= roundSize) break;
+      try {
+        const payload = await fetchShard(shard);
+        shardPool.push(...(payload.questions || []));
+      } catch (error) {
+        failures.push(error);
+        continue;
+      }
+      const chosen = chooseQuestions(shardPool, {
         target: roundSize - selected.length,
-        fetchShard,
-        recent,
+        difficultyCounts: difficultyBudget,
         selectedIds,
         selectedSentences,
-        random
+        recentQuestionIds,
+        recentSentenceIds,
+        random,
+        relaxDifficulty: false
+      });
+      selected.push(...chosen);
+      for (const question of chosen) {
+        difficultyBudget[question.difficulty] = Math.max(
+          0,
+          (difficultyBudget[question.difficulty] || 0) - 1
+        );
+      }
+    }
+
+    if (selected.length < roundSize) {
+      selected.push(...chooseQuestions([...shardPool, ...goldQuestions], {
+        target: roundSize - selected.length,
+        difficultyCounts: {
+          basic: roundSize,
+          intermediate: roundSize,
+          advanced: roundSize
+        },
+        selectedIds,
+        selectedSentences,
+        recentQuestionIds,
+        recentSentenceIds,
+        random,
+        relaxDifficulty: true
       }));
     }
     if (selected.length < roundSize) {
+      const detail = failures.length ? ' Some question files could not be loaded.' : '';
       throw new Error(
-        `Only ${selected.length} unique sentence questions are available; ${roundSize} are required.`
+        `Only ${selected.length} unique sentence questions are available; `
+        + `${roundSize} are required.${detail}`
       );
     }
     return shuffled(selected, random).slice(0, roundSize);
   }
 
-  function appendRecent(existing, questionIds, limit = 500) {
-    const maximum = Math.min(500, Math.max(0, Number(limit) || 0));
+  function appendRecent(existing, ids, limit) {
+    const maximum = Math.max(0, Math.floor(Number(limit) || 0));
     if (!maximum) return [];
     const ordered = [];
     const seen = new Set();
-    for (const id of [...existing, ...questionIds]) {
+    for (const id of [...existing, ...ids]) {
       if (!id || seen.has(id)) continue;
       seen.add(id);
       ordered.push(id);
@@ -170,7 +237,8 @@
   return {
     appendRecent,
     createRound,
-    shuffled,
-    weightedIndex
+    goldTarget,
+    requestedDifficultyCounts,
+    shuffled
   };
 }));

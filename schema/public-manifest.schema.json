@@ -8,32 +8,41 @@
     "title",
     "language",
     "version",
+    "corpus_version",
+    "build_timestamp_utc",
     "round_size",
     "scoring",
     "sampling_policy",
     "modes",
     "totals",
+    "gold",
     "shards"
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "title": {
       "type": "string",
       "minLength": 1
     },
     "language": {
-      "type": "string",
-      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+      "const": "en"
     },
     "version": {
       "type": "string",
       "minLength": 1
     },
+    "corpus_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "build_timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
     "round_size": {
-      "type": "integer",
-      "minimum": 1
+      "const": 10
     },
     "scoring": {
       "type": "object"
@@ -41,19 +50,27 @@
     "sampling_policy": {
       "type": "object",
       "required": [
-        "reviewed_core_share",
-        "recent_history_limit"
+        "reviewed_item_weight",
+        "recent_question_ids_per_mode",
+        "recent_sentence_ids_per_mode",
+        "difficulty"
       ],
       "properties": {
-        "reviewed_core_share": {
+        "reviewed_item_weight": {
           "type": "number",
           "minimum": 0,
           "maximum": 1
         },
-        "recent_history_limit": {
+        "recent_question_ids_per_mode": {
           "type": "integer",
-          "minimum": 0,
-          "maximum": 500
+          "maximum": 250
+        },
+        "recent_sentence_ids_per_mode": {
+          "type": "integer",
+          "maximum": 150
+        },
+        "difficulty": {
+          "type": "object"
         }
       },
       "additionalProperties": false
@@ -66,69 +83,72 @@
     },
     "modes": {
       "type": "array",
-      "minItems": 1
+      "minItems": 3,
+      "maxItems": 3
     },
     "totals": {
       "type": "object",
       "required": [
         "sentences",
+        "corpus_sentences",
         "questions",
-        "teacher_reviewed",
-        "provisional",
-        "by_mode"
+        "reviewed_questions",
+        "by_mode",
+        "by_subskill",
+        "by_difficulty",
+        "by_source_corpus"
       ]
+    },
+    "gold": {
+      "$ref": "#/$defs/file"
     },
     "shards": {
       "type": "array",
       "items": {
-        "type": "object",
-        "required": [
-          "id",
-          "mode",
-          "tier",
-          "path",
-          "count",
-          "bytes",
-          "sha256"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "minLength": 1
+        "allOf": [
+          {
+            "$ref": "#/$defs/file"
           },
-          "mode": {
-            "enum": [
-              "parts-of-speech",
-              "sentence-elements",
-              "clauses"
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "mode",
+              "difficulty"
             ]
-          },
-          "tier": {
-            "enum": [
-              "reviewed-core",
-              "provisional"
-            ]
-          },
-          "path": {
-            "type": "string",
-            "minLength": 1
-          },
-          "count": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "bytes": {
-            "type": "integer",
-            "minimum": 1
-          },
-          "sha256": {
-            "type": "string",
-            "pattern": "^[a-f0-9]{64}$"
           }
-        },
-        "additionalProperties": false
+        ]
       }
     }
   },
-  "additionalProperties": false
+  "$defs": {
+    "file": {
+      "type": "object",
+      "required": [
+        "path",
+        "count",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500000
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    }
+  }
 }

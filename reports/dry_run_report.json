@@ -1,0 +1,246 @@
+{
+  "annotation": {
+    "annotation_conllu": "data/corpus/sentences_10k.conllu",
+    "annotation_jsonl": "data/corpus/sentences_10k.annotations.jsonl",
+    "batch_size": 100,
+    "completed_at_utc": "2026-07-26T17:51:44+00:00",
+    "gpu_used": true,
+    "hardware": {
+      "cuda_available": true,
+      "cuda_device": "NVIDIA RTX 2000 Ada Generation",
+      "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+    },
+    "model_bundle_sha256": "51f32c3b4b77d2a460e8aeaeb653dbd240ad270b7f8b42110f509ff87c483711",
+    "model_bytes": 336774269,
+    "package": "combined",
+    "processors": [
+      "tokenize",
+      "mwt",
+      "pos",
+      "lemma",
+      "depparse"
+    ],
+    "runtime_seconds": 42.035,
+    "sentence_count": 10000,
+    "stanza_version": "1.14.0",
+    "torch_version": "2.13.0+cu130"
+  },
+  "audit": {
+    "MASC": {
+      "documents": 390,
+      "raw_sentences": 36469,
+      "raw_tokens": 594220
+    },
+    "OANC": {
+      "audited_documents": 60,
+      "available_extracted_documents": 653,
+      "raw_sentences": 15874,
+      "raw_tokens": 408174
+    }
+  },
+  "browser": {
+    "about_scrolls": true,
+    "console_errors": 0,
+    "horizontal_overflow": false,
+    "initial_request_boundary": "manifest only; no gold or shard before mode start",
+    "rounds_completed": {
+      "desktop": 1,
+      "mobile": 1
+    },
+    "screenshots": [
+      "desktop-home.png",
+      "desktop-about.png",
+      "desktop-quiz.png",
+      "desktop-summary.png",
+      "mobile-home-390.png",
+      "mobile-about-390.png",
+      "mobile-quiz-390.png",
+      "mobile-summary-390.png"
+    ],
+    "widths_checked": [
+      320,
+      390,
+      768,
+      1440
+    ]
+  },
+  "generation": {
+    "accepted_by_label": {
+      "-ing clause": 642,
+      "Adjective": 1468,
+      "Adverb": 1459,
+      "Adverbial clause — function: A": 298,
+      "Auxiliary verb": 306,
+      "Complementizer": 497,
+      "Coordinator": 877,
+      "DO — Direct Object": 520,
+      "Determiner": 3607,
+      "IO — Indirect Object": 13,
+      "Infinitival marker": 1994,
+      "Interrogative subordinator": 22,
+      "Lexical verb": 1479,
+      "Modal auxiliary": 166,
+      "Nominal relative clause — function: S": 16,
+      "Noun": 3535,
+      "P — Predicator": 46,
+      "Particle": 36,
+      "Preposition": 1224,
+      "Pronoun": 3739,
+      "Proper noun": 1744,
+      "Relative adverb": 82,
+      "Relative clause — function: PostM": 212,
+      "Relative pronoun": 965,
+      "S — Subject": 8741,
+      "SC — Subject Complement": 47,
+      "Subordinating conjunction": 938,
+      "Subordinator": 185
+    },
+    "accepted_by_mode": {
+      "clauses": 5492,
+      "parts-of-speech": 19999,
+      "sentence-elements": 9367
+    },
+    "accepted_count": 34858,
+    "candidate_count": 35358,
+    "candidate_status_counts": {
+      "auto-high-confidence": 34858,
+      "needs-review": 500
+    },
+    "questions_per_sentence": {
+      "1": {
+        "percentage": 0.0,
+        "sentences": 0
+      },
+      "2": {
+        "percentage": 5.22,
+        "sentences": 522
+      },
+      "3+": {
+        "percentage": 94.78,
+        "sentences": 9478
+      }
+    },
+    "rejected_count": 0,
+    "review_needed_count": 500,
+    "sentence_count": 10000
+  },
+  "public": {
+    "corpus_sentence_count": 10000,
+    "initial_transfer_budget_bytes": 500000,
+    "initial_transfer_bytes": 100519,
+    "initial_transfer_within_budget": true,
+    "largest_shard_bytes": 273207,
+    "manifest_bytes": 32204,
+    "public_question_count": 35014,
+    "public_sentence_count": 10092,
+    "question_counts_by_mode": {
+      "clauses": 5554,
+      "parts-of-speech": 20049,
+      "sentence-elements": 9411
+    },
+    "reviewed_question_count": 106,
+    "shard_count": 89,
+    "shard_size_range_bytes": [
+      23772,
+      273207
+    ],
+    "smallest_shard_bytes": 23772,
+    "total_public_site_bytes": 21840699
+  },
+  "release": {
+    "bytes": 3948813,
+    "path": "reports/release/sentence-sense-detective-corpus-1.0.0.zip",
+    "sha256": "2bd3269bc9f9ce3f6db4df5ef95c1359477e4e8b8e53f8c4703c579535d93f4c"
+  },
+  "review": {
+    "full_rows": 35358,
+    "sample_bytes": 24644,
+    "sample_rows": 100,
+    "spreadsheet_error_scan": "passed",
+    "visual_render_check": "passed",
+    "workbook_bytes": 6365226
+  },
+  "selection": {
+    "by_difficulty": {
+      "advanced": 2000,
+      "basic": 3500,
+      "intermediate": 4500
+    },
+    "by_genre": {
+      "blog": 952,
+      "court": 150,
+      "debate": 150,
+      "email": 761,
+      "essay": 550,
+      "ficlets": 375,
+      "fiction": 416,
+      "government": 700,
+      "journal": 557,
+      "letters": 1144,
+      "movie-script": 330,
+      "newspaper": 791,
+      "nonfiction": 640,
+      "spoken": 340,
+      "technical": 1110,
+      "travel": 1034
+    },
+    "by_source": {
+      "MASC": 7781,
+      "OANC": 2219
+    },
+    "filter_version": "1.5.0",
+    "maximum_document_contribution": 75,
+    "oanc_fallback_needed": true,
+    "seed": 20260726,
+    "sentences": 10000,
+    "sha256": "004ba9c33cf1929490cac1881e9867a3eb466357471c3718a60b3aa3f75fe806"
+  },
+  "sources": [
+    {
+      "archive_bytes": 1351682,
+      "archive_filename": "masc_500k_texts.zip",
+      "archive_sha256": "0c3f1fd3314ee5ec09830d6f6b217c19a6899d1cabd22c42264578c3348b2d01",
+      "attribution": "Manually Annotated Sub-Corpus (MASC), Open American National Corpus project",
+      "corpus": "MASC",
+      "licence": "CC BY 3.0 US",
+      "official_page": "https://anc.org/data/masc/downloads/data-download/",
+      "resolved_download_url": "https://www.anc.org/MASC/download/masc_500k_texts.zip",
+      "retrieved_at_utc": "2026-07-26T16:50:56+00:00",
+      "tls_certificate_verified": false,
+      "used_sentence_count": 7781,
+      "version": "3.0.0"
+    },
+    {
+      "archive_bytes": 655230430,
+      "archive_filename": "OANC_GrAF.zip",
+      "archive_sha256": "5a26559a1becba41a527cb674fff4fb9c4fb70b276f60422c4f07a0ef23fd867",
+      "attribution": "Open American National Corpus",
+      "corpus": "OANC",
+      "licence": "Unrestricted use and redistribution for research and development, including commercial development (official OANC download terms)",
+      "official_page": "https://anc.org/data/oanc/download/",
+      "resolved_download_url": "https://www.anc.org/OANC/OANC_GrAF.zip",
+      "retrieved_at_utc": "2026-07-26T17:04:46+00:00",
+      "tls_certificate_verified": false,
+      "used_sentence_count": 2219,
+      "version": "GrAF release 2011-07-16"
+    }
+  ],
+  "status": "dry-run complete; not pushed or deployed",
+  "tests": {
+    "node_test": {
+      "failed": 0,
+      "passed": 13
+    },
+    "python_unittest": {
+      "failed": 0,
+      "passed": 31
+    },
+    "validators": [
+      "deterministic public build",
+      "canonical corpus",
+      "public shards",
+      "public content boundary",
+      "JavaScript syntax"
+    ]
+  }
+}

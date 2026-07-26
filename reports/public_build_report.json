@@ -1,0 +1,18 @@
+{
+  "corpus_sentence_count": 10000,
+  "initial_transfer_budget_bytes": 500000,
+  "initial_transfer_bytes": 100519,
+  "initial_transfer_within_budget": true,
+  "largest_shard_bytes": 273207,
+  "public_question_count": 35014,
+  "public_sentence_count": 10092,
+  "question_counts_by_mode": {
+    "clauses": 5554,
+    "parts-of-speech": 20049,
+    "sentence-elements": 9411
+  },
+  "reviewed_question_count": 106,
+  "shard_count": 89,
+  "smallest_shard_bytes": 23772,
+  "total_public_site_bytes": 21840699
+}

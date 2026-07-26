@@ -1,0 +1,35 @@
+{
+  "corpus_build_version": "1.0.0",
+  "project": "Sentence Sense Detective",
+  "selection_seed": 20260726,
+  "sources": [
+    {
+      "archive_bytes": 1351682,
+      "archive_filename": "masc_500k_texts.zip",
+      "archive_sha256": "0c3f1fd3314ee5ec09830d6f6b217c19a6899d1cabd22c42264578c3348b2d01",
+      "attribution": "Manually Annotated Sub-Corpus (MASC), Open American National Corpus project",
+      "corpus": "MASC",
+      "licence": "CC BY 3.0 US",
+      "official_page": "https://anc.org/data/masc/downloads/data-download/",
+      "resolved_download_url": "https://www.anc.org/MASC/download/masc_500k_texts.zip",
+      "retrieved_at_utc": "2026-07-26T16:50:56+00:00",
+      "tls_certificate_verified": false,
+      "used_sentence_count": 7781,
+      "version": "3.0.0"
+    },
+    {
+      "archive_bytes": 655230430,
+      "archive_filename": "OANC_GrAF.zip",
+      "archive_sha256": "5a26559a1becba41a527cb674fff4fb9c4fb70b276f60422c4f07a0ef23fd867",
+      "attribution": "Open American National Corpus",
+      "corpus": "OANC",
+      "licence": "Unrestricted use and redistribution for research and development, including commercial development (official OANC download terms)",
+      "official_page": "https://anc.org/data/oanc/download/",
+      "resolved_download_url": "https://www.anc.org/OANC/OANC_GrAF.zip",
+      "retrieved_at_utc": "2026-07-26T17:04:46+00:00",
+      "tls_certificate_verified": false,
+      "used_sentence_count": 2219,
+      "version": "GrAF release 2011-07-16"
+    }
+  ]
+}

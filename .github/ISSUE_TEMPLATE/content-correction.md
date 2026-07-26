@@ -10,6 +10,12 @@ Question ID:
 
 Mode:
 
-Page:
+Sentence:
 
-Suggested correction:
+Highlighted target:
+
+Displayed answer:
+
+App version:
+
+Report:

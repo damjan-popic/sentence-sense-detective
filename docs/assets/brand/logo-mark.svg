@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Sentence Sense Detective logo</title>
+  <desc id="desc">A magnifying glass examining a sentence with one highlighted word.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M155 154 L211 210" stroke="#24324a" stroke-width="34"/>
+    <path d="M159 158 L207 206" stroke="#314767" stroke-width="18"/>
+    <path d="M191 190 L207 206" stroke="#ded9ff" stroke-width="11"/>
+    <circle cx="105" cy="103" r="76" fill="#fffdf8" stroke="#24324a" stroke-width="12"/>
+    <circle cx="105" cy="103" r="64" fill="#cfeee5" stroke="#ffffff" stroke-width="4"/>
+    <circle cx="105" cy="103" r="50" fill="#fffdf8" stroke="#24324a" stroke-width="5"/>
+    <path d="M67 82 H91" stroke="#5d6878" stroke-width="7"/>
+    <rect x="99" y="70" width="42" height="22" rx="7" fill="#ffeaa6" stroke="#e0b943" stroke-width="2"/>
+    <path d="M67 107 H143" stroke="#5d6878" stroke-width="7"/>
+    <path d="M67 132 H121" stroke="#5d6878" stroke-width="7"/>
+    <path d="M189 38 C192 50 197 55 209 58 C197 61 192 66 189 78 C186 66 181 61 169 58 C181 55 186 50 189 38 Z" fill="#ffeaa6" stroke="#24324a" stroke-width="3"/>
+    <circle cx="41" cy="57" r="7" fill="#ded9ff" stroke="#24324a" stroke-width="3"/>
+  </g>
+</svg>

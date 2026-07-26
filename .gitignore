@@ -3,6 +3,12 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+.venv/
+.cache/
+external/
+*.inspect.ndjson
+*.part
+*.tmp
 playwright-report/
 test-results/
 internal/

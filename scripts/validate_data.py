@@ -26,17 +26,40 @@ EXPECTED_SENTENCES = 92
 REVIEWED_CONTRACT_HASH = "a6a15b586f8542e9792194e8f745951ef19c6030abf1fe1c71cdc8f41ff5d9a8"
 HIGHLIGHT_CONTRACT_HASH = "3688077b0bf6e345e98ef88e85afc734660a79cf893ff2a1c9ffbe09a92d3a39"
 QUESTION_CONTRACT_HASH = "e8a660c6e98830cdd272ccf665e8783b2771788bd27fd11ab05e03052fdb35ca"
-METHODOLOGY_PARAGRAPH = (
-    "<p>The English pilot began with 106 examples reviewed by an experienced grammar "
-    "teacher. Behind the scenes, we are testing how sentences annotated automatically "
-    "with Stanza and Universal Dependencies can be translated into the grammatical "
-    "categories students actually use in class. Students do not need to learn UD labels: "
-    "that technical layer belongs to corpus preparation, not to the learning task. The "
-    "reviewed examples remain our reference set; larger automatically prepared batches "
-    "are provisional until they are checked and corrected.</p>"
+METHODOLOGY_SECTION = (
+    '<section id="about-methodology">\n'
+    "      <h3>How the question bank is built</h3>\n"
+    "      <p>The English pilot began with 106 examples prepared and reviewed by Martin "
+    "Grad. To expand the bank, we use openly licensed language corpora and automatic "
+    "linguistic analysis with Stanza and Universal Dependencies to identify candidate "
+    "words, sentence elements, and clauses. These candidates are converted into the "
+    "grammatical terminology used in teaching, filtered, tested, and corrected over time. "
+    "The technical annotation is part of corpus preparation only: it is not the terminology "
+    "students are expected to learn.</p>\n"
+    "    </section>"
 )
+ALLOWLIST_START = "<!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->"
+ALLOWLIST_END = "<!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->"
 RAW_RELATIONS = re.compile(
     r"\b(?:nsubj|csubj|iobj|obj|obl|ccomp|xcomp|advcl|advmod|nmod|acl|amod)\b"
+)
+PUBLIC_PROHIBITED_PATTERNS = (
+    ("Stanza", re.compile(r"\bStanza\b", re.IGNORECASE)),
+    ("Universal Dependencies", re.compile(r"\bUniversal Dependencies\b", re.IGNORECASE)),
+    ("UD abbreviation", re.compile(r"\bUD\b")),
+    ("mapping terminology", re.compile(r"\b(?:re)?mapping\b", re.IGNORECASE)),
+    ("parser terminology", re.compile(r"\bparser\b", re.IGNORECASE)),
+    ("provisional terminology", re.compile(r"\bprovisional\b", re.IGNORECASE)),
+    ("manual review terminology", re.compile(r"\bmanual review\b", re.IGNORECASE)),
+    ("rule-based terminology", re.compile(r"\brule-based\b", re.IGNORECASE)),
+    (
+        "internal review status",
+        re.compile(
+            r"\b(?:martin-reviewed|auto-high-confidence|human-reviewed|needs-review|rejected)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    ("raw dependency relation", RAW_RELATIONS),
 )
 
 
@@ -52,6 +75,41 @@ def target_contract(sentence: str, spans: list[dict]) -> list[dict]:
         occurrence = sentence[:span["start"]].casefold().count(text.casefold())
         targets.append({"text": text, "occurrence": occurrence})
     return targets
+
+
+def validate_public_terms(index_html: str) -> list[str]:
+    """Validate the single exact methodology allowance and scan all other public text."""
+    errors: list[str] = []
+    if index_html.count(ALLOWLIST_START) != 1 or index_html.count(ALLOWLIST_END) != 1:
+        errors.append("the About methodology allowlist markers must each occur once")
+        stripped_index = index_html
+    else:
+        before, remainder = index_html.split(ALLOWLIST_START, 1)
+        allowed_block, after = remainder.split(ALLOWLIST_END, 1)
+        if allowed_block.strip() != METHODOLOGY_SECTION:
+            errors.append("the About methodology section differs from the authoritative copy")
+        stripped_index = before + after
+
+    public_text_files = {
+        ".html", ".js", ".css", ".json", ".webmanifest", ".txt", ".svg"
+    }
+    for path in DOCS.rglob("*"):
+        if not path.is_file() or path.suffix.casefold() not in public_text_files:
+            continue
+        text = stripped_index if path == DOCS / "index.html" else path.read_text(
+            encoding="utf-8", errors="replace"
+        )
+        if path != DOCS / "index.html" and (
+            ALLOWLIST_START in text or ALLOWLIST_END in text
+        ):
+            errors.append(
+                f"{path.relative_to(ROOT)}: methodology allowlist markers are only permitted in docs/index.html"
+            )
+        for label, pattern in PUBLIC_PROHIBITED_PATTERNS:
+            if pattern.search(text):
+                errors.append(f"{path.relative_to(ROOT)}: {label} appears outside the allowlist")
+                break
+    return errors
 
 
 def main() -> int:
@@ -158,36 +216,28 @@ def main() -> int:
 
     index_path = DOCS / "index.html"
     index_html = index_path.read_text(encoding="utf-8")
-    start_marker = "<!-- methodology-note:start -->"
-    end_marker = "<!-- methodology-note:end -->"
-    if index_html.count(start_marker) != 1 or index_html.count(end_marker) != 1:
-        errors.append("the About methodology whitelist markers must each occur once")
-        allowed_block = ""
-    else:
-        allowed_block = index_html.split(start_marker, 1)[1].split(end_marker, 1)[0].strip()
-        if allowed_block != METHODOLOGY_PARAGRAPH:
-            errors.append("the About methodology paragraph differs from the authoritative brief")
+    errors.extend(validate_public_terms(index_html))
 
     required_assets = (
-        "assets/logo-mark.svg",
-        "assets/favicon.svg",
-        "assets/favicon-16x16.png",
-        "assets/favicon-32x32.png",
-        "assets/apple-touch-icon.png",
-        "assets/icon-192.png",
-        "assets/icon-512.png",
-        "site.webmanifest",
+        "assets/brand/logo-mark.svg",
+        "assets/brand/favicon.svg",
+        "assets/brand/favicon-16x16.png",
+        "assets/brand/favicon-32x32.png",
+        "assets/brand/apple-touch-icon.png",
+        "assets/brand/icon-192.png",
+        "assets/brand/icon-512.png",
+        "assets/brand/site.webmanifest",
     )
     for relative in required_assets:
         if not (DOCS / relative).exists():
             errors.append(f"missing supplied brand asset: docs/{relative}")
     for reference in (
-        'src="assets/logo-mark.svg"',
-        'href="assets/favicon.svg"',
-        'href="assets/favicon-16x16.png"',
-        'href="assets/favicon-32x32.png"',
-        'href="assets/apple-touch-icon.png"',
-        'href="site.webmanifest"',
+        'src="assets/brand/logo-mark.svg"',
+        'href="assets/brand/favicon.svg"',
+        'href="assets/brand/favicon-16x16.png"',
+        'href="assets/brand/favicon-32x32.png"',
+        'href="assets/brand/apple-touch-icon.png"',
+        'href="assets/brand/site.webmanifest"',
     ):
         if reference not in index_html:
             errors.append(f"index.html does not reference {reference}")
@@ -197,29 +247,6 @@ def main() -> int:
         errors.append("the monolithic browser question payload is still referenced")
     if (DOCS / "data" / "questions.js").exists() or (DOCS / "data" / "questions.json").exists():
         errors.append("legacy monolithic public question files still exist")
-
-    public_text_files = {
-        ".html", ".js", ".css", ".json", ".webmanifest", ".txt", ".svg"
-    }
-    for path in DOCS.rglob("*"):
-        if not path.is_file() or path.suffix.casefold() not in public_text_files:
-            continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        if path == index_path and allowed_block:
-            text = text.replace(
-                f"{start_marker}\n      {allowed_block}\n      {end_marker}",
-                "",
-                1,
-            )
-        for label, pattern in (
-            ("Stanza", re.compile(r"\bStanza\b", re.IGNORECASE)),
-            ("Universal Dependencies", re.compile(r"\bUniversal Dependencies\b", re.IGNORECASE)),
-            ("UD abbreviation", re.compile(r"\bUD\b")),
-            ("raw dependency relation", RAW_RELATIONS),
-        ):
-            if pattern.search(text):
-                errors.append(f"{path.relative_to(ROOT)}: {label} appears outside the whitelist")
-                break
 
     app_js = (DOCS / "assets" / "app.js").read_text(encoding="utf-8")
     if "els.aboutVersion.textContent" not in app_js:

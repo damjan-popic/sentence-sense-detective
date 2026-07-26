@@ -6,12 +6,12 @@
   <meta name="description" content="Sentence Sense Detective is a free English grammar practice tool for parts of speech, sentence elements, and clauses.">
   <meta name="theme-color" content="#24324a">
   <title>Sentence Sense Detective</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="assets/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/brand/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+  <link rel="manifest" href="assets/brand/site.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css?v=1.0.0">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to practice</a>
@@ -19,7 +19,7 @@
   <header class="topbar">
     <a class="brand" href="#" id="brand-home" aria-label="Sentence Sense Detective home">
       <span class="brand-mark" aria-hidden="true">
-        <img src="assets/logo-mark.svg" alt="" width="48" height="48">
+        <img src="assets/brand/logo-mark.svg" alt="" width="48" height="48">
       </span>
       <span>
         <strong>Sentence Sense Detective</strong>
@@ -178,26 +178,41 @@
     <form method="dialog">
       <button class="dialog-close" aria-label="Close about window">×</button>
     </form>
-    <p class="eyebrow">About Sentence Sense Detective</p>
-    <h2>Small rounds, useful feedback.</h2>
-    <p>Sentence Sense Detective is a lightweight classroom companion for practising parts of speech, sentence elements, and clause analysis.</p>
-    <ol>
-      <li>The target is highlighted for you.</li>
-      <li>A correct first answer earns one point.</li>
-      <li>After a mistake, you get one learning retry.</li>
-      <li>At the end, you can review everything you missed.</li>
-    </ol>
-    <section class="about-project" aria-labelledby="about-project-title">
-      <h3 id="about-project-title">How the question bank is built</h3>
-      <!-- methodology-note:start -->
-      <p>The English pilot began with 106 examples reviewed by an experienced grammar teacher. Behind the scenes, we are testing how sentences annotated automatically with Stanza and Universal Dependencies can be translated into the grammatical categories students actually use in class. Students do not need to learn UD labels: that technical layer belongs to corpus preparation, not to the learning task. The reviewed examples remain our reference set; larger automatically prepared batches are provisional until they are checked and corrected.</p>
-      <!-- methodology-note:end -->
+    <h2>About Sentence Sense Detective</h2>
+    <p>Sentence Sense Detective is a free grammar-practice tool developed at the Department of Translation Studies, Faculty of Arts, University of Ljubljana. It turns short, highlighted examples into ten-question practice rounds on parts of speech, sentence elements, and clauses. A correct first answer earns a point; after a mistake, the learner gets one unscored retry and a concise explanation.</p>
 
-      <h3>Our aim</h3>
-      <p>Our next target is an open corpus of roughly 10,000 annotated English sentences that can supply varied, randomly selected practice. The longer-term aim is a reusable multilingual tool for the languages taught at the Department of Translation and across the Faculty of Arts. The code and, wherever source licensing permits, the data will remain openly available on GitHub.</p>
-
-      <p class="pilot-version">English pilot · version <span id="about-version"></span></p>
+    <!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->
+    <section id="about-methodology">
+      <h3>How the question bank is built</h3>
+      <p>The English pilot began with 106 examples prepared and reviewed by Martin Grad. To expand the bank, we use openly licensed language corpora and automatic linguistic analysis with Stanza and Universal Dependencies to identify candidate words, sentence elements, and clauses. These candidates are converted into the grammatical terminology used in teaching, filtered, tested, and corrected over time. The technical annotation is part of corpus preparation only: it is not the terminology students are expected to learn.</p>
     </section>
+    <!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->
+
+    <section>
+      <h3>Our aim</h3>
+      <p>Our immediate aim is an open English practice corpus based on approximately 10,000 sentences, from which varied questions can be selected at random for short practice rounds. In the longer term, we want Sentence Sense Detective to become a reusable multilingual learning tool for the languages taught at the Department of Translation Studies and across the Faculty of Arts.</p>
+    </section>
+
+    <section>
+      <h3>About the authors</h3>
+      <div class="author-cards">
+        <article class="author-card">
+          <h4>Martin Grad — Principal author and grammar lead</h4>
+          <p><a href="https://www.ff.uni-lj.si/en/staff/martin-anton-grad" target="_blank" rel="noopener noreferrer">Martin Grad</a> teaches English language and grammar at the Department of Translation Studies, Faculty of Arts, University of Ljubljana. He defines the grammatical framework, prepares and reviews the core examples, and is responsible for the pedagogical analyses and explanations.</p>
+        </article>
+        <article class="author-card">
+          <h4>Damjan Popič — Co-author and project lead</h4>
+          <p><a href="https://www.ff.uni-lj.si/zaposleni/damjan-popic" target="_blank" rel="noopener noreferrer">Damjan Popič</a> is a linguist and language-technology researcher at the Department of Translation Studies and the University of Ljubljana Faculty of Computer and Information Science. He is responsible for the corpus workflow, digital development, open infrastructure, and the planned multilingual expansion.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h3>Sources, openness, and privacy</h3>
+      <p>The code and, wherever source licences permit, the derived learning data are openly available through the project’s GitHub repository. Corpus sources and licences are documented on the <a href="credits.html">Sources and licences page</a>. The practice site requires no account and uses no analytics or tracking; progress is stored only in the learner’s browser.</p>
+    </section>
+
+    <p class="pilot-version">English pilot · Version <span id="about-version"></span></p>
   </dialog>
 
   <script src="assets/round-state.js"></script>

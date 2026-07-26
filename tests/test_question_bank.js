@@ -7,8 +7,9 @@ const test = require('node:test');
 const bank = require('../docs/assets/question-bank.js');
 
 const root = path.resolve(__dirname, '..');
-const publicRoot = path.join(root, 'docs', 'data', 'en');
+const publicRoot = path.join(root, 'docs', 'data');
 const manifest = JSON.parse(fs.readFileSync(path.join(publicRoot, 'manifest.json'), 'utf8'));
+const gold = JSON.parse(fs.readFileSync(path.join(publicRoot, manifest.gold.path), 'utf8'));
 const shardPayloads = new Map(
   manifest.shards.map(shard => [
     shard.id,
@@ -28,12 +29,17 @@ async function loadRealShard(shard) {
   return shardPayloads.get(shard.id);
 }
 
+async function loadGold() {
+  return gold;
+}
+
 test('every mode yields ten unique questions and ten unique sentence IDs', async () => {
   for (const mode of manifest.modes) {
     const round = await bank.createRound({
       manifest,
       modeId: mode.id,
       fetchShard: loadRealShard,
+      fetchGold: loadGold,
       random: seededRandom(17)
     });
     assert.equal(round.length, 10);
@@ -43,103 +49,97 @@ test('every mode yields ten unique questions and ten unique sentence IDs', async
   }
 });
 
-test('recent-question avoidance is best effort and never blocks a round', async () => {
+test('recent question and sentence avoidance is best effort', async () => {
   const modeId = 'parts-of-speech';
-  const recentIds = shardPayloads.get(
-    manifest.shards.find(shard => shard.mode === modeId).id
-  ).questions.map(question => question.id);
+  const recentQuestions = manifest.shards
+    .filter(shard => shard.mode === modeId)
+    .flatMap(shard => shardPayloads.get(shard.id).questions)
+    .slice(0, 500);
   const round = await bank.createRound({
     manifest,
     modeId,
     fetchShard: loadRealShard,
-    recentIds,
+    fetchGold: loadGold,
+    recent: {
+      questionIds: recentQuestions.map(question => question.id),
+      sentenceIds: recentQuestions.map(question => question.sentence_id)
+    },
     random: seededRandom(3)
   });
   assert.equal(round.length, 10);
 });
 
-test('recent history stays bounded at 500 IDs', () => {
-  const ids = Array.from({ length: 650 }, (_, index) => `question-${index}`);
-  const history = bank.appendRecent([], ids, 500);
-  assert.equal(history.length, 500);
-  assert.equal(history[0], 'question-150');
-  assert.equal(history.at(-1), 'question-649');
+test('recent histories remain independently bounded', () => {
+  const ids = Array.from({ length: 650 }, (_, index) => `item-${index}`);
+  const questionHistory = bank.appendRecent([], ids, 250);
+  const sentenceHistory = bank.appendRecent([], ids, 150);
+  assert.equal(questionHistory.length, 250);
+  assert.equal(questionHistory[0], 'item-400');
+  assert.equal(sentenceHistory.length, 150);
+  assert.equal(sentenceHistory[0], 'item-500');
 });
 
-test('weighted shard choice follows counts within statistical tolerance', () => {
-  const items = [{ count: 1 }, { count: 9 }];
+test('difficulty budgets allocate the whole ten-question round', () => {
+  const counts = bank.requestedDifficultyCounts(manifest, 10, seededRandom(7));
+  assert.equal(Object.values(counts).reduce((sum, count) => sum + count, 0), 10);
+  assert.equal(counts.advanced, 2);
+  assert.ok([3, 4].includes(counts.basic));
+  assert.ok([4, 5].includes(counts.intermediate));
+});
+
+test('reviewed sampling averages the configured 15 percent', () => {
   const random = seededRandom(29);
-  let second = 0;
   const trials = 10000;
+  let total = 0;
   for (let index = 0; index < trials; index += 1) {
-    if (bank.weightedIndex(items, random) === 1) second += 1;
+    total += bank.goldTarget(manifest, 10, random);
   }
-  const share = second / trials;
-  assert.ok(share > 0.88 && share < 0.92, `observed weighted share ${share}`);
+  assert.ok(Math.abs(total / trials - 1.5) < 0.03);
 });
 
-test('mixed banks retain the configured reviewed-core share', async () => {
-  const reviewedSource = shardPayloads.get(
-    manifest.shards.find(shard => shard.tier === 'reviewed-core').id
-  ).questions;
-  const reviewedSentenceIds = new Set();
-  const reviewed = reviewedSource.filter(question => {
-    if (reviewedSentenceIds.has(question.sentence_id)) return false;
-    reviewedSentenceIds.add(question.sentence_id);
-    return true;
-  }).slice(0, 20);
-  const provisionalSource = shardPayloads.get(
-    manifest.shards.find(shard => shard.tier === 'provisional').id
-  ).questions;
-  const provisionalSentenceIds = new Set(reviewed.map(question => question.sentence_id));
-  const provisional = provisionalSource.filter(question => {
-    if (provisionalSentenceIds.has(question.sentence_id)) return false;
-    provisionalSentenceIds.add(question.sentence_id);
-    return true;
-  }).slice(0, 20);
-  const mixedManifest = {
-    round_size: 10,
-    sampling_policy: { reviewed_core_share: 0.2 },
-    shards: [
-      { id: 'reviewed', mode: 'mixed', tier: 'reviewed-core', count: reviewed.length },
-      { id: 'provisional', mode: 'mixed', tier: 'provisional', count: provisional.length }
-    ]
-  };
-  const payloads = {
-    reviewed: { questions: reviewed },
-    provisional: { questions: provisional }
-  };
-  const reviewedIds = new Set(reviewed.map(question => question.id));
-  let reviewedTotal = 0;
-  const trials = 200;
-  for (let index = 0; index < trials; index += 1) {
-    const round = await bank.createRound({
-      manifest: mixedManifest,
-      modeId: 'mixed',
-      fetchShard: async shard => payloads[shard.id],
-      random: seededRandom(index + 1)
-    });
-    reviewedTotal += round.filter(question => reviewedIds.has(question.id)).length;
-  }
-  assert.ok(Math.abs(reviewedTotal / trials - 2) < 0.05);
-});
-
-test('a failed fetch is recoverable by retrying', async () => {
-  const modeId = 'clauses';
-  await assert.rejects(
-    bank.createRound({
-      manifest,
-      modeId,
-      fetchShard: async () => { throw new Error('offline'); },
-      random: seededRandom(4)
-    }),
-    /offline/
-  );
+test('a failed shard fetch is skipped when another shard can complete the round', async () => {
+  const modeId = 'parts-of-speech';
+  let failed = false;
   const round = await bank.createRound({
     manifest,
     modeId,
-    fetchShard: loadRealShard,
+    fetchGold: loadGold,
+    fetchShard: async shard => {
+      if (!failed) {
+        failed = true;
+        throw new Error('temporary offline failure');
+      }
+      return loadRealShard(shard);
+    },
     random: seededRandom(4)
+  });
+  assert.equal(round.length, 10);
+  assert.equal(failed, true);
+});
+
+test('loaded shard payloads are sufficient without further network access', async () => {
+  const modeId = 'clauses';
+  const cache = new Map();
+  await bank.createRound({
+    manifest,
+    modeId,
+    fetchGold: loadGold,
+    fetchShard: async shard => {
+      const payload = await loadRealShard(shard);
+      cache.set(shard.id, payload);
+      return payload;
+    },
+    random: seededRandom(9)
+  });
+  const round = await bank.createRound({
+    manifest,
+    modeId,
+    fetchGold: loadGold,
+    fetchShard: async shard => {
+      if (!cache.has(shard.id)) throw new Error('network disabled');
+      return cache.get(shard.id);
+    },
+    random: seededRandom(9)
   });
   assert.equal(round.length, 10);
 });

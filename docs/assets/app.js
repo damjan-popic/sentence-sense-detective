@@ -8,7 +8,7 @@
     return;
   }
 
-  const MANIFEST_URL = new URL('data/en/manifest.json', document.baseURI);
+  const MANIFEST_URL = new URL('data/manifest.json', document.baseURI);
   const STORAGE_KEY = 'sentence-sense-detective:progress:v1';
   const RECENT_KEY_PREFIX = 'sentence-sense-detective:recent:v1:';
   const MAX_CACHED_SHARDS = 2;
@@ -19,6 +19,7 @@
   let lastRequestedMode = null;
   let loadGeneration = 0;
   const shardCache = new Map();
+  let goldCache = null;
 
   const $ = id => document.getElementById(id);
   const els = {
@@ -141,20 +142,35 @@
 
   function loadRecent(modeId) {
     try {
-      const parsed = JSON.parse(localStorage.getItem(`${RECENT_KEY_PREFIX}${modeId}`) || '[]');
-      return Array.isArray(parsed) ? parsed.filter(value => typeof value === 'string') : [];
+      const parsed = JSON.parse(localStorage.getItem(`${RECENT_KEY_PREFIX}${modeId}`) || '{}');
+      return {
+        questionIds: Array.isArray(parsed.questionIds)
+          ? parsed.questionIds.filter(value => typeof value === 'string')
+          : [],
+        sentenceIds: Array.isArray(parsed.sentenceIds)
+          ? parsed.sentenceIds.filter(value => typeof value === 'string')
+          : []
+      };
     } catch (_) {
-      return [];
+      return { questionIds: [], sentenceIds: [] };
     }
   }
 
   function saveRecent(modeId, questions) {
-    const limit = manifest?.sampling_policy?.recent_history_limit ?? 500;
-    const recent = questionBank.appendRecent(
-      loadRecent(modeId),
-      questions.map(question => question.id),
-      limit
-    );
+    const existing = loadRecent(modeId);
+    const policy = manifest?.sampling_policy || {};
+    const recent = {
+      questionIds: questionBank.appendRecent(
+        existing.questionIds,
+        questions.map(question => question.id),
+        policy.recent_question_ids_per_mode ?? 250
+      ),
+      sentenceIds: questionBank.appendRecent(
+        existing.sentenceIds,
+        questions.map(question => question.sentence_id),
+        policy.recent_sentence_ids_per_mode ?? 150
+      )
+    };
     try {
       localStorage.setItem(`${RECENT_KEY_PREFIX}${modeId}`, JSON.stringify(recent));
     } catch (_) {
@@ -191,6 +207,21 @@
     return payload;
   }
 
+  async function fetchGold() {
+    if (goldCache) return goldCache;
+    const descriptor = manifest?.gold;
+    if (!descriptor?.path) throw new Error('The reviewed question set is unavailable.');
+    const payload = await fetchJson(new URL(descriptor.path, MANIFEST_URL));
+    if (
+      !Array.isArray(payload?.questions)
+      || payload.questions.length !== descriptor.count
+    ) {
+      throw new Error('The reviewed question set did not match its manifest entry.');
+    }
+    goldCache = payload;
+    return payload;
+  }
+
   function escapeHtml(value) {
     return String(value ?? '')
       .replaceAll('&', '&amp;')
@@ -208,6 +239,13 @@
       return bucket[0] % max;
     }
     return Math.floor(Math.random() * max);
+  }
+
+  function secureRandom() {
+    if (!window.crypto?.getRandomValues) return Math.random();
+    const bucket = new Uint32Array(1);
+    window.crypto.getRandomValues(bucket);
+    return bucket[0] / 0x100000000;
   }
 
   function shuffle(items) {
@@ -345,7 +383,9 @@
         manifest,
         modeId,
         fetchShard,
-        recentIds: loadRecent(modeId)
+        fetchGold,
+        recent: loadRecent(modeId),
+        random: secureRandom
       });
       if (generation !== loadGeneration) return;
       saveRecent(modeId, selected);
@@ -470,15 +510,21 @@
     if (!configuredUrl) return;
     try {
       const issueUrl = new URL(configuredUrl);
+      const highlightedTarget = (question.target_spans || [])
+        .map(span => [...question.sentence].slice(span.start, span.end).join(''))
+        .join(' … ');
       issueUrl.searchParams.set('title', `Question correction: ${question.id}`);
       issueUrl.searchParams.set(
         'body',
         [
           `Question ID: ${question.id}`,
           `Mode: ${question.mode}`,
-          `Page: ${window.location.href}`,
+          `Sentence: ${question.sentence}`,
+          `Highlighted target: ${highlightedTarget}`,
+          `Displayed answer: ${question.answer}`,
+          `App version: ${manifest?.version || 'unknown'}`,
           '',
-          'Suggested correction:',
+          'Report:',
           ''
         ].join('\n')
       );
@@ -751,6 +797,7 @@
         throw new Error('The question manifest is not valid.');
       }
       manifest = loaded;
+      goldCache = null;
       modes = loaded.modes;
       modeById = Object.fromEntries(modes.map(mode => [mode.id, mode]));
       roundSize = Math.max(1, Number(loaded.round_size) || 10);

@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.0.0
+
+- Guarded fused and nominal relatives, independent determinatives, and copular
+  verbs so ambiguous automatic analyses stay out of the public bank, and
+  excluded boundary punctuation from generated highlights.
+- Added a reproducible, resumable MASC 3.0.0-first corpus pipeline with a
+  written-OANC fallback, exact provenance, deterministic selection, and 10,000
+  unique English sentences.
+- Ran pinned local Stanza annotation and exported versioned JSONL and CoNLL-U
+  artifacts without exposing annotation internals in student exercises.
+- Generated conservative questions from the existing controlled vocabulary,
+  retained every sentence, and separated auto-accepted and review-needed items.
+- Added the full review workbook, deterministic 100-question review sample,
+  strict correction importer, and immutable index for all 106 reviewed cases.
+- Replaced the pilot-scale public bank with a direct manifest, reviewed gold
+  file, and bounded mode-specific shards suitable for GitHub Pages.
+- Added source credits, licences, release packaging, public size budgets,
+  deterministic reporting, and corpus-specific regression tests.
+- Integrated the final supplied logo/favicon family and exact About copy with a
+  narrow methodology-term allowlist.
+
 ## 0.3.0
 
 - Migrated all 156 targets from text/occurrence lookup to Unicode code-point offsets while preserving the complete legacy question and highlight fingerprints.

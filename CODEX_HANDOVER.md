@@ -1,6 +1,6 @@
 # Codex handover — Sentence Sense Detective
 
-`CODEX_HANDOVER_10K_OPEN_CORPUS.md` supersedes this handover and is the authoritative implementation brief. Read that file and `AGENTS.md` in full.
+`CODEX_HANDOVER_MASC_OANC_10K.md` supersedes this handover and `CODEX_HANDOVER_10K_OPEN_CORPUS.md`. Read `AGENTS.md`, this file, and the MASC/OANC handover in that order.
 
 ## Current implemented baseline
 
@@ -24,6 +24,6 @@
 - Retry and reveal score zero; there are no negative points.
 - Progress stays in browser storage.
 
-## Stop condition
+## Current corpus authority
 
-No 10,000-sentence source corpus has been supplied or created. Do not source, scrape, fabricate, generate, or publish one. The project team must supply corpus text and confirm its licensing before the pipeline can materialize it.
+The MASC/OANC handover authorizes local acquisition from the official ANC source, with MASC 3.0.0 first and written OANC only as a documented fallback. Its local-only dry-run stop condition remains in force.

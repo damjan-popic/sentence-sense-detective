@@ -5,13 +5,18 @@ import json
 import unittest
 from pathlib import Path
 
+import sys
+
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from validate_data import validate_public_terms  # noqa: E402
 HTML = (ROOT / "docs/index.html").read_text(encoding="utf-8")
 JS = (ROOT / "docs/assets/app.js").read_text(encoding="utf-8")
 ROUND_STATE = (ROOT / "docs/assets/round-state.js").read_text(encoding="utf-8")
 QUESTION_BANK = (ROOT / "docs/assets/question-bank.js").read_text(encoding="utf-8")
 CSS = (ROOT / "docs/assets/styles.css").read_text(encoding="utf-8")
-MANIFEST = json.loads((ROOT / "docs/data/en/manifest.json").read_text(encoding="utf-8"))
+MANIFEST = json.loads((ROOT / "docs/data/manifest.json").read_text(encoding="utf-8"))
 
 
 class PublicSiteTests(unittest.TestCase):
@@ -21,14 +26,17 @@ class PublicSiteTests(unittest.TestCase):
             ["Parts of Speech", "Sentence Elements", "Clauses"],
             [mode["title"] for mode in MANIFEST["modes"]],
         )
-        self.assertEqual(156, MANIFEST["totals"]["questions"])
-        self.assertEqual(92, MANIFEST["totals"]["sentences"])
+        self.assertEqual(10_000, MANIFEST["totals"]["corpus_sentences"])
+        self.assertEqual(106, MANIFEST["totals"]["reviewed_questions"])
+        self.assertGreaterEqual(MANIFEST["totals"]["questions"], 10_156)
+        self.assertGreaterEqual(MANIFEST["totals"]["sentences"], 10_000)
 
     def test_manifest_is_initial_payload_and_shards_are_lazy(self) -> None:
         self.assertNotIn("data/questions.js", HTML)
         self.assertNotIn("SENTENCE_SENSE_DATA", JS)
-        self.assertIn("data/en/manifest.json", JS)
+        self.assertIn("data/manifest.json", JS)
         self.assertIn("async function fetchShard", JS)
+        self.assertIn("async function fetchGold", JS)
         self.assertIn("MAX_CACHED_SHARDS = 2", JS)
         self.assertIn("loadModeRound(button.dataset.mode)", JS)
 
@@ -36,10 +44,17 @@ class PublicSiteTests(unittest.TestCase):
         public_fields = {
             "id", "sentence_id", "language", "mode", "subskill", "sentence",
             "target_spans", "prompt", "answer", "options", "explanation",
+            "difficulty",
         }
         seen = set()
+        gold_path = ROOT / "docs/data" / MANIFEST["gold"]["path"]
+        gold = json.loads(gold_path.read_text(encoding="utf-8"))
+        self.assertEqual(106, len(gold["questions"]))
+        for question in gold["questions"]:
+            self.assertEqual(public_fields, set(question))
+            seen.add(question["id"])
         for shard in MANIFEST["shards"]:
-            path = ROOT / "docs/data/en" / shard["path"]
+            path = ROOT / "docs/data" / shard["path"]
             content = path.read_bytes()
             self.assertEqual(shard["bytes"], len(content))
             self.assertEqual(shard["sha256"], hashlib.sha256(content).hexdigest())
@@ -49,7 +64,7 @@ class PublicSiteTests(unittest.TestCase):
                 self.assertEqual(public_fields, set(question))
                 self.assertNotIn(question["id"], seen)
                 seen.add(question["id"])
-        self.assertEqual(156, len(seen))
+        self.assertEqual(MANIFEST["totals"]["questions"], len(seen))
 
     def test_brand_and_favicon_assets(self) -> None:
         assets = (
@@ -58,18 +73,27 @@ class PublicSiteTests(unittest.TestCase):
             "icon-512.png",
         )
         for asset in assets:
-            self.assertTrue((ROOT / "docs/assets" / asset).is_file(), asset)
-        self.assertTrue((ROOT / "docs/site.webmanifest").is_file())
-        self.assertIn('src="assets/logo-mark.svg"', HTML)
+            self.assertTrue((ROOT / "docs/assets/brand" / asset).is_file(), asset)
+        self.assertTrue((ROOT / "docs/assets/brand/site.webmanifest").is_file())
+        self.assertIn('src="assets/brand/logo-mark.svg"', HTML)
         self.assertNotIn("🔎", HTML)
 
     def test_about_methodology_is_exact_and_version_is_dynamic(self) -> None:
-        self.assertEqual(1, HTML.count("<!-- methodology-note:start -->"))
-        self.assertEqual(1, HTML.count("<!-- methodology-note:end -->"))
-        self.assertIn("The English pilot began with 106 examples", HTML)
-        self.assertIn("Our next target is an open corpus of roughly 10,000", HTML)
+        self.assertEqual(1, HTML.count("<!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->"))
+        self.assertEqual(1, HTML.count("<!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->"))
+        self.assertIn("The English pilot began with 106 examples prepared and reviewed by Martin Grad.", HTML)
+        self.assertIn("Our immediate aim is an open English practice corpus based on approximately 10,000 sentences", HTML)
+        self.assertIn("Martin Grad — Principal author and grammar lead", HTML)
+        self.assertIn("Damjan Popič — Co-author and project lead", HTML)
+        self.assertIn('href="credits.html"', HTML)
         self.assertIn('id="about-version"', HTML)
         self.assertIn("els.aboutVersion.textContent = loaded.version", JS)
+        self.assertEqual([], validate_public_terms(HTML))
+
+    def test_methodology_allowlist_does_not_weaken_public_scan(self) -> None:
+        injected = HTML.replace("</main>", "<p>Stanza must stay out of exercises.</p></main>")
+        errors = validate_public_terms(injected)
+        self.assertTrue(any("appears outside the allowlist" in error for error in errors))
 
     def test_required_interactions_and_recoverable_loading_exist(self) -> None:
         for element_id in (
@@ -83,7 +107,8 @@ class PublicSiteTests(unittest.TestCase):
         self.assertIn("SentenceSenseRound", JS)
         self.assertIn("SentenceSenseQuestionBank", JS)
         self.assertIn("retry-available", ROUND_STATE)
-        self.assertIn("recent_history_limit", JS)
+        self.assertIn("recent_question_ids_per_mode", JS)
+        self.assertIn("recent_sentence_ids_per_mode", JS)
         self.assertIn("appendRecent", QUESTION_BANK)
 
     def test_accessibility_and_reduced_motion_contracts(self) -> None:
@@ -97,16 +122,24 @@ class PublicSiteTests(unittest.TestCase):
         self.assertIn("return prefersReducedMotion() ? 'auto' : 'smooth';", JS)
         self.assertIn("if (prefersReducedMotion()) return;", JS)
 
-    def test_report_link_prefill_excludes_student_state(self) -> None:
+    def test_report_link_contains_the_required_question_context(self) -> None:
         block = JS.split("function configureReportLink", 1)[1].split(
             "function showRetryFeedback", 1
         )[0]
         self.assertIn("Question ID:", block)
         self.assertIn("Mode:", block)
-        self.assertIn("Page:", block)
-        self.assertIn("Suggested correction:", block)
+        self.assertIn("Sentence:", block)
+        self.assertIn("Highlighted target:", block)
+        self.assertIn("Displayed answer:", block)
+        self.assertIn("App version:", block)
+        self.assertIn("Report:", block)
         for forbidden in ("selectedAnswer", "score:", "progress:", "navigator"):
             self.assertNotIn(forbidden, block)
+
+    def test_mobile_about_contract(self) -> None:
+        self.assertIn("max-height: min(86vh, 760px)", CSS)
+        self.assertIn("@media (max-width: 360px)", CSS)
+        self.assertIn(".author-cards { grid-template-columns: 1fr; }", CSS)
 
 
 if __name__ == "__main__":

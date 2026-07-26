@@ -1,0 +1,136 @@
+{
+  "dimensions": {
+    "clause_function": {
+      "labels": [
+        "A — Adverbial",
+        "DO — Direct Object",
+        "OC / Clausal object",
+        "PostM — Postmodifier",
+        "S — Subject",
+        "SC — Subject Complement"
+      ],
+      "mode": "clauses",
+      "prompts": [
+        "What function does the highlighted clause have in the larger sentence?"
+      ],
+      "subskill": "Clause function"
+    },
+    "clause_marker": {
+      "labels": [
+        "Complementizer",
+        "Infinitival marker",
+        "Interrogative subordinator",
+        "Preposition",
+        "Relative adverb",
+        "Relative pronoun",
+        "Subordinating conjunction",
+        "Zero marker"
+      ],
+      "mode": "clauses",
+      "prompts": [
+        "What type of clause marker is highlighted?"
+      ],
+      "subskill": "Clause marker"
+    },
+    "clause_structure": {
+      "labels": [
+        "-ing clause",
+        "Bare infinitival clause",
+        "Comparative clause",
+        "Finite that-clause",
+        "Finite wh-clause",
+        "Finite whether/if-clause",
+        "Finite zero-that clause",
+        "Preposition + -ing clause",
+        "Reduced / verbless clause",
+        "To-infinitival clause"
+      ],
+      "mode": "clauses",
+      "prompts": [
+        "What is the structure of the highlighted clause?"
+      ],
+      "subskill": "Clause structure"
+    },
+    "clause_type": {
+      "labels": [
+        "Adverbial clause — function: A",
+        "Appositive clause",
+        "Causal adverbial clause",
+        "Comparative clause — postmodifier of an adjective",
+        "Concessive adverbial clause",
+        "Conditional adverbial clause",
+        "Dependent verbal question — function: S",
+        "Main clause",
+        "Manner / comparison adverbial clause",
+        "Negative-conditional adverbial clause",
+        "Nominal clause — function: DO",
+        "Nominal clause — function: SC",
+        "Nominal clause — postmodifier of an adjective",
+        "Nominal relative clause — function: S",
+        "Non-restrictive relative clause — function: PostM",
+        "Place / free-choice adverbial clause",
+        "Purpose adverbial clause",
+        "Relative clause — function: PostM",
+        "Restrictive relative clause — function: PostM",
+        "Supplementive non-finite clause — function: A",
+        "Temporal adverbial clause"
+      ],
+      "mode": "clauses",
+      "prompts": [
+        "Which description best fits the highlighted clause?"
+      ],
+      "subskill": "Clause type"
+    },
+    "sentence_element": {
+      "labels": [
+        "A + A — two Adverbials",
+        "A — Adverbial",
+        "Context needed",
+        "DO — Direct Object",
+        "Formal S + Postponed S",
+        "IO — Indirect Object",
+        "OC — Object Complement",
+        "Operator",
+        "P — Predicator",
+        "S — Subject",
+        "SC — Subject Complement"
+      ],
+      "mode": "sentence-elements",
+      "prompts": [
+        "Can the highlighted phrase be assigned one clear sentence-element function from this sentence alone?",
+        "How should the two highlighted units be analysed?",
+        "What is the function of the highlighted word or phrase?",
+        "What is the function of the highlighted word?"
+      ],
+      "subskill": "Sentence elements"
+    },
+    "word_class": {
+      "labels": [
+        "Adjective",
+        "Adverb",
+        "Auxiliary verb",
+        "Coordinator",
+        "Determiner",
+        "Infinitival marker",
+        "Lexical verb",
+        "Modal auxiliary",
+        "Noun",
+        "Particle",
+        "Preposition",
+        "Pronoun",
+        "Proper noun",
+        "Subordinator"
+      ],
+      "mode": "parts-of-speech",
+      "prompts": [
+        "Which part of speech is the highlighted word?"
+      ],
+      "subskill": "Parts of speech"
+    }
+  },
+  "language": "en",
+  "locked_reviewed_question_count": 106,
+  "operator_is_separate": true,
+  "source_question_count": 156,
+  "version": "1.0.0"
+}

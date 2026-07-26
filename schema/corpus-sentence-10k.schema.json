@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sentence Sense Detective selected corpus sentence",
+  "type": "object",
+  "required": [
+    "sentence_id",
+    "text",
+    "language",
+    "variety",
+    "source",
+    "selection"
+  ],
+  "properties": {
+    "sentence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "const": "en"
+    },
+    "variety": {
+      "const": "en-US"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "corpus",
+        "corpus_version",
+        "document_id",
+        "genre",
+        "source_path",
+        "licence",
+        "attribution",
+        "sentence_index"
+      ]
+    },
+    "selection": {
+      "type": "object",
+      "required": [
+        "seed",
+        "difficulty",
+        "filter_version"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

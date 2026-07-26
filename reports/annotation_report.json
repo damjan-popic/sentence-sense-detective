@@ -1,0 +1,26 @@
+{
+  "annotation_conllu": "data/corpus/sentences_10k.conllu",
+  "annotation_jsonl": "data/corpus/sentences_10k.annotations.jsonl",
+  "batch_size": 100,
+  "completed_at_utc": "2026-07-26T17:51:44+00:00",
+  "gpu_used": true,
+  "hardware": {
+    "cuda_available": true,
+    "cuda_device": "NVIDIA RTX 2000 Ada Generation",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+  },
+  "model_bundle_sha256": "51f32c3b4b77d2a460e8aeaeb653dbd240ad270b7f8b42110f509ff87c483711",
+  "model_bytes": 336774269,
+  "package": "combined",
+  "processors": [
+    "tokenize",
+    "mwt",
+    "pos",
+    "lemma",
+    "depparse"
+  ],
+  "runtime_seconds": 42.035,
+  "sentence_count": 10000,
+  "stanza_version": "1.14.0",
+  "torch_version": "2.13.0+cu130"
+}

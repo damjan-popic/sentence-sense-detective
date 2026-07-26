@@ -1,0 +1,66 @@
+{
+  "download_checked_at_utc": "2026-07-26T16:56:00+00:00",
+  "hardware": {
+    "cuda_available": true,
+    "cuda_device": "NVIDIA RTX 2000 Ada Generation",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+  },
+  "language": "en",
+  "model_bundle_sha256": "51f32c3b4b77d2a460e8aeaeb653dbd240ad270b7f8b42110f509ff87c483711",
+  "model_bytes": 336774269,
+  "model_directory": "/home/damjan/stanza_resources",
+  "model_file_count": 8,
+  "model_files": [
+    {
+      "bytes": 22743430,
+      "path": "en/backward_charlm/1billion.pt",
+      "sha256": "5d8cb2306650e4fc2b4f7517cc0fb33b38269e05bbf8d05e712e481471052225"
+    },
+    {
+      "bytes": 142301116,
+      "path": "en/depparse/combined_charlm.pt",
+      "sha256": "862b1edda8fc9c371164650d4fbeb222f27b8da86ebfce696a87d478ea036fae"
+    },
+    {
+      "bytes": 22743428,
+      "path": "en/forward_charlm/1billion.pt",
+      "sha256": "8a32ac2226dda8ea5d30f2a15fe3f835639977f299cfda315ce1b8a656596fd2"
+    },
+    {
+      "bytes": 2465184,
+      "path": "en/lemma/combined_nocharlm.pt",
+      "sha256": "775d42962ae209d4ff2fc3a799a9438333a44aa6ede3a7368dc07afd573d79d3"
+    },
+    {
+      "bytes": 509238,
+      "path": "en/mwt/combined.pt",
+      "sha256": "5f7579111def1f6212c98fa8154ff964bf0eafb9218845ecfa3a1d5a931be237"
+    },
+    {
+      "bytes": 38649906,
+      "path": "en/pos/combined_charlm.pt",
+      "sha256": "e9952f2e2943a583cb7af7150140ec66197bbe046b671fe020324b0f877190eb"
+    },
+    {
+      "bytes": 106701210,
+      "path": "en/pretrain/conll17.pt",
+      "sha256": "edde4c195f91ba45aab3f3a6254202011f284559da8a5ead5e62ce522f819c5e"
+    },
+    {
+      "bytes": 660757,
+      "path": "en/tokenize/combined_nocharlm.pt",
+      "sha256": "0b67d0cc24bf9461176d854ca891706616a6eea3a7f698ccf085fcf559fa87ec"
+    }
+  ],
+  "package": "combined",
+  "processors": [
+    "tokenize",
+    "mwt",
+    "pos",
+    "lemma",
+    "depparse"
+  ],
+  "resources_version": null,
+  "stanza_version": "1.14.0",
+  "torch_version": "2.13.0+cu130"
+}

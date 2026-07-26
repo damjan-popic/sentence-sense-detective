@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
@@ -12,7 +13,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_public_shards  # noqa: E402
+import select_sentences  # noqa: E402
 from build_question_bank import apply_corrections, build_questions  # noqa: E402
+from generate_questions import (  # noqa: E402
+    classify_pos,
+    clause_candidates,
+    contiguous_span,
+)
 from ingest_sentences import validate_and_transform  # noqa: E402
 
 
@@ -27,9 +34,139 @@ def read_jsonl(path: Path) -> list[dict]:
 SENTENCES = read_jsonl(ROOT / "data/corpus/en/sentences-0001.jsonl")
 ANNOTATIONS = read_jsonl(ROOT / "data/annotations/en/pedagogical-annotations.jsonl")
 PROVISIONAL = read_jsonl(ROOT / "data/questions/en/provisional-0001.jsonl")
+TAGSET = json.loads(
+    (ROOT / "config/pedagogical_tagset_en.json").read_text(encoding="utf-8")
+)
 
 
 class PipelineTests(unittest.TestCase):
+    @staticmethod
+    def generated_sentence(sentence_id: str, text: str) -> dict:
+        return {
+            "sentence_id": sentence_id,
+            "text": text,
+            "source": {"genre": "test", "corpus": "MASC"},
+            "selection": {"difficulty": "intermediate"},
+        }
+
+    def test_nominal_relative_subject_is_not_mislabeled_as_postmodifier(self) -> None:
+        text = "What tomorrow will bring will come."
+        words = [
+            {"id": 1, "text": "What", "lemma": "what", "upos": "PRON",
+             "xpos": "WP", "head": 6, "deprel": "nsubj",
+             "start_char": 0, "end_char": 4},
+            {"id": 2, "text": "tomorrow", "lemma": "tomorrow", "upos": "NOUN",
+             "xpos": "NN", "head": 4, "deprel": "nsubj",
+             "start_char": 5, "end_char": 13},
+            {"id": 3, "text": "will", "lemma": "will", "upos": "AUX",
+             "xpos": "MD", "head": 4, "deprel": "aux",
+             "start_char": 14, "end_char": 18},
+            {"id": 4, "text": "bring", "lemma": "bring", "upos": "VERB",
+             "xpos": "VB", "head": 1, "deprel": "acl:relcl",
+             "start_char": 19, "end_char": 24},
+            {"id": 5, "text": "will", "lemma": "will", "upos": "AUX",
+             "xpos": "MD", "head": 6, "deprel": "aux",
+             "start_char": 25, "end_char": 29},
+            {"id": 6, "text": "come", "lemma": "come", "upos": "VERB",
+             "xpos": "VB", "head": 0, "deprel": "root",
+             "start_char": 30, "end_char": 34},
+            {"id": 7, "text": ".", "lemma": ".", "upos": "PUNCT",
+             "xpos": ".", "head": 6, "deprel": "punct",
+             "start_char": 34, "end_char": 35},
+        ]
+        candidates = clause_candidates(
+            self.generated_sentence("test-nominal-relative-subject", text),
+            words,
+            TAGSET,
+        )
+        self.assertEqual(1, len(candidates))
+        self.assertEqual(
+            "Nominal relative clause — function: S",
+            candidates[0]["answer"],
+        )
+        span = candidates[0]["target_spans"][0]
+        self.assertEqual(
+            "What tomorrow will bring",
+            text[span["start"]:span["end"]],
+        )
+
+    def test_non_subject_fused_relative_is_not_called_a_postmodifier(self) -> None:
+        text = "I bought what she recommended."
+        words = [
+            {"id": 1, "text": "I", "lemma": "I", "upos": "PRON",
+             "xpos": "PRP", "head": 2, "deprel": "nsubj",
+             "start_char": 0, "end_char": 1},
+            {"id": 2, "text": "bought", "lemma": "buy", "upos": "VERB",
+             "xpos": "VBD", "head": 0, "deprel": "root",
+             "start_char": 2, "end_char": 8},
+            {"id": 3, "text": "what", "lemma": "what", "upos": "PRON",
+             "xpos": "WP", "head": 2, "deprel": "obj",
+             "start_char": 9, "end_char": 13},
+            {"id": 4, "text": "she", "lemma": "she", "upos": "PRON",
+             "xpos": "PRP", "head": 5, "deprel": "nsubj",
+             "start_char": 14, "end_char": 17},
+            {"id": 5, "text": "recommended", "lemma": "recommend",
+             "upos": "VERB", "xpos": "VBD", "head": 3,
+             "deprel": "acl:relcl", "start_char": 18, "end_char": 29},
+            {"id": 6, "text": ".", "lemma": ".", "upos": "PUNCT",
+             "xpos": ".", "head": 2, "deprel": "punct",
+             "start_char": 29, "end_char": 30},
+        ]
+        candidates = clause_candidates(
+            self.generated_sentence("test-fused-relative-object", text),
+            words,
+            TAGSET,
+        )
+        self.assertEqual([], candidates)
+
+    def test_pos_guards_copulas_and_independent_determiners(self) -> None:
+        copula = {
+            "id": 1, "text": "is", "lemma": "be", "upos": "AUX",
+            "xpos": "VBZ", "head": 2, "deprel": "cop",
+        }
+        auxiliary = {
+            "id": 2, "text": "has", "lemma": "have", "upos": "AUX",
+            "xpos": "VBZ", "head": 3, "deprel": "aux",
+        }
+        independent_all = {
+            "id": 3, "text": "All", "lemma": "all", "upos": "DET",
+            "xpos": "DT", "head": 4, "deprel": "nsubj",
+        }
+        attributive_all = {
+            "id": 4, "text": "all", "lemma": "all", "upos": "DET",
+            "xpos": "DT", "head": 5, "deprel": "det",
+        }
+        by_id = {
+            item["id"]: item
+            for item in (copula, auxiliary, independent_all, attributive_all)
+        }
+        self.assertIsNone(classify_pos(copula, by_id))
+        self.assertEqual(
+            ("Auxiliary verb", "pos-primary-auxiliary"),
+            classify_pos(auxiliary, by_id),
+        )
+        self.assertIsNone(classify_pos(independent_all, by_id))
+        self.assertEqual(
+            ("Determiner", "pos-det"),
+            classify_pos(attributive_all, by_id),
+        )
+
+    def test_generated_span_excludes_boundary_punctuation(self) -> None:
+        words = [
+            {"id": 1, "text": ",", "upos": "PUNCT",
+             "start_char": 0, "end_char": 1},
+            {"id": 2, "text": "working", "upos": "VERB",
+             "start_char": 2, "end_char": 9},
+            {"id": 3, "text": "carefully", "upos": "ADV",
+             "start_char": 10, "end_char": 19},
+            {"id": 4, "text": ",", "upos": "PUNCT",
+             "start_char": 19, "end_char": 20},
+        ]
+        self.assertEqual(
+            {"start": 2, "end": 19},
+            contiguous_span(words),
+        )
+
     def test_ingestion_preserves_text_and_reports_exact_duplicates(self) -> None:
         source_rows = []
         for sentence in SENTENCES[:2]:
@@ -204,15 +341,64 @@ class PipelineTests(unittest.TestCase):
         second = build_public_shards.build_files()
         self.assertEqual(first, second)
 
-    def test_capacity_report_materializes_no_corpus(self) -> None:
+    def test_materialised_selection_is_exact_and_records_fallback(self) -> None:
         report = json.loads(
-            (ROOT / "reports/capacity-10000.json").read_text(encoding="utf-8")
+            (ROOT / "reports/selection_report.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(10_000, report["hypothetical_sentence_count"])
-        self.assertEqual(20, report["hypothetical_sentence_shards"])
-        self.assertFalse(report["corpus_materialized"])
-        self.assertFalse(report["corpus_supplied"])
-        self.assertIsNone(report["hypothetical_question_count"])
+        corpus_path = ROOT / "data/corpus/sentences_10k.jsonl"
+        self.assertEqual(10_000, report["accepted_sentence_count"])
+        self.assertEqual(10_000, report["unique_sentence_id_count"])
+        self.assertEqual(10_000, report["unique_normalized_text_count"])
+        self.assertTrue(report["oanc_fallback_needed"])
+        self.assertEqual(
+            hashlib.sha256(corpus_path.read_bytes()).hexdigest(),
+            report["selected_jsonl_sha256"],
+        )
+        corpus = read_jsonl(corpus_path)
+        for sentence in corpus:
+            self.assertIsNone(
+                select_sentences.UNSUITABLE_RE.search(sentence["text"]),
+                sentence["sentence_id"],
+            )
+            self.assertIsNone(
+                select_sentences.PUBLIC_TECHNICAL_RE.search(sentence["text"]),
+                sentence["sentence_id"],
+            )
+            self.assertIsNone(
+                select_sentences.MALFORMED_TEXT_RE.search(sentence["text"]),
+                sentence["sentence_id"],
+            )
+
+    def test_selection_rejects_public_technical_terms_and_profanity(self) -> None:
+        base = {
+            "words": [
+                {"text": "Students", "upos": "NOUN", "xpos": "NNS",
+                 "start_char": 0, "end_char": 8},
+                {"text": "review", "upos": "VERB", "xpos": "VBP",
+                 "start_char": 9, "end_char": 15},
+            ],
+        }
+        for text in (
+            "Students review the parser mapping in class.",
+            "Students review this goddamn example in class.",
+            "Students review a dierent example in class.",
+            "Students review the code. // This is a comment.",
+            "Students review several items:\n·first item\n·second item.",
+        ):
+            record = {**base, "text": text}
+            reasons = select_sentences.rejection_reasons(
+                record, minimum=1, maximum=40
+            )
+            self.assertTrue(
+                {
+                    "public_technical_terminology",
+                    "unsuitable_content",
+                    "source_extraction_artifact",
+                    "markup_or_formula",
+                    "header_or_list_fragment",
+                }
+                & set(reasons)
+            )
 
 
 if __name__ == "__main__":

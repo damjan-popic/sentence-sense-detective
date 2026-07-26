@@ -1,6 +1,6 @@
 # AGENTS.md — Sentence Sense Detective
 
-These instructions apply to every task in this repository. `CODEX_HANDOVER_10K_OPEN_CORPUS.md` is the newest authoritative brief; read it in full before changing the corpus architecture or public site.
+These instructions apply to every task in this repository. `CODEX_HANDOVER_MASC_OANC_10K.md` is the newest authoritative brief; read it in full after this file and `CODEX_HANDOVER.md` before changing the corpus architecture or public site.
 
 ## Product and content locks
 
@@ -13,7 +13,7 @@ These instructions apply to every task in this repository. `CODEX_HANDOVER_10K_O
 
 ## Public boundary
 
-- The only public allowance for `Stanza`, `Universal Dependencies`, or `UD` is the exact paragraph between `methodology-note:start` and `methodology-note:end` in `docs/index.html`.
+- The only public allowance for `Stanza` or `Universal Dependencies` is the exact approved section between `PUBLIC_METHODOLOGY_ALLOWLIST_START` and `PUBLIC_METHODOLOGY_ALLOWLIST_END` in `docs/index.html`.
 - Exercises, choices, feedback, summaries, and public question data must not contain raw dependency labels, transformation tables, confidence classes, private notes, reviewer identity, or development jargon.
 - Keep internal annotations, comments, rules, provenance maintenance fields, and review fields outside `docs/`.
 - Escape all content inserted into HTML.
@@ -21,19 +21,19 @@ These instructions apply to every task in this repository. `CODEX_HANDOVER_10K_O
 ## Data architecture
 
 - Canonical records are JSONL under `data/corpus`, `data/annotations`, and `data/questions`.
-- Public delivery uses `docs/data/en/manifest.json` and deterministic lazy-loaded shards. Do not restore a monolithic browser payload.
+- Public delivery uses `docs/data/manifest.json`, `docs/data/gold.json`, and deterministic lazy-loaded files under `docs/data/shards/`. Do not restore a monolithic browser payload.
 - Targets are Unicode code-point half-open ranges. Multiple spans represent discontinuous targets.
 - Every sentence requires source, licence, and attribution metadata. Rights that are pending, blocked, unknown, or incompatible must block public output.
-- Do not scrape, invent, generate, or silently choose a 10,000-sentence corpus. Use only team-supplied text with confirmed rights.
-- Public shards target 500 KB or less and fail above 1 MB. The manifest fails above 250 KB; `docs/` fails above 250 MB.
+- Use MASC 3.0.0 from the official ANC source first and the written OANC only if the documented MASC filters cannot supply 10,000 usable sentences. Never scrape replacement web text or fabricate corpus sentences.
+- Public shards must remain under 500 KB uncompressed. Initial HTML, CSS, JavaScript, and manifest transfer must remain under 500 KB uncompressed, excluding optional images.
 
 ## Interface and deployment
 
 - Keep the static, no-build, vanilla HTML/CSS/JavaScript path.
 - Maintain keyboard access, visible focus, semantic HTML, readable contrast, reduced-motion support, and no horizontal overflow at 390 px.
 - Initial page load fetches the manifest only. Mode selection loads shards with accessible Loading, Retry, and Return home states.
-- A round must contain ten unique question IDs and ten unique sentence IDs, use the selected mode only, retain the reviewed-core sampling policy, and keep recent history at no more than 500 IDs per mode.
-- Do not install dependencies, push, deploy, change Pages settings, or add a custom domain without explicit approval.
+- A round must contain ten unique question IDs and ten unique sentence IDs, use the selected mode only, retain the reviewed-core sampling policy, and keep recent history at no more than 250 question IDs and 150 sentence IDs per mode.
+- Keep corpus-only dependencies in a project `.venv` and `requirements-corpus.txt`. Do not push, deploy, change Pages settings, or add a custom domain until the required local dry-run report and review sample have been approved.
 
 ## Required checks
 

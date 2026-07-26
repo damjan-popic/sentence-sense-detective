@@ -1,0 +1,60 @@
+{
+  "available_document_count": 653,
+  "by_genre": {
+    "government": {
+      "documents": 11,
+      "sentences": 3270,
+      "tokens": 94608
+    },
+    "journal": {
+      "documents": 7,
+      "sentences": 3787,
+      "tokens": 87846
+    },
+    "letters": {
+      "documents": 8,
+      "sentences": 192,
+      "tokens": 4242
+    },
+    "nonfiction": {
+      "documents": 6,
+      "sentences": 2487,
+      "tokens": 63298
+    },
+    "technical": {
+      "documents": 14,
+      "sentences": 1826,
+      "tokens": 50484
+    },
+    "travel": {
+      "documents": 14,
+      "sentences": 4312,
+      "tokens": 107696
+    }
+  },
+  "candidate_file": "external/audit/oanc_sentence_candidates.jsonl",
+  "candidate_file_sha256": "7579a858ad47ffb06be3f5a9c9154393d3bb15a8df542ae4ac5d3963cdd767ce",
+  "corpus": "OANC",
+  "corpus_version": "GrAF release 2011-07-16",
+  "document_count": 60,
+  "document_failures": [],
+  "input_fingerprint_sha256": "7001e644ac069caf1ac84f91d39d7e3c88dc45f3c75001ca1432f05733fe867c",
+  "input_root": "external/oanc",
+  "invalid_sentence_offset_count": 0,
+  "raw_character_count": 2282788,
+  "raw_sentence_count": 15874,
+  "raw_token_count": 408174,
+  "runtime_seconds": 130.893,
+  "stanza": {
+    "gpu_used": true,
+    "model_bundle_sha256": "51f32c3b4b77d2a460e8aeaeb653dbd240ad270b7f8b42110f509ff87c483711",
+    "package": "combined",
+    "processors": [
+      "tokenize",
+      "mwt",
+      "pos",
+      "lemma"
+    ],
+    "version": "1.14.0"
+  }
+}

@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -22,10 +24,175 @@ VALID_DIMENSIONS = {
     "clause_function",
 }
 VALID_STATUSES = {"teacher-reviewed", "provisional"}
+GENERATED_STATUSES = {
+    "auto-high-confidence",
+    "human-reviewed",
+    "needs-review",
+    "rejected",
+}
 
 
 def duplicate_values(values: list[str]) -> list[str]:
     return sorted(value for value, count in Counter(values).items() if count > 1)
+
+
+def normalized_text(value: str) -> str:
+    return re.sub(r"\s+", " ", value).strip().casefold()
+
+
+def validate_expanded(data_root: Path, errors: list[str]) -> dict:
+    sentences_path = data_root / "corpus" / "sentences_10k.jsonl"
+    annotations_path = data_root / "corpus" / "sentences_10k.annotations.jsonl"
+    conllu_path = data_root / "corpus" / "sentences_10k.conllu"
+    candidates_path = data_root / "generated" / "question_candidates.jsonl"
+    accepted_path = data_root / "generated" / "accepted_questions.jsonl"
+    if not all(
+        path.exists()
+        for path in (
+            sentences_path,
+            annotations_path,
+            conllu_path,
+            candidates_path,
+            accepted_path,
+        )
+    ):
+        errors.append("the materialised 10K corpus outputs are incomplete")
+        return {}
+
+    sentences = read_jsonl(sentences_path)
+    sentence_by_id = {record.get("sentence_id"): record for record in sentences}
+    if len(sentences) != 10_000:
+        errors.append(f"expected 10,000 selected sentences, found {len(sentences)}")
+    if len(sentence_by_id) != len(sentences):
+        errors.append("10K sentence IDs are not unique")
+    normalized = [normalized_text(record.get("text", "")) for record in sentences]
+    if len(set(normalized)) != len(sentences):
+        errors.append("10K normalized sentence texts are not unique")
+    document_counts = Counter()
+    difficulty_counts = Counter()
+    source_counts = Counter()
+    excluded = {"spam", "twitter", "jokes"}
+    for record in sentences:
+        sentence_id = record.get("sentence_id", "<missing>")
+        if record.get("language") != "en" or record.get("variety") != "en-US":
+            errors.append(f"{sentence_id}: invalid language or variety")
+        source = record.get("source", {})
+        for field in (
+            "corpus",
+            "corpus_version",
+            "document_id",
+            "genre",
+            "source_path",
+            "licence",
+            "attribution",
+            "sentence_index",
+        ):
+            if source.get(field) in ("", None):
+                errors.append(f"{sentence_id}: missing source {field}")
+        if source.get("genre") in excluded:
+            errors.append(f"{sentence_id}: excluded source genre is present")
+        document_counts[(source.get("corpus"), source.get("document_id"))] += 1
+        difficulty = record.get("selection", {}).get("difficulty")
+        difficulty_counts[difficulty] += 1
+        source_counts[source.get("corpus")] += 1
+        if record.get("selection", {}).get("seed") != 20260726:
+            errors.append(f"{sentence_id}: selection seed changed")
+    if document_counts and max(document_counts.values()) > 75:
+        errors.append("a source document contributes more than 75 selected sentences")
+    if difficulty_counts != Counter(
+        {"basic": 3500, "intermediate": 4500, "advanced": 2000}
+    ):
+        errors.append(f"unexpected 10K difficulty distribution: {dict(difficulty_counts)}")
+
+    annotations = read_jsonl(annotations_path)
+    annotation_by_id = {record.get("sentence_id"): record for record in annotations}
+    if len(annotations) != 10_000 or set(annotation_by_id) != set(sentence_by_id):
+        errors.append("Stanza JSONL must cover every selected sentence exactly once")
+    for sentence_id, annotation in annotation_by_id.items():
+        source = sentence_by_id.get(sentence_id)
+        if not source:
+            continue
+        if annotation.get("text") != source.get("text"):
+            errors.append(f"{sentence_id}: annotation text differs from selected text")
+            continue
+        for token in annotation.get("tokens", []):
+            start, end = token.get("start_char"), token.get("end_char")
+            if (
+                not isinstance(start, int)
+                or not isinstance(end, int)
+                or not 0 <= start < end <= len(source["text"])
+                or source["text"][start:end] != token.get("text")
+            ):
+                errors.append(f"{sentence_id}: token character offsets do not align")
+                break
+        metadata = annotation.get("annotation", {})
+        if not metadata.get("stanza_version") or not metadata.get("model_bundle_sha256"):
+            errors.append(f"{sentence_id}: Stanza/model versions are missing")
+    conllu_text = conllu_path.read_text(encoding="utf-8")
+    if conllu_text.count("# sent_id = ") != 10_000:
+        errors.append("CoNLL-U output does not contain exactly 10,000 sentences")
+    for line_number, line in enumerate(conllu_text.splitlines(), 1):
+        if line and not line.startswith("#") and len(line.split("\t")) != 10:
+            errors.append(f"CoNLL-U line {line_number} does not have ten columns")
+            break
+
+    tagset = json.loads(
+        (ROOT / "config" / "pedagogical_tagset_en.json").read_text(encoding="utf-8")
+    )
+    labels = {
+        dimension: set(value["labels"])
+        for dimension, value in tagset["dimensions"].items()
+    }
+    candidates = read_jsonl(candidates_path)
+    accepted = read_jsonl(accepted_path)
+    candidate_ids = [record.get("question_id") for record in candidates]
+    if duplicate_values(candidate_ids):
+        errors.append("generated question IDs are not unique")
+    accepted_sentence_counts = Counter()
+    for question in candidates:
+        question_id = question.get("question_id", "<missing>")
+        if question.get("review_status") not in GENERATED_STATUSES:
+            errors.append(f"{question_id}: invalid generated review status")
+        if question.get("answer") not in labels.get(question.get("dimension"), set()):
+            errors.append(f"{question_id}: answer is outside controlled vocabulary")
+        options = question.get("options")
+        if not isinstance(options, list) or len(options) != 4 or len(set(options)) != 4:
+            errors.append(f"{question_id}: options must be four unique values")
+        elif question.get("answer") not in options:
+            errors.append(f"{question_id}: answer is absent from options")
+        sentence = sentence_by_id.get(question.get("sentence_id"))
+        if not sentence or sentence["text"] != question.get("sentence"):
+            errors.append(f"{question_id}: sentence text or ID is invalid")
+            continue
+        for span in question.get("target_spans", []):
+            if not (
+                isinstance(span.get("start"), int)
+                and isinstance(span.get("end"), int)
+                and 0 <= span["start"] < span["end"] <= len(sentence["text"])
+            ):
+                errors.append(f"{question_id}: target offsets are invalid")
+    for question in accepted:
+        accepted_sentence_counts[question.get("sentence_id")] += 1
+    if set(accepted_sentence_counts) != set(sentence_by_id):
+        errors.append("every selected sentence must yield at least one accepted question")
+
+    gold_path = data_root / "gold" / "reviewed_106.jsonl"
+    gold_index_path = data_root / "gold" / "index.json"
+    gold = read_jsonl(gold_path)
+    gold_index = json.loads(gold_index_path.read_text(encoding="utf-8"))
+    if len(gold) != 106 or gold_index.get("question_count") != 106:
+        errors.append("the immutable gold copy does not contain 106 questions")
+    if hashlib.sha256(gold_path.read_bytes()).hexdigest() != gold_index.get("sha256"):
+        errors.append("the immutable gold file hash differs from its index")
+
+    return {
+        "expanded_sentences": len(sentences),
+        "expanded_annotations": len(annotations),
+        "generated_candidates": len(candidates),
+        "accepted_questions": len(accepted),
+        "expanded_by_source": dict(sorted(source_counts.items())),
+        "expanded_by_difficulty": dict(sorted(difficulty_counts.items())),
+    }
 
 
 def validate(data_root: Path) -> tuple[list[str], dict]:
@@ -217,6 +384,7 @@ def validate(data_root: Path) -> tuple[list[str], dict]:
         "provisional": sum(q.get("review_status") == "provisional" for q in questions),
         "by_mode": dict(Counter(q.get("mode") for q in questions)),
     }
+    stats.update(validate_expanded(data_root, errors))
     return errors, stats
 
 

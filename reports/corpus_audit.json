@@ -1,0 +1,122 @@
+{
+  "by_genre": {
+    "blog": {
+      "documents": 21,
+      "sentences": 1811,
+      "tokens": 33658
+    },
+    "court": {
+      "documents": 2,
+      "sentences": 2158,
+      "tokens": 35366
+    },
+    "debate": {
+      "documents": 2,
+      "sentences": 2227,
+      "tokens": 36735
+    },
+    "email": {
+      "documents": 80,
+      "sentences": 2196,
+      "tokens": 35426
+    },
+    "essay": {
+      "documents": 8,
+      "sentences": 1468,
+      "tokens": 35774
+    },
+    "ficlets": {
+      "documents": 5,
+      "sentences": 3036,
+      "tokens": 34036
+    },
+    "fiction": {
+      "documents": 6,
+      "sentences": 2590,
+      "tokens": 39367
+    },
+    "government": {
+      "documents": 5,
+      "sentences": 1054,
+      "tokens": 28246
+    },
+    "jokes": {
+      "documents": 16,
+      "sentences": 2435,
+      "tokens": 34069
+    },
+    "journal": {
+      "documents": 9,
+      "sentences": 972,
+      "tokens": 24787
+    },
+    "letters": {
+      "documents": 49,
+      "sentences": 1382,
+      "tokens": 26688
+    },
+    "movie-script": {
+      "documents": 6,
+      "sentences": 2768,
+      "tokens": 28995
+    },
+    "newspaper": {
+      "documents": 52,
+      "sentences": 1325,
+      "tokens": 31407
+    },
+    "nonfiction": {
+      "documents": 5,
+      "sentences": 1276,
+      "tokens": 29848
+    },
+    "spam": {
+      "documents": 96,
+      "sentences": 1703,
+      "tokens": 26655
+    },
+    "spoken": {
+      "documents": 11,
+      "sentences": 2989,
+      "tokens": 30700
+    },
+    "technical": {
+      "documents": 8,
+      "sentences": 776,
+      "tokens": 22883
+    },
+    "travel": {
+      "documents": 7,
+      "sentences": 1213,
+      "tokens": 27801
+    },
+    "twitter": {
+      "documents": 2,
+      "sentences": 3090,
+      "tokens": 31779
+    }
+  },
+  "candidate_file": "external/audit/masc_sentence_candidates.jsonl",
+  "corpus": "MASC",
+  "corpus_version": "3.0.0",
+  "document_count": 390,
+  "document_failures": [],
+  "input_root": "external/masc-3.0.0/masc_500k_texts",
+  "invalid_sentence_offset_count": 0,
+  "raw_character_count": 3094329,
+  "raw_sentence_count": 36469,
+  "raw_token_count": 594220,
+  "runtime_seconds": 205.927,
+  "stanza": {
+    "gpu_used": true,
+    "model_bundle_sha256": "51f32c3b4b77d2a460e8aeaeb653dbd240ad270b7f8b42110f509ff87c483711",
+    "package": "combined",
+    "processors": [
+      "tokenize",
+      "mwt",
+      "pos",
+      "lemma"
+    ],
+    "version": "1.14.0"
+  }
+}

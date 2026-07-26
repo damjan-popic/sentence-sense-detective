@@ -41,6 +41,8 @@
           "answer",
           "options",
           "explanation"
+          ,
+          "difficulty"
         ],
         "properties": {
           "id": {
@@ -113,6 +115,13 @@
           "explanation": {
             "type": "string",
             "minLength": 1
+          },
+          "difficulty": {
+            "enum": [
+              "basic",
+              "intermediate",
+              "advanced"
+            ]
           }
         },
         "additionalProperties": false
