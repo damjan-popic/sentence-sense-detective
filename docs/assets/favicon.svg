@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sentence Sense Detective">
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M39 39 L55 55" stroke="#24324a" stroke-width="11"/>
+    <path d="M41 41 L53 53" stroke="#314767" stroke-width="5"/>
+    <circle cx="27" cy="27" r="21" fill="#cfeee5" stroke="#24324a" stroke-width="6"/>
+    <circle cx="27" cy="27" r="15" fill="#fffdf8" stroke="#ffffff" stroke-width="2"/>
+    <path d="M17 23 H24" stroke="#5d6878" stroke-width="3.5"/>
+    <rect x="28" y="18.5" width="10" height="8" rx="2.5" fill="#ffeaa6" stroke="#e0b943" stroke-width="1"/>
+    <path d="M17 31 H38" stroke="#5d6878" stroke-width="3.5"/>
+    <path d="M17 38 H31" stroke="#5d6878" stroke-width="3.5"/>
+  </g>
+</svg>

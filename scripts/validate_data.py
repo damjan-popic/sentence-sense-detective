@@ -1,185 +1,247 @@
 #!/usr/bin/env python3
-"""Validate Sentence Sense Detective data, public content, and deployment invariants."""
+"""Validate the locked English pilot and public-facing content boundaries."""
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-CANONICAL = ROOT / "data" / "questions.json"
-PUBLIC_JSON = ROOT / "docs" / "data" / "questions.json"
-DOCS = ROOT / "docs"
+from corpus_io import read_jsonl
 
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
 EXPECTED_MODE_COUNTS = {
     "parts-of-speech": 50,
     "sentence-elements": 44,
     "clauses": 62,
 }
 EXPECTED_REVIEWED = 106
-EXPECTED_PROVISIONAL_POS = 50
+EXPECTED_PROVISIONAL = 50
 EXPECTED_TOTAL = 156
-
-PROHIBITED_PUBLIC_PATTERNS = {
-    "annotation-system abbreviation": re.compile(r"\bUD\b", re.IGNORECASE),
-    "parser package name": re.compile(r"\bStanza\b", re.IGNORECASE),
-    "technical preparation term": re.compile(r"\bremap(?:ping|ped|s)?\b", re.IGNORECASE),
-    "technical transformation term": re.compile(r"\bmapping\b", re.IGNORECASE),
-    "parser internals": re.compile(r"\bparser\b", re.IGNORECASE),
-    "technical review class": re.compile(r"\bmanual[- ]review\b", re.IGNORECASE),
-    "technical rule class": re.compile(r"\brule[- ]based\b", re.IGNORECASE),
-    "private evaluation term": re.compile(r"\bgold (?:label|analysis|answer|case)\b", re.IGNORECASE),
-    "private preparation artifact": re.compile(
-        r"\b(?:spreadsheet|validation row|source review|review note|regression test)\b",
-        re.IGNORECASE,
-    ),
-    "draft product term": re.compile(r"\bscaffold\b", re.IGNORECASE),
-    "private review status": re.compile(r"\b(?:teacher-reviewed|provisional)\b", re.IGNORECASE),
-}
-
-
-def nth_index(haystack: str, needle: str, occurrence: int) -> int:
-    source = haystack.casefold()
-    target = needle.casefold()
-    start = 0
-    found = -1
-    for _ in range(occurrence + 1):
-        found = source.find(target, start)
-        if found < 0:
-            return -1
-        start = found + len(target)
-    return found
+EXPECTED_SENTENCES = 92
+REVIEWED_CONTRACT_HASH = "a6a15b586f8542e9792194e8f745951ef19c6030abf1fe1c71cdc8f41ff5d9a8"
+HIGHLIGHT_CONTRACT_HASH = "3688077b0bf6e345e98ef88e85afc734660a79cf893ff2a1c9ffbe09a92d3a39"
+QUESTION_CONTRACT_HASH = "e8a660c6e98830cdd272ccf665e8783b2771788bd27fd11ab05e03052fdb35ca"
+METHODOLOGY_PARAGRAPH = (
+    "<p>The English pilot began with 106 examples reviewed by an experienced grammar "
+    "teacher. Behind the scenes, we are testing how sentences annotated automatically "
+    "with Stanza and Universal Dependencies can be translated into the grammatical "
+    "categories students actually use in class. Students do not need to learn UD labels: "
+    "that technical layer belongs to corpus preparation, not to the learning task. The "
+    "reviewed examples remain our reference set; larger automatically prepared batches "
+    "are provisional until they are checked and corrected.</p>"
+)
+RAW_RELATIONS = re.compile(
+    r"\b(?:nsubj|csubj|iobj|obj|obl|ccomp|xcomp|advcl|advmod|nmod|acl|amod)\b"
+)
 
 
-def fail(errors: list[str], message: str) -> None:
-    errors.append(message)
+def compact_hash(value: object) -> str:
+    encoded = json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def target_contract(sentence: str, spans: list[dict]) -> list[dict]:
+    targets = []
+    for span in spans:
+        text = sentence[span["start"]:span["end"]]
+        occurrence = sentence[:span["start"]].casefold().count(text.casefold())
+        targets.append({"text": text, "occurrence": occurrence})
+    return targets
 
 
 def main() -> int:
     errors: list[str] = []
-    payload = json.loads(CANONICAL.read_text(encoding="utf-8"))
-    public = json.loads(PUBLIC_JSON.read_text(encoding="utf-8"))
-    questions = payload.get("questions", [])
+    sentence_records = []
+    for path in sorted((ROOT / "data" / "corpus" / "en").glob("sentences-*.jsonl")):
+        sentence_records.extend(read_jsonl(path))
+    sentence_by_id = {record["id"]: record for record in sentence_records}
+    annotations = read_jsonl(
+        ROOT / "data" / "annotations" / "en" / "pedagogical-annotations.jsonl"
+    )
+    annotation_by_id = {record["id"]: record for record in annotations}
+    reviewed = read_jsonl(ROOT / "data" / "questions" / "en" / "reviewed-core.jsonl")
+    provisional = []
+    for path in sorted((ROOT / "data" / "questions" / "en").glob("provisional-*.jsonl")):
+        provisional.extend(read_jsonl(path))
+    questions = provisional + reviewed
+    config = json.loads(
+        (ROOT / "data" / "questions" / "en" / "config.json").read_text(encoding="utf-8")
+    )
 
+    if len(sentence_records) != EXPECTED_SENTENCES:
+        errors.append(f"expected {EXPECTED_SENTENCES} unique sentences, found {len(sentence_records)}")
     if len(questions) != EXPECTED_TOTAL:
-        fail(errors, f"Expected {EXPECTED_TOTAL} canonical questions, found {len(questions)}")
-
-    ids = [question.get("id") for question in questions]
-    if len(ids) != len(set(ids)):
-        duplicates = [item for item, count in Counter(ids).items() if count > 1]
-        fail(errors, f"Duplicate question IDs: {duplicates}")
-
-    mode_counts = Counter(question.get("mode") for question in questions)
-    if dict(mode_counts) != EXPECTED_MODE_COUNTS:
-        fail(errors, f"Unexpected mode counts: {dict(mode_counts)}")
-
-    reviewed = [question for question in questions if question.get("status") == "teacher-reviewed"]
-    provisional = [question for question in questions if question.get("status") == "provisional-scaffold"]
+        errors.append(f"expected {EXPECTED_TOTAL} questions, found {len(questions)}")
     if len(reviewed) != EXPECTED_REVIEWED:
-        fail(errors, f"Expected {EXPECTED_REVIEWED} reviewed questions, found {len(reviewed)}")
-    if len(provisional) != EXPECTED_PROVISIONAL_POS:
-        fail(errors, f"Expected {EXPECTED_PROVISIONAL_POS} provisional POS questions, found {len(provisional)}")
+        errors.append(f"expected {EXPECTED_REVIEWED} reviewed questions, found {len(reviewed)}")
+    if len(provisional) != EXPECTED_PROVISIONAL:
+        errors.append(f"expected {EXPECTED_PROVISIONAL} provisional questions, found {len(provisional)}")
+    mode_counts = Counter(question["mode"] for question in questions)
+    if dict(mode_counts) != EXPECTED_MODE_COUNTS:
+        errors.append(f"unexpected mode counts: {dict(mode_counts)}")
+    if len({question["source_id"] for question in reviewed}) != EXPECTED_REVIEWED:
+        errors.append("all 106 reviewed source IDs must remain represented exactly once")
+    if any(question["mode"] == "parts-of-speech" for question in reviewed):
+        errors.append("reviewed source questions must remain in Sentence Elements or Clauses")
+    if any(question["mode"] != "parts-of-speech" for question in provisional):
+        errors.append("the 50 provisional pilot questions must remain Parts of Speech")
 
-    reviewed_source_ids = [question.get("source_id") for question in reviewed]
-    if len(set(reviewed_source_ids)) != EXPECTED_REVIEWED:
-        fail(errors, "Reviewed source IDs must be present exactly once")
-    if any(question.get("mode") == "parts-of-speech" for question in reviewed):
-        fail(errors, "Reviewed source questions must remain in Sentence Elements or Clauses")
-    if any(question.get("mode") != "parts-of-speech" for question in provisional):
-        fail(errors, "Provisional scaffold questions must remain in Parts of Speech")
-
+    joined = []
     for question in questions:
-        qid = question.get("id", "<missing>")
-        required = {
-            "id", "source_id", "language", "mode", "subskill", "sentence",
-            "targets", "prompt", "answer", "options", "explanation", "status"
+        sentence = sentence_by_id[question["sentence_id"]]["text"]
+        spans = annotation_by_id[question["annotation_id"]]["target_spans"]
+        joined.append(
+            {
+                **question,
+                "sentence": sentence,
+                "targets": target_contract(sentence, spans),
+            }
+        )
+    highlight_contract = [
+        {"id": q["id"], "sentence": q["sentence"], "targets": q["targets"]}
+        for q in joined
+    ]
+    full_contract = [
+        {
+            field: q[field]
+            for field in (
+                "id", "source_id", "mode", "subskill", "sentence",
+                "targets", "prompt", "answer",
+            )
         }
-        missing = sorted(required - set(question))
-        if missing:
-            fail(errors, f"{qid}: missing fields {missing}")
-            continue
-        if question["language"] != "en":
-            fail(errors, f"{qid}: current pilot must use language=en")
-        if len(question["options"]) != 4 or len(set(question["options"])) != 4:
-            fail(errors, f"{qid}: options must contain exactly four unique values")
-        if question["answer"] not in question["options"]:
-            fail(errors, f"{qid}: answer is missing from options")
-        if not question["targets"]:
-            fail(errors, f"{qid}: at least one target is required")
-        for target in question["targets"]:
-            text = str(target.get("text", ""))
-            occurrence = int(target.get("occurrence", 0))
-            if not text or nth_index(question["sentence"], text, occurrence) < 0:
-                fail(errors, f"{qid}: target {text!r} occurrence {occurrence} not found")
-        if not str(question["prompt"]).strip() or not str(question["explanation"]).strip():
-            fail(errors, f"{qid}: prompt and explanation must be non-empty")
+        for q in joined
+    ]
+    reviewed_contract = [
+        {
+            field: q[field]
+            for field in (
+                "id", "source_id", "mode", "subskill", "sentence",
+                "targets", "prompt", "answer",
+            )
+        }
+        for q in joined
+        if q["review_status"] == "teacher-reviewed"
+    ]
+    if compact_hash(highlight_contract) != HIGHLIGHT_CONTRACT_HASH:
+        errors.append("one or more of the 156 migrated highlights changed")
+    if compact_hash(full_contract) != QUESTION_CONTRACT_HASH:
+        errors.append("one or more pilot IDs, answers, prompts, or terminology choices changed")
+    if compact_hash(reviewed_contract) != REVIEWED_CONTRACT_HASH:
+        errors.append("the 106 reviewed mappings no longer match the locked contract")
 
-    operator = next((q for q in questions if q.get("id") == "SE-P-02"), None)
-    if not operator:
-        fail(errors, "SE-P-02 is missing")
-    else:
-        if operator.get("answer") != "Operator":
-            fail(errors, "SE-P-02 must use Operator as a separate answer category")
-        if operator.get("targets") != [{"text": "Did", "occurrence": 0}]:
-            fail(errors, "SE-P-02 must highlight Did only")
+    operator = next((question for question in joined if question["id"] == "SE-P-02"), None)
+    if not operator or operator["answer"] != "Operator" or operator["targets"] != [
+        {"text": "Did", "occurrence": 0}
+    ]:
+        errors.append("SE-P-02 must retain Operator and highlight Did only")
+    review_guard = next((question for question in joined if question["id"] == "REVIEW-01"), None)
+    if (
+        not review_guard
+        or review_guard["answer"] != "Context needed"
+        or "More context is needed" not in review_guard["explanation"]
+    ):
+        errors.append("the manual-review guard in REVIEW-01 must remain visible")
 
-    if payload.get("metadata", {}).get("round_size") != 10:
-        fail(errors, "Round size must remain 10")
-    scoring = payload.get("metadata", {}).get("scoring", {})
     expected_scoring = {
         "first_attempt_correct": 1,
         "retry_correct": 0,
         "show_answer": 0,
         "negative_points": False,
     }
-    if scoring != expected_scoring:
-        fail(errors, f"Unexpected scoring configuration: {scoring}")
+    if config.get("round_size") != 10 or config.get("scoring") != expected_scoring:
+        errors.append("round size or scoring changed")
 
-    public_questions = public.get("questions", [])
-    if len(public_questions) != EXPECTED_TOTAL:
-        fail(errors, "Public question count differs from canonical count")
-    public_ids = [question.get("id") for question in public_questions]
-    if public_ids != ids:
-        fail(errors, "Public question order or IDs differ from canonical data")
-    for question in public_questions:
-        forbidden_fields = {"source_id", "status", "teacher_comment", "private_note"}
-        leaked = sorted(forbidden_fields & set(question))
-        if leaked:
-            fail(errors, f"{question.get('id')}: public data leaks fields {leaked}")
+    index_path = DOCS / "index.html"
+    index_html = index_path.read_text(encoding="utf-8")
+    start_marker = "<!-- methodology-note:start -->"
+    end_marker = "<!-- methodology-note:end -->"
+    if index_html.count(start_marker) != 1 or index_html.count(end_marker) != 1:
+        errors.append("the About methodology whitelist markers must each occur once")
+        allowed_block = ""
+    else:
+        allowed_block = index_html.split(start_marker, 1)[1].split(end_marker, 1)[0].strip()
+        if allowed_block != METHODOLOGY_PARAGRAPH:
+            errors.append("the About methodology paragraph differs from the authoritative brief")
 
-    allowed_public_metadata = {
-        "title", "language", "version", "round_size", "question_count", "scoring"
+    required_assets = (
+        "assets/logo-mark.svg",
+        "assets/favicon.svg",
+        "assets/favicon-16x16.png",
+        "assets/favicon-32x32.png",
+        "assets/apple-touch-icon.png",
+        "assets/icon-192.png",
+        "assets/icon-512.png",
+        "site.webmanifest",
+    )
+    for relative in required_assets:
+        if not (DOCS / relative).exists():
+            errors.append(f"missing supplied brand asset: docs/{relative}")
+    for reference in (
+        'src="assets/logo-mark.svg"',
+        'href="assets/favicon.svg"',
+        'href="assets/favicon-16x16.png"',
+        'href="assets/favicon-32x32.png"',
+        'href="assets/apple-touch-icon.png"',
+        'href="site.webmanifest"',
+    ):
+        if reference not in index_html:
+            errors.append(f"index.html does not reference {reference}")
+    if "🔎" in index_html:
+        errors.append("the old emoji brand mark is still present")
+    if 'src="data/questions.js"' in index_html:
+        errors.append("the monolithic browser question payload is still referenced")
+    if (DOCS / "data" / "questions.js").exists() or (DOCS / "data" / "questions.json").exists():
+        errors.append("legacy monolithic public question files still exist")
+
+    public_text_files = {
+        ".html", ".js", ".css", ".json", ".webmanifest", ".txt", ".svg"
     }
-    unexpected_metadata = sorted(set(public.get("metadata", {})) - allowed_public_metadata)
-    if unexpected_metadata:
-        fail(errors, f"Public metadata leaks internal fields {unexpected_metadata}")
-
     for path in DOCS.rglob("*"):
-        if not path.is_file() or path.suffix.lower() not in {".html", ".js", ".css", ".json", ".txt"}:
+        if not path.is_file() or path.suffix.casefold() not in public_text_files:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
-        for label, pattern in PROHIBITED_PUBLIC_PATTERNS.items():
-            match = pattern.search(text)
-            if match:
-                relative = path.relative_to(ROOT)
-                fail(errors, f"{relative}: prohibited {label}: {match.group(0)!r}")
+        if path == index_path and allowed_block:
+            text = text.replace(
+                f"{start_marker}\n      {allowed_block}\n      {end_marker}",
+                "",
+                1,
+            )
+        for label, pattern in (
+            ("Stanza", re.compile(r"\bStanza\b", re.IGNORECASE)),
+            ("Universal Dependencies", re.compile(r"\bUniversal Dependencies\b", re.IGNORECASE)),
+            ("UD abbreviation", re.compile(r"\bUD\b")),
+            ("raw dependency relation", RAW_RELATIONS),
+        ):
+            if pattern.search(text):
+                errors.append(f"{path.relative_to(ROOT)}: {label} appears outside the whitelist")
+                break
 
-    if (DOCS / "teacher_notes.json").exists() or any("teacher_notes" in p.name for p in DOCS.rglob("*")):
-        fail(errors, "Private teacher notes must not exist under docs/")
+    app_js = (DOCS / "assets" / "app.js").read_text(encoding="utf-8")
+    if "els.aboutVersion.textContent" not in app_js:
+        errors.append("About version is not populated from public metadata")
+    if "MANIFEST_URL" not in app_js or "fetchShard" not in app_js:
+        errors.append("the manifest-and-shards loader is missing")
+    if not (ROOT / ".github" / "ISSUE_TEMPLATE" / "content-correction.md").exists():
+        errors.append("the content-correction issue template is missing")
+    for path in ROOT.rglob("*"):
+        if path.is_file() and "Zone.Identifier" in path.name:
+            errors.append(f"Windows Zone.Identifier artefact remains: {path.relative_to(ROOT)}")
 
     if errors:
-        print("Sentence Sense Detective validation failed:\n", file=sys.stderr)
+        print("Sentence Sense Detective validation failed:", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
-
-    print("Sentence Sense Detective validation passed.")
+    print("Sentence Sense Detective pilot validation passed.")
+    print(f"- Sentences: {len(sentence_records)}")
     print(f"- Questions: {len(questions)}")
     print(f"- Reviewed source cases: {len(reviewed)}")
-    print(f"- Provisional POS questions: {len(provisional)}")
+    print(f"- Provisional questions: {len(provisional)}")
     print(f"- Mode counts: {dict(mode_counts)}")
     return 0
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0
+
+- Migrated all 156 targets from text/occurrence lookup to Unicode code-point offsets while preserving the complete legacy question and highlight fingerprints.
+- Split 92 source sentences, 156 pedagogical annotations, 106 reviewed questions, and 50 provisional questions into separate canonical JSONL layers.
+- Replaced the monolithic browser payload with a deterministic manifest and three lazy-loaded public shards.
+- Added unique-question/unique-sentence round selection, reviewed-core sampling, bounded recent history, a two-shard cache, and recoverable loading states.
+- Integrated the supplied vector logo, SVG/PNG favicon set, web manifest, and exact About methodology/aim copy.
+- Added a privacy-safe content-correction link and issue template.
+- Added supplied-corpus ingestion, local pre-annotation, conservative candidate/question generation, file-based correction, canonical/public validation, and deterministic build checks.
+- Added a metadata-only 10,000-sentence capacity report. No new corpus was sourced, generated, or published.
+- Expanded regression coverage for data preservation, offsets, public boundaries, shard integrity, sampling, loading recovery, pipeline idempotence, and size budgets.
+
 ## 0.2.1
 
 - Audited all 156 questions and preserved every reviewed ID, target, answer, and terminology choice.

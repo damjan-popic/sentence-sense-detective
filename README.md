@@ -2,76 +2,97 @@
 
 **Spot it. Name it. Make it stick.**
 
-Sentence Sense Detective is a small, dependency-free grammar practice site for an English pilot. Students complete ten-question rounds in three modes:
+Sentence Sense Detective is a dependency-free grammar practice site. The English pilot contains 156 questions over 92 unique sentences:
 
-- **Parts of Speech** — 50 provisional scaffold questions;
-- **Sentence Elements** — 44 teacher-reviewed questions;
-- **Clauses** — 62 teacher-reviewed advanced questions covering clause type, marker, structure, and function.
+- 50 provisional Parts of Speech questions;
+- 44 teacher-reviewed Sentence Elements questions;
+- 62 teacher-reviewed Clauses questions.
 
-The 106 reviewed cases all come from the current instructor-reviewed source set. The parts-of-speech bank uses sentences from that same set and is deliberately marked as provisional in the internal data so it can be improved after the first classroom deployment.
-
-## Student experience
-
-- The target word, phrase, or clause is already highlighted.
-- A correct answer on the first attempt earns **1 point**.
-- After an incorrect answer, the student gets **one learning retry**, worth no point.
-- Revealing the answer earns no point.
-- There are no negative points.
-- A streak counts consecutive first-attempt correct answers.
-- Every round ends with a score, percentage, category breakdown, and a **Review mistakes** round.
-- Progress is stored only in the browser. There is no login, server, leaderboard, analytics, or tracking.
-
-`Operator` is a separate answer category in the sentence-elements mode.
+The 106 reviewed cases are preserved exactly. Students complete ten-question rounds with one learning retry, explanations, summaries, and mistake review. Progress stays in the browser; there is no account, backend, analytics, or tracking.
 
 ## Run locally
 
 ```bash
-python -m http.server 8000 --directory docs
+python3 -m http.server 8000 --directory docs
 ```
 
-Open `http://localhost:8000`.
+Open `http://localhost:8000`. Serving over HTTP is required because the browser loads the manifest and selected question shards with `fetch`.
 
 ## Validate
 
 ```bash
-python scripts/build_public_data.py --check
-python scripts/validate_data.py
-python -m unittest discover -s tests -v
+python3 scripts/build_public_shards.py --check
+python3 scripts/validate_corpus.py
+python3 scripts/validate_public_shards.py
+python3 scripts/validate_data.py
+python3 -m unittest discover -s tests -v
 node --check docs/assets/round-state.js
+node --check docs/assets/question-bank.js
 node --check docs/assets/app.js
-node --test tests/test_round_state.js
+node --test tests/test_round_state.js tests/test_question_bank.js
 ```
 
-## Repository layout
+## Data architecture
+
+Canonical records are newline-delimited JSON and keep the distinct data layers separate:
 
 ```text
-data/questions.json             canonical question bank
-docs/                           static GitHub Pages site
-docs/data/questions.js          browser-ready copy of the question bank
-docs/assets/round-state.js       testable scoring state transitions
-schema/question.schema.json      public question contract
-scripts/build_public_data.py     refreshes docs/data from data/questions.json
-scripts/validate_data.py         content and deployment checks
-tests/                           regression tests
-AGENTS.md                        persistent instructions for Codex
-CODEX_HANDOVER.md                locked product brief and acceptance criteria
+data/corpus/en/                     source sentences and corpus manifest
+data/annotations/en/                internal machine and pedagogical annotations
+data/questions/en/                  reviewed/provisional questions and configuration
+data/sources/en-sources.json         provenance, licence, and rights declarations
+docs/data/en/manifest.json           initial browser payload
+docs/data/en/<mode>/*.json           lazy-loaded public question shards
+schema/                              contracts for every record/public layer
 ```
 
-## Deploy with GitHub Pages
+Targets use Unicode code-point half-open ranges (`start`, `end`). Discontinuous targets use multiple spans. Public shards contain only the fields needed by the exercise.
 
-Push the repository to GitHub, then set **Settings → Pages → Source** to **GitHub Actions**. The included workflow validates the data and deploys the `docs/` directory.
+The public builder is deterministic, packs at most 400 questions per shard, targets at most 500 KB uncompressed, and refuses a shard above 1 MB. The browser initially fetches only the manifest, then loads one or more shards after a mode is selected. A round never repeats a question or source sentence.
 
-No remote repository is created automatically. Repository ownership, public/private status, and the final repository name must be confirmed before publication.
+## Supplied-corpus pipeline
 
-## Multilingual direction
+The ingestion path accepts a team-supplied `.tsv` or `.jsonl` file with:
 
-English is the first profile. The question schema already carries a language code, and additional languages can use the same interaction model while supplying their own reviewed terminology, examples, answer sets, and explanations.
+```text
+sentence_id	language	text	source_id	document_id	licence	attribution
+```
+
+Start from `examples/corpus-input-template.tsv`; replace every placeholder with the supplied corpus’s actual provenance and rights information.
+
+Example dry run:
+
+```bash
+python3 scripts/ingest_sentences.py supplied.tsv \
+  --output-dir /tmp/sentence-sense-corpus --dry-run
+```
+
+The pipeline validates IDs, language tags, text, provenance, and licence metadata; reports exact and near duplicates separately; preserves source text; and writes 500-sentence canonical shards. Subsequent stages are:
+
+```bash
+python3 scripts/preannotate_stanza.py --input-dir CORPUS --output MACHINE.jsonl --dry-run
+python3 scripts/build_pedagogical_candidates.py \
+  --sentences SENTENCES.jsonl --machine-annotations MACHINE.jsonl \
+  --output CANDIDATES.jsonl --review-queue REVIEW.json
+python3 scripts/build_question_bank.py build \
+  --sentences SENTENCES.jsonl --annotations CANDIDATES.jsonl \
+  --output QUESTIONS.jsonl
+```
+
+`preannotate_stanza.py` never installs a package, downloads a model, or fetches a resource. Its non-dry-run path only uses an already-approved local environment. Candidate records remain provisional. Human review uses `build_question_bank.py export-review` and `apply-corrections`, with stable IDs, mandatory rationales, change reports, and idempotent updates.
+
+## 10,000-sentence stop condition
+
+No 10,000-sentence corpus is included. The project team must supply the source text and confirm its licence/publication status. The checked capacity report at `reports/capacity-10000.json` is metadata only: 10,000 sentences would occupy 20 canonical shards at 500 records each. Question count and byte totals intentionally remain unknown until a licensed corpus is supplied.
 
 ## Licensing
 
-Code and educational content are separated provisionally:
+- Software: `LICENSE-CODE` (MIT).
+- Pedagogical question content and explanations: `LICENSE-CONTENT`.
+- Source-sentence publication rights: recorded per source in `data/sources/en-sources.json`.
 
-- code: `LICENSE-CODE`;
-- question content and explanations: `LICENSE-CONTENT`.
+Do not publish a new source corpus when its rights are pending, blocked, unknown, or incompatible. The public builder enforces this boundary.
 
-Confirm the right to publish all source examples before making the repository public.
+## GitHub Pages
+
+The site remains static and deployable from `docs/` through `.github/workflows/pages.yml`. The workflow validates canonical data, deterministic shards, tests, JavaScript, and size budgets before deployment.

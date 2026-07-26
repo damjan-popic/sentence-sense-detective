@@ -1,0 +1,13 @@
+{
+  "kind": "metadata-only capacity dry run",
+  "hypothetical_sentence_count": 10000,
+  "corpus_materialized": false,
+  "corpus_supplied": false,
+  "source_rights_confirmed": false,
+  "sentence_shard_size": 500,
+  "hypothetical_sentence_shards": 20,
+  "public_question_shard_size": 400,
+  "hypothetical_question_count": null,
+  "hypothetical_public_question_shards": null,
+  "stop_condition": "Question and byte totals require a team-supplied corpus with confirmed licensing; no sentences were sourced, generated, or published."
+}

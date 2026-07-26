@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "title": "Sentence Sense Detective",
+  "language": "en",
+  "version": "0.3.0",
+  "round_size": 10,
+  "scoring": {
+    "first_attempt_correct": 1,
+    "retry_correct": 0,
+    "show_answer": 0,
+    "negative_points": false
+  },
+  "sampling_policy": {
+    "reviewed_core_share": 0.2,
+    "recent_history_limit": 500
+  },
+  "report_issue_url": "https://github.com/damjan-popic/sentence-sense-detective/issues/new?template=content-correction.md",
+  "modes": [
+    {
+      "id": "parts-of-speech",
+      "title": "Parts of Speech",
+      "short_title": "Word classes",
+      "description": "Identify what kind of word is highlighted.",
+      "icon": "Aa"
+    },
+    {
+      "id": "sentence-elements",
+      "title": "Sentence Elements",
+      "short_title": "Sentence roles",
+      "description": "Identify the function of the highlighted word, phrase, or clause.",
+      "icon": "S·P"
+    },
+    {
+      "id": "clauses",
+      "title": "Clauses",
+      "short_title": "Advanced",
+      "description": "Classify clause type, marker, structure, and function.",
+      "icon": "{…}"
+    }
+  ],
+  "totals": {
+    "sentences": 92,
+    "questions": 156,
+    "teacher_reviewed": 106,
+    "provisional": 50,
+    "by_mode": {
+      "parts-of-speech": 50,
+      "sentence-elements": 44,
+      "clauses": 62
+    }
+  },
+  "shards": [
+    {
+      "id": "en-parts-of-speech-provisional-0001",
+      "mode": "parts-of-speech",
+      "tier": "provisional",
+      "path": "parts-of-speech/provisional-0001.json",
+      "count": 50,
+      "bytes": 23145,
+      "sha256": "cfbab70adc247e5c8d7ad7d0c33f1b62a20309b3e67109a8de49e1205e7286b0"
+    },
+    {
+      "id": "en-sentence-elements-reviewed-core-0001",
+      "mode": "sentence-elements",
+      "tier": "reviewed-core",
+      "path": "sentence-elements/reviewed-core-0001.json",
+      "count": 44,
+      "bytes": 24005,
+      "sha256": "84734fda9eaf0b8ba61cbaf190557af5e7fcb095fcfac5a2a03a61f2642d78dd"
+    },
+    {
+      "id": "en-clauses-reviewed-core-0001",
+      "mode": "clauses",
+      "tier": "reviewed-core",
+      "path": "clauses/reviewed-core-0001.json",
+      "count": 62,
+      "bytes": 37229,
+      "sha256": "08603b2b82e87f08397b3a499c2efd99eb61780d9523198c38c0c69b6453d94f"
+    }
+  ]
+}

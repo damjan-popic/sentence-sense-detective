@@ -6,6 +6,11 @@
   <meta name="description" content="Sentence Sense Detective is a free English grammar practice tool for parts of speech, sentence elements, and clauses.">
   <meta name="theme-color" content="#24324a">
   <title>Sentence Sense Detective</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -13,7 +18,9 @@
 
   <header class="topbar">
     <a class="brand" href="#" id="brand-home" aria-label="Sentence Sense Detective home">
-      <span class="brand-mark" aria-hidden="true">🔎</span>
+      <span class="brand-mark" aria-hidden="true">
+        <img src="assets/logo-mark.svg" alt="" width="48" height="48">
+      </span>
       <span>
         <strong>Sentence Sense Detective</strong>
         <small>Spot it. Name it. Make it stick.</small>
@@ -50,6 +57,11 @@
       </div>
 
       <div id="mode-grid" class="mode-grid" aria-label="Practice modes"></div>
+      <section id="home-load-panel" class="load-panel" role="status" aria-live="polite">
+        <h2 id="home-load-title">Loading practice…</h2>
+        <p id="home-load-message">Checking which question sets are available.</p>
+        <button id="manifest-retry" class="secondary-button" type="button" hidden>Retry</button>
+      </section>
 
       <section class="progress-panel" aria-labelledby="progress-title">
         <div class="progress-panel-heading">
@@ -85,7 +97,16 @@
         <div class="progress-track" id="progress-track" role="progressbar" aria-label="Current question in round" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1"><div id="progress-bar"></div></div>
       </div>
 
-      <article id="question-card" class="question-card" tabindex="-1" aria-labelledby="question-prompt">
+      <section id="round-load-panel" class="load-panel round-load-panel" role="status" aria-live="polite" tabindex="-1" hidden>
+        <h2 id="round-load-title">Loading your round…</h2>
+        <p id="round-load-message">Selecting ten different sentences.</p>
+        <div class="load-actions">
+          <button id="round-retry" class="primary-button" type="button" hidden>Retry</button>
+          <button id="round-load-home" class="secondary-button" type="button">Return home</button>
+        </div>
+      </section>
+
+      <article id="question-card" class="question-card" tabindex="-1" aria-labelledby="question-prompt" hidden>
         <div class="question-card-top">
           <span id="question-badge" class="question-badge">Sentence elements</span>
           <span id="round-kind" class="round-kind">New round</span>
@@ -115,6 +136,7 @@
           <div id="answer-explanation" class="answer-explanation" hidden>
             <p><strong>Answer:</strong> <span id="correct-answer"></span></p>
             <p id="explanation-text"></p>
+            <p><a id="report-question" class="report-question" href="#" target="_blank" rel="noopener noreferrer" hidden>Something wrong with this question? Report it.</a></p>
           </div>
         </section>
         <div id="celebration" class="celebration" aria-hidden="true"></div>
@@ -165,11 +187,21 @@
       <li>After a mistake, you get one learning retry.</li>
       <li>At the end, you can review everything you missed.</li>
     </ol>
-    <p>The English pilot uses carefully checked examples and explanations. The same practice format can later support other languages.</p>
+    <section class="about-project" aria-labelledby="about-project-title">
+      <h3 id="about-project-title">How the question bank is built</h3>
+      <!-- methodology-note:start -->
+      <p>The English pilot began with 106 examples reviewed by an experienced grammar teacher. Behind the scenes, we are testing how sentences annotated automatically with Stanza and Universal Dependencies can be translated into the grammatical categories students actually use in class. Students do not need to learn UD labels: that technical layer belongs to corpus preparation, not to the learning task. The reviewed examples remain our reference set; larger automatically prepared batches are provisional until they are checked and corrected.</p>
+      <!-- methodology-note:end -->
+
+      <h3>Our aim</h3>
+      <p>Our next target is an open corpus of roughly 10,000 annotated English sentences that can supply varied, randomly selected practice. The longer-term aim is a reusable multilingual tool for the languages taught at the Department of Translation and across the Faculty of Arts. The code and, wherever source licensing permits, the data will remain openly available on GitHub.</p>
+
+      <p class="pilot-version">English pilot · version <span id="about-version"></span></p>
+    </section>
   </dialog>
 
-  <script src="data/questions.js"></script>
   <script src="assets/round-state.js"></script>
+  <script src="assets/question-bank.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

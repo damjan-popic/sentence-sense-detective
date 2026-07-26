@@ -1,95 +1,52 @@
 # AGENTS.md — Sentence Sense Detective
 
-These instructions apply to every Codex task in this repository.
+These instructions apply to every task in this repository. `CODEX_HANDOVER_10K_OPEN_CORPUS.md` is the newest authoritative brief; read it in full before changing the corpus architecture or public site.
 
-## Product purpose
+## Product and content locks
 
-Sentence Sense Detective is a student-facing grammar practice tool. It is not a research demonstrator, annotation inspector, technical dashboard, or linguistic pipeline interface.
+- Preserve the highlighted-target interface, ten-question rounds, first-attempt scoring, one zero-point retry, zero-point reveal, streaks, summaries, and mistake review.
+- Preserve all 106 teacher-reviewed mappings exactly once. `Operator` remains a separate category, and the visible manual-review guard remains a valid output.
+- Never silently change a reviewed ID, source ID, answer, target, prompt, explanation, terminology choice, or review guard. A reviewed change requires a written rationale, changelog entry, and regression test.
+- Keep word class, sentence element, clause class, marker type, clause structure, and clause function as separate pedagogical dimensions.
+- Use “pedagogical grammar layer”, “pedagogical analysis”, or “Universal Pedagogical Tag Set”; never call it a departmental schema.
+- Do not imply that technical annotation labels are classroom grammar labels.
 
-The public site must do one thing well: present a highlighted target, ask a clear grammar question, score the response, explain the answer, and support another short round.
+## Public boundary
 
-## Locked product decisions
+- The only public allowance for `Stanza`, `Universal Dependencies`, or `UD` is the exact paragraph between `methodology-note:start` and `methodology-note:end` in `docs/index.html`.
+- Exercises, choices, feedback, summaries, and public question data must not contain raw dependency labels, transformation tables, confidence classes, private notes, reviewer identity, or development jargon.
+- Keep internal annotations, comments, rules, provenance maintenance fields, and review fields outside `docs/`.
+- Escape all content inserted into HTML.
 
-1. Product name: **Sentence Sense Detective**.
-2. Current language: **English pilot**.
-3. Public practice modes:
-   - Parts of Speech;
-   - Sentence Elements;
-   - Clauses (advanced).
-4. Answer interaction: **highlighted-target mode only**. Do not add span selection in this scaffold.
-5. Round length: **10 questions** unless a review round contains fewer mistakes.
-6. Scoring:
-   - first-attempt correct = 1 point;
-   - retry correct = 0 points;
-   - reveal = 0 points;
-   - no negative points;
-   - streak = consecutive first-attempt correct answers.
-7. One retry follows an incorrect first attempt.
-8. Every round ends with:
-   - score;
-   - first-try percentage;
-   - subskill breakdown;
-   - missed-item explanations;
-   - Review mistakes action.
-9. Progress remains in browser storage only.
-10. No login, backend, analytics, tracking, leaderboard, social sharing, advertising, or paid service.
-11. `Operator` is a separate sentence-element answer category.
+## Data architecture
 
-## Content boundaries
+- Canonical records are JSONL under `data/corpus`, `data/annotations`, and `data/questions`.
+- Public delivery uses `docs/data/en/manifest.json` and deterministic lazy-loaded shards. Do not restore a monolithic browser payload.
+- Targets are Unicode code-point half-open ranges. Multiple spans represent discontinuous targets.
+- Every sentence requires source, licence, and attribution metadata. Rights that are pending, blocked, unknown, or incompatible must block public output.
+- Do not scrape, invent, generate, or silently choose a 10,000-sentence corpus. Use only team-supplied text with confirmed rights.
+- Public shards target 500 KB or less and fail above 1 MB. The manifest fails above 250 KB; `docs/` fails above 250 MB.
 
-The deployed `docs/` directory must not expose research-pipeline terminology or implementation metadata. In particular, do not show or explain:
+## Interface and deployment
 
-- parser internals;
-- annotation-system names;
-- source-analysis cues;
-- technical transformation categories;
-- teacher-review workflow labels;
-- internal status fields;
-- private comments;
-- source spreadsheet columns.
-
-Do not add a methodology dashboard or a reference table of internal analyses.
-
-Public wording must remain about grammar learning: words, sentence elements, clauses, answers, explanations, scores, and practice.
-
-## Data rules
-
-- `data/questions.json` is the canonical learning dataset.
-- `docs/data/questions.js` is generated from the canonical dataset.
-- All **106 teacher-reviewed source cases** must remain represented exactly once among the reviewed Sentence Elements and Clauses questions.
-- The **50 parts-of-speech questions** are a provisional scaffold built from sentences in the same source set. They may be corrected after deployment, but changes must be documented in `CHANGELOG.md`.
-- Do not silently replace a reviewed answer. Add a regression test and explain the correction in `CHANGELOG.md`.
-- Public questions must contain exactly four unique options, including the correct answer.
-- Every target must occur in the displayed sentence.
-- Source IDs and internal status may exist in data for maintenance, but the UI must not display them.
-
-## Interface rules
-
-- Keep the current warm, compact visual direction: friendly but suitable for university students.
-- Preserve keyboard access and visible focus states.
-- Preserve reduced-motion support.
-- Maintain a usable layout at 320 px and above.
-- Avoid external fonts, trackers, CDNs, and runtime dependencies.
-- Keep the site static and deployable from `docs/`.
-- Prefer small, readable vanilla JavaScript over a framework migration.
+- Keep the static, no-build, vanilla HTML/CSS/JavaScript path.
+- Maintain keyboard access, visible focus, semantic HTML, readable contrast, reduced-motion support, and no horizontal overflow at 390 px.
+- Initial page load fetches the manifest only. Mode selection loads shards with accessible Loading, Retry, and Return home states.
+- A round must contain ten unique question IDs and ten unique sentence IDs, use the selected mode only, retain the reviewed-core sampling policy, and keep recent history at no more than 500 IDs per mode.
+- Do not install dependencies, push, deploy, change Pages settings, or add a custom domain without explicit approval.
 
 ## Required checks
 
-Run all of these before completing work:
-
 ```bash
-python scripts/build_public_data.py --check
-python scripts/validate_data.py
-python -m unittest discover -s tests -v
+python3 scripts/build_public_shards.py --check
+python3 scripts/validate_corpus.py
+python3 scripts/validate_public_shards.py
+python3 scripts/validate_data.py
+python3 -m unittest discover -s tests -v
+node --check docs/assets/round-state.js
+node --check docs/assets/question-bank.js
 node --check docs/assets/app.js
+node --test tests/test_round_state.js tests/test_question_bank.js
 ```
 
-For layout changes, also serve the site and inspect desktop and mobile widths:
-
-```bash
-python -m http.server 8000 --directory docs
-```
-
-## GitHub Pages
-
-The workflow in `.github/workflows/pages.yml` is the deployment path. Do not publish to a remote repository until the owner, repository name, visibility, and rights status are confirmed.
+For UI changes, serve `docs/` and inspect desktop practice, the About methodology view, mobile practice at 390 × 844, keyboard operation, reduced motion, all scoring paths, the browser console, and page errors.

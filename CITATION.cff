@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 title: "Sentence Sense Detective"
-message: "Please cite Sentence Sense Detective if you use or adapt the teaching scaffold."
+message: "Please cite Sentence Sense Detective if you use or adapt the grammar practice tool or its pedagogical annotations."
 type: software
-version: "0.2.0-scaffold"
+version: "0.3.0"
 date-released: 2026-07-26
 license: MIT
 authors:

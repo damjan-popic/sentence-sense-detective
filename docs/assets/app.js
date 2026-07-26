@@ -1,23 +1,24 @@
 (() => {
   'use strict';
 
-  const payload = window.SENTENCE_SENSE_DATA;
   const roundEngine = window.SentenceSenseRound;
-  if (
-    !payload
-    || !Array.isArray(payload.questions)
-    || !Array.isArray(payload.modes)
-    || !roundEngine
-  ) {
+  const questionBank = window.SentenceSenseQuestionBank;
+  if (!roundEngine || !questionBank) {
     document.body.innerHTML = '<p style="padding:2rem">The practice data could not be loaded.</p>';
     return;
   }
 
-  const ROUND_SIZE = Number(payload.metadata?.round_size || 10);
+  const MANIFEST_URL = new URL('data/en/manifest.json', document.baseURI);
   const STORAGE_KEY = 'sentence-sense-detective:progress:v1';
-  const questions = payload.questions;
-  const modes = payload.modes;
-  const modeById = Object.fromEntries(modes.map(mode => [mode.id, mode]));
+  const RECENT_KEY_PREFIX = 'sentence-sense-detective:recent:v1:';
+  const MAX_CACHED_SHARDS = 2;
+  let manifest = null;
+  let modes = [];
+  let modeById = {};
+  let roundSize = 10;
+  let lastRequestedMode = null;
+  let loadGeneration = 0;
+  const shardCache = new Map();
 
   const $ = id => document.getElementById(id);
   const els = {
@@ -27,6 +28,10 @@
     homeTitle: $('home-title'),
     brandHome: $('brand-home'),
     modeGrid: $('mode-grid'),
+    homeLoadPanel: $('home-load-panel'),
+    homeLoadTitle: $('home-load-title'),
+    homeLoadMessage: $('home-load-message'),
+    manifestRetry: $('manifest-retry'),
     progressCards: $('progress-cards'),
     resetProgress: $('reset-progress'),
     aboutButton: $('about-button'),
@@ -40,6 +45,11 @@
     subskill: $('subskill-label'),
     progressTrack: $('progress-track'),
     progressBar: $('progress-bar'),
+    roundLoadPanel: $('round-load-panel'),
+    roundLoadTitle: $('round-load-title'),
+    roundLoadMessage: $('round-load-message'),
+    roundRetry: $('round-retry'),
+    roundLoadHome: $('round-load-home'),
     questionCard: $('question-card'),
     questionBadge: $('question-badge'),
     roundKind: $('round-kind'),
@@ -55,6 +65,7 @@
     answerExplanation: $('answer-explanation'),
     correctAnswer: $('correct-answer'),
     explanation: $('explanation-text'),
+    reportQuestion: $('report-question'),
     celebration: $('celebration'),
     summaryEmblem: $('summary-emblem'),
     summaryTitle: $('summary-title'),
@@ -66,7 +77,8 @@
     mistakesList: $('mistakes-list'),
     reviewMistakes: $('review-mistakes'),
     newRound: $('new-round'),
-    summaryHome: $('summary-home')
+    summaryHome: $('summary-home'),
+    aboutVersion: $('about-version')
   };
 
   const state = {
@@ -117,7 +129,7 @@
     }
   }
 
-  let stats = loadStats();
+  let stats = {};
 
   function saveStats() {
     try {
@@ -125,6 +137,58 @@
     } catch (_) {
       // The tool remains fully usable when browser storage is unavailable.
     }
+  }
+
+  function loadRecent(modeId) {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(`${RECENT_KEY_PREFIX}${modeId}`) || '[]');
+      return Array.isArray(parsed) ? parsed.filter(value => typeof value === 'string') : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveRecent(modeId, questions) {
+    const limit = manifest?.sampling_policy?.recent_history_limit ?? 500;
+    const recent = questionBank.appendRecent(
+      loadRecent(modeId),
+      questions.map(question => question.id),
+      limit
+    );
+    try {
+      localStorage.setItem(`${RECENT_KEY_PREFIX}${modeId}`, JSON.stringify(recent));
+    } catch (_) {
+      // Recent-item avoidance is best-effort when browser storage is unavailable.
+    }
+  }
+
+  async function fetchJson(url) {
+    const response = await fetch(url, { credentials: 'same-origin' });
+    if (!response.ok) throw new Error(`Request failed with status ${response.status}.`);
+    return response.json();
+  }
+
+  async function fetchShard(shard) {
+    const key = shard.path;
+    if (shardCache.has(key)) {
+      const cached = shardCache.get(key);
+      shardCache.delete(key);
+      shardCache.set(key, cached);
+      return cached;
+    }
+    const payload = await fetchJson(new URL(shard.path, MANIFEST_URL));
+    if (
+      payload?.mode !== shard.mode
+      || !Array.isArray(payload?.questions)
+      || payload.questions.length !== shard.count
+    ) {
+      throw new Error('A question set did not match its manifest entry.');
+    }
+    shardCache.set(key, payload);
+    while (shardCache.size > MAX_CACHED_SHARDS) {
+      shardCache.delete(shardCache.keys().next().value);
+    }
+    return payload;
   }
 
   function escapeHtml(value) {
@@ -167,25 +231,31 @@
     window.requestAnimationFrame(() => element?.focus({ preventScroll: true }));
   }
 
-  function findOccurrence(haystack, needle, occurrence = 0) {
-    const source = haystack.toLocaleLowerCase('en');
-    const target = needle.toLocaleLowerCase('en');
-    let from = 0;
-    let found = -1;
-    for (let count = 0; count <= occurrence; count += 1) {
-      found = source.indexOf(target, from);
-      if (found < 0) return -1;
-      from = found + target.length;
+  function codePointBoundaries(value) {
+    const boundaries = [0];
+    let utf16Index = 0;
+    for (const character of value) {
+      utf16Index += character.length;
+      boundaries.push(utf16Index);
     }
-    return found;
+    return boundaries;
   }
 
-  function highlightedSentence(sentence, targets) {
+  function highlightedSentence(sentence, targetSpans) {
+    const boundaries = codePointBoundaries(sentence);
     const ranges = [];
-    for (const target of targets || []) {
-      const text = String(target.text || '');
-      const start = findOccurrence(sentence, text, Number(target.occurrence || 0));
-      if (start >= 0) ranges.push({ start, end: start + text.length });
+    for (const span of targetSpans || []) {
+      const start = Number(span.start);
+      const end = Number(span.end);
+      if (
+        Number.isInteger(start)
+        && Number.isInteger(end)
+        && start >= 0
+        && end > start
+        && end < boundaries.length
+      ) {
+        ranges.push({ start: boundaries[start], end: boundaries[end] });
+      }
     }
     ranges.sort((a, b) => a.start - b.start || b.end - a.end);
 
@@ -215,13 +285,9 @@
     window.scrollTo({ top: 0, behavior: scrollBehavior() });
   }
 
-  function questionsForMode(modeId) {
-    return questions.filter(question => question.mode === modeId);
-  }
-
   function renderModeCards() {
     els.modeGrid.innerHTML = modes.map(mode => {
-      const count = questionsForMode(mode.id).length;
+      const count = Number(manifest?.totals?.by_mode?.[mode.id] || 0);
       return `
         <article class="mode-card">
           <div class="mode-icon" aria-hidden="true">${escapeHtml(mode.icon)}</div>
@@ -235,7 +301,7 @@
     }).join('');
 
     els.modeGrid.querySelectorAll('[data-mode]').forEach(button => {
-      button.addEventListener('click', () => startRound(button.dataset.mode));
+      button.addEventListener('click', () => loadModeRound(button.dataset.mode));
     });
   }
 
@@ -258,17 +324,51 @@
     }).join('');
   }
 
-  function startRound(modeId, suppliedQuestions = null, kind = 'new') {
+  async function loadModeRound(modeId) {
     const mode = modeById[modeId];
     if (!mode) return;
-    const bank = suppliedQuestions ? [...suppliedQuestions] : questionsForMode(modeId);
-    if (!bank.length) return;
+    const generation = ++loadGeneration;
+    lastRequestedMode = modeId;
+    state.roundQuestions = [];
+    els.quizModeKicker.textContent = 'Practice round';
+    els.quizModeTitle.textContent = mode.title;
+    els.roundLoadTitle.textContent = 'Loading your round…';
+    els.roundLoadMessage.textContent = 'Selecting ten different sentences.';
+    els.roundRetry.hidden = true;
+    els.roundLoadPanel.hidden = false;
+    els.questionCard.hidden = true;
+    showView('quiz');
+    focusWithoutScroll(els.roundLoadPanel);
+
+    try {
+      const selected = await questionBank.createRound({
+        manifest,
+        modeId,
+        fetchShard,
+        recentIds: loadRecent(modeId)
+      });
+      if (generation !== loadGeneration) return;
+      saveRecent(modeId, selected);
+      beginRound(modeId, selected, 'new');
+    } catch (error) {
+      if (generation !== loadGeneration) return;
+      els.roundLoadTitle.textContent = 'That round could not load.';
+      els.roundLoadMessage.textContent = `${error.message || 'Please try again.'}`;
+      els.roundRetry.hidden = false;
+      focusWithoutScroll(els.roundRetry);
+    }
+  }
+
+  function beginRound(modeId, suppliedQuestions, kind = 'new') {
+    const mode = modeById[modeId];
+    if (!mode || !Array.isArray(suppliedQuestions) || !suppliedQuestions.length) return;
+    const bank = [...suppliedQuestions];
 
     state.modeId = modeId;
     state.roundKind = kind;
-    state.roundQuestions = suppliedQuestions
-      ? shuffle(bank).slice(0, ROUND_SIZE)
-      : shuffle(bank).slice(0, Math.min(ROUND_SIZE, bank.length));
+    state.roundQuestions = kind === 'review'
+      ? shuffle(bank).slice(0, roundSize)
+      : bank.slice(0, roundSize);
     state.index = 0;
     state.score = 0;
     state.streak = 0;
@@ -281,6 +381,8 @@
     els.quizModeKicker.textContent = kind === 'review' ? 'Review round' : 'Practice round';
     els.quizModeTitle.textContent = mode.title;
     els.roundKind.textContent = kind === 'review' ? 'Review mistakes' : 'New round';
+    els.roundLoadPanel.hidden = true;
+    els.questionCard.hidden = false;
     showView('quiz');
     renderQuestion();
   }
@@ -306,7 +408,7 @@
     els.progressTrack.setAttribute('aria-valuenow', String(progress));
     els.progressBar.style.width = `${(progress / state.roundQuestions.length) * 100}%`;
     els.questionBadge.textContent = question.subskill;
-    els.sentence.innerHTML = highlightedSentence(question.sentence, question.targets);
+    els.sentence.innerHTML = highlightedSentence(question.sentence, question.target_spans);
     els.prompt.textContent = question.prompt;
     els.options.innerHTML = state.optionOrder.map((option, index) => `
       <button class="answer-option" type="button" data-answer="${escapeHtml(option)}" id="option-${index}">
@@ -320,6 +422,7 @@
     els.feedback.hidden = true;
     els.feedback.className = 'feedback-panel';
     els.answerExplanation.hidden = true;
+    els.reportQuestion.hidden = true;
     els.showAnswer.hidden = false;
     els.showAnswer.disabled = false;
     els.next.hidden = true;
@@ -355,9 +458,35 @@
     els.correctAnswer.textContent = question.answer;
     els.explanation.textContent = question.explanation;
     els.answerExplanation.hidden = false;
+    configureReportLink(question);
     els.showAnswer.hidden = true;
     els.next.hidden = false;
     els.next.focus({ preventScroll: true });
+  }
+
+  function configureReportLink(question) {
+    const configuredUrl = manifest?.report_issue_url;
+    els.reportQuestion.hidden = true;
+    if (!configuredUrl) return;
+    try {
+      const issueUrl = new URL(configuredUrl);
+      issueUrl.searchParams.set('title', `Question correction: ${question.id}`);
+      issueUrl.searchParams.set(
+        'body',
+        [
+          `Question ID: ${question.id}`,
+          `Mode: ${question.mode}`,
+          `Page: ${window.location.href}`,
+          '',
+          'Suggested correction:',
+          ''
+        ].join('\n')
+      );
+      els.reportQuestion.href = issueUrl.toString();
+      els.reportQuestion.hidden = false;
+    } catch (_) {
+      // Invalid or absent issue URLs are deliberately ignored in local forks.
+    }
   }
 
   function showRetryFeedback() {
@@ -537,7 +666,7 @@
     els.reviewMistakes.hidden = mistakes.length === 0;
     els.mistakesList.innerHTML = mistakes.map(result => `
       <article class="mistake-item">
-        <p class="mistake-sentence">${highlightedSentence(result.question.sentence, result.question.targets)}</p>
+        <p class="mistake-sentence">${highlightedSentence(result.question.sentence, result.question.target_spans)}</p>
         <p><strong>${escapeHtml(result.question.answer)}</strong></p>
         <p>${escapeHtml(result.question.explanation)}</p>
       </article>`).join('');
@@ -547,12 +676,15 @@
     const missedQuestions = state.results
       .filter(result => !result.firstTryCorrect)
       .map(result => result.question);
-    if (missedQuestions.length) startRound(state.modeId, missedQuestions, 'review');
+    if (missedQuestions.length) beginRound(state.modeId, missedQuestions, 'review');
   }
 
   function leaveRound() {
     const unfinished = state.roundQuestions.length && state.results.length < state.roundQuestions.length;
     if (unfinished && !window.confirm('Leave this round? Your completed questions are saved, but this round will not appear as finished.')) return;
+    loadGeneration += 1;
+    els.roundLoadPanel.hidden = true;
+    els.questionCard.hidden = true;
     showView('home');
     renderProgress();
     focusWithoutScroll(els.homeTitle);
@@ -561,14 +693,17 @@
   function resetProgress() {
     if (!window.confirm('Reset all saved Sentence Sense Detective progress on this device?')) return;
     stats = blankStats();
-    try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      for (const mode of modes) localStorage.removeItem(`${RECENT_KEY_PREFIX}${mode.id}`);
+    } catch (_) {}
     renderProgress();
   }
 
   els.showAnswer.addEventListener('click', revealAnswer);
   els.next.addEventListener('click', nextQuestion);
   els.reviewMistakes.addEventListener('click', reviewMistakes);
-  els.newRound.addEventListener('click', () => startRound(state.modeId));
+  els.newRound.addEventListener('click', () => loadModeRound(state.modeId));
   els.summaryHome.addEventListener('click', () => {
     showView('home');
     renderProgress();
@@ -578,6 +713,9 @@
   els.brandHome.addEventListener('click', event => { event.preventDefault(); leaveRound(); });
   els.resetProgress.addEventListener('click', resetProgress);
   els.aboutButton.addEventListener('click', () => els.aboutDialog.showModal());
+  els.roundRetry.addEventListener('click', () => loadModeRound(lastRequestedMode));
+  els.roundLoadHome.addEventListener('click', leaveRound);
+  els.manifestRetry.addEventListener('click', loadManifest);
 
   document.addEventListener('keydown', event => {
     if (
@@ -595,7 +733,39 @@
     }
   });
 
-  renderModeCards();
-  renderProgress();
   showView('home');
+  loadManifest();
+
+  async function loadManifest() {
+    els.manifestRetry.hidden = true;
+    els.homeLoadPanel.hidden = false;
+    els.homeLoadTitle.textContent = 'Loading practice…';
+    els.homeLoadMessage.textContent = 'Checking which question sets are available.';
+    try {
+      const loaded = await fetchJson(MANIFEST_URL);
+      if (
+        !Array.isArray(loaded?.modes)
+        || !Array.isArray(loaded?.shards)
+        || !loaded?.totals?.by_mode
+      ) {
+        throw new Error('The question manifest is not valid.');
+      }
+      manifest = loaded;
+      modes = loaded.modes;
+      modeById = Object.fromEntries(modes.map(mode => [mode.id, mode]));
+      roundSize = Math.max(1, Number(loaded.round_size) || 10);
+      stats = loadStats();
+      els.aboutVersion.textContent = loaded.version || '';
+      renderModeCards();
+      renderProgress();
+      els.homeLoadPanel.hidden = true;
+    } catch (error) {
+      els.modeGrid.innerHTML = '';
+      els.progressCards.innerHTML = '';
+      els.homeLoadTitle.textContent = 'Practice could not load.';
+      els.homeLoadMessage.textContent = error.message || 'Please try again.';
+      els.manifestRetry.hidden = false;
+      focusWithoutScroll(els.manifestRetry);
+    }
+  }
 })();

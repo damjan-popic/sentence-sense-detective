@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "title": "Sentence Sense Detective",
+  "language": "en",
+  "version": "0.3.0",
+  "round_size": 10,
+  "scoring": {
+    "first_attempt_correct": 1,
+    "retry_correct": 0,
+    "show_answer": 0,
+    "negative_points": false
+  },
+  "sampling_policy": {
+    "reviewed_core_share": 0.2,
+    "recent_history_limit": 500
+  },
+  "report_issue_url": "https://github.com/damjan-popic/sentence-sense-detective/issues/new?template=content-correction.md",
+  "modes": [
+    {
+      "id": "parts-of-speech",
+      "title": "Parts of Speech",
+      "short_title": "Word classes",
+      "description": "Identify what kind of word is highlighted.",
+      "icon": "Aa"
+    },
+    {
+      "id": "sentence-elements",
+      "title": "Sentence Elements",
+      "short_title": "Sentence roles",
+      "description": "Identify the function of the highlighted word, phrase, or clause.",
+      "icon": "S·P"
+    },
+    {
+      "id": "clauses",
+      "title": "Clauses",
+      "short_title": "Advanced",
+      "description": "Classify clause type, marker, structure, and function.",
+      "icon": "{…}"
+    }
+  ]
+}

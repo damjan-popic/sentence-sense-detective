@@ -1,5 +1,11 @@
-Provisional content licence: Creative Commons Attribution 4.0 International (CC BY 4.0).
+Pedagogical question content and explanations in the Sentence Sense Detective
+English pilot are made available under the Creative Commons Attribution 4.0
+International licence (CC BY 4.0).
 
-This notice applies only after the authors and institution confirm that every
-teaching example may be published under this licence. Until that rights review
-is complete, do not publish the repository publicly.
+Source-sentence publication rights are a separate concern. Each corpus source
+must have explicit provenance, licence, attribution, and rights status in
+`data/sources/`. A source whose rights are pending, blocked, unknown, or
+incompatible must not be included in public output.
+
+This repository does not contain the proposed 10,000-sentence corpus. Any future
+corpus remains subject to its supplied source licence and attribution terms.

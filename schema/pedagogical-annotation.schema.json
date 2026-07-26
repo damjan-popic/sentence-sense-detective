@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/sentence-sense-detective/pedagogical-annotation.schema.json",
+  "title": "Pedagogical annotation unit",
+  "type": "object",
+  "required": [
+    "id",
+    "sentence_id",
+    "language",
+    "mode",
+    "subskill",
+    "dimension",
+    "target_spans",
+    "label",
+    "review_status",
+    "source_question_id"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sentence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "mode": {
+      "enum": [
+        "parts-of-speech",
+        "sentence-elements",
+        "clauses"
+      ]
+    },
+    "subskill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dimension": {
+      "enum": [
+        "word_class",
+        "sentence_element",
+        "clause_class",
+        "marker_type",
+        "clause_structure",
+        "clause_function"
+      ]
+    },
+    "target_spans": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "properties": {
+          "start": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_status": {
+      "enum": [
+        "teacher-reviewed",
+        "provisional"
+      ]
+    },
+    "source_question_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

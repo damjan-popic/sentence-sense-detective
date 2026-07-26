@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/sentence-sense-detective/public-manifest.schema.json",
+  "title": "Sentence Sense Detective public question manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "title",
+    "language",
+    "version",
+    "round_size",
+    "scoring",
+    "sampling_policy",
+    "modes",
+    "totals",
+    "shards"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "round_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "scoring": {
+      "type": "object"
+    },
+    "sampling_policy": {
+      "type": "object",
+      "required": [
+        "reviewed_core_share",
+        "recent_history_limit"
+      ],
+      "properties": {
+        "reviewed_core_share": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "recent_history_limit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "report_issue_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "modes": {
+      "type": "array",
+      "minItems": 1
+    },
+    "totals": {
+      "type": "object",
+      "required": [
+        "sentences",
+        "questions",
+        "teacher_reviewed",
+        "provisional",
+        "by_mode"
+      ]
+    },
+    "shards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "mode",
+          "tier",
+          "path",
+          "count",
+          "bytes",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mode": {
+            "enum": [
+              "parts-of-speech",
+              "sentence-elements",
+              "clauses"
+            ]
+          },
+          "tier": {
+            "enum": [
+              "reviewed-core",
+              "provisional"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

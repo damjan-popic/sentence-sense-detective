@@ -1,0 +1,21 @@
+{
+  "migration": "v0.2.1 target text/occurrence to v0.3.0 Unicode code-point offsets",
+  "source": "data/questions.json",
+  "counts": {
+    "sentences": 92,
+    "questions": 156,
+    "pedagogical_annotations": 156,
+    "machine_annotations": 0,
+    "teacher_reviewed": 106,
+    "provisional": 50,
+    "by_mode": {
+      "parts-of-speech": 50,
+      "sentence-elements": 44,
+      "clauses": 62
+    }
+  },
+  "legacy_contract_sha256": {
+    "highlights": "3688077b0bf6e345e98ef88e85afc734660a79cf893ff2a1c9ffbe09a92d3a39",
+    "questions": "e8a660c6e98830cdd272ccf665e8783b2771788bd27fd11ab05e03052fdb35ca"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "language": "en",
+  "sentence_count": 92,
+  "shard_size": 500,
+  "shards": [
+    {
+      "path": "sentences-0001.jsonl",
+      "count": 92,
+      "bytes": 29894,
+      "sha256": "178b828f00f96459a523078e693ebc870329f40ef9c260b5cb094bb5e49195d6"
+    }
+  ]
+}

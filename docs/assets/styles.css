@@ -72,16 +72,13 @@ button:focus-visible, a:focus-visible { outline: 3px solid rgba(36, 50, 74, .28)
 .brand-mark {
   width: 48px;
   height: 48px;
-  border-radius: 16px 16px 16px 7px;
-  display: grid;
-  place-items: center;
-  background: var(--navy);
-  color: #fff;
-  font-weight: 900;
-  font-size: 1.35rem;
-  letter-spacing: -.04em;
-  box-shadow: 0 8px 20px rgba(36, 50, 74, .18);
+  display: block;
+  flex: 0 0 48px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
+.brand-mark img { display: block; width: 100%; height: 100%; }
 .brand strong { display: block; font-size: 1.15rem; letter-spacing: -.02em; }
 .brand small { display: block; color: var(--ink-soft); font-size: .78rem; }
 .topbar-actions { display: flex; align-items: center; gap: .65rem; }
@@ -183,6 +180,20 @@ h1, h2, h3 { line-height: 1.1; }
 .section-heading > p { color: var(--ink-soft); margin: 0; }
 
 .mode-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+
+.load-panel {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.load-panel h2, .load-panel p { margin: 0; }
+.load-panel p { margin-top: .4rem; color: var(--ink-soft); }
+.load-panel button, .load-actions { margin-top: 1rem; }
+.load-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.round-load-panel { max-width: 48rem; margin: 2rem auto 0; }
+.report-question { font-size: .92rem; font-weight: 700; }
 .mode-card {
   position: relative;
   min-height: 270px;
@@ -398,6 +409,8 @@ h1, h2, h3 { line-height: 1.1; }
 
 .about-dialog {
   width: min(620px, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   border: 1px solid var(--line);
   border-radius: 26px;
   padding: 1.5rem;
@@ -407,9 +420,12 @@ h1, h2, h3 { line-height: 1.1; }
 }
 .about-dialog::backdrop { background: rgba(23, 30, 42, .45); backdrop-filter: blur(3px); }
 .about-dialog h2 { margin: 0 0 1rem; font-size: 2rem; }
+.about-dialog h3 { margin: 1.2rem 0 .5rem; font-size: 1.15rem; }
 .about-dialog li + li { margin-top: .45rem; }
 .about-dialog form { float: right; }
 .dialog-close { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 1.5rem; }
+.about-project { margin-top: 1.25rem; padding-top: .25rem; border-top: 1px solid var(--line); }
+.pilot-version { margin-bottom: 0; color: var(--ink-soft); font-size: .82rem; font-weight: 800; }
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
