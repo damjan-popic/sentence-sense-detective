@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "Sentence Sense Detective"
+message: "Please cite Sentence Sense Detective if you use or adapt the teaching scaffold."
+type: software
+version: "0.2.0-scaffold"
+date-released: 2026-07-26
+license: MIT
+authors:
+  - family-names: "Grad"
+    given-names: "Martin"
+  - family-names: "Popič"
+    given-names: "Damjan"

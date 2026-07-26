@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sentence Sense Detective is a free English grammar practice tool for parts of speech, sentence elements, and clauses.">
+  <meta name="theme-color" content="#24324a">
+  <title>Sentence Sense Detective</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to practice</a>
+
+  <header class="topbar">
+    <a class="brand" href="#" id="brand-home" aria-label="Sentence Sense Detective home">
+      <span class="brand-mark" aria-hidden="true">🔎</span>
+      <span>
+        <strong>Sentence Sense Detective</strong>
+        <small>Spot it. Name it. Make it stick.</small>
+      </span>
+    </a>
+    <div class="topbar-actions">
+      <span class="language-pill">English pilot</span>
+      <button class="text-button" id="about-button" type="button">About</button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="home-view" class="view home-view" aria-labelledby="home-title">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Ten questions. One clear goal.</p>
+          <h1 id="home-title" tabindex="-1">Build better sentence sense.</h1>
+          <p class="hero-copy">Choose a practice mode, follow the highlighted target, and see what you know. No wild guessing required.</p>
+        </div>
+        <div class="hero-doodle" aria-hidden="true">
+          <span class="doodle-card doodle-one">S</span>
+          <span class="doodle-card doodle-two">DO</span>
+          <span class="doodle-card doodle-three">Aa</span>
+          <span class="doodle-spark">✦</span>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Choose a mode</p>
+          <h2>What would you like to practise?</h2>
+        </div>
+        <p>Each round contains 10 questions.</p>
+      </div>
+
+      <div id="mode-grid" class="mode-grid" aria-label="Practice modes"></div>
+
+      <section class="progress-panel" aria-labelledby="progress-title">
+        <div class="progress-panel-heading">
+          <div>
+            <p class="eyebrow">Saved on this device</p>
+            <h2 id="progress-title">Your progress</h2>
+          </div>
+          <button class="text-button danger" id="reset-progress" type="button">Reset progress</button>
+        </div>
+        <div id="progress-cards" class="progress-cards"></div>
+        <p class="privacy-note">No account, leaderboard, analytics, or tracking. Your results stay in this browser.</p>
+      </section>
+    </section>
+
+    <section id="quiz-view" class="view quiz-view" hidden aria-labelledby="quiz-mode-title">
+      <div class="quiz-toolbar">
+        <button class="back-button" id="exit-round" type="button" aria-label="Leave this round">← Home</button>
+        <div class="round-labels">
+          <span id="quiz-mode-kicker" class="eyebrow">Practice</span>
+          <h1 id="quiz-mode-title">Sentence Elements</h1>
+        </div>
+        <div class="score-strip" aria-label="Round score" aria-live="polite" aria-atomic="true">
+          <div><span>Score</span><strong id="score-value">0/10</strong></div>
+          <div><span>Streak</span><strong id="streak-value">0</strong></div>
+        </div>
+      </div>
+
+      <div class="question-progress" aria-label="Round progress">
+        <div class="question-progress-copy">
+          <span id="question-position">Question 1 of 10</span>
+          <span id="subskill-label">Sentence elements</span>
+        </div>
+        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Current question in round" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1"><div id="progress-bar"></div></div>
+      </div>
+
+      <article id="question-card" class="question-card" tabindex="-1" aria-labelledby="question-prompt">
+        <div class="question-card-top">
+          <span id="question-badge" class="question-badge">Sentence elements</span>
+          <span id="round-kind" class="round-kind">New round</span>
+        </div>
+
+        <div class="sentence-panel">
+          <span class="sentence-label">Look at the highlighted target</span>
+          <p id="sentence-text" class="sentence-text"></p>
+        </div>
+
+        <fieldset class="answer-fieldset">
+          <legend id="question-prompt">What is the function of the highlighted phrase?</legend>
+          <div id="answer-options" class="answer-options"></div>
+        </fieldset>
+
+        <div class="question-actions">
+          <button class="secondary-button" id="show-answer" type="button">Show answer</button>
+          <button class="primary-button" id="next-question" type="button" hidden>Next question</button>
+        </div>
+
+        <section id="feedback-panel" class="feedback-panel" aria-live="polite" hidden>
+          <div class="feedback-heading">
+            <span id="feedback-icon" aria-hidden="true">✓</span>
+            <h2 id="feedback-title">Correct!</h2>
+          </div>
+          <p id="feedback-message"></p>
+          <div id="answer-explanation" class="answer-explanation" hidden>
+            <p><strong>Answer:</strong> <span id="correct-answer"></span></p>
+            <p id="explanation-text"></p>
+          </div>
+        </section>
+        <div id="celebration" class="celebration" aria-hidden="true"></div>
+      </article>
+    </section>
+
+    <section id="summary-view" class="view summary-view" hidden aria-labelledby="summary-title">
+      <div class="summary-card">
+        <div id="summary-emblem" class="summary-emblem" aria-hidden="true">★</div>
+        <p class="eyebrow">Round complete</p>
+        <h1 id="summary-title" tabindex="-1">Nicely done.</h1>
+        <p id="summary-copy" class="summary-copy"></p>
+
+        <div class="summary-score">
+          <strong id="summary-score-value">8/10</strong>
+          <span id="summary-percent">80% first-try accuracy</span>
+        </div>
+
+        <section class="breakdown-section" aria-labelledby="breakdown-title">
+          <h2 id="breakdown-title">By question type</h2>
+          <div id="breakdown-list" class="breakdown-list"></div>
+        </section>
+
+        <section id="mistakes-section" class="mistakes-section" aria-labelledby="mistakes-title">
+          <h2 id="mistakes-title">Worth another look</h2>
+          <div id="mistakes-list" class="mistakes-list"></div>
+        </section>
+
+        <div class="summary-actions">
+          <button id="review-mistakes" class="primary-button" type="button">Review mistakes</button>
+          <button id="new-round" class="secondary-button" type="button">New round</button>
+          <button id="summary-home" class="text-button" type="button">Back to home</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="about-dialog" class="about-dialog">
+    <form method="dialog">
+      <button class="dialog-close" aria-label="Close about window">×</button>
+    </form>
+    <p class="eyebrow">About Sentence Sense Detective</p>
+    <h2>Small rounds, useful feedback.</h2>
+    <p>Sentence Sense Detective is a lightweight classroom companion for practising parts of speech, sentence elements, and clause analysis.</p>
+    <ol>
+      <li>The target is highlighted for you.</li>
+      <li>A correct first answer earns one point.</li>
+      <li>After a mistake, you get one learning retry.</li>
+      <li>At the end, you can review everything you missed.</li>
+    </ol>
+    <p>The English pilot uses carefully checked examples and explanations. The same practice format can later support other languages.</p>
+  </dialog>
+
+  <script src="data/questions.js"></script>
+  <script src="assets/round-state.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

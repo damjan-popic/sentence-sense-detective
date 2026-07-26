@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/sentence-sense-detective/question.schema.json",
+  "title": "Sentence Sense Detective question",
+  "type": "object",
+  "required": [
+    "id", "source_id", "language", "mode", "subskill", "sentence",
+    "targets", "prompt", "answer", "options", "explanation", "status"
+  ],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "language": {"const": "en"},
+    "mode": {"enum": ["parts-of-speech", "sentence-elements", "clauses"]},
+    "subskill": {"type": "string", "minLength": 1},
+    "sentence": {"type": "string", "minLength": 1},
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["text", "occurrence"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1},
+          "occurrence": {"type": "integer", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "prompt": {"type": "string", "minLength": 1},
+    "answer": {"type": "string", "minLength": 1},
+    "options": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "explanation": {"type": "string", "minLength": 1},
+    "status": {"enum": ["teacher-reviewed", "provisional-scaffold"]}
+  },
+  "additionalProperties": false
+}
