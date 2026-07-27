@@ -1,0 +1,49 @@
+{
+  "corpus_sentence_count": 10000,
+  "formal_candidate_count": 274198,
+  "generated_publishable_count": 102147,
+  "generated_review_only_count": 17114,
+  "initial_transfer_budget_bytes": 500000,
+  "initial_transfer_bytes": 282171,
+  "initial_transfer_within_budget": true,
+  "largest_shard_bytes": 289410,
+  "pilot_question_count": 156,
+  "presented_candidate_count": 119261,
+  "public_question_count": 102303,
+  "public_sentence_count": 10092,
+  "question_counts_by_mode": {
+    "clauses": 34456,
+    "parts-of-speech": 20049,
+    "sentence-elements": 47798
+  },
+  "reviewed_question_count": 106,
+  "round_sampling": {
+    "difficulty": {
+      "advanced": 0.2,
+      "basic": 0.35,
+      "intermediate": 0.45
+    },
+    "max_answer_label_per_round": 3,
+    "max_subskill_per_round": 4,
+    "recent_question_ids_per_mode": 250,
+    "recent_sentence_ids_per_mode": 150,
+    "reviewed_item_weight": 0.15,
+    "subskills_by_mode": {
+      "clauses": [
+        "Clause function",
+        "Clause marker",
+        "Clause structure",
+        "Clause type"
+      ],
+      "parts-of-speech": [
+        "Parts of speech"
+      ],
+      "sentence-elements": [
+        "Sentence elements"
+      ]
+    }
+  },
+  "shard_count": 257,
+  "smallest_shard_bytes": 24997,
+  "total_public_site_bytes": 70317585
+}

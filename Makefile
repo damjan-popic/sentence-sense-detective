@@ -2,7 +2,9 @@ PYTHON := .venv/bin/python
 
 .PHONY: corpus-fetch corpus-fetch-oanc corpus-extract corpus-models corpus-audit \
 	corpus-audit-oanc corpus-select corpus-annotate corpus-generate \
-	corpus-review-pack corpus-build-public corpus-package corpus-all validate preview
+	corpus-review-pack corpus-build-public corpus-package corpus-all \
+	remap-contract remap-compile remap-replay-gold remap-10k \
+	remap-review-pack remap-compare remap-all validate preview
 
 corpus-fetch:
 	$(PYTHON) scripts/fetch_corpus.py --source masc --allow-insecure-tls
@@ -34,10 +36,40 @@ corpus-select:
 corpus-annotate:
 	$(PYTHON) scripts/annotate_stanza.py
 
-corpus-generate:
+corpus-generate: remap-10k
+
+remap-contract:
+	$(PYTHON) scripts/validate_formal_contract.py
+
+remap-compile: remap-contract
 	$(PYTHON) scripts/extract_tagset.py
 	$(PYTHON) scripts/build_gold_index.py
+	$(PYTHON) scripts/compile_remap_rules.py
+
+remap-replay-gold: remap-compile
+	$(PYTHON) scripts/replay_gold_contract.py
+
+remap-10k: remap-replay-gold
+	$(PYTHON) scripts/remap_stanza_annotations.py
 	$(PYTHON) scripts/generate_questions.py
+	$(PYTHON) scripts/report_remap_distribution.py
+
+remap-review-pack:
+	$(PYTHON) scripts/prepare_review_rows.py
+	powershell.exe -NoProfile -ExecutionPolicy Bypass \
+		-File "$$(wslpath -m scripts/export_review_pack.ps1)" \
+		-RepoRoot "$$(wslpath -m .)"
+
+remap-compare:
+	$(PYTHON) scripts/compare_legacy_and_formal_banks.py
+
+remap-all:
+	$(MAKE) remap-10k
+	$(MAKE) remap-review-pack
+	$(MAKE) remap-compare
+	$(MAKE) corpus-build-public
+	$(MAKE) corpus-package
+	$(MAKE) validate
 
 corpus-review-pack:
 	$(PYTHON) scripts/prepare_review_rows.py

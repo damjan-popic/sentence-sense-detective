@@ -1,0 +1,1481 @@
+{
+  "by_action": {
+    "publish": 257084,
+    "review": 17114
+  },
+  "by_decision_class": {
+    "direct": 28216,
+    "manual-review": 17108,
+    "rule-based": 228874
+  },
+  "by_difficulty": {
+    "advanced": 90382,
+    "basic": 54001,
+    "intermediate": 129815
+  },
+  "by_dimension": {
+    "clause_function": 7510,
+    "clause_marker": 7388,
+    "clause_structure": 7496,
+    "clause_type": 16638,
+    "sentence_element": 60230,
+    "word_class": 174936
+  },
+  "by_genre": {
+    "blog": 25193,
+    "court": 2169,
+    "debate": 2233,
+    "email": 20591,
+    "essay": 14939,
+    "ficlets": 6982,
+    "fiction": 8542,
+    "government": 21689,
+    "journal": 17084,
+    "letters": 31999,
+    "movie-script": 6608,
+    "newspaper": 22835,
+    "nonfiction": 17945,
+    "spoken": 7798,
+    "technical": 36201,
+    "travel": 31390
+  },
+  "by_label": {
+    "-ing clause": 1976,
+    "A — Adverbial": 18779,
+    "Adjective": 15746,
+    "Adverb": 8049,
+    "Adverbial clause — function: A": 2282,
+    "Appositive clause": 42,
+    "Auxiliary verb": 4500,
+    "Bare infinitival clause": 237,
+    "Causal adverbial clause": 106,
+    "Comparative clause": 16,
+    "Comparative clause — postmodifier of an adjective": 16,
+    "Complementizer": 861,
+    "Concessive adverbial clause": 113,
+    "Conditional adverbial clause": 287,
+    "Context needed": 2905,
+    "Coordinator": 6903,
+    "DO — Direct Object": 12177,
+    "Dependent verbal question — function: S": 1,
+    "Determiner": 18613,
+    "Finite that-clause": 920,
+    "Finite wh-clause": 198,
+    "Finite whether/if-clause": 377,
+    "Finite zero-that clause": 730,
+    "Formal S + Postponed S": 158,
+    "IO — Indirect Object": 328,
+    "Infinitival marker": 5606,
+    "Interrogative subordinator": 87,
+    "Lexical verb": 22133,
+    "Main clause": 9507,
+    "Manner / comparison adverbial clause": 14,
+    "Modal auxiliary": 2548,
+    "Negative-conditional adverbial clause": 9,
+    "Nominal clause — function: DO": 1517,
+    "Nominal clause — function: SC": 54,
+    "Nominal clause — postmodifier of an adjective": 75,
+    "Nominal relative clause — function: S": 20,
+    "Non-restrictive relative clause — function: PostM": 85,
+    "Noun": 43246,
+    "OC / Clausal object": 208,
+    "OC — Object Complement": 257,
+    "Operator": 2209,
+    "P — Predicator": 9687,
+    "Particle": 631,
+    "Place / free-choice adverbial clause": 2,
+    "PostM — Postmodifier": 2013,
+    "Preposition": 21876,
+    "Preposition + -ing clause": 475,
+    "Pronoun": 13316,
+    "Proper noun": 11921,
+    "Purpose adverbial clause": 26,
+    "Reduced / verbless clause": 103,
+    "Relative adverb": 116,
+    "Relative clause — function: PostM": 1060,
+    "Relative pronoun": 1382,
+    "Restrictive relative clause — function: PostM": 852,
+    "S — Subject": 16646,
+    "SC — Subject Complement": 2373,
+    "Subordinating conjunction": 1553,
+    "Subordinator": 3237,
+    "Supplementive non-finite clause — function: A": 422,
+    "Temporal adverbial clause": 148,
+    "To-infinitival clause": 2464
+  },
+  "by_source_corpus": {
+    "MASC": 195330,
+    "OANC": 78868
+  },
+  "conflict_downgrade_count": 194,
+  "formal_candidate_count": 274198,
+  "presented_candidate_count": 119261,
+  "profile_id": "en-1.0.0",
+  "profile_sha256": "5cee51d8a950b2e9bdf7133a6d97dcd20d2258c6fbb61e9d97b64b8e7249178d",
+  "publish_count": 257084,
+  "review_by_reason": {
+    "A bare infinitive after a perception or causative verb requires confirmation against the teaching analysis.": 237,
+    "A non-subject fused relative requires contextual confirmation of its higher-clause function.": 53,
+    "A technical oblique relation does not decide whether the phrase is an adverbial or selected complement.": 7197,
+    "A temporal expression after copular be can be analysed as SC or A; the reviewed framework requires confirmation.": 30,
+    "An unmarked non-finite supplementive clause requires semantic review.": 895,
+    "An unmarked supplementive clause requires review before assigning A.": 893,
+    "Bare infinitives after perception verbs depend on the course convention for OC versus clausal object.": 14,
+    "Comparative clause boundaries and attachment require confirmation beyond the dependency relation.": 10,
+    "Duration noun phrases receive variable technical analyses and require confirmation as pedagogical A.": 716,
+    "Embedded interrogative if must be distinguished from conditional if using the higher construction.": 46,
+    "Formal it and the postponed clause must be confirmed as two linked subject annotations.": 158,
+    "Incompatible formal rules matched the same sentence/dimension/target: A — Adverbial, OC — Object Complement": 10,
+    "Incompatible formal rules matched the same sentence/dimension/target: Comparative clause, Reduced / verbless clause": 12,
+    "Incompatible formal rules matched the same sentence/dimension/target: Context needed, OC — Object Complement": 162,
+    "Incompatible formal rules matched the same sentence/dimension/target: DO — Direct Object, OC — Object Complement": 10,
+    "Nested clause boundaries make the matrix clause discontinuous; confirm the teaching highlight.": 1215,
+    "PP attachment is ambiguous between event adverbial, nominal modifier, and selected complement.": 2824,
+    "Punctuation does not encode the reviewed non-restrictive reading; semantic interpretation is required.": 1,
+    "Reduced adjective-based clauses are not represented consistently by automatic dependency parses.": 97,
+    "So-that clauses require a semantic decision between purpose and result.": 11,
+    "The higher-clause function depends on the matrix predicate.": 406,
+    "The matrix predicate does not support an automatic nominal-DO classification.": 406,
+    "The matrix verb does not license an automatic clausal-DO analysis.": 406,
+    "The non-finite clause can be analysed as OC or a clausal object depending on the teaching convention.": 208,
+    "The reduced clause lacks an overt finite verb and requires manual confirmation.": 107,
+    "The reviewed contract requires human review.": 91,
+    "The supplementive function is structurally plausible, but its semantic subtype requires review.": 382,
+    "The teaching treatment of this -ing complement as DO rather than a general clausal complement is policy-controlled.": 54,
+    "Zero-relative recovery and restrictiveness require review.": 463
+  },
+  "review_count": 17114,
+  "rules": [
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 42,
+      "published_10k": 42,
+      "reviewed_10k": 0,
+      "rule_id": "clause.appositive",
+      "source_case_ids": [
+        "CL-NOM-06",
+        "CL-NOM-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 106,
+      "published_10k": 106,
+      "reviewed_10k": 0,
+      "rule_id": "clause.causal.adverbial",
+      "source_case_ids": [
+        "CL-ADV-02",
+        "CL-ADV-03"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 16,
+      "published_10k": 0,
+      "reviewed_10k": 16,
+      "rule_id": "clause.comparative.adjective.postmodifier",
+      "source_case_ids": [
+        "CL-ADV-10"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 113,
+      "published_10k": 113,
+      "reviewed_10k": 0,
+      "rule_id": "clause.concessive.adverbial",
+      "source_case_ids": [
+        "CL-ADV-06"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 287,
+      "published_10k": 287,
+      "reviewed_10k": 0,
+      "rule_id": "clause.conditional.adverbial",
+      "source_case_ids": [
+        "CL-ADV-04"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 1,
+      "published_10k": 1,
+      "reviewed_10k": 0,
+      "rule_id": "clause.dependent.question.subject",
+      "source_case_ids": [
+        "CL-NOM-05"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 2175,
+      "published_10k": 2175,
+      "reviewed_10k": 0,
+      "rule_id": "clause.generic.adverbial.publish",
+      "source_case_ids": [
+        "CL-ADV-12",
+        "CL-ADV-13"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 107,
+      "published_10k": 0,
+      "reviewed_10k": 107,
+      "rule_id": "clause.generic.adverbial.review",
+      "source_case_ids": [
+        "CL-ADV-14",
+        "CL-ADV-15"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_type",
+      "matched_10k": 8292,
+      "published_10k": 8292,
+      "reviewed_10k": 0,
+      "rule_id": "clause.main",
+      "source_case_ids": [
+        "CL-MAIN-01"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 1215,
+      "published_10k": 0,
+      "reviewed_10k": 1215,
+      "rule_id": "clause.main.complex.review",
+      "source_case_ids": [
+        "CL-MAIN-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 14,
+      "published_10k": 14,
+      "reviewed_10k": 0,
+      "rule_id": "clause.manner.comparison.adverbial",
+      "source_case_ids": [
+        "CL-ADV-09"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 9,
+      "published_10k": 9,
+      "reviewed_10k": 0,
+      "rule_id": "clause.negative.conditional.adverbial",
+      "source_case_ids": [
+        "CL-ADV-05"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 75,
+      "published_10k": 0,
+      "reviewed_10k": 75,
+      "rule_id": "clause.nominal.adjective.postmodifier",
+      "source_case_ids": [
+        "CL-NOM-09",
+        "CL-NOM-10"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 1111,
+      "published_10k": 1111,
+      "reviewed_10k": 0,
+      "rule_id": "clause.nominal.do.publish",
+      "source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 406,
+      "published_10k": 0,
+      "reviewed_10k": 406,
+      "rule_id": "clause.nominal.do.review",
+      "source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 20,
+      "published_10k": 20,
+      "reviewed_10k": 0,
+      "rule_id": "clause.nominal.relative.subject",
+      "source_case_ids": [
+        "CL-NOM-04"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 54,
+      "published_10k": 54,
+      "reviewed_10k": 0,
+      "rule_id": "clause.nominal.subject.complement",
+      "source_case_ids": [
+        "CL-NOM-08"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 2,
+      "published_10k": 2,
+      "reviewed_10k": 0,
+      "rule_id": "clause.place.free.choice.adverbial",
+      "source_case_ids": [
+        "CL-ADV-08"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 15,
+      "published_10k": 15,
+      "reviewed_10k": 0,
+      "rule_id": "clause.purpose.adverbial.publish",
+      "source_case_ids": [
+        "CL-ADV-07"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 11,
+      "published_10k": 0,
+      "reviewed_10k": 11,
+      "rule_id": "clause.purpose.adverbial.review",
+      "source_case_ids": [
+        "CL-ADV-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 1018,
+      "published_10k": 1018,
+      "reviewed_10k": 0,
+      "rule_id": "clause.relative.generic",
+      "source_case_ids": [
+        "CL-REL-03",
+        "CL-REL-04",
+        "CL-REL-05"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 84,
+      "published_10k": 84,
+      "reviewed_10k": 0,
+      "rule_id": "clause.relative.nonrestrictive",
+      "source_case_ids": [
+        "CL-REL-09"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 431,
+      "published_10k": 431,
+      "reviewed_10k": 0,
+      "rule_id": "clause.relative.restrictive",
+      "source_case_ids": [
+        "CL-REL-01",
+        "CL-REL-06",
+        "CL-REL-08"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 1,
+      "published_10k": 0,
+      "reviewed_10k": 1,
+      "rule_id": "clause.relative.semantic.review",
+      "source_case_ids": [
+        "CL-REL-10"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 42,
+      "published_10k": 0,
+      "reviewed_10k": 42,
+      "rule_id": "clause.relative.zero.review.review.relative-clause-function-postm-zero-relati",
+      "source_case_ids": [
+        "CL-REL-02",
+        "CL-REL-07"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 421,
+      "published_10k": 0,
+      "reviewed_10k": 421,
+      "rule_id": "clause.relative.zero.review.review.restrictive-relative-clause-function-postm",
+      "source_case_ids": [
+        "CL-REL-02",
+        "CL-REL-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 40,
+      "published_10k": 40,
+      "reviewed_10k": 0,
+      "rule_id": "clause.supplementive.initial",
+      "source_case_ids": [
+        "CL-ADV-11"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_type",
+      "matched_10k": 382,
+      "published_10k": 0,
+      "reviewed_10k": 382,
+      "rule_id": "clause.supplementive.review",
+      "source_case_ids": [
+        "CL-ADV-11"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_type",
+      "matched_10k": 148,
+      "published_10k": 148,
+      "reviewed_10k": 0,
+      "rule_id": "clause.temporal.adverbial",
+      "source_case_ids": [
+        "CL-ADV-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_function",
+      "matched_10k": 2516,
+      "published_10k": 2516,
+      "reviewed_10k": 0,
+      "rule_id": "function.clause.adverbial.publish",
+      "source_case_ids": [
+        "CL-FUNC-04"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_function",
+      "matched_10k": 893,
+      "published_10k": 0,
+      "reviewed_10k": 893,
+      "rule_id": "function.clause.adverbial.review",
+      "source_case_ids": [
+        "CL-FUNC-04"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_function",
+      "matched_10k": 1078,
+      "published_10k": 1078,
+      "reviewed_10k": 0,
+      "rule_id": "function.clause.direct.object.publish",
+      "source_case_ids": [
+        "CL-FUNC-02"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_function",
+      "matched_10k": 53,
+      "published_10k": 0,
+      "reviewed_10k": 53,
+      "rule_id": "function.clause.direct.object.review.do-direct-object-a-non-subject-fused-relat",
+      "source_case_ids": [
+        "CL-FUNC-02"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_function",
+      "matched_10k": 406,
+      "published_10k": 0,
+      "reviewed_10k": 406,
+      "rule_id": "function.clause.direct.object.review.do-direct-object-the-higher-clause-functio",
+      "source_case_ids": [
+        "CL-FUNC-02"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_function",
+      "matched_10k": 0,
+      "published_10k": 0,
+      "reviewed_10k": 0,
+      "rule_id": "function.clause.object.complement.review.review.oc-clausal-object-a-non-subject-fused-rela",
+      "source_case_ids": [
+        "CL-FUNC-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_function",
+      "matched_10k": 208,
+      "published_10k": 0,
+      "reviewed_10k": 208,
+      "rule_id": "function.clause.object.complement.review.review.oc-clausal-object-the-non-finite-clause-ca",
+      "source_case_ids": [
+        "CL-FUNC-06"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_function",
+      "matched_10k": 2013,
+      "published_10k": 2013,
+      "reviewed_10k": 0,
+      "rule_id": "function.clause.postmodifier",
+      "source_case_ids": [
+        "CL-FUNC-05"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_function",
+      "matched_10k": 273,
+      "published_10k": 273,
+      "reviewed_10k": 0,
+      "rule_id": "function.clause.subject",
+      "source_case_ids": [
+        "CL-FUNC-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_function",
+      "matched_10k": 70,
+      "published_10k": 70,
+      "reviewed_10k": 0,
+      "rule_id": "function.clause.subject.complement",
+      "source_case_ids": [
+        "CL-FUNC-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 861,
+      "published_10k": 861,
+      "reviewed_10k": 0,
+      "rule_id": "marker.complementizer",
+      "source_case_ids": [
+        "CL-MARK-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 2908,
+      "published_10k": 2908,
+      "reviewed_10k": 0,
+      "rule_id": "marker.infinitival",
+      "source_case_ids": [
+        "CL-MARK-09"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_marker",
+      "matched_10k": 46,
+      "published_10k": 0,
+      "reviewed_10k": 46,
+      "rule_id": "marker.interrogative.if.review",
+      "source_case_ids": [
+        "CL-MARK-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 41,
+      "published_10k": 41,
+      "reviewed_10k": 0,
+      "rule_id": "marker.interrogative.whether",
+      "source_case_ids": [
+        "CL-MARK-02"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 481,
+      "published_10k": 481,
+      "reviewed_10k": 0,
+      "rule_id": "marker.preposition.ing",
+      "source_case_ids": [
+        "CL-STR-08"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 116,
+      "published_10k": 116,
+      "reviewed_10k": 0,
+      "rule_id": "marker.relative.adverb",
+      "source_case_ids": [
+        "CL-MARK-08"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 1382,
+      "published_10k": 1382,
+      "reviewed_10k": 0,
+      "rule_id": "marker.relative.pronoun",
+      "source_case_ids": [
+        "CL-MARK-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_marker",
+      "matched_10k": 1553,
+      "published_10k": 1553,
+      "reviewed_10k": 0,
+      "rule_id": "marker.subordinating.conjunction",
+      "source_case_ids": [
+        "CL-MARK-04",
+        "CL-MARK-05",
+        "CL-MARK-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_marker",
+      "matched_10k": 0,
+      "published_10k": 0,
+      "reviewed_10k": 0,
+      "rule_id": "marker.zero.not.highlightable",
+      "source_case_ids": [
+        "CL-MARK-10"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 15746,
+      "published_10k": 15746,
+      "reviewed_10k": 0,
+      "rule_id": "pos.adj",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 8049,
+      "published_10k": 8049,
+      "reviewed_10k": 0,
+      "rule_id": "pos.adv",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 6903,
+      "published_10k": 6903,
+      "reviewed_10k": 0,
+      "rule_id": "pos.cconj",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 18613,
+      "published_10k": 18613,
+      "reviewed_10k": 0,
+      "rule_id": "pos.det",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 2698,
+      "published_10k": 2698,
+      "reviewed_10k": 0,
+      "rule_id": "pos.infinitival.marker",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 22133,
+      "published_10k": 22133,
+      "reviewed_10k": 0,
+      "rule_id": "pos.lexical.verb",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 2548,
+      "published_10k": 2548,
+      "reviewed_10k": 0,
+      "rule_id": "pos.modal.auxiliary",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 43246,
+      "published_10k": 43246,
+      "reviewed_10k": 0,
+      "rule_id": "pos.noun",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 631,
+      "published_10k": 631,
+      "reviewed_10k": 0,
+      "rule_id": "pos.particle",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 21395,
+      "published_10k": 21395,
+      "reviewed_10k": 0,
+      "rule_id": "pos.preposition",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 4500,
+      "published_10k": 4500,
+      "reviewed_10k": 0,
+      "rule_id": "pos.primary.auxiliary",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 13316,
+      "published_10k": 13316,
+      "reviewed_10k": 0,
+      "rule_id": "pos.pron",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 11921,
+      "published_10k": 11921,
+      "reviewed_10k": 0,
+      "rule_id": "pos.propn",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "word_class",
+      "matched_10k": 3237,
+      "published_10k": 3237,
+      "reviewed_10k": 0,
+      "rule_id": "pos.sconj",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 2535,
+      "published_10k": 2535,
+      "reviewed_10k": 0,
+      "rule_id": "se.adverbial.clause.publish",
+      "source_case_ids": [
+        "SE-A-06",
+        "SE-A-07"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 895,
+      "published_10k": 0,
+      "reviewed_10k": 895,
+      "rule_id": "se.adverbial.clause.review",
+      "source_case_ids": [
+        "SE-A-06",
+        "SE-A-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 1,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 4023,
+      "published_10k": 4022,
+      "reviewed_10k": 1,
+      "rule_id": "se.adverbial.direct",
+      "source_case_ids": [
+        "SE-A-01",
+        "SE-A-02",
+        "SE-A-04"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 4,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 720,
+      "published_10k": 0,
+      "reviewed_10k": 720,
+      "rule_id": "se.adverbial.duration.review",
+      "source_case_ids": [
+        "SE-A-03"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 7197,
+      "published_10k": 0,
+      "reviewed_10k": 7197,
+      "rule_id": "se.ambiguous.pp.review.review.a-adverbial-a-technical-oblique-relation-d",
+      "source_case_ids": [
+        "REVIEW-01"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 81,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 2905,
+      "published_10k": 0,
+      "reviewed_10k": 2905,
+      "rule_id": "se.ambiguous.pp.review.review.context-needed-pp-attachment-is-ambiguous-",
+      "source_case_ids": [
+        "REVIEW-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 1085,
+      "published_10k": 1085,
+      "reviewed_10k": 0,
+      "rule_id": "se.clausal.direct.object.publish",
+      "source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 406,
+      "published_10k": 0,
+      "reviewed_10k": 406,
+      "rule_id": "se.clausal.direct.object.review",
+      "source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 30,
+      "published_10k": 0,
+      "reviewed_10k": 30,
+      "rule_id": "se.copular.temporal.review",
+      "source_case_ids": [
+        "REVIEW-02"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 9090,
+      "published_10k": 9090,
+      "reviewed_10k": 0,
+      "rule_id": "se.direct.object",
+      "source_case_ids": [
+        "SE-DO-01",
+        "SE-DO-02",
+        "SE-DO-03"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 158,
+      "published_10k": 0,
+      "reviewed_10k": 158,
+      "rule_id": "se.formal.postponed.subject",
+      "source_case_ids": [
+        "SE-S-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 5,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 59,
+      "published_10k": 0,
+      "reviewed_10k": 59,
+      "rule_id": "se.gerund.complement.review",
+      "source_case_ids": [
+        "SE-DO-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 328,
+      "published_10k": 328,
+      "reviewed_10k": 0,
+      "rule_id": "se.indirect.object",
+      "source_case_ids": [
+        "SE-IO-01",
+        "SE-IO-02",
+        "SE-IO-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 5,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 150,
+      "published_10k": 145,
+      "reviewed_10k": 5,
+      "rule_id": "se.object.complement",
+      "source_case_ids": [
+        "SE-OC-01",
+        "SE-OC-02",
+        "SE-OC-05",
+        "SE-OC-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 14,
+      "published_10k": 0,
+      "reviewed_10k": 14,
+      "rule_id": "se.object.complement.bare.review",
+      "source_case_ids": [
+        "SE-OC-04"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 7,
+      "published_10k": 7,
+      "reviewed_10k": 0,
+      "rule_id": "se.object.complement.pp.definite",
+      "source_case_ids": [
+        "SE-OC-03"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 86,
+      "decision_class": "manual-review",
+      "dimension": "sentence_element",
+      "matched_10k": 86,
+      "published_10k": 0,
+      "reviewed_10k": 86,
+      "rule_id": "se.object.complement.pp.review",
+      "source_case_ids": [
+        "SE-OC-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 2209,
+      "published_10k": 2209,
+      "reviewed_10k": 0,
+      "rule_id": "se.operator.finite.auxiliary",
+      "source_case_ids": [
+        "SE-P-02"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 2120,
+      "published_10k": 2120,
+      "reviewed_10k": 0,
+      "rule_id": "se.predicator.copula",
+      "source_case_ids": [
+        "SE-P-04"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 175,
+      "published_10k": 175,
+      "reviewed_10k": 0,
+      "rule_id": "se.predicator.particle",
+      "source_case_ids": [
+        "SE-P-05"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 1143,
+      "published_10k": 1143,
+      "reviewed_10k": 0,
+      "rule_id": "se.predicator.passive",
+      "source_case_ids": [
+        "SE-P-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "sentence_element",
+      "matched_10k": 6249,
+      "published_10k": 6249,
+      "reviewed_10k": 0,
+      "rule_id": "se.predicator.simple",
+      "source_case_ids": [
+        "SE-P-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "sentence_element",
+      "matched_10k": 570,
+      "published_10k": 570,
+      "reviewed_10k": 0,
+      "rule_id": "se.subject.clause",
+      "source_case_ids": [
+        "SE-S-03",
+        "SE-S-04",
+        "SE-S-05"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 2070,
+      "published_10k": 2070,
+      "reviewed_10k": 0,
+      "rule_id": "se.subject.complement.copular",
+      "source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 203,
+      "published_10k": 203,
+      "reviewed_10k": 0,
+      "rule_id": "se.subject.complement.linking",
+      "source_case_ids": [
+        "SE-SC-07",
+        "SE-SC-08"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 15803,
+      "published_10k": 15803,
+      "reviewed_10k": 0,
+      "rule_id": "se.subject.np",
+      "source_case_ids": [
+        "SE-S-01",
+        "SE-S-02"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "sentence_element",
+      "matched_10k": 0,
+      "published_10k": 0,
+      "reviewed_10k": 0,
+      "rule_id": "se.two.adverbials",
+      "source_case_ids": [
+        "SE-A-05"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "manual-review",
+      "dimension": "clause_structure",
+      "matched_10k": 237,
+      "published_10k": 0,
+      "reviewed_10k": 237,
+      "rule_id": "structure.bare.infinitive.review",
+      "source_case_ids": [
+        "CL-STR-06"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 6,
+      "decision_class": "manual-review",
+      "dimension": "clause_structure",
+      "matched_10k": 16,
+      "published_10k": 0,
+      "reviewed_10k": 16,
+      "rule_id": "structure.comparative.review",
+      "source_case_ids": [
+        "CL-STR-10"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_structure",
+      "matched_10k": 920,
+      "published_10k": 920,
+      "reviewed_10k": 0,
+      "rule_id": "structure.finite.that",
+      "source_case_ids": [
+        "CL-STR-01"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_structure",
+      "matched_10k": 198,
+      "published_10k": 198,
+      "reviewed_10k": 0,
+      "rule_id": "structure.finite.wh",
+      "source_case_ids": [
+        "CL-STR-03"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_structure",
+      "matched_10k": 377,
+      "published_10k": 377,
+      "reviewed_10k": 0,
+      "rule_id": "structure.finite.whether.if",
+      "source_case_ids": [
+        "CL-STR-04"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "rule-based",
+      "dimension": "clause_structure",
+      "matched_10k": 730,
+      "published_10k": 730,
+      "reviewed_10k": 0,
+      "rule_id": "structure.finite.zero.that",
+      "source_case_ids": [
+        "CL-STR-02"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_structure",
+      "matched_10k": 1976,
+      "published_10k": 1976,
+      "reviewed_10k": 0,
+      "rule_id": "structure.ing",
+      "source_case_ids": [
+        "CL-STR-07"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_structure",
+      "matched_10k": 475,
+      "published_10k": 475,
+      "reviewed_10k": 0,
+      "rule_id": "structure.preposition.ing",
+      "source_case_ids": [
+        "CL-STR-08"
+      ]
+    },
+    {
+      "configured_action": "review",
+      "conflict_downgrades_10k": 6,
+      "decision_class": "manual-review",
+      "dimension": "clause_structure",
+      "matched_10k": 103,
+      "published_10k": 0,
+      "reviewed_10k": 103,
+      "rule_id": "structure.reduced.review",
+      "source_case_ids": [
+        "CL-STR-09"
+      ]
+    },
+    {
+      "configured_action": "publish",
+      "conflict_downgrades_10k": 0,
+      "decision_class": "direct",
+      "dimension": "clause_structure",
+      "matched_10k": 2464,
+      "published_10k": 2464,
+      "reviewed_10k": 0,
+      "rule_id": "structure.to.infinitive",
+      "source_case_ids": [
+        "CL-STR-05"
+      ]
+    }
+  ],
+  "rules_with_matches": 96,
+  "rules_without_matches": 3,
+  "sentence_count": 10000
+}

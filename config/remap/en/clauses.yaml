@@ -1,0 +1,2952 @@
+{
+  "language": "en",
+  "profile_version": "1.0.0",
+  "rules": [
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MAIN-01.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause is the independent main clause of the sentence.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MAIN-01: The root clause maps to the main clause layer."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-main",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "root clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Main clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.main",
+      "source_case_ids": [
+        "CL-MAIN-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-MAIN-01.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted clause is the independent main clause of the sentence.",
+      "guards": [
+        {
+          "reason": "Nested clause boundaries make the matrix clause discontinuous; confirm the teaching highlight.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-MAIN-01: The root clause maps to the main clause layer."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-main-complex-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Nested clause boundaries make the matrix clause discontinuous; confirm the teaching highlight."
+        },
+        "sentence": {
+          "contract_signals": [
+            "root clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Main clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.main.complex.review",
+      "source_case_ids": [
+        "CL-MAIN-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-NOM-01, CL-NOM-02, CL-NOM-03.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted content clause functions as the direct object of the higher verb.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-NOM-01: Finite content clause maps to nominal clause; function is derived from attachment.",
+        "CL-NOM-02: Zero-that content clause maps to nominal clause.",
+        "CL-NOM-03: Each coordinated content clause should be represented separately."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-nominal-do",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "ccomp + mark=that",
+            "ccomp without overt marker",
+            "coordinated ccomp clauses"
+          ]
+        }
+      },
+      "output": {
+        "label": "Nominal clause — function: DO",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.nominal.do.publish",
+      "source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-NOM-01, CL-NOM-02, CL-NOM-03.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted content clause functions as the direct object of the higher verb.",
+      "guards": [
+        {
+          "reason": "The matrix predicate does not support an automatic nominal-DO classification.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-NOM-01: Finite content clause maps to nominal clause; function is derived from attachment.",
+        "CL-NOM-02: Zero-that content clause maps to nominal clause.",
+        "CL-NOM-03: Each coordinated content clause should be represented separately."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-nominal-do",
+          "event_status": "needs-review",
+          "event_review_reason": "The matrix predicate does not support an automatic nominal-DO classification."
+        },
+        "sentence": {
+          "contract_signals": [
+            "ccomp + mark=that",
+            "ccomp without overt marker",
+            "coordinated ccomp clauses"
+          ]
+        }
+      },
+      "output": {
+        "label": "Nominal clause — function: DO",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.nominal.do.review",
+      "source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-NOM-04.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted nominal relative clause functions as the subject of the larger clause.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-NOM-04: Wh/fused relative clause can function as subject."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-nominal-relative-subject",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "csubj: fused relative / wh-clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Nominal relative clause — function: S",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.nominal.relative.subject",
+      "source_case_ids": [
+        "CL-NOM-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-NOM-04: \"Wh/fused relative\"? To je ponovno nominal relative clause (same as #7)."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-NOM-05.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted dependent question functions as the subject of the larger clause.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-NOM-05: Whether-clause can function as subject."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-dependent-question-subject",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "csubj + mark=whether"
+          ]
+        }
+      },
+      "output": {
+        "label": "Dependent verbal question — function: S",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.dependent.question.subject",
+      "source_case_ids": [
+        "CL-NOM-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-NOM-05: Mi to imenujemo dependent verbal question."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-NOM-06, CL-NOM-07.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause specifies the content of the noun it follows.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-NOM-06: Content clause after a noun maps to nominal clause and postmodifier function.",
+        "CL-NOM-07: Whether content clause after a noun maps to postmodifier."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-appositive",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "content noun + that-clause",
+            "content noun + whether-clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Appositive clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.appositive",
+      "source_case_ids": [
+        "CL-NOM-06",
+        "CL-NOM-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-NOM-06: To je v bistvu appositive clause, ki se nekoliko razlikuje od klasičnih PostM.",
+        "CL-NOM-07: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-NOM-08.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted content clause functions as a subject complement.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-NOM-08: Predicative content clause maps to subject complement."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-nominal-subject-complement",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "copular predicate content clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Nominal clause — function: SC",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.nominal.subject.complement",
+      "source_case_ids": [
+        "CL-NOM-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-NOM-09, CL-NOM-10.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause completes and postmodifies the adjective.",
+      "guards": [
+        {
+          "reason": "The reviewed contract requires human review.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-NOM-09: Adjective complements are nominal clauses, but their sentence-element function needs a policy decision.",
+        "CL-NOM-10: That-clause after an adjective should be retained as a nominal clause, with function reviewed."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-nominal-adjective-postmodifier",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "adjective complement clause",
+            "adjective complement that-clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Nominal clause — postmodifier of an adjective",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.nominal.adjective.postmodifier",
+      "source_case_ids": [
+        "CL-NOM-09",
+        "CL-NOM-10"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-NOM-09: V tem primeru ima funkcijo PostM (pridevnika sure).",
+        "CL-NOM-10: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-01.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause locates the situation in time.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-01: Temporal while-clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-temporal-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + mark=while"
+          ]
+        }
+      },
+      "output": {
+        "label": "Temporal adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.temporal.adverbial",
+      "source_case_ids": [
+        "CL-ADV-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-01: Namesto \"maps to adverbial clause\" bi moralo biti \"maps to A\"?"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-02, CL-ADV-03.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause expresses cause or reason.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-02: Causal because-clause maps to adverbial clause.",
+        "CL-ADV-03: Causal since-clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-causal-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + mark=because",
+            "advcl + mark=since"
+          ]
+        }
+      },
+      "output": {
+        "label": "Causal adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.causal.adverbial",
+      "source_case_ids": [
+        "CL-ADV-02",
+        "CL-ADV-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-02: ditto",
+        "CL-ADV-03: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-04.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause states a condition.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-04: Conditional if-clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-conditional-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + mark=if"
+          ]
+        }
+      },
+      "output": {
+        "label": "Conditional adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.conditional.adverbial",
+      "source_case_ids": [
+        "CL-ADV-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-04: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-05.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause states a negative condition.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-05: Negative conditional unless-clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-negative-conditional-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + mark=unless"
+          ]
+        }
+      },
+      "output": {
+        "label": "Negative-conditional adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.negative.conditional.adverbial",
+      "source_case_ids": [
+        "CL-ADV-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-05: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-06.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause presents a concession.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-06: Concessive although-clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-concessive-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + mark=although"
+          ]
+        }
+      },
+      "output": {
+        "label": "Concessive adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.concessive.adverbial",
+      "source_case_ids": [
+        "CL-ADV-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-06: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-07.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause expresses purpose.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-07: Purpose/result so-that clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-purpose-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + marker=so that"
+          ]
+        }
+      },
+      "output": {
+        "label": "Purpose adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.purpose.adverbial.publish",
+      "source_case_ids": [
+        "CL-ADV-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-07: ditto + samo \"purpose\" (result/consequence je druga vrsta)"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-ADV-07.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause expresses purpose.",
+      "guards": [
+        {
+          "reason": "So-that clauses require a semantic decision between purpose and result.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-ADV-07: Purpose/result so-that clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-purpose-adverbial",
+          "event_status": "needs-review",
+          "event_review_reason": "So-that clauses require a semantic decision between purpose and result."
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + marker=so that"
+          ]
+        }
+      },
+      "output": {
+        "label": "Purpose adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.purpose.adverbial.review",
+      "source_case_ids": [
+        "CL-ADV-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-07: ditto + samo \"purpose\" (result/consequence je druga vrsta)"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-08.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause expresses place or free choice.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-08: Place/free-choice wherever-clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-place-free-choice-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + marker=wherever"
+          ]
+        }
+      },
+      "output": {
+        "label": "Place / free-choice adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.place.free.choice.adverbial",
+      "source_case_ids": [
+        "CL-ADV-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-08: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-09.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted adverbial clause expresses manner through comparison.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-09: Manner/comparison as-if clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-manner-comparison-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl + marker=as if"
+          ]
+        }
+      },
+      "output": {
+        "label": "Manner / comparison adverbial clause",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.manner.comparison.adverbial",
+      "source_case_ids": [
+        "CL-ADV-09"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-ADV-10.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted comparative clause postmodifies the adjective.",
+      "guards": [
+        {
+          "reason": "The reviewed contract requires human review.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-ADV-10: Comparative clause maps to adverbial/comparative clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-comparative-adjective-postmodifier",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "comparative clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Comparative clause — postmodifier of an adjective",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.comparative.adjective.postmodifier",
+      "source_case_ids": [
+        "CL-ADV-10"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-10: Ta v resnici nima funkcije stavčnega člena (A), ampak je PostM (pridevniku \"friendly\")."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-ADV-11.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted non-finite supplementive clause functions as an adverbial.",
+      "guards": [
+        {
+          "reason": "The supplementive function is structurally plausible, but its semantic subtype requires review.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-ADV-11: -ing adverbial clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-supplementive-review",
+          "event_status": "needs-review",
+          "event_review_reason": "The supplementive function is structurally plausible, but its semantic subtype requires review."
+        },
+        "sentence": {
+          "contract_signals": [
+            "non-finite -ing clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Supplementive non-finite clause — function: A",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.supplementive.review",
+      "source_case_ids": [
+        "CL-ADV-11"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-11: Ker gre za supplementive clause (ki je non-finite), je včasih težko določiti vrsto A."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Initial unmarked -ing supplementive clause with a reviewed adverbial function.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted non-finite supplementive clause functions as an adverbial.",
+      "guards": [
+        {
+          "operator": "anchor-start-char-equals",
+          "value": 0
+        }
+      ],
+      "implementation_notes": [
+        "CL-ADV-11: Publish the clear initial supplementive pattern; retain less explicit unmarked -ing attachments for review."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-supplementive-review",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "initial non-finite -ing supplementive clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Supplementive non-finite clause — function: A",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 110,
+      "rule_id": "clause.supplementive.initial",
+      "source_case_ids": [
+        "CL-ADV-11"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-ADV-11: Ker gre za supplementive clause (ki je non-finite), je včasih težko določiti vrsto A."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-ADV-12, CL-ADV-13.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as an adverbial in the larger sentence.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-ADV-12: Prepositional -ing clause maps to adverbial clause.",
+        "CL-ADV-13: Purpose infinitive maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-generic-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "preposition + -ing clause",
+            "to-infinitival purpose clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Adverbial clause — function: A",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.generic.adverbial.publish",
+      "source_case_ids": [
+        "CL-ADV-12",
+        "CL-ADV-13"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-ADV-14, CL-ADV-15.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as an adverbial in the larger sentence.",
+      "guards": [
+        {
+          "reason": "The reduced clause lacks an overt finite verb and requires manual confirmation.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-ADV-14: Verbless concessive clause maps to adverbial clause.",
+        "CL-ADV-15: Reduced conditional/concessive clause maps to adverbial clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-generic-adverbial",
+          "event_status": "needs-review",
+          "event_review_reason": "The reduced clause lacks an overt finite verb and requires manual confirmation."
+        },
+        "sentence": {
+          "contract_signals": [
+            "reduced even-if clause",
+            "verbless/reduced clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Adverbial clause — function: A",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.generic.adverbial.review",
+      "source_case_ids": [
+        "CL-ADV-14",
+        "CL-ADV-15"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-REL-01, CL-REL-06, CL-REL-08.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted relative clause restricts its antecedent and functions as a postmodifier.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-REL-01: Relative clause maps to postmodifier of the noun.",
+        "CL-REL-06: Which-relative maps to relative postmodifier.",
+        "CL-REL-08: Restrictive relatives narrow the reference of the antecedent."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-relative-restrictive",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "acl:relcl + which",
+            "acl:relcl + who",
+            "restrictive relative"
+          ]
+        }
+      },
+      "output": {
+        "label": "Restrictive relative clause — function: PostM",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.relative.restrictive",
+      "source_case_ids": [
+        "CL-REL-01",
+        "CL-REL-06",
+        "CL-REL-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-REL-08:  maps to PostM"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-REL-02, CL-REL-07.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted relative clause modifies the noun that comes before it.",
+      "guards": [
+        {
+          "reason": "Zero-relative recovery and restrictiveness require review.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-REL-02: Zero relative clause maps to relative postmodifier.",
+        "CL-REL-07: Zero relative clause maps to postmodifier."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-relative-zero-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Zero-relative recovery and restrictiveness require review.",
+          "event_variant": "clause-head-nonverb"
+        },
+        "sentence": {
+          "contract_signals": [
+            "acl:relcl with zero marker",
+            "zero relative after noun"
+          ]
+        }
+      },
+      "output": {
+        "label": "Relative clause — function: PostM",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.relative.zero.review.review.relative-clause-function-postm-zero-relati",
+      "source_case_ids": [
+        "CL-REL-02",
+        "CL-REL-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-REL-02, CL-REL-07.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted relative clause restricts its antecedent and functions as a postmodifier.",
+      "guards": [
+        {
+          "reason": "Zero-relative recovery and restrictiveness require review.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-REL-02: Zero relative clause maps to relative postmodifier.",
+        "CL-REL-07: Zero relative clause maps to postmodifier."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-relative-zero-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Zero-relative recovery and restrictiveness require review.",
+          "event_variant": "clause-head-verb"
+        },
+        "sentence": {
+          "contract_signals": [
+            "acl:relcl with zero marker",
+            "zero relative after noun"
+          ]
+        }
+      },
+      "output": {
+        "label": "Restrictive relative clause — function: PostM",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.relative.zero.review.review.restrictive-relative-clause-function-postm",
+      "source_case_ids": [
+        "CL-REL-02",
+        "CL-REL-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-REL-03, CL-REL-04, CL-REL-05.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted relative clause modifies the noun that comes before it.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-REL-03: Prepositional relative pronoun maps to relative clause.",
+        "CL-REL-04: Relative adverb why maps to relative clause.",
+        "CL-REL-05: Relative adverb where maps to relative clause."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-relative-generic",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "acl:relcl + prepositional relative pronoun",
+            "acl:relcl + relative adverb where",
+            "acl:relcl + relative adverb why"
+          ]
+        }
+      },
+      "output": {
+        "label": "Relative clause — function: PostM",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.relative.generic",
+      "source_case_ids": [
+        "CL-REL-03",
+        "CL-REL-04",
+        "CL-REL-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-REL-09.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted relative clause adds supplementary information and functions as a postmodifier.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-REL-09: Non-restrictive relatives add parenthetical information."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-relative-nonrestrictive",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "non-restrictive relative"
+          ]
+        }
+      },
+      "output": {
+        "label": "Non-restrictive relative clause — function: PostM",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 100,
+      "rule_id": "clause.relative.nonrestrictive",
+      "source_case_ids": [
+        "CL-REL-09"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-REL-10.",
+      "dimension": "clause_type",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted relative clause adds supplementary information and functions as a postmodifier.",
+      "guards": [
+        {
+          "reason": "Punctuation does not encode the reviewed non-restrictive reading; semantic interpretation is required.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-REL-10: Restrictiveness cannot be reliably inferred when punctuation is unreliable or removed."
+      ],
+      "language": "en",
+      "layer": "clause_type",
+      "match": {
+        "anchor": {
+          "event_rule_id": "clause-relative-semantic-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Punctuation does not encode the reviewed non-restrictive reading; semantic interpretation is required."
+        },
+        "sentence": {
+          "contract_signals": [
+            "relative clause with removed/uncertain punctuation"
+          ]
+        }
+      },
+      "output": {
+        "label": "Non-restrictive relative clause — function: PostM",
+        "mode": "clauses",
+        "subskill": "Clause type"
+      },
+      "priority": 200,
+      "rule_id": "clause.relative.semantic.review",
+      "source_case_ids": [
+        "CL-REL-10"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-REL-10: Čeprav je brez vejic, gre za non-restrictive clause."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MARK-01.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted word introduces a clause that functions as a complement.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MARK-01: that in a content clause maps to complementizer marker."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-complementizer",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "mark=that"
+          ]
+        }
+      },
+      "output": {
+        "label": "Complementizer",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.complementizer",
+      "source_case_ids": [
+        "CL-MARK-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-MARK-01: #82-#92 ne razumem 🤔"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MARK-02.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted word introduces an embedded question.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MARK-02: whether marks an embedded interrogative/content clause."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-interrogative-whether",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "mark=whether"
+          ]
+        }
+      },
+      "output": {
+        "label": "Interrogative subordinator",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.interrogative.whether",
+      "source_case_ids": [
+        "CL-MARK-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-MARK-03.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted word introduces an embedded question.",
+      "guards": [
+        {
+          "reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-MARK-03: if can mark an embedded interrogative/content clause."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-interrogative-if-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction."
+        },
+        "sentence": {
+          "contract_signals": [
+            "mark=if in nominal clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Interrogative subordinator",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 200,
+      "rule_id": "marker.interrogative.if.review",
+      "source_case_ids": [
+        "CL-MARK-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MARK-04, CL-MARK-05, CL-MARK-06.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted word marks the clause as subordinate.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MARK-04: conditional if maps to subordinating conjunction marker.",
+        "CL-MARK-05: Causal adverbial markers map to subordinating conjunction.",
+        "CL-MARK-06: Concessive adverbial markers map to subordinating conjunction."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-subordinating-conjunction",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "mark=although/while/even if",
+            "mark=because/since/as",
+            "mark=if in adverbial clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Subordinating conjunction",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.subordinating.conjunction",
+      "source_case_ids": [
+        "CL-MARK-04",
+        "CL-MARK-05",
+        "CL-MARK-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MARK-07.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted word links the relative clause to the noun it modifies and has a role inside the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MARK-07: Relative pronoun maps to relative marker type."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-relative-pronoun",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "relative pronoun"
+          ]
+        }
+      },
+      "output": {
+        "label": "Relative pronoun",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.relative.pronoun",
+      "source_case_ids": [
+        "CL-MARK-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MARK-08.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted word links the relative clause to the noun it modifies and expresses an adverbial relation.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MARK-08: Relative adverb maps to relative marker type."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-relative-adverb",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "relative adverb"
+          ]
+        }
+      },
+      "output": {
+        "label": "Relative adverb",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.relative.adverb",
+      "source_case_ids": [
+        "CL-MARK-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-MARK-09.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted “to” introduces an infinitival clause.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-MARK-09: to maps to infinitival marker when introducing a non-finite clause."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-infinitival",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "mark=to"
+          ]
+        }
+      },
+      "output": {
+        "label": "Infinitival marker",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.infinitival",
+      "source_case_ids": [
+        "CL-MARK-09"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-STR-08.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted preposition introduces a preposition + -ing clause.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-08: Preposition plus -ing form maps to prepositional -ing clause structure."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-preposition-ing",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "preposition + -ing clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Preposition",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 100,
+      "rule_id": "marker.preposition.ing",
+      "source_case_ids": [
+        "CL-STR-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-MARK-10.",
+      "dimension": "clause_marker",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The clause has no overt marker; the reviewed display represents the absence with ∅.",
+      "guards": [
+        {
+          "reason": "Zero markers have no overt source span and require a reviewed display strategy.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-MARK-10: Omitted complementizer or relative marker should be represented as zero."
+      ],
+      "language": "en",
+      "layer": "clause_marker",
+      "match": {
+        "anchor": {
+          "event_rule_id": "marker-zero-not-highlightable",
+          "event_status": "needs-review",
+          "event_review_reason": "Zero markers have no overt source span and require a reviewed display strategy."
+        },
+        "sentence": {
+          "contract_signals": [
+            "zero marker"
+          ]
+        }
+      },
+      "output": {
+        "label": "Zero marker",
+        "mode": "clauses",
+        "subskill": "Clause marker"
+      },
+      "priority": 200,
+      "rule_id": "marker.zero.not.highlightable",
+      "source_case_ids": [
+        "CL-MARK-10"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-STR-01.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause is finite and is introduced by “that”.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-01: mark=that + finite verb maps to finite that-clause."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-finite-that",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "finite that-clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Finite that-clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.finite.that",
+      "source_case_ids": [
+        "CL-STR-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-STR-01: ditto @ #93-#102"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-STR-02.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted finite content clause has no overt “that” marker.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-02: Finite content clause without overt that maps to zero-that structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-finite-zero-that",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "finite bare declarative content clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Finite zero-that clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.finite.zero.that",
+      "source_case_ids": [
+        "CL-STR-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-STR-03.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted finite clause is introduced by a wh-form.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-03: Wh-word + finite verb maps to wh-clause structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-finite-wh",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "finite wh-clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Finite wh-clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.finite.wh",
+      "source_case_ids": [
+        "CL-STR-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-STR-04.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted finite clause is introduced by “whether” or interrogative “if”.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-04: whether/if + finite verb maps to whether/if-clause structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-finite-whether-if",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "finite whether/if-clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Finite whether/if-clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.finite.whether.if",
+      "source_case_ids": [
+        "CL-STR-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-STR-05.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause is built around a to-infinitive.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-05: to + infinitive maps to to-infinitival structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-to-infinitive",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "to-infinitival clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "To-infinitival clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.to.infinitive",
+      "source_case_ids": [
+        "CL-STR-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-STR-06.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted non-finite clause uses the plain verb form without infinitival “to”.",
+      "guards": [
+        {
+          "reason": "A bare infinitive after a perception or causative verb requires confirmation against the teaching analysis.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-STR-06: Bare infinitive after perception verb maps to bare infinitival structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-bare-infinitive-review",
+          "event_status": "needs-review",
+          "event_review_reason": "A bare infinitive after a perception or causative verb requires confirmation against the teaching analysis."
+        },
+        "sentence": {
+          "contract_signals": [
+            "bare infinitival clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Bare infinitival clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 200,
+      "rule_id": "structure.bare.infinitive.review",
+      "source_case_ids": [
+        "CL-STR-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-STR-07.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause is built around an -ing verb form.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-07: -ing verb form maps to -ing clause structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-ing",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "-ing clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "-ing clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.ing",
+      "source_case_ids": [
+        "CL-STR-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-STR-08.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted -ing clause is introduced by a preposition-like marker.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-STR-08: Preposition plus -ing form maps to prepositional -ing clause structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-preposition-ing",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "preposition + -ing clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Preposition + -ing clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 100,
+      "rule_id": "structure.preposition.ing",
+      "source_case_ids": [
+        "CL-STR-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-STR-09.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted subordinate unit is reduced and has no overt finite verb.",
+      "guards": [
+        {
+          "reason": "Reduced adjective-based clauses are not represented consistently by automatic dependency parses.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-STR-09: Reduced adjective-based clause maps to reduced/verbless structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-reduced-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Reduced adjective-based clauses are not represented consistently by automatic dependency parses."
+        },
+        "sentence": {
+          "contract_signals": [
+            "verbless/reduced clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Reduced / verbless clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 200,
+      "rule_id": "structure.reduced.review",
+      "source_case_ids": [
+        "CL-STR-09"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-STR-10.",
+      "dimension": "clause_structure",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted clause realizes the second part of a comparison.",
+      "guards": [
+        {
+          "reason": "Comparative clause boundaries and attachment require confirmation beyond the dependency relation.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-STR-10: Comparative marker pattern maps to comparative clause structure."
+      ],
+      "language": "en",
+      "layer": "clause_structure",
+      "match": {
+        "anchor": {
+          "event_rule_id": "structure-comparative-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Comparative clause boundaries and attachment require confirmation beyond the dependency relation."
+        },
+        "sentence": {
+          "contract_signals": [
+            "comparative clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Comparative clause",
+        "mode": "clauses",
+        "subskill": "Clause structure"
+      },
+      "priority": 200,
+      "rule_id": "structure.comparative.review",
+      "source_case_ids": [
+        "CL-STR-10"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from CL-FUNC-01.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as the subject of the higher clause.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-FUNC-01: Subordinate clause functioning as subject maps to S."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-subject",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal subject"
+          ]
+        }
+      },
+      "output": {
+        "label": "S — Subject",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 100,
+      "rule_id": "function.clause.subject",
+      "source_case_ids": [
+        "CL-FUNC-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "CL-FUNC-01: ditto @ #103-#108"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-FUNC-02.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as the direct object of the higher verb.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-FUNC-02: Content clause selected by verb maps to DO."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-direct-object",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal direct object"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 100,
+      "rule_id": "function.clause.direct.object.publish",
+      "source_case_ids": [
+        "CL-FUNC-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-FUNC-02.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as the direct object of the higher verb.",
+      "guards": [
+        {
+          "reason": "A non-subject fused relative requires contextual confirmation of its higher-clause function.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-FUNC-02: Content clause selected by verb maps to DO."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-direct-object",
+          "event_status": "needs-review",
+          "event_review_reason": "A non-subject fused relative requires contextual confirmation of its higher-clause function."
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal direct object"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 200,
+      "rule_id": "function.clause.direct.object.review.do-direct-object-a-non-subject-fused-relat",
+      "source_case_ids": [
+        "CL-FUNC-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-FUNC-02.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as the direct object of the higher verb.",
+      "guards": [
+        {
+          "reason": "The higher-clause function depends on the matrix predicate.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-FUNC-02: Content clause selected by verb maps to DO."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-direct-object",
+          "event_status": "needs-review",
+          "event_review_reason": "The higher-clause function depends on the matrix predicate."
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal direct object"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 200,
+      "rule_id": "function.clause.direct.object.review.do-direct-object-the-higher-clause-functio",
+      "source_case_ids": [
+        "CL-FUNC-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-FUNC-03.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as a subject complement.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-FUNC-03: Predicative content/wh-clause after copula maps to SC."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-subject-complement",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal subject complement"
+          ]
+        }
+      },
+      "output": {
+        "label": "SC — Subject Complement",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 100,
+      "rule_id": "function.clause.subject.complement",
+      "source_case_ids": [
+        "CL-FUNC-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-FUNC-04.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as an adverbial.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-FUNC-04: Adverbial clause maps to A."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-adverbial",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal adverbial"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 100,
+      "rule_id": "function.clause.adverbial.publish",
+      "source_case_ids": [
+        "CL-FUNC-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-FUNC-04.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as an adverbial.",
+      "guards": [
+        {
+          "reason": "An unmarked supplementive clause requires review before assigning A.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-FUNC-04: Adverbial clause maps to A."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-adverbial",
+          "event_status": "needs-review",
+          "event_review_reason": "An unmarked supplementive clause requires review before assigning A."
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal adverbial"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 200,
+      "rule_id": "function.clause.adverbial.review",
+      "source_case_ids": [
+        "CL-FUNC-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from CL-FUNC-05.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted clause functions as a postmodifier.",
+      "guards": [],
+      "implementation_notes": [
+        "CL-FUNC-05: Relative clause after a noun maps to postmodifier."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-postmodifier",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal postmodifier"
+          ]
+        }
+      },
+      "output": {
+        "label": "PostM — Postmodifier",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 100,
+      "rule_id": "function.clause.postmodifier",
+      "source_case_ids": [
+        "CL-FUNC-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-FUNC-06.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted non-finite clause requires the course analysis used for object complementation.",
+      "guards": [
+        {
+          "reason": "A non-subject fused relative requires contextual confirmation of its higher-clause function.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-FUNC-06: Non-finite clause predicated of an object can function as OC."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-object-complement-review",
+          "event_status": "needs-review",
+          "event_review_reason": "A non-subject fused relative requires contextual confirmation of its higher-clause function."
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal object complement"
+          ]
+        }
+      },
+      "output": {
+        "label": "OC / Clausal object",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 200,
+      "rule_id": "function.clause.object.complement.review.review.oc-clausal-object-a-non-subject-fused-rela",
+      "source_case_ids": [
+        "CL-FUNC-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from CL-FUNC-06.",
+      "dimension": "clause_function",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted non-finite clause requires the course analysis used for object complementation.",
+      "guards": [
+        {
+          "reason": "The non-finite clause can be analysed as OC or a clausal object depending on the teaching convention.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "CL-FUNC-06: Non-finite clause predicated of an object can function as OC."
+      ],
+      "language": "en",
+      "layer": "clause_function",
+      "match": {
+        "anchor": {
+          "event_rule_id": "function-clause-object-complement-review",
+          "event_status": "needs-review",
+          "event_review_reason": "The non-finite clause can be analysed as OC or a clausal object depending on the teaching convention."
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal object complement"
+          ]
+        }
+      },
+      "output": {
+        "label": "OC / Clausal object",
+        "mode": "clauses",
+        "subskill": "Clause function"
+      },
+      "priority": 200,
+      "rule_id": "function.clause.object.complement.review.review.oc-clausal-object-the-non-finite-clause-ca",
+      "source_case_ids": [
+        "CL-FUNC-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "clause-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    }
+  ],
+  "source_contract_sha256": "f62fcfcdc35d43d8425b63266b86ae54c3bd688d37ca5e47e0dab432f767a51d"
+}

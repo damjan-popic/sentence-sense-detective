@@ -1,0 +1,22 @@
+{
+  "description": "Versioned English UD/Stanza-to-pedagogical remapping profile.",
+  "language": "en",
+  "profile_id": "en-1.0.0",
+  "profile_version": "1.0.0",
+  "source_contract": "data/remap/en/martin_contract_106.json",
+  "source_workbook_sha256": "f62fcfcdc35d43d8425b63266b86ae54c3bd688d37ca5e47e0dab432f767a51d",
+  "rule_files": [
+    "sentence_elements.yaml",
+    "clauses.yaml",
+    "word_classes.yaml"
+  ],
+  "lexical_sets": "lexical_sets.yaml",
+  "pos_profile_status": "provisional-profile",
+  "publication_policy": {
+    "publish_action": "publish",
+    "review_action": "review",
+    "reject_action": "reject",
+    "confidence_controls_publication": false,
+    "incompatible_ties": "review"
+  }
+}

@@ -44,7 +44,7 @@ class PublicSiteTests(unittest.TestCase):
         public_fields = {
             "id", "sentence_id", "language", "mode", "subskill", "sentence",
             "target_spans", "prompt", "answer", "options", "explanation",
-            "difficulty",
+            "difficulty", "dimension",
         }
         seen = set()
         gold_path = ROOT / "docs/data" / MANIFEST["gold"]["path"]

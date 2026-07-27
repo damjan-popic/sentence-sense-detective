@@ -49,6 +49,44 @@ test('every mode yields ten unique questions and ten unique sentence IDs', async
   }
 });
 
+test('ordinary rounds balance answer labels and available subskills', async () => {
+  for (let seed = 1; seed <= 20; seed += 1) {
+    for (const mode of manifest.modes) {
+      const round = await bank.createRound({
+        manifest,
+        modeId: mode.id,
+        fetchShard: loadRealShard,
+        fetchGold: loadGold,
+        random: seededRandom(seed)
+      });
+      const answerCounts = new Map();
+      const subskillCounts = new Map();
+      for (const question of round) {
+        answerCounts.set(
+          question.answer,
+          (answerCounts.get(question.answer) || 0) + 1
+        );
+        subskillCounts.set(
+          question.subskill,
+          (subskillCounts.get(question.subskill) || 0) + 1
+        );
+      }
+      assert.ok(
+        Math.max(...answerCounts.values()) <= 3,
+        `${mode.id} seed ${seed} exceeded the answer-label cap`
+      );
+      const availableSubskills =
+        manifest.sampling_policy.subskills_by_mode[mode.id];
+      if (availableSubskills.length > 1) {
+        assert.ok(
+          Math.max(...subskillCounts.values()) <= 4,
+          `${mode.id} seed ${seed} exceeded the subskill cap`
+        );
+      }
+    }
+  }
+});
+
 test('recent question and sentence avoidance is best effort', async () => {
   const modeId = 'parts-of-speech';
   const recentQuestions = manifest.shards

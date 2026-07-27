@@ -1,0 +1,60 @@
+{
+  "accepted_by_label": {
+    "-ing clause": 642,
+    "Adjective": 1468,
+    "Adverb": 1459,
+    "Adverbial clause — function: A": 298,
+    "Auxiliary verb": 306,
+    "Complementizer": 497,
+    "Coordinator": 877,
+    "DO — Direct Object": 520,
+    "Determiner": 3607,
+    "IO — Indirect Object": 13,
+    "Infinitival marker": 1994,
+    "Interrogative subordinator": 22,
+    "Lexical verb": 1479,
+    "Modal auxiliary": 166,
+    "Nominal relative clause — function: S": 16,
+    "Noun": 3535,
+    "P — Predicator": 46,
+    "Particle": 36,
+    "Preposition": 1224,
+    "Pronoun": 3739,
+    "Proper noun": 1744,
+    "Relative adverb": 82,
+    "Relative clause — function: PostM": 212,
+    "Relative pronoun": 965,
+    "S — Subject": 8741,
+    "SC — Subject Complement": 47,
+    "Subordinating conjunction": 938,
+    "Subordinator": 185
+  },
+  "accepted_by_mode": {
+    "clauses": 5492,
+    "parts-of-speech": 19999,
+    "sentence-elements": 9367
+  },
+  "accepted_count": 34858,
+  "candidate_count": 35358,
+  "candidate_status_counts": {
+    "auto-high-confidence": 34858,
+    "needs-review": 500
+  },
+  "questions_per_sentence": {
+    "1": {
+      "percentage": 0.0,
+      "sentences": 0
+    },
+    "2": {
+      "percentage": 5.22,
+      "sentences": 522
+    },
+    "3+": {
+      "percentage": 94.78,
+      "sentences": 9478
+    }
+  },
+  "rejected_count": 0,
+  "review_needed_count": 500,
+  "sentence_count": 10000
+}

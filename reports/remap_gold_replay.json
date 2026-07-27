@@ -1,0 +1,4393 @@
+{
+  "case_count": 106,
+  "decision_counts": {
+    "Needs manual review": 20,
+    "OK": 26,
+    "Rule-based OK": 60
+  },
+  "manual_cases_auto_published": 0,
+  "profile_id": "en-1.0.0",
+  "profile_sha256": "5cee51d8a950b2e9bdf7133a6d97dcd20d2258c6fbb61e9d97b64b8e7249178d",
+  "results": [
+    {
+      "actual_action": "publish",
+      "actual_answer": "S — Subject",
+      "actual_target_spans": [
+        {
+          "end": 23,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Sarah and her daughters"
+      ],
+      "case_id": "SE-S-01",
+      "expected_action": "publish",
+      "expected_answer": "S — Subject",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 23,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Sarah and her daughters"
+      ],
+      "focus_span": "Sarah and her daughters",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.np"
+      ],
+      "matched_source_case_ids": [
+        "SE-S-01",
+        "SE-S-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Sarah and her daughters arrived first.",
+      "source_item_id": "w05_s_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "S — Subject",
+      "actual_target_spans": [
+        {
+          "end": 36,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "The old woman living in the basement"
+      ],
+      "case_id": "SE-S-02",
+      "expected_action": "publish",
+      "expected_answer": "S — Subject",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 36,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "The old woman living in the basement"
+      ],
+      "focus_span": "The old woman living in the basement",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.np"
+      ],
+      "matched_source_case_ids": [
+        "SE-S-01",
+        "SE-S-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The old woman living in the basement needs help.",
+      "source_item_id": "w05_s_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "S — Subject",
+      "actual_target_spans": [
+        {
+          "end": 12,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "What he said"
+      ],
+      "case_id": "SE-S-03",
+      "expected_action": "publish",
+      "expected_answer": "S — Subject",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 12,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "What he said"
+      ],
+      "focus_span": "What he said",
+      "martin_comment": "csubj: finite wh-clause (VS. nominal relative clause)",
+      "matched_rule_ids": [
+        "se.subject.clause"
+      ],
+      "matched_source_case_ids": [
+        "SE-S-03",
+        "SE-S-04",
+        "SE-S-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "What he said cannot be denied.",
+      "source_item_id": "w10_ex1_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "S — Subject",
+      "actual_target_spans": [
+        {
+          "end": 32,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "To have seen him lose his temper"
+      ],
+      "case_id": "SE-S-04",
+      "expected_action": "publish",
+      "expected_answer": "S — Subject",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 32,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "To have seen him lose his temper"
+      ],
+      "focus_span": "To have seen him lose his temper",
+      "martin_comment": "V bistvu je tudi naslednji primer \"non-finite clause\" - tukaj bi moralo biti infinitival, ali še bolje perfect infinitive clause.",
+      "matched_rule_ids": [
+        "se.subject.clause"
+      ],
+      "matched_source_case_ids": [
+        "SE-S-03",
+        "SE-S-04",
+        "SE-S-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "To have seen him lose his temper was unexpected.",
+      "source_item_id": "w05_s_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "S — Subject",
+      "actual_target_spans": [
+        {
+          "end": 31,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Writing a letter of application"
+      ],
+      "case_id": "SE-S-05",
+      "expected_action": "publish",
+      "expected_answer": "S — Subject",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 31,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Writing a letter of application"
+      ],
+      "focus_span": "Writing a letter of application",
+      "martin_comment": "Če bi se to dalo ločiti (bodisi gerundial bodisi participial - v tem primeru gerundial), bi bilo super, drugače pa ok.",
+      "matched_rule_ids": [
+        "se.subject.clause"
+      ],
+      "matched_source_case_ids": [
+        "SE-S-03",
+        "SE-S-04",
+        "SE-S-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Writing a letter of application proved difficult.",
+      "source_item_id": "w05_s_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Formal S + Postponed S",
+      "actual_target_spans": [
+        {
+          "end": 2,
+          "start": 0
+        },
+        {
+          "end": 33,
+          "start": 16
+        }
+      ],
+      "actual_target_texts": [
+        "It",
+        "to know the truth"
+      ],
+      "case_id": "SE-S-06",
+      "expected_action": "review",
+      "expected_answer": "Formal S + Postponed S",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 2,
+          "start": 0
+        },
+        {
+          "end": 33,
+          "start": 16
+        }
+      ],
+      "expected_target_texts": [
+        "It",
+        "to know the truth"
+      ],
+      "focus_span": "It / to know the truth",
+      "martin_comment": "A pri \"postponed clausal S\" bi se dalo, da bi bila analiza bolj precizna (i.e., da gre za infinitival clause)?",
+      "matched_rule_ids": [
+        "se.formal.postponed.subject"
+      ],
+      "matched_source_case_ids": [
+        "SE-S-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "It is important to know the truth.",
+      "source_item_id": "w05_s_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "P — Predicator",
+      "actual_target_spans": [
+        {
+          "end": 5,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Close"
+      ],
+      "case_id": "SE-P-01",
+      "expected_action": "publish",
+      "expected_answer": "P — Predicator",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 5,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Close"
+      ],
+      "focus_span": "Close",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.predicator.simple"
+      ],
+      "matched_source_case_ids": [
+        "SE-P-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Close the door.",
+      "source_item_id": "w05_ex1_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Operator",
+      "actual_target_spans": [
+        {
+          "end": 3,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Did"
+      ],
+      "case_id": "SE-P-02",
+      "expected_action": "publish",
+      "expected_answer": "Operator",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 3,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Did"
+      ],
+      "focus_span": "Did ... play",
+      "martin_comment": "Aux v \"split predicator\" scenariju je operator.",
+      "matched_rule_ids": [
+        "se.operator.finite.auxiliary"
+      ],
+      "matched_source_case_ids": [
+        "SE-P-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Did the children play?",
+      "source_item_id": "w05_p_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "P — Predicator",
+      "actual_target_spans": [
+        {
+          "end": 13,
+          "start": 5
+        }
+      ],
+      "actual_target_texts": [
+        "was sent"
+      ],
+      "case_id": "SE-P-03",
+      "expected_action": "publish",
+      "expected_answer": "P — Predicator",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 13,
+          "start": 5
+        }
+      ],
+      "expected_target_texts": [
+        "was sent"
+      ],
+      "focus_span": "was sent",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.predicator.passive"
+      ],
+      "matched_source_case_ids": [
+        "SE-P-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "John was sent a copy of the letter to the president.",
+      "source_item_id": "w07_ex1_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "P — Predicator",
+      "actual_target_spans": [
+        {
+          "end": 7,
+          "start": 5
+        }
+      ],
+      "actual_target_texts": [
+        "is"
+      ],
+      "case_id": "SE-P-04",
+      "expected_action": "publish",
+      "expected_answer": "P — Predicator",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 7,
+          "start": 5
+        }
+      ],
+      "expected_target_texts": [
+        "is"
+      ],
+      "focus_span": "is",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.predicator.copula"
+      ],
+      "matched_source_case_ids": [
+        "SE-P-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Paul is a good student.",
+      "source_item_id": "w07_sc_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "P — Predicator",
+      "actual_target_spans": [
+        {
+          "end": 11,
+          "start": 4
+        }
+      ],
+      "actual_target_texts": [
+        "rang up"
+      ],
+      "case_id": "SE-P-05",
+      "expected_action": "publish",
+      "expected_answer": "P — Predicator",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 11,
+          "start": 4
+        }
+      ],
+      "expected_target_texts": [
+        "rang up"
+      ],
+      "focus_span": "rang up",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.predicator.particle"
+      ],
+      "matched_source_case_ids": [
+        "SE-P-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She rang up her mother to ask her to dinner.",
+      "source_item_id": "w11_ex3_09",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 17,
+          "start": 10
+        }
+      ],
+      "actual_target_texts": [
+        "no harm"
+      ],
+      "case_id": "SE-DO-01",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 17,
+          "start": 10
+        }
+      ],
+      "expected_target_texts": [
+        "no harm"
+      ],
+      "focus_span": "no harm",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.direct.object"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-01",
+        "SE-DO-02",
+        "SE-DO-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She meant no harm.",
+      "source_item_id": "w05_do_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 14,
+          "start": 7
+        }
+      ],
+      "actual_target_texts": [
+        "himself"
+      ],
+      "case_id": "SE-DO-02",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 14,
+          "start": 7
+        }
+      ],
+      "expected_target_texts": [
+        "himself"
+      ],
+      "focus_span": "himself",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.direct.object"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-01",
+        "SE-DO-02",
+        "SE-DO-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He hit himself with a golf club.",
+      "source_item_id": "w05_do_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 4,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Whom"
+      ],
+      "case_id": "SE-DO-03",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 4,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Whom"
+      ],
+      "focus_span": "Whom",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.direct.object"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-01",
+        "SE-DO-02",
+        "SE-DO-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Whom did you see there?",
+      "source_item_id": "w07_ex1_09",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 36,
+          "start": 9
+        }
+      ],
+      "actual_target_texts": [
+        "that she had lost her purse"
+      ],
+      "case_id": "SE-DO-04",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 36,
+          "start": 9
+        }
+      ],
+      "expected_target_texts": [
+        "that she had lost her purse"
+      ],
+      "focus_span": "that she had lost her purse",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.clausal.direct.object.publish"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She said that she had lost her purse.",
+      "source_item_id": "w05_do_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 28,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "he had lost his mind"
+      ],
+      "case_id": "SE-DO-05",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 28,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "he had lost his mind"
+      ],
+      "focus_span": "he had lost his mind",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.clausal.direct.object.publish"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He said he had lost his mind.",
+      "source_item_id": "w05_ex1_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 36,
+          "start": 17
+        }
+      ],
+      "actual_target_texts": [
+        "what you will study"
+      ],
+      "case_id": "SE-DO-06",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 36,
+          "start": 17
+        }
+      ],
+      "expected_target_texts": [
+        "what you will study"
+      ],
+      "focus_span": "what you will study",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.clausal.direct.object.publish"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Have you decided what you will study?",
+      "source_item_id": "w12_ex5_17",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 39,
+          "start": 18
+        }
+      ],
+      "actual_target_texts": [
+        "reading the newspaper"
+      ],
+      "case_id": "SE-DO-07",
+      "expected_action": "review",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 39,
+          "start": 18
+        }
+      ],
+      "expected_target_texts": [
+        "reading the newspaper"
+      ],
+      "focus_span": "reading the newspaper",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.gerund.complement.review"
+      ],
+      "matched_source_case_ids": [
+        "SE-DO-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Have you finished reading the newspaper?",
+      "source_item_id": "w05_do_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "IO — Indirect Object",
+      "actual_target_spans": [
+        {
+          "end": 11,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "him"
+      ],
+      "case_id": "SE-IO-01",
+      "expected_action": "publish",
+      "expected_answer": "IO — Indirect Object",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 11,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "him"
+      ],
+      "focus_span": "him",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.indirect.object"
+      ],
+      "matched_source_case_ids": [
+        "SE-IO-01",
+        "SE-IO-02",
+        "SE-IO-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I found him a vacant flat.",
+      "source_item_id": "w05_io_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "IO — Indirect Object",
+      "actual_target_spans": [
+        {
+          "end": 24,
+          "start": 5
+        }
+      ],
+      "actual_target_texts": [
+        "whoever rings me up"
+      ],
+      "case_id": "SE-IO-02",
+      "expected_action": "publish",
+      "expected_answer": "IO — Indirect Object",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 24,
+          "start": 5
+        }
+      ],
+      "expected_target_texts": [
+        "whoever rings me up"
+      ],
+      "focus_span": "whoever rings me up",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.indirect.object"
+      ],
+      "matched_source_case_ids": [
+        "SE-IO-01",
+        "SE-IO-02",
+        "SE-IO-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Tell whoever rings me up to call back later.",
+      "source_item_id": "w05_io_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "IO — Indirect Object",
+      "actual_target_spans": [
+        {
+          "end": 16,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "his wife"
+      ],
+      "case_id": "SE-IO-03",
+      "expected_action": "publish",
+      "expected_answer": "IO — Indirect Object",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 16,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "his wife"
+      ],
+      "focus_span": "his wife",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.indirect.object"
+      ],
+      "matched_source_case_ids": [
+        "SE-IO-01",
+        "SE-IO-02",
+        "SE-IO-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He gave his wife what he had earned.",
+      "source_item_id": "w12_ex5_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 30,
+          "start": 16
+        }
+      ],
+      "actual_target_texts": [
+        "quite pleasant"
+      ],
+      "case_id": "SE-SC-01",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 30,
+          "start": 16
+        }
+      ],
+      "expected_target_texts": [
+        "quite pleasant"
+      ],
+      "focus_span": "quite pleasant",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The journey was quite pleasant.",
+      "source_item_id": "w07_sc_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 22,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "a good student"
+      ],
+      "case_id": "SE-SC-02",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 22,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "a good student"
+      ],
+      "focus_span": "a good student",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Paul is a good student.",
+      "source_item_id": "w07_sc_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 49,
+          "start": 33
+        }
+      ],
+      "actual_target_texts": [
+        "in bad condition"
+      ],
+      "case_id": "SE-SC-03",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 49,
+          "start": 33
+        }
+      ],
+      "expected_target_texts": [
+        "in bad condition"
+      ],
+      "focus_span": "in bad condition",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The furniture in their office is in bad condition.",
+      "source_item_id": "w07_sc_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 36,
+          "start": 13
+        }
+      ],
+      "actual_target_texts": [
+        "to keep your mouth shut"
+      ],
+      "case_id": "SE-SC-04",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 36,
+          "start": 13
+        }
+      ],
+      "expected_target_texts": [
+        "to keep your mouth shut"
+      ],
+      "focus_span": "to keep your mouth shut",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "My advice is to keep your mouth shut.",
+      "source_item_id": "w07_sc_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 30,
+          "start": 13
+        }
+      ],
+      "actual_target_texts": [
+        "collecting stamps"
+      ],
+      "case_id": "SE-SC-05",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 30,
+          "start": 13
+        }
+      ],
+      "expected_target_texts": [
+        "collecting stamps"
+      ],
+      "focus_span": "collecting stamps",
+      "martin_comment": "#9",
+      "matched_rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "His hobby is collecting stamps.",
+      "source_item_id": "w07_sc_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 40,
+          "start": 15
+        }
+      ],
+      "actual_target_texts": [
+        "that he has no money left"
+      ],
+      "case_id": "SE-SC-06",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 40,
+          "start": 15
+        }
+      ],
+      "expected_target_texts": [
+        "that he has no money left"
+      ],
+      "focus_span": "that he has no money left",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The trouble is that he has no money left.",
+      "source_item_id": "w07_sc_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 27,
+          "start": 18
+        }
+      ],
+      "actual_target_texts": [
+        "abandoned"
+      ],
+      "case_id": "SE-SC-07",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 27,
+          "start": 18
+        }
+      ],
+      "expected_target_texts": [
+        "abandoned"
+      ],
+      "focus_span": "abandoned",
+      "martin_comment": "Zgoraj je povsod \"copula\", tukaj pa se pojavi \"linking verb\". A to kaj vpliva na funkcionalnost? Pa še ena reč je, in sicer tukaj piše \"predicate\", v resnici gre pa za adjectivized past participle (e.g., She appears happy.)",
+      "matched_rule_ids": [
+        "se.subject.complement.linking"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-07",
+        "SE-SC-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The town appeared abandoned.",
+      "source_item_id": "w07_sc_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 18,
+          "start": 15
+        }
+      ],
+      "actual_target_texts": [
+        "off"
+      ],
+      "case_id": "SE-SC-08",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 18,
+          "start": 15
+        }
+      ],
+      "expected_target_texts": [
+        "off"
+      ],
+      "focus_span": "off",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "se.subject.complement.linking"
+      ],
+      "matched_source_case_ids": [
+        "SE-SC-07",
+        "SE-SC-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The milk seems off.",
+      "source_item_id": "w07_ex1_12",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "OC — Object Complement",
+      "actual_target_spans": [
+        {
+          "end": 24,
+          "start": 15
+        }
+      ],
+      "actual_target_texts": [
+        "my friend"
+      ],
+      "case_id": "SE-OC-01",
+      "expected_action": "publish",
+      "expected_answer": "OC — Object Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 24,
+          "start": 15
+        }
+      ],
+      "expected_target_texts": [
+        "my friend"
+      ],
+      "focus_span": "my friend",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.object.complement"
+      ],
+      "matched_source_case_ids": [
+        "SE-OC-01",
+        "SE-OC-02",
+        "SE-OC-05",
+        "SE-OC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I consider him my friend.",
+      "source_item_id": "w07_oc_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "OC — Object Complement",
+      "actual_target_spans": [
+        {
+          "end": 29,
+          "start": 24
+        }
+      ],
+      "actual_target_texts": [
+        "white"
+      ],
+      "case_id": "SE-OC-02",
+      "expected_action": "publish",
+      "expected_answer": "OC — Object Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 29,
+          "start": 24
+        }
+      ],
+      "expected_target_texts": [
+        "white"
+      ],
+      "focus_span": "white",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.object.complement"
+      ],
+      "matched_source_case_ids": [
+        "SE-OC-01",
+        "SE-OC-02",
+        "SE-OC-05",
+        "SE-OC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Worries turned his hair white.",
+      "source_item_id": "w07_oc_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "OC — Object Complement",
+      "actual_target_spans": [
+        {
+          "end": 40,
+          "start": 18
+        }
+      ],
+      "actual_target_texts": [
+        "in very good condition"
+      ],
+      "case_id": "SE-OC-03",
+      "expected_action": "publish",
+      "expected_answer": "OC — Object Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 40,
+          "start": 18
+        }
+      ],
+      "expected_target_texts": [
+        "in very good condition"
+      ],
+      "focus_span": "in very good condition",
+      "martin_comment": "Ta primer je ful zanimiv, ker če določni člen zamenjaš z nedoločnim (a flat), PP postane del DO. A bi to pravilno analiziral?",
+      "matched_rule_ids": [
+        "se.object.complement.pp.definite"
+      ],
+      "matched_source_case_ids": [
+        "SE-OC-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "We found the flat in very good condition.",
+      "source_item_id": "w07_oc_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "OC — Object Complement",
+      "actual_target_spans": [
+        {
+          "end": 16,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "sing"
+      ],
+      "case_id": "SE-OC-04",
+      "expected_action": "review",
+      "expected_answer": "OC — Object Complement",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 16,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "sing"
+      ],
+      "focus_span": "sing",
+      "martin_comment": "Podobno kot pri #36 - če sing zamenjaš z npr. singing, postane her singing DO.",
+      "matched_rule_ids": [
+        "se.object.complement.bare.review"
+      ],
+      "matched_source_case_ids": [
+        "SE-OC-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I heard her sing.",
+      "source_item_id": "w07_oc_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "OC — Object Complement",
+      "actual_target_spans": [
+        {
+          "end": 33,
+          "start": 13
+        }
+      ],
+      "actual_target_texts": [
+        "sitting on the porch"
+      ],
+      "case_id": "SE-OC-05",
+      "expected_action": "publish",
+      "expected_answer": "OC — Object Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 33,
+          "start": 13
+        }
+      ],
+      "expected_target_texts": [
+        "sitting on the porch"
+      ],
+      "focus_span": "sitting on the porch",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.object.complement"
+      ],
+      "matched_source_case_ids": [
+        "SE-OC-01",
+        "SE-OC-02",
+        "SE-OC-05",
+        "SE-OC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "We found her sitting on the porch.",
+      "source_item_id": "w07_oc_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "OC — Object Complement",
+      "actual_target_spans": [
+        {
+          "end": 29,
+          "start": 16
+        }
+      ],
+      "actual_target_texts": [
+        "what you like"
+      ],
+      "case_id": "SE-OC-06",
+      "expected_action": "publish",
+      "expected_answer": "OC — Object Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 29,
+          "start": 16
+        }
+      ],
+      "expected_target_texts": [
+        "what you like"
+      ],
+      "focus_span": "what you like",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.object.complement"
+      ],
+      "matched_source_case_ids": [
+        "SE-OC-01",
+        "SE-OC-02",
+        "SE-OC-05",
+        "SE-OC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "You may call it what you like.",
+      "source_item_id": "w07_oc_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 19,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "bravely"
+      ],
+      "case_id": "SE-A-01",
+      "expected_action": "publish",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 19,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "bravely"
+      ],
+      "focus_span": "bravely",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.adverbial.direct"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-01",
+        "SE-A-02",
+        "SE-A-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "They fought bravely.",
+      "source_item_id": "w07_a_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 17,
+          "start": 10
+        }
+      ],
+      "actual_target_texts": [
+        "for joy"
+      ],
+      "case_id": "SE-A-02",
+      "expected_action": "publish",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 17,
+          "start": 10
+        }
+      ],
+      "expected_target_texts": [
+        "for joy"
+      ],
+      "focus_span": "for joy",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.adverbial.direct"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-01",
+        "SE-A-02",
+        "SE-A-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He jumped for joy.",
+      "source_item_id": "w07_a_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 34,
+          "start": 19
+        }
+      ],
+      "actual_target_texts": [
+        "an entire month"
+      ],
+      "case_id": "SE-A-03",
+      "expected_action": "review",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 34,
+          "start": 19
+        }
+      ],
+      "expected_target_texts": [
+        "an entire month"
+      ],
+      "focus_span": "an entire month",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.adverbial.duration.review"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The journey lasted an entire month.",
+      "source_item_id": "w07_a_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 9,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Yesterday"
+      ],
+      "case_id": "SE-A-04",
+      "expected_action": "publish",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 9,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Yesterday"
+      ],
+      "focus_span": "Yesterday",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.adverbial.direct"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-01",
+        "SE-A-02",
+        "SE-A-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Yesterday I helped my brother prepare lunch.",
+      "source_item_id": "w05_ex1_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A + A — two Adverbials",
+      "actual_target_spans": [
+        {
+          "end": 26,
+          "start": 22
+        },
+        {
+          "end": 33,
+          "start": 27
+        }
+      ],
+      "actual_target_texts": [
+        "home",
+        "to die"
+      ],
+      "case_id": "SE-A-05",
+      "expected_action": "publish",
+      "expected_answer": "A + A — two Adverbials",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 26,
+          "start": 22
+        },
+        {
+          "end": 33,
+          "start": 27
+        }
+      ],
+      "expected_target_texts": [
+        "home",
+        "to die"
+      ],
+      "focus_span": "to die",
+      "martin_comment": "Tukaj bi moral biti tudi home označen kot A.",
+      "matched_rule_ids": [
+        "se.two.adverbials"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The emigrant returned home to die.",
+      "source_item_id": "w07_a_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 44,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "because the traffic was so dense"
+      ],
+      "case_id": "SE-A-06",
+      "expected_action": "publish",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 44,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "because the traffic was so dense"
+      ],
+      "focus_span": "because the traffic was so dense",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.adverbial.clause.publish"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-06",
+        "SE-A-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He was late because the traffic was so dense.",
+      "source_item_id": "w07_a_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 17,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Knowing my temper"
+      ],
+      "case_id": "SE-A-07",
+      "expected_action": "publish",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 17,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Knowing my temper"
+      ],
+      "focus_span": "Knowing my temper",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.adverbial.clause.publish"
+      ],
+      "matched_source_case_ids": [
+        "SE-A-06",
+        "SE-A-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Knowing my temper, I didn't reply.",
+      "source_item_id": "w10_ex1_10",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Main clause",
+      "actual_target_spans": [
+        {
+          "end": 14,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "She telephoned"
+      ],
+      "case_id": "CL-MAIN-01",
+      "expected_action": "publish",
+      "expected_answer": "Main clause",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 14,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "She telephoned"
+      ],
+      "focus_span": "She telephoned",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.main"
+      ],
+      "matched_source_case_ids": [
+        "CL-MAIN-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She telephoned while you were out.",
+      "source_item_id": "w10_ex1_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Nominal clause — function: DO",
+      "actual_target_spans": [
+        {
+          "end": 57,
+          "start": 10
+        }
+      ],
+      "actual_target_texts": [
+        "that he spoke English with an Australian accent"
+      ],
+      "case_id": "CL-NOM-01",
+      "expected_action": "publish",
+      "expected_answer": "Nominal clause — function: DO",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 57,
+          "start": 10
+        }
+      ],
+      "expected_target_texts": [
+        "that he spoke English with an Australian accent"
+      ],
+      "focus_span": "that he spoke English with an Australian accent",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.nominal.do.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I noticed that he spoke English with an Australian accent.",
+      "source_item_id": "w10_ex1_09",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Nominal clause — function: DO",
+      "actual_target_spans": [
+        {
+          "end": 38,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "you have some influence on her"
+      ],
+      "case_id": "CL-NOM-02",
+      "expected_action": "publish",
+      "expected_answer": "Nominal clause — function: DO",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 38,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "you have some influence on her"
+      ],
+      "focus_span": "you have some influence on her",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.nominal.do.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I think you have some influence on her.",
+      "source_item_id": "w10_ex1_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Nominal clause — function: DO",
+      "actual_target_spans": [
+        {
+          "end": 40,
+          "start": 13
+        },
+        {
+          "end": 75,
+          "start": 45
+        }
+      ],
+      "actual_target_texts": [
+        "that you are a car mechanic",
+        "that your brother is a plumber"
+      ],
+      "case_id": "CL-NOM-03",
+      "expected_action": "publish",
+      "expected_answer": "Nominal clause — function: DO",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 40,
+          "start": 13
+        },
+        {
+          "end": 75,
+          "start": 45
+        }
+      ],
+      "expected_target_texts": [
+        "that you are a car mechanic",
+        "that your brother is a plumber"
+      ],
+      "focus_span": "that you are a car mechanic / that your brother is a plumber",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.nominal.do.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-01",
+        "CL-NOM-02",
+        "CL-NOM-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I have heard that you are a car mechanic and that your brother is a plumber.",
+      "source_item_id": "w10_ex1_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Nominal relative clause — function: S",
+      "actual_target_spans": [
+        {
+          "end": 13,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "What you want"
+      ],
+      "case_id": "CL-NOM-04",
+      "expected_action": "publish",
+      "expected_answer": "Nominal relative clause — function: S",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 13,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "What you want"
+      ],
+      "focus_span": "What you want",
+      "martin_comment": "\"Wh/fused relative\"? To je ponovno nominal relative clause (same as #7).",
+      "matched_rule_ids": [
+        "clause.nominal.relative.subject"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "What you want is impossible.",
+      "source_item_id": "w11_ex2_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Dependent verbal question — function: S",
+      "actual_target_spans": [
+        {
+          "end": 21,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Whether he will agree"
+      ],
+      "case_id": "CL-NOM-05",
+      "expected_action": "publish",
+      "expected_answer": "Dependent verbal question — function: S",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 21,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Whether he will agree"
+      ],
+      "focus_span": "Whether he will agree",
+      "martin_comment": "Mi to imenujemo dependent verbal question.",
+      "matched_rule_ids": [
+        "clause.dependent.question.subject"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Whether he will agree is not certain.",
+      "source_item_id": "w11_ex2_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Appositive clause",
+      "actual_target_spans": [
+        {
+          "end": 36,
+          "start": 9
+        }
+      ],
+      "actual_target_texts": [
+        "that he is now old and weak"
+      ],
+      "case_id": "CL-NOM-06",
+      "expected_action": "publish",
+      "expected_answer": "Appositive clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 36,
+          "start": 9
+        }
+      ],
+      "expected_target_texts": [
+        "that he is now old and weak"
+      ],
+      "focus_span": "that he is now old and weak",
+      "martin_comment": "To je v bistvu appositive clause, ki se nekoliko razlikuje od klasičnih PostM.",
+      "matched_rule_ids": [
+        "clause.appositive"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-06",
+        "CL-NOM-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The fact that he is now old and weak must be taken into consideration.",
+      "source_item_id": "w11_ex2_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Appositive clause",
+      "actual_target_spans": [
+        {
+          "end": 52,
+          "start": 13
+        }
+      ],
+      "actual_target_texts": [
+        "whether the atom can or cannot be split"
+      ],
+      "case_id": "CL-NOM-07",
+      "expected_action": "publish",
+      "expected_answer": "Appositive clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 52,
+          "start": 13
+        }
+      ],
+      "expected_target_texts": [
+        "whether the atom can or cannot be split"
+      ],
+      "focus_span": "whether the atom can or cannot be split",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.appositive"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-06",
+        "CL-NOM-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The question whether the atom can or cannot be split has interested scientists for decades.",
+      "source_item_id": "w11_ex2_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Nominal clause — function: SC",
+      "actual_target_spans": [
+        {
+          "end": 46,
+          "start": 13
+        }
+      ],
+      "actual_target_texts": [
+        "that you should apply for the job"
+      ],
+      "case_id": "CL-NOM-08",
+      "expected_action": "publish",
+      "expected_answer": "Nominal clause — function: SC",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 46,
+          "start": 13
+        }
+      ],
+      "expected_target_texts": [
+        "that you should apply for the job"
+      ],
+      "focus_span": "that you should apply for the job",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.nominal.subject.complement"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "My advice is that you should apply for the job.",
+      "source_item_id": "w11_ex2_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Nominal clause — postmodifier of an adjective",
+      "actual_target_spans": [
+        {
+          "end": 27,
+          "start": 14
+        }
+      ],
+      "actual_target_texts": [
+        "what he wants"
+      ],
+      "case_id": "CL-NOM-09",
+      "expected_action": "review",
+      "expected_answer": "Nominal clause — postmodifier of an adjective",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 27,
+          "start": 14
+        }
+      ],
+      "expected_target_texts": [
+        "what he wants"
+      ],
+      "focus_span": "what he wants",
+      "martin_comment": "V tem primeru ima funkcijo PostM (pridevnika sure).",
+      "matched_rule_ids": [
+        "clause.nominal.adjective.postmodifier"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-09",
+        "CL-NOM-10"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I am not sure what he wants.",
+      "source_item_id": "w11_ex2_10",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Nominal clause — postmodifier of an adjective",
+      "actual_target_spans": [
+        {
+          "end": 50,
+          "start": 11
+        }
+      ],
+      "actual_target_texts": [
+        "that I couldn't meet you at the station"
+      ],
+      "case_id": "CL-NOM-10",
+      "expected_action": "review",
+      "expected_answer": "Nominal clause — postmodifier of an adjective",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 50,
+          "start": 11
+        }
+      ],
+      "expected_target_texts": [
+        "that I couldn't meet you at the station"
+      ],
+      "focus_span": "that I couldn't meet you at the station",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.nominal.adjective.postmodifier"
+      ],
+      "matched_source_case_ids": [
+        "CL-NOM-09",
+        "CL-NOM-10"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I am sorry that I couldn't meet you at the station.",
+      "source_item_id": "w11_ex2_12",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Temporal adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 33,
+          "start": 15
+        }
+      ],
+      "actual_target_texts": [
+        "while you were out"
+      ],
+      "case_id": "CL-ADV-01",
+      "expected_action": "publish",
+      "expected_answer": "Temporal adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 33,
+          "start": 15
+        }
+      ],
+      "expected_target_texts": [
+        "while you were out"
+      ],
+      "focus_span": "while you were out",
+      "martin_comment": "Namesto \"maps to adverbial clause\" bi moralo biti \"maps to A\"?",
+      "matched_rule_ids": [
+        "clause.temporal.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She telephoned while you were out.",
+      "source_item_id": "w10_ex1_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Causal adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 58,
+          "start": 24
+        }
+      ],
+      "actual_target_texts": [
+        "because I am studying this evening"
+      ],
+      "case_id": "CL-ADV-02",
+      "expected_action": "publish",
+      "expected_answer": "Causal adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 58,
+          "start": 24
+        }
+      ],
+      "expected_target_texts": [
+        "because I am studying this evening"
+      ],
+      "focus_span": "because I am studying this evening",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.causal.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-02",
+        "CL-ADV-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I can't go out with you because I am studying this evening.",
+      "source_item_id": "w10_ex1_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Causal adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 22,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Since it is your fault"
+      ],
+      "case_id": "CL-ADV-03",
+      "expected_action": "publish",
+      "expected_answer": "Causal adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 22,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Since it is your fault"
+      ],
+      "focus_span": "Since it is your fault",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.causal.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-02",
+        "CL-ADV-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Since it is your fault, you should apologize.",
+      "source_item_id": "w11_ex3_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Conditional adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 21,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "If it weren't so cold"
+      ],
+      "case_id": "CL-ADV-04",
+      "expected_action": "publish",
+      "expected_answer": "Conditional adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 21,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "If it weren't so cold"
+      ],
+      "focus_span": "If it weren't so cold",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.conditional.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "If it weren't so cold, it would be nice.",
+      "source_item_id": "w11_ex3_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Negative-conditional adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 25,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Unless she studies harder"
+      ],
+      "case_id": "CL-ADV-05",
+      "expected_action": "publish",
+      "expected_answer": "Negative-conditional adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 25,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Unless she studies harder"
+      ],
+      "focus_span": "Unless she studies harder",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.negative.conditional.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Unless she studies harder, she won't pass the exam.",
+      "source_item_id": "w11_ex3_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Concessive adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 30,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Although it was cold and rainy"
+      ],
+      "case_id": "CL-ADV-06",
+      "expected_action": "publish",
+      "expected_answer": "Concessive adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 30,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Although it was cold and rainy"
+      ],
+      "focus_span": "Although it was cold and rainy",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.concessive.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Although it was cold and rainy, we enjoyed the trip.",
+      "source_item_id": "w11_ex3_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Purpose adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 85,
+          "start": 31
+        }
+      ],
+      "actual_target_texts": [
+        "so that they may open the subway at the scheduled time"
+      ],
+      "case_id": "CL-ADV-07",
+      "expected_action": "publish",
+      "expected_answer": "Purpose adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 85,
+          "start": 31
+        }
+      ],
+      "expected_target_texts": [
+        "so that they may open the subway at the scheduled time"
+      ],
+      "focus_span": "so that they may open the subway at the scheduled time",
+      "martin_comment": "ditto + samo \"purpose\" (result/consequence je druga vrsta)",
+      "matched_rule_ids": [
+        "clause.purpose.adverbial.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "They are working night and day so that they may open the subway at the scheduled time.",
+      "source_item_id": "w12_ex5_18",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Place / free-choice adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 16,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Wherever he went"
+      ],
+      "case_id": "CL-ADV-08",
+      "expected_action": "publish",
+      "expected_answer": "Place / free-choice adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 16,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Wherever he went"
+      ],
+      "focus_span": "Wherever he went",
+      "martin_comment": "ditto",
+      "matched_rule_ids": [
+        "clause.place.free.choice.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Wherever he went, he was welcome.",
+      "source_item_id": "w11_ex3_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Manner / comparison adverbial clause",
+      "actual_target_spans": [
+        {
+          "end": 38,
+          "start": 20
+        }
+      ],
+      "actual_target_texts": [
+        "as if he were rich"
+      ],
+      "case_id": "CL-ADV-09",
+      "expected_action": "publish",
+      "expected_answer": "Manner / comparison adverbial clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 38,
+          "start": 20
+        }
+      ],
+      "expected_target_texts": [
+        "as if he were rich"
+      ],
+      "focus_span": "as if he were rich",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.manner.comparison.adverbial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-09"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He spends his money as if he were rich.",
+      "source_item_id": "w11_ex3_10",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Comparative clause — postmodifier of an adjective",
+      "actual_target_spans": [
+        {
+          "end": 40,
+          "start": 20
+        }
+      ],
+      "actual_target_texts": [
+        "as she had ever been"
+      ],
+      "case_id": "CL-ADV-10",
+      "expected_action": "review",
+      "expected_answer": "Comparative clause — postmodifier of an adjective",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 40,
+          "start": 20
+        }
+      ],
+      "expected_target_texts": [
+        "as she had ever been"
+      ],
+      "focus_span": "as she had ever been",
+      "martin_comment": "Ta v resnici nima funkcije stavčnega člena (A), ampak je PostM (pridevniku \"friendly\").",
+      "matched_rule_ids": [
+        "clause.comparative.adjective.postmodifier"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-10"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She was as friendly as she had ever been.",
+      "source_item_id": "w11_ex3_11",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Supplementive non-finite clause — function: A",
+      "actual_target_spans": [
+        {
+          "end": 17,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Entering the room"
+      ],
+      "case_id": "CL-ADV-11",
+      "expected_action": "publish",
+      "expected_answer": "Supplementive non-finite clause — function: A",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 17,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Entering the room"
+      ],
+      "focus_span": "Entering the room",
+      "martin_comment": "Ker gre za supplementive clause (ki je non-finite), je včasih težko določiti vrsto A.",
+      "matched_rule_ids": [
+        "clause.supplementive.initial"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-11"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Entering the room, he noticed that the windows were open.",
+      "source_item_id": "w11_ex3_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Adverbial clause — function: A",
+      "actual_target_spans": [
+        {
+          "end": 26,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "On arriving at the cottage"
+      ],
+      "case_id": "CL-ADV-12",
+      "expected_action": "publish",
+      "expected_answer": "Adverbial clause — function: A",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 26,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "On arriving at the cottage"
+      ],
+      "focus_span": "On arriving at the cottage",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.generic.adverbial.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-12",
+        "CL-ADV-13"
+      ],
+      "parser_mismatch": false,
+      "sentence": "On arriving at the cottage, Tom found it burnt down.",
+      "source_item_id": "w11_ex3_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Adverbial clause — function: A",
+      "actual_target_spans": [
+        {
+          "end": 43,
+          "start": 23
+        }
+      ],
+      "actual_target_texts": [
+        "to ask her to dinner"
+      ],
+      "case_id": "CL-ADV-13",
+      "expected_action": "publish",
+      "expected_answer": "Adverbial clause — function: A",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 43,
+          "start": 23
+        }
+      ],
+      "expected_target_texts": [
+        "to ask her to dinner"
+      ],
+      "focus_span": "to ask her to dinner",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.generic.adverbial.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-12",
+        "CL-ADV-13"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She rang up her mother to ask her to dinner.",
+      "source_item_id": "w11_ex3_09",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Adverbial clause — function: A",
+      "actual_target_spans": [
+        {
+          "end": 23,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Although always helpful"
+      ],
+      "case_id": "CL-ADV-14",
+      "expected_action": "review",
+      "expected_answer": "Adverbial clause — function: A",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 23,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Although always helpful"
+      ],
+      "focus_span": "Although always helpful",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.generic.adverbial.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-14",
+        "CL-ADV-15"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Although always helpful, he was not much liked.",
+      "source_item_id": "w10_ex1_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Adverbial clause — function: A",
+      "actual_target_spans": [
+        {
+          "end": 21,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Even if still working"
+      ],
+      "case_id": "CL-ADV-15",
+      "expected_action": "review",
+      "expected_answer": "Adverbial clause — function: A",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 21,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Even if still working"
+      ],
+      "focus_span": "Even if still working",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.generic.adverbial.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-ADV-14",
+        "CL-ADV-15"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Even if still working, the engine is not reliable.",
+      "source_item_id": "w12_ex5_20",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Restrictive relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 22,
+          "start": 9
+        }
+      ],
+      "actual_target_texts": [
+        "who work hard"
+      ],
+      "case_id": "CL-REL-01",
+      "expected_action": "publish",
+      "expected_answer": "Restrictive relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 22,
+          "start": 9
+        }
+      ],
+      "expected_target_texts": [
+        "who work hard"
+      ],
+      "focus_span": "who work hard",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.restrictive"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-01",
+        "CL-REL-06",
+        "CL-REL-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Students who work hard pass their exams.",
+      "source_item_id": "w12_ex5_10",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Restrictive relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 28,
+          "start": 11
+        }
+      ],
+      "actual_target_texts": [
+        "I am listening to"
+      ],
+      "case_id": "CL-REL-02",
+      "expected_action": "review",
+      "expected_answer": "Restrictive relative clause — function: PostM",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 28,
+          "start": 11
+        }
+      ],
+      "expected_target_texts": [
+        "I am listening to"
+      ],
+      "focus_span": "I am listening to",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.zero.review.review.restrictive-relative-clause-function-postm"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-02",
+        "CL-REL-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The record I am listening to is a present from Moscow.",
+      "source_item_id": "w12_ex4_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 36,
+          "start": 11
+        }
+      ],
+      "actual_target_texts": [
+        "of whom we were very fond"
+      ],
+      "case_id": "CL-REL-03",
+      "expected_action": "publish",
+      "expected_answer": "Relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 36,
+          "start": 11
+        }
+      ],
+      "expected_target_texts": [
+        "of whom we were very fond"
+      ],
+      "focus_span": "of whom we were very fond",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.generic"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-03",
+        "CL-REL-04",
+        "CL-REL-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Our granny of whom we were very fond died unexpectedly.",
+      "source_item_id": "w12_ex4_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 49,
+          "start": 22
+        }
+      ],
+      "actual_target_texts": [
+        "why I should refuse a drink"
+      ],
+      "case_id": "CL-REL-04",
+      "expected_action": "publish",
+      "expected_answer": "Relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 49,
+          "start": 22
+        }
+      ],
+      "expected_target_texts": [
+        "why I should refuse a drink"
+      ],
+      "focus_span": "why I should refuse a drink",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.generic"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-03",
+        "CL-REL-04",
+        "CL-REL-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I could see no reason why I should refuse a drink.",
+      "source_item_id": "w12_ex4_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 51,
+          "start": 23
+        }
+      ],
+      "actual_target_texts": [
+        "where we could talk in peace"
+      ],
+      "case_id": "CL-REL-05",
+      "expected_action": "publish",
+      "expected_answer": "Relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 51,
+          "start": 23
+        }
+      ],
+      "expected_target_texts": [
+        "where we could talk in peace"
+      ],
+      "focus_span": "where we could talk in peace",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.generic"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-03",
+        "CL-REL-04",
+        "CL-REL-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "We could find no place where we could talk in peace.",
+      "source_item_id": "w12_ex4_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Restrictive relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 47,
+          "start": 20
+        }
+      ],
+      "actual_target_texts": [
+        "which Mrs. Thompson sent me"
+      ],
+      "case_id": "CL-REL-06",
+      "expected_action": "publish",
+      "expected_answer": "Restrictive relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 47,
+          "start": 20
+        }
+      ],
+      "expected_target_texts": [
+        "which Mrs. Thompson sent me"
+      ],
+      "focus_span": "which Mrs. Thompson sent me",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.restrictive"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-01",
+        "CL-REL-06",
+        "CL-REL-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I liked the present which Mrs. Thompson sent me.",
+      "source_item_id": "w12_ex4_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 30,
+          "start": 24
+        }
+      ],
+      "actual_target_texts": [
+        "he was"
+      ],
+      "case_id": "CL-REL-07",
+      "expected_action": "review",
+      "expected_answer": "Relative clause — function: PostM",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 30,
+          "start": 24
+        }
+      ],
+      "expected_target_texts": [
+        "he was"
+      ],
+      "focus_span": "he was",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.zero.review.review.relative-clause-function-postm-zero-relati"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-02",
+        "CL-REL-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He is no longer the man he was.",
+      "source_item_id": "w12_ex4_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Restrictive relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 31,
+          "start": 11
+        }
+      ],
+      "actual_target_texts": [
+        "who wishes to see me"
+      ],
+      "case_id": "CL-REL-08",
+      "expected_action": "publish",
+      "expected_answer": "Restrictive relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 31,
+          "start": 11
+        }
+      ],
+      "expected_target_texts": [
+        "who wishes to see me"
+      ],
+      "focus_span": "who wishes to see me",
+      "martin_comment": " maps to PostM",
+      "matched_rule_ids": [
+        "clause.relative.restrictive"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-01",
+        "CL-REL-06",
+        "CL-REL-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Any person who wishes to see me must take an appointment.",
+      "source_item_id": "w12_ex5_14",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Non-restrictive relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 66,
+          "start": 17
+        }
+      ],
+      "actual_target_texts": [
+        "which is to be found in the remote parts of China"
+      ],
+      "case_id": "CL-REL-09",
+      "expected_action": "publish",
+      "expected_answer": "Non-restrictive relative clause — function: PostM",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 66,
+          "start": 17
+        }
+      ],
+      "expected_target_texts": [
+        "which is to be found in the remote parts of China"
+      ],
+      "focus_span": "which is to be found in the remote parts of China",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "clause.relative.nonrestrictive"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-09"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The giant panda, which is to be found in the remote parts of China, lives exclusively on bamboo shoots.",
+      "source_item_id": "w12_ex5_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Non-restrictive relative clause — function: PostM",
+      "actual_target_spans": [
+        {
+          "end": 34,
+          "start": 18
+        }
+      ],
+      "actual_target_texts": [
+        "which was Friday"
+      ],
+      "case_id": "CL-REL-10",
+      "expected_action": "review",
+      "expected_answer": "Non-restrictive relative clause — function: PostM",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_class",
+      "expected_target_spans": [
+        {
+          "end": 34,
+          "start": 18
+        }
+      ],
+      "expected_target_texts": [
+        "which was Friday"
+      ],
+      "focus_span": "which was Friday",
+      "martin_comment": "Čeprav je brez vejic, gre za non-restrictive clause.",
+      "matched_rule_ids": [
+        "clause.relative.semantic.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-REL-10"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The following day which was Friday he left for Belgrade.",
+      "source_item_id": "w12_ex4_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Complementizer",
+      "actual_target_spans": [
+        {
+          "end": 13,
+          "start": 9
+        }
+      ],
+      "actual_target_texts": [
+        "that"
+      ],
+      "case_id": "CL-MARK-01",
+      "expected_action": "publish",
+      "expected_answer": "Complementizer",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 13,
+          "start": 9
+        }
+      ],
+      "expected_target_texts": [
+        "that"
+      ],
+      "focus_span": "that",
+      "martin_comment": "#82-#92 ne razumem 🤔",
+      "matched_rule_ids": [
+        "marker.complementizer"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She said that she had lost her purse.",
+      "source_item_id": "w05_do_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Interrogative subordinator",
+      "actual_target_spans": [
+        {
+          "end": 22,
+          "start": 15
+        }
+      ],
+      "actual_target_texts": [
+        "whether"
+      ],
+      "case_id": "CL-MARK-02",
+      "expected_action": "publish",
+      "expected_answer": "Interrogative subordinator",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 22,
+          "start": 15
+        }
+      ],
+      "expected_target_texts": [
+        "whether"
+      ],
+      "focus_span": "whether",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.interrogative.whether"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Time will show whether we are right or wrong.",
+      "source_item_id": "w11_ex2_01",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Interrogative subordinator",
+      "actual_target_spans": [
+        {
+          "end": 18,
+          "start": 16
+        }
+      ],
+      "actual_target_texts": [
+        "if"
+      ],
+      "case_id": "CL-MARK-03",
+      "expected_action": "review",
+      "expected_answer": "Interrogative subordinator",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 18,
+          "start": 16
+        }
+      ],
+      "expected_target_texts": [
+        "if"
+      ],
+      "focus_span": "if",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.interrogative.if.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The question is if he feels up to the task.",
+      "source_item_id": "w11_ex2_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Subordinating conjunction",
+      "actual_target_spans": [
+        {
+          "end": 2,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "If"
+      ],
+      "case_id": "CL-MARK-04",
+      "expected_action": "publish",
+      "expected_answer": "Subordinating conjunction",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 2,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "If"
+      ],
+      "focus_span": "If",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.subordinating.conjunction"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-04",
+        "CL-MARK-05",
+        "CL-MARK-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "If it weren't so cold, it would be nice.",
+      "source_item_id": "w11_ex3_03",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Subordinating conjunction",
+      "actual_target_spans": [
+        {
+          "end": 2,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "As"
+      ],
+      "case_id": "CL-MARK-05",
+      "expected_action": "publish",
+      "expected_answer": "Subordinating conjunction",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 2,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "As"
+      ],
+      "focus_span": "As",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.subordinating.conjunction"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-04",
+        "CL-MARK-05",
+        "CL-MARK-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "As it was raining, we stayed indoors all day.",
+      "source_item_id": "w12_ex5_09",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Subordinating conjunction",
+      "actual_target_spans": [
+        {
+          "end": 5,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "While"
+      ],
+      "case_id": "CL-MARK-06",
+      "expected_action": "publish",
+      "expected_answer": "Subordinating conjunction",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 5,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "While"
+      ],
+      "focus_span": "While",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.subordinating.conjunction"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-04",
+        "CL-MARK-05",
+        "CL-MARK-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "While he has invested a lot of money in paintings, he doesn't understand very much about art.",
+      "source_item_id": "w12_ex5_19",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Relative pronoun",
+      "actual_target_spans": [
+        {
+          "end": 12,
+          "start": 9
+        }
+      ],
+      "actual_target_texts": [
+        "who"
+      ],
+      "case_id": "CL-MARK-07",
+      "expected_action": "publish",
+      "expected_answer": "Relative pronoun",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 12,
+          "start": 9
+        }
+      ],
+      "expected_target_texts": [
+        "who"
+      ],
+      "focus_span": "who",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.relative.pronoun"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Students who work hard pass their exams.",
+      "source_item_id": "w12_ex5_10",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Relative adverb",
+      "actual_target_spans": [
+        {
+          "end": 28,
+          "start": 23
+        }
+      ],
+      "actual_target_texts": [
+        "where"
+      ],
+      "case_id": "CL-MARK-08",
+      "expected_action": "publish",
+      "expected_answer": "Relative adverb",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 28,
+          "start": 23
+        }
+      ],
+      "expected_target_texts": [
+        "where"
+      ],
+      "focus_span": "where",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.relative.adverb"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "We could find no place where we could talk in peace.",
+      "source_item_id": "w12_ex4_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Infinitival marker",
+      "actual_target_spans": [
+        {
+          "end": 26,
+          "start": 24
+        }
+      ],
+      "actual_target_texts": [
+        "to"
+      ],
+      "case_id": "CL-MARK-09",
+      "expected_action": "publish",
+      "expected_answer": "Infinitival marker",
+      "expected_decision": "OK",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 26,
+          "start": 24
+        }
+      ],
+      "expected_target_texts": [
+        "to"
+      ],
+      "focus_span": "to",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.infinitival"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-09"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The best thing would be to tell everybody.",
+      "source_item_id": "w10_ex1_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Zero marker",
+      "actual_target_spans": [],
+      "actual_target_texts": [],
+      "case_id": "CL-MARK-10",
+      "expected_action": "review",
+      "expected_answer": "Zero marker",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "marker_type",
+      "expected_target_spans": [
+        {
+          "end": 9,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "∅"
+      ],
+      "focus_span": "zero",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "marker.zero.not.highlightable"
+      ],
+      "matched_source_case_ids": [
+        "CL-MARK-10"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He said he had lost his mind.",
+      "source_item_id": "w05_ex1_05",
+      "status": "matched",
+      "target_disposition": "non-highlightable zero marker; no synthetic source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Finite that-clause",
+      "actual_target_spans": [
+        {
+          "end": 49,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "that every question would be answered"
+      ],
+      "case_id": "CL-STR-01",
+      "expected_action": "publish",
+      "expected_answer": "Finite that-clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 49,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "that every question would be answered"
+      ],
+      "focus_span": "that every question would be answered",
+      "martin_comment": "ditto @ #93-#102",
+      "matched_rule_ids": [
+        "structure.finite.that"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He promised that every question would be answered.",
+      "source_item_id": "w12_ex5_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Finite zero-that clause",
+      "actual_target_spans": [
+        {
+          "end": 38,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "you have some influence on her"
+      ],
+      "case_id": "CL-STR-02",
+      "expected_action": "publish",
+      "expected_answer": "Finite zero-that clause",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 38,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "you have some influence on her"
+      ],
+      "focus_span": "you have some influence on her",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.finite.zero.that"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I think you have some influence on her.",
+      "source_item_id": "w10_ex1_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Finite wh-clause",
+      "actual_target_spans": [
+        {
+          "end": 25,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "How the accident happened"
+      ],
+      "case_id": "CL-STR-03",
+      "expected_action": "publish",
+      "expected_answer": "Finite wh-clause",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 25,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "How the accident happened"
+      ],
+      "focus_span": "How the accident happened",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.finite.wh"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "How the accident happened is a mystery.",
+      "source_item_id": "w12_ex5_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Finite whether/if-clause",
+      "actual_target_spans": [
+        {
+          "end": 50,
+          "start": 14
+        }
+      ],
+      "actual_target_texts": [
+        "whether that will come out all right"
+      ],
+      "case_id": "CL-STR-04",
+      "expected_action": "publish",
+      "expected_answer": "Finite whether/if-clause",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 50,
+          "start": 14
+        }
+      ],
+      "expected_target_texts": [
+        "whether that will come out all right"
+      ],
+      "focus_span": "whether that will come out all right",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.finite.whether.if"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I am not sure whether that will come out all right.",
+      "source_item_id": "w12_ex5_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "To-infinitival clause",
+      "actual_target_spans": [
+        {
+          "end": 41,
+          "start": 24
+        }
+      ],
+      "actual_target_texts": [
+        "to tell everybody"
+      ],
+      "case_id": "CL-STR-05",
+      "expected_action": "publish",
+      "expected_answer": "To-infinitival clause",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 41,
+          "start": 24
+        }
+      ],
+      "expected_target_texts": [
+        "to tell everybody"
+      ],
+      "focus_span": "to tell everybody",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.to.infinitive"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The best thing would be to tell everybody.",
+      "source_item_id": "w10_ex1_06",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Bare infinitival clause",
+      "actual_target_spans": [
+        {
+          "end": 16,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "sing"
+      ],
+      "case_id": "CL-STR-06",
+      "expected_action": "review",
+      "expected_answer": "Bare infinitival clause",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 16,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "sing"
+      ],
+      "focus_span": "sing",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.bare.infinitive.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I heard her sing.",
+      "source_item_id": "w07_oc_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "-ing clause",
+      "actual_target_spans": [
+        {
+          "end": 17,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Knowing my temper"
+      ],
+      "case_id": "CL-STR-07",
+      "expected_action": "publish",
+      "expected_answer": "-ing clause",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 17,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Knowing my temper"
+      ],
+      "focus_span": "Knowing my temper",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.ing"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-07"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Knowing my temper, I didn't reply.",
+      "source_item_id": "w10_ex1_10",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "Preposition + -ing clause",
+      "actual_target_spans": [
+        {
+          "end": 30,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "without saying goodbye"
+      ],
+      "case_id": "CL-STR-08",
+      "expected_action": "publish",
+      "expected_answer": "Preposition + -ing clause",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 30,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "without saying goodbye"
+      ],
+      "focus_span": "without saying goodbye",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.preposition.ing"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-08"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He left without saying goodbye.",
+      "source_item_id": "w12_ex5_11",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Reduced / verbless clause",
+      "actual_target_spans": [
+        {
+          "end": 20,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "Too nervous to reply"
+      ],
+      "case_id": "CL-STR-09",
+      "expected_action": "review",
+      "expected_answer": "Reduced / verbless clause",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 20,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "Too nervous to reply"
+      ],
+      "focus_span": "Too nervous to reply",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.reduced.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-09"
+      ],
+      "parser_mismatch": false,
+      "sentence": "Too nervous to reply, he stared at the floor.",
+      "source_item_id": "w10_ex1_07",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Comparative clause",
+      "actual_target_spans": [
+        {
+          "end": 40,
+          "start": 20
+        }
+      ],
+      "actual_target_texts": [
+        "as she had ever been"
+      ],
+      "case_id": "CL-STR-10",
+      "expected_action": "review",
+      "expected_answer": "Comparative clause",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_structure",
+      "expected_target_spans": [
+        {
+          "end": 40,
+          "start": 20
+        }
+      ],
+      "expected_target_texts": [
+        "as she had ever been"
+      ],
+      "focus_span": "as she had ever been",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "structure.comparative.review"
+      ],
+      "matched_source_case_ids": [
+        "CL-STR-10"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She was as friendly as she had ever been.",
+      "source_item_id": "w11_ex3_11",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "S — Subject",
+      "actual_target_spans": [
+        {
+          "end": 15,
+          "start": 0
+        }
+      ],
+      "actual_target_texts": [
+        "That he is rich"
+      ],
+      "case_id": "CL-FUNC-01",
+      "expected_action": "publish",
+      "expected_answer": "S — Subject",
+      "expected_decision": "OK",
+      "expected_dimension": "clause_function",
+      "expected_target_spans": [
+        {
+          "end": 15,
+          "start": 0
+        }
+      ],
+      "expected_target_texts": [
+        "That he is rich"
+      ],
+      "focus_span": "That he is rich",
+      "martin_comment": "ditto @ #103-#108",
+      "matched_rule_ids": [
+        "function.clause.subject"
+      ],
+      "matched_source_case_ids": [
+        "CL-FUNC-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "That he is rich doesn't mean anything to them.",
+      "source_item_id": "w11_ex2_11",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "DO — Direct Object",
+      "actual_target_spans": [
+        {
+          "end": 49,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "that every question would be answered"
+      ],
+      "case_id": "CL-FUNC-02",
+      "expected_action": "publish",
+      "expected_answer": "DO — Direct Object",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_function",
+      "expected_target_spans": [
+        {
+          "end": 49,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "that every question would be answered"
+      ],
+      "focus_span": "that every question would be answered",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "function.clause.direct.object.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-FUNC-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "He promised that every question would be answered.",
+      "source_item_id": "w12_ex5_08",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 20,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "what he said"
+      ],
+      "case_id": "CL-FUNC-03",
+      "expected_action": "publish",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_function",
+      "expected_target_spans": [
+        {
+          "end": 20,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "what he said"
+      ],
+      "focus_span": "what he said",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "function.clause.subject.complement"
+      ],
+      "matched_source_case_ids": [
+        "CL-FUNC-03"
+      ],
+      "parser_mismatch": false,
+      "sentence": "This is what he said.",
+      "source_item_id": "w12_ex5_12",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "A — Adverbial",
+      "actual_target_spans": [
+        {
+          "end": 26,
+          "start": 9
+        }
+      ],
+      "actual_target_texts": [
+        "as she drove home"
+      ],
+      "case_id": "CL-FUNC-04",
+      "expected_action": "publish",
+      "expected_answer": "A — Adverbial",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_function",
+      "expected_target_spans": [
+        {
+          "end": 26,
+          "start": 9
+        }
+      ],
+      "expected_target_texts": [
+        "as she drove home"
+      ],
+      "focus_span": "as she drove home",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "function.clause.adverbial.publish"
+      ],
+      "matched_source_case_ids": [
+        "CL-FUNC-04"
+      ],
+      "parser_mismatch": false,
+      "sentence": "She sang as she drove home.",
+      "source_item_id": "w12_ex5_05",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "publish",
+      "actual_answer": "PostM — Postmodifier",
+      "actual_target_spans": [
+        {
+          "end": 18,
+          "start": 8
+        }
+      ],
+      "actual_target_texts": [
+        "I spoke to"
+      ],
+      "case_id": "CL-FUNC-05",
+      "expected_action": "publish",
+      "expected_answer": "PostM — Postmodifier",
+      "expected_decision": "Rule-based OK",
+      "expected_dimension": "clause_function",
+      "expected_target_spans": [
+        {
+          "end": 18,
+          "start": 8
+        }
+      ],
+      "expected_target_texts": [
+        "I spoke to"
+      ],
+      "focus_span": "I spoke to",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "function.clause.postmodifier"
+      ],
+      "matched_source_case_ids": [
+        "CL-FUNC-05"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The man I spoke to is an accountant in our firm.",
+      "source_item_id": "w12_ex4_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "OC / Clausal object",
+      "actual_target_spans": [
+        {
+          "end": 16,
+          "start": 12
+        }
+      ],
+      "actual_target_texts": [
+        "sing"
+      ],
+      "case_id": "CL-FUNC-06",
+      "expected_action": "review",
+      "expected_answer": "OC / Clausal object",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "clause_function",
+      "expected_target_spans": [
+        {
+          "end": 16,
+          "start": 12
+        }
+      ],
+      "expected_target_texts": [
+        "sing"
+      ],
+      "focus_span": "sing",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "function.clause.object.complement.review.review.oc-clausal-object-the-non-finite-clause-ca"
+      ],
+      "matched_source_case_ids": [
+        "CL-FUNC-06"
+      ],
+      "parser_mismatch": false,
+      "sentence": "I heard her sing.",
+      "source_item_id": "w07_oc_04",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "Context needed",
+      "actual_target_spans": [
+        {
+          "end": 43,
+          "start": 24
+        }
+      ],
+      "actual_target_texts": [
+        "in his father's car"
+      ],
+      "case_id": "REVIEW-01",
+      "expected_action": "review",
+      "expected_answer": "Context needed",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 43,
+          "start": 24
+        }
+      ],
+      "expected_target_texts": [
+        "in his father's car"
+      ],
+      "focus_span": "in his father's car",
+      "martin_comment": null,
+      "matched_rule_ids": [
+        "se.ambiguous.pp.review.review.context-needed-pp-attachment-is-ambiguous-"
+      ],
+      "matched_source_case_ids": [
+        "REVIEW-01"
+      ],
+      "parser_mismatch": false,
+      "sentence": "George smashed a window in his father's car.",
+      "source_item_id": "w07_ex1_02",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    },
+    {
+      "actual_action": "review",
+      "actual_answer": "SC — Subject Complement",
+      "actual_target_spans": [
+        {
+          "end": 65,
+          "start": 46
+        }
+      ],
+      "actual_target_texts": [
+        "tomorrow at 11 p.m."
+      ],
+      "case_id": "REVIEW-02",
+      "expected_action": "review",
+      "expected_answer": "SC — Subject Complement",
+      "expected_decision": "Needs manual review",
+      "expected_dimension": "sentence_element",
+      "expected_target_spans": [
+        {
+          "end": 65,
+          "start": 46
+        }
+      ],
+      "expected_target_texts": [
+        "tomorrow at 11 p.m."
+      ],
+      "focus_span": "tomorrow at 11 p.m.",
+      "martin_comment": "SC?",
+      "matched_rule_ids": [
+        "se.copular.temporal.review"
+      ],
+      "matched_source_case_ids": [
+        "REVIEW-02"
+      ],
+      "parser_mismatch": false,
+      "sentence": "The fight for the world championship title is tomorrow at 11 p.m.",
+      "source_item_id": "w07_ex1_14",
+      "status": "matched",
+      "target_disposition": "overt source span"
+    }
+  ],
+  "status_counts": {
+    "matched": 106
+  }
+}

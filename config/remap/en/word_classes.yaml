@@ -1,0 +1,562 @@
+{
+  "language": "en",
+  "profile_status": "provisional-profile",
+  "profile_version": "1.0.0",
+  "rules": [
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word is an individual name, so it is a proper noun.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "text_has_upper": true,
+          "upos_in": [
+            "PROPN"
+          ]
+        }
+      },
+      "output": {
+        "label": "Proper noun",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 99,
+      "rule_id": "pos.propn",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word names a person, place, thing, or concept, so it is a noun.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "NOUN"
+          ]
+        }
+      },
+      "output": {
+        "label": "Noun",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.noun",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word stands in for a noun phrase, so it is a pronoun.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "PRON"
+          ]
+        }
+      },
+      "output": {
+        "label": "Pronoun",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.pron",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word describes a noun or completes an adjectival description.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "ADJ"
+          ]
+        }
+      },
+      "output": {
+        "label": "Adjective",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.adj",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word modifies an action, description, or circumstance.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "ADV"
+          ]
+        }
+      },
+      "output": {
+        "label": "Adverb",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.adv",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word introduces or specifies a noun phrase.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "deprel_in": [
+            "det",
+            "det:predet"
+          ],
+          "upos_in": [
+            "DET"
+          ]
+        }
+      },
+      "output": {
+        "label": "Determiner",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 100,
+      "rule_id": "pos.det",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word joins units of equal grammatical status.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "CCONJ"
+          ]
+        }
+      },
+      "output": {
+        "label": "Coordinator",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.cconj",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word introduces a subordinate clause.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "SCONJ"
+          ]
+        }
+      },
+      "output": {
+        "label": "Subordinator",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.sconj",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word expresses the main action, event, or state.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "upos_in": [
+            "VERB"
+          ]
+        }
+      },
+      "output": {
+        "label": "Lexical verb",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 90,
+      "rule_id": "pos.lexical.verb",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word expresses meanings such as possibility, necessity, or prediction.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "deprel_in": [
+            "aux",
+            "aux:pass"
+          ],
+          "upos_in": [
+            "AUX"
+          ],
+          "xpos_in": [
+            "MD"
+          ]
+        }
+      },
+      "output": {
+        "label": "Modal auxiliary",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 120,
+      "rule_id": "pos.modal.auxiliary",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word helps form the verb phrase.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "deprel_in": [
+            "aux",
+            "aux:pass"
+          ],
+          "lemma_in": [
+            "be",
+            "do",
+            "have"
+          ],
+          "upos_in": [
+            "AUX"
+          ],
+          "xpos_not_in": [
+            "MD"
+          ]
+        }
+      },
+      "output": {
+        "label": "Auxiliary verb",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 110,
+      "rule_id": "pos.primary.auxiliary",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word combines with a verb as part of a multi-word verb.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "deprel_in": [
+            "compound:prt"
+          ],
+          "upos_in": [
+            "ADP",
+            "PART"
+          ]
+        }
+      },
+      "output": {
+        "label": "Particle",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 120,
+      "rule_id": "pos.particle",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted word heads a phrase expressing a relation such as place or direction.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "deprel_not_in": [
+            "compound:prt"
+          ],
+          "upos_in": [
+            "ADP"
+          ]
+        }
+      },
+      "output": {
+        "label": "Preposition",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 100,
+      "rule_id": "pos.preposition",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Provisional English word-class mapping profile.",
+      "dimension": "word_class",
+      "exclude": [],
+      "explanation_template": "The highlighted “to” introduces an infinitive.",
+      "guards": [],
+      "implementation_notes": [
+        "This profile is provisional and is not part of the Martin-reviewed 106-case contract."
+      ],
+      "language": "en",
+      "layer": "word_class",
+      "match": {
+        "anchor": {
+          "head_upos_in": [
+            "VERB"
+          ],
+          "lemma_in": [
+            "to"
+          ],
+          "upos_in": [
+            "PART"
+          ]
+        }
+      },
+      "output": {
+        "label": "Infinitival marker",
+        "mode": "parts-of-speech",
+        "subskill": "Parts of speech"
+      },
+      "priority": 120,
+      "rule_id": "pos.infinitival.marker",
+      "source_case_ids": [
+        "POS-PROFILE-EN-1.0.0"
+      ],
+      "target": {
+        "strategy": "anchor-token",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    }
+  ]
+}

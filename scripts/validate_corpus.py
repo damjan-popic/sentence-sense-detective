@@ -8,10 +8,11 @@ import hashlib
 import json
 import re
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
-from corpus_io import BCP47, read_jsonl, sha256_file
+from corpus_io import BCP47, sha256_file
+from pipeline_common import read_jsonl
 
 ROOT = Path(__file__).resolve().parents[1]
 VALID_MODES = {"parts-of-speech", "sentence-elements", "clauses"}
@@ -44,8 +45,14 @@ def validate_expanded(data_root: Path, errors: list[str]) -> dict:
     sentences_path = data_root / "corpus" / "sentences_10k.jsonl"
     annotations_path = data_root / "corpus" / "sentences_10k.annotations.jsonl"
     conllu_path = data_root / "corpus" / "sentences_10k.conllu"
-    candidates_path = data_root / "generated" / "question_candidates.jsonl"
-    accepted_path = data_root / "generated" / "accepted_questions.jsonl"
+    candidates_path = data_root / "generated" / "question_candidates.jsonl.gz"
+    accepted_path = data_root / "generated" / "accepted_questions.jsonl.gz"
+    remapped_path = (
+        data_root / "remap" / "en" / "pedagogical_candidates_10k.jsonl.gz"
+    )
+    compiled_path = data_root / "remap" / "en" / "compiled_rules.json"
+    case_matrix_path = data_root / "remap" / "en" / "case_to_rule.json"
+    replay_path = ROOT / "reports" / "remap_gold_replay.json"
     if not all(
         path.exists()
         for path in (
@@ -54,6 +61,10 @@ def validate_expanded(data_root: Path, errors: list[str]) -> dict:
             conllu_path,
             candidates_path,
             accepted_path,
+            remapped_path,
+            compiled_path,
+            case_matrix_path,
+            replay_path,
         )
     ):
         errors.append("the materialised 10K corpus outputs are incomplete")
@@ -143,6 +154,113 @@ def validate_expanded(data_root: Path, errors: list[str]) -> dict:
         dimension: set(value["labels"])
         for dimension, value in tagset["dimensions"].items()
     }
+    compiled = json.loads(compiled_path.read_text(encoding="utf-8"))
+    compiled_rules = {
+        rule["rule_id"]: rule for rule in compiled.get("rules", [])
+    }
+    if len(compiled_rules) != 99:
+        errors.append(
+            f"expected 99 unique formal rules, found {len(compiled_rules)}"
+        )
+    case_matrix = json.loads(case_matrix_path.read_text(encoding="utf-8"))
+    matrix_rows = case_matrix.get("rows", [])
+    if len(matrix_rows) != 106 or len(
+        {row.get("case_id") for row in matrix_rows}
+    ) != 106:
+        errors.append("the formal case-to-rule matrix must cover 106 unique cases")
+    expected_decisions = Counter(
+        row.get("expected_decision") for row in matrix_rows
+    )
+    if expected_decisions != Counter(
+        {"OK": 26, "Rule-based OK": 60, "Needs manual review": 20}
+    ):
+        errors.append(
+            f"formal decision counts differ from 26/60/20: "
+            f"{dict(expected_decisions)}"
+        )
+    manual_case_ids = {
+        row["case_id"]
+        for row in matrix_rows
+        if row.get("expected_decision") == "Needs manual review"
+    }
+    for rule in compiled_rules.values():
+        if (
+            rule.get("action") == "publish"
+            and manual_case_ids.intersection(rule.get("source_case_ids", []))
+        ):
+            errors.append(
+                f"{rule['rule_id']}: a manual-review source case can publish"
+            )
+    pos_rules = [
+        rule
+        for rule in compiled_rules.values()
+        if rule.get("dimension") == "word_class"
+    ]
+    if not pos_rules or any(
+        rule.get("source_case_ids") != ["POS-PROFILE-EN-1.0.0"]
+        for rule in pos_rules
+    ):
+        errors.append("word-class rules are not isolated in the provisional POS profile")
+    replay = json.loads(replay_path.read_text(encoding="utf-8"))
+    if (
+        replay.get("case_count") != 106
+        or replay.get("status_counts") != {"matched": 106}
+        or replay.get("manual_cases_auto_published") != 0
+    ):
+        errors.append("formal gold replay is not a clean 106/106 match")
+
+    remapped = read_jsonl(remapped_path)
+    remap_ids = [record.get("remap_candidate_id") for record in remapped]
+    if duplicate_values(remap_ids):
+        errors.append("formal remap candidate IDs are not unique")
+    remap_report = json.loads(
+        (data_root / "remap" / "en" / "remap_10k_report.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    if remap_report.get("candidate_count") != len(remapped):
+        errors.append("formal remap report candidate count differs")
+    if remap_report.get("profile_sha256") != compiled.get("profile_sha256"):
+        errors.append("formal remap output uses a different compiled profile")
+    required_provenance = {
+        "remap_profile",
+        "remap_profile_sha256",
+        "remap_rule_id",
+        "decision_class",
+        "action",
+        "source_case_ids",
+        "matched_evidence",
+        "stanza_version",
+        "model_bundle_sha256",
+    }
+    for item in remapped:
+        remap_id = item.get("remap_candidate_id", "<missing>")
+        if required_provenance - set(item):
+            errors.append(f"{remap_id}: formal provenance is incomplete")
+            continue
+        rule = compiled_rules.get(item.get("remap_rule_id"))
+        if not rule:
+            errors.append(f"{remap_id}: formal rule is absent from the profile")
+            continue
+        if item.get("remap_profile_sha256") != compiled.get("profile_sha256"):
+            errors.append(f"{remap_id}: formal profile hash differs")
+        conflict_downgrade = (
+            rule.get("action") == "publish"
+            and item.get("action") == "review"
+            and str(item.get("review_reason") or "").startswith(
+                "Incompatible formal rules"
+            )
+        )
+        if item.get("action") != rule.get("action") and not conflict_downgrade:
+            errors.append(f"{remap_id}: action differs from formal rule")
+        if item.get("source_case_ids") != rule.get("source_case_ids"):
+            errors.append(f"{remap_id}: source cases differ from formal rule")
+        if (
+            item.get("action") == "publish"
+            and manual_case_ids.intersection(item.get("source_case_ids", []))
+        ):
+            errors.append(f"{remap_id}: manual-review case was auto-published")
+
     candidates = read_jsonl(candidates_path)
     accepted = read_jsonl(accepted_path)
     candidate_ids = [record.get("question_id") for record in candidates]
@@ -153,6 +271,32 @@ def validate_expanded(data_root: Path, errors: list[str]) -> dict:
         question_id = question.get("question_id", "<missing>")
         if question.get("review_status") not in GENERATED_STATUSES:
             errors.append(f"{question_id}: invalid generated review status")
+        if (
+            question.get("review_status") == "needs-review"
+            and not str(question.get("review_reason") or "").strip()
+        ):
+            errors.append(f"{question_id}: needs-review candidate has no reason")
+        missing_provenance = required_provenance - set(question)
+        if missing_provenance:
+            errors.append(
+                f"{question_id}: missing formal provenance "
+                f"{sorted(missing_provenance)}"
+            )
+        rule = compiled_rules.get(question.get("remap_rule_id"))
+        if not rule:
+            errors.append(f"{question_id}: unknown formal remap rule")
+        elif (
+            question.get("rule_id") != rule["rule_id"]
+            or question.get("source_case_ids") != rule["source_case_ids"]
+        ):
+            errors.append(f"{question_id}: provenance differs from formal rule")
+        expected_status = {
+            "publish": "auto-high-confidence",
+            "review": "needs-review",
+            "reject": "rejected",
+        }.get(question.get("action"))
+        if question.get("review_status") != expected_status:
+            errors.append(f"{question_id}: action and review status disagree")
         if question.get("answer") not in labels.get(question.get("dimension"), set()):
             errors.append(f"{question_id}: answer is outside controlled vocabulary")
         options = question.get("options")
@@ -175,6 +319,27 @@ def validate_expanded(data_root: Path, errors: list[str]) -> dict:
         accepted_sentence_counts[question.get("sentence_id")] += 1
     if set(accepted_sentence_counts) != set(sentence_by_id):
         errors.append("every selected sentence must yield at least one accepted question")
+    accepted_by_target = defaultdict(list)
+    for question in accepted:
+        target_key = (
+            question.get("sentence_id"),
+            question.get("dimension"),
+            json.dumps(question.get("target_spans", []), sort_keys=True),
+        )
+        accepted_by_target[target_key].append(question)
+    conflicting_targets = [
+        questions
+        for questions in accepted_by_target.values()
+        if len({question.get("answer") for question in questions}) > 1
+    ]
+    if conflicting_targets:
+        example = conflicting_targets[0]
+        errors.append(
+            "accepted questions assign contradictory answers to the same "
+            f"sentence/dimension/target; first conflict: "
+            f"{example[0].get('sentence_id')} "
+            f"{sorted({question.get('answer') for question in example})}"
+        )
 
     gold_path = data_root / "gold" / "reviewed_106.jsonl"
     gold_index_path = data_root / "gold" / "index.json"
@@ -184,6 +349,24 @@ def validate_expanded(data_root: Path, errors: list[str]) -> dict:
         errors.append("the immutable gold copy does not contain 106 questions")
     if hashlib.sha256(gold_path.read_bytes()).hexdigest() != gold_index.get("sha256"):
         errors.append("the immutable gold file hash differs from its index")
+
+    contract_path = data_root / "gold" / "remapping_contract_106.json"
+    fixture_path = data_root / "gold" / "remapping_stanza_1.14.0.jsonl"
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    contract_cases = contract.get("cases", [])
+    contract_ids = {case.get("id") for case in contract_cases}
+    gold_ids = {case.get("id") for case in gold}
+    if len(contract_cases) != 106 or contract_ids != gold_ids:
+        errors.append("the remapping contract must match all 106 immutable gold IDs")
+    matrix_ids = {row.get("case_id") for row in matrix_rows}
+    if contract_ids != matrix_ids:
+        errors.append("the formal case matrix does not anchor all 106 gold IDs")
+    fixtures = read_jsonl(fixture_path)
+    fixture_case_ids = {
+        case_id for fixture in fixtures for case_id in fixture.get("case_ids", [])
+    }
+    if len(fixtures) != 91 or fixture_case_ids != contract_ids:
+        errors.append("the Stanza remapping fixture does not cover the 106-case contract")
 
     return {
         "expanded_sentences": len(sentences),

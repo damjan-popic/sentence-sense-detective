@@ -19,7 +19,7 @@ OUTPUT_ROOT = ROOT / "docs" / "data"
 CONFIG_PATH = DATA_ROOT / "questions" / LANGUAGE / "config.json"
 CORPUS_CONFIG = ROOT / "config" / "corpus_10k.yaml"
 SOURCE_MANIFEST = ROOT / "config" / "source_manifest.json"
-GENERATED_QUESTIONS = DATA_ROOT / "generated" / "accepted_questions.jsonl"
+GENERATED_QUESTIONS = DATA_ROOT / "generated" / "accepted_questions.jsonl.gz"
 SHARD_QUESTION_LIMIT = 400
 SHARD_MAX_BYTES = 500_000
 MANIFEST_MAX_BYTES = 250_000
@@ -35,6 +35,7 @@ PUBLIC_QUESTION_FIELDS = (
     "language",
     "mode",
     "subskill",
+    "dimension",
     "sentence",
     "target_spans",
     "prompt",
@@ -79,14 +80,16 @@ def load_pilot() -> tuple[dict, list[dict], list[dict]]:
     internal = []
     for question in questions:
         sentence = sentence_by_id[question["sentence_id"]]["text"]
+        annotation = annotation_by_id[question["annotation_id"]]
         record = {
             "id": question["id"],
             "sentence_id": question["sentence_id"],
             "language": question["language"],
             "mode": question["mode"],
             "subskill": question["subskill"],
+            "dimension": annotation["dimension"],
             "sentence": sentence,
-            "target_spans": annotation_by_id[question["annotation_id"]]["target_spans"],
+            "target_spans": annotation["target_spans"],
             "prompt": question["prompt"],
             "answer": question["answer"],
             "options": question["options"],
@@ -102,6 +105,7 @@ def load_pilot() -> tuple[dict, list[dict], list[dict]]:
                     else "pilot-scaffold"
                 ),
                 "source_corpus": "English pilot",
+                "rule_group": "martin-reviewed-core",
             }
         )
     return config, public, internal
@@ -119,6 +123,7 @@ def load_generated() -> tuple[list[dict], list[dict]]:
             "language": LANGUAGE,
             "mode": question["mode"],
             "subskill": question["subskill"],
+            "dimension": question["dimension"],
             "sentence": question["sentence"],
             "target_spans": question["target_spans"],
             "prompt": question["prompt"],
@@ -132,6 +137,7 @@ def load_generated() -> tuple[list[dict], list[dict]]:
             {
                 "review_status": question["review_status"],
                 "source_corpus": question["source_corpus"],
+                "rule_group": question["remap_rule_id"],
             }
         )
     return public, internal
@@ -242,6 +248,11 @@ def build_files() -> dict[Path, bytes]:
                     "bytes": len(content),
                     "sha256": hashlib.sha256(content).hexdigest(),
                     "difficulty": nested_counts(shard_records, "difficulty"),
+                    "by_label": nested_counts(shard_records, "answer"),
+                    "by_dimension": nested_counts(
+                        shard_records, "dimension"
+                    ),
+                    "by_subskill": nested_counts(shard_records, "subskill"),
                 }
             )
 
@@ -252,6 +263,16 @@ def build_files() -> dict[Path, bytes]:
         record["sentence_id"]
         for record, internal in pairs
         if internal["source_corpus"] in {"MASC", "OANC"}
+    }
+    subskills_by_mode = {
+        mode: sorted(
+            {
+                record["subskill"]
+                for record in all_public
+                if record["mode"] == mode
+            }
+        )
+        for mode in mode_order
     }
     manifest = {
         "schema_version": 2,
@@ -266,6 +287,9 @@ def build_files() -> dict[Path, bytes]:
             "reviewed_item_weight": 0.15,
             "recent_question_ids_per_mode": 250,
             "recent_sentence_ids_per_mode": 150,
+            "max_answer_label_per_round": 3,
+            "max_subskill_per_round": 4,
+            "subskills_by_mode": subskills_by_mode,
             "difficulty": {
                 "basic": 0.35,
                 "intermediate": 0.45,
@@ -281,9 +305,13 @@ def build_files() -> dict[Path, bytes]:
             "reviewed_questions": len(gold),
             "by_mode": nested_counts(all_public, "mode"),
             "by_subskill": nested_counts(all_public, "subskill"),
+            "by_dimension": nested_counts(all_public, "dimension"),
             "by_difficulty": nested_counts(all_public, "difficulty"),
             "by_source_corpus": dict(
                 sorted(Counter(item["source_corpus"] for item in all_internal).items())
+            ),
+            "internal_rule_groups_at_build_time": len(
+                {item["rule_group"] for item in all_internal}
             ),
         },
         "gold": gold_entry,
@@ -310,6 +338,12 @@ def existing_json_files() -> set[Path]:
 
 def build_report(generated: dict[Path, bytes]) -> dict:
     manifest = json.loads(generated[Path("manifest.json")])
+    generation = read_json(
+        ROOT / "data" / "generated" / "generation_report.json"
+    )
+    remap = read_json(
+        ROOT / "data" / "remap" / "en" / "remap_10k_report.json"
+    )
     shard_sizes = [entry["bytes"] for entry in manifest["shards"]]
     static_files = [
         ROOT / "docs" / "index.html",
@@ -331,7 +365,15 @@ def build_report(generated: dict[Path, bytes]) -> dict:
         "corpus_sentence_count": manifest["totals"]["corpus_sentences"],
         "public_question_count": manifest["totals"]["questions"],
         "reviewed_question_count": manifest["totals"]["reviewed_questions"],
+        "formal_candidate_count": remap["candidate_count"],
+        "presented_candidate_count": generation["candidate_count"],
+        "generated_publishable_count": generation["accepted_count"],
+        "generated_review_only_count": generation["review_needed_count"],
+        "pilot_question_count": (
+            manifest["totals"]["questions"] - generation["accepted_count"]
+        ),
         "question_counts_by_mode": manifest["totals"]["by_mode"],
+        "round_sampling": manifest["sampling_policy"],
         "shard_count": len(shard_sizes),
         "smallest_shard_bytes": min(shard_sizes) if shard_sizes else 0,
         "largest_shard_bytes": max(shard_sizes) if shard_sizes else 0,
@@ -351,6 +393,19 @@ def markdown_report(report: dict) -> str:
             f"- Public sentence IDs: {report['public_sentence_count']}",
             f"- Public questions: {report['public_question_count']}",
             f"- Reviewed gold questions: {report['reviewed_question_count']}",
+            f"- Formal candidates before presentation selection: "
+            f"{report['formal_candidate_count']}",
+            f"- Presented generated candidates: "
+            f"{report['presented_candidate_count']}",
+            f"- Published generated questions: "
+            f"{report['generated_publishable_count']}",
+            f"- Review-only generated questions: "
+            f"{report['generated_review_only_count']}",
+            f"- Preserved pilot questions: {report['pilot_question_count']}",
+            (
+                "- Ordinary-round answer-label cap: "
+                f"{report['round_sampling']['max_answer_label_per_round']}"
+            ),
             f"- Shards: {report['shard_count']}",
             (
                 f"- Shard size range: {report['smallest_shard_bytes']}–"
@@ -407,7 +462,11 @@ def main() -> int:
             print(f"Wrote {path.relative_to(ROOT)} ({len(content)} bytes)")
         report = build_report(generated)
         write_json(ROOT / "reports" / "public_build_report.json", report)
+        write_json(ROOT / "reports" / "remap_public_build.json", report)
         (ROOT / "reports" / "public_build_report.md").write_text(
+            markdown_report(report), encoding="utf-8"
+        )
+        (ROOT / "reports" / "remap_public_build.md").write_text(
             markdown_report(report), encoding="utf-8"
         )
         if not report["initial_transfer_within_budget"]:

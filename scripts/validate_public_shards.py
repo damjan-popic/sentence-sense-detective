@@ -24,6 +24,7 @@ PUBLIC_FIELDS = {
     "language",
     "mode",
     "subskill",
+    "dimension",
     "sentence",
     "target_spans",
     "prompt",
@@ -136,6 +137,7 @@ def main() -> int:
     sentence_text_by_id = {}
     mode_counts = Counter()
     subskill_counts = Counter()
+    dimension_counts = Counter()
     difficulty_counts = Counter()
     expected_paths = {"manifest.json"}
 
@@ -163,6 +165,7 @@ def main() -> int:
             gold_ids.add(question.get("id"))
             mode_counts[question.get("mode")] += 1
             subskill_counts[question.get("subskill")] += 1
+            dimension_counts[question.get("dimension")] += 1
             difficulty_counts[question.get("difficulty")] += 1
     except (OSError, ValueError, json.JSONDecodeError) as error:
         errors.append(f"gold file validation failed: {error}")
@@ -205,6 +208,23 @@ def main() -> int:
         )
         if shard.get("difficulty") != dict(sorted(actual_difficulty.items())):
             errors.append(f"{relative}: difficulty coverage differs from manifest")
+        actual_labels = Counter(question.get("answer") for question in questions)
+        actual_dimensions = Counter(
+            question.get("dimension") for question in questions
+        )
+        actual_subskills = Counter(
+            question.get("subskill") for question in questions
+        )
+        if shard.get("by_label") != dict(sorted(actual_labels.items())):
+            errors.append(f"{relative}: label coverage differs from manifest")
+        if shard.get("by_dimension") != dict(
+            sorted(actual_dimensions.items())
+        ):
+            errors.append(f"{relative}: dimension coverage differs from manifest")
+        if shard.get("by_subskill") != dict(
+            sorted(actual_subskills.items())
+        ):
+            errors.append(f"{relative}: subskill coverage differs from manifest")
         for question in questions:
             validate_question(
                 question,
@@ -215,6 +235,7 @@ def main() -> int:
             )
             mode_counts[question.get("mode")] += 1
             subskill_counts[question.get("subskill")] += 1
+            dimension_counts[question.get("dimension")] += 1
             difficulty_counts[question.get("difficulty")] += 1
 
     committed_paths = {
@@ -243,6 +264,8 @@ def main() -> int:
         errors.append("manifest mode counts differ from public files")
     if totals.get("by_subskill") != dict(sorted(subskill_counts.items())):
         errors.append("manifest subskill counts differ from public files")
+    if totals.get("by_dimension") != dict(sorted(dimension_counts.items())):
+        errors.append("manifest dimension counts differ from public files")
     if totals.get("by_difficulty") != dict(sorted(difficulty_counts.items())):
         errors.append("manifest difficulty counts differ from public files")
     if sum(totals.get("by_source_corpus", {}).values()) != len(question_ids):
@@ -253,6 +276,31 @@ def main() -> int:
         errors.append("question history limit exceeds 250")
     if policy.get("recent_sentence_ids_per_mode", 0) > 150:
         errors.append("sentence history limit exceeds 150")
+    if policy.get("max_answer_label_per_round") != 3:
+        errors.append("ordinary rounds must cap answer labels at three")
+    expected_subskills_by_mode = {
+        mode["id"]: sorted(
+            {
+                question.get("subskill")
+                for question in (
+                    gold_questions
+                    + [
+                        item
+                        for shard in manifest.get("shards", [])
+                        for item in json.loads(
+                            safe_public_path(
+                                args.public_root, shard["path"]
+                            ).read_text(encoding="utf-8")
+                        ).get("questions", [])
+                    ]
+                )
+                if question.get("mode") == mode["id"]
+            }
+        )
+        for mode in manifest.get("modes", [])
+    }
+    if policy.get("subskills_by_mode") != expected_subskills_by_mode:
+        errors.append("sampling subskill inventory differs from public files")
 
     initial_files = [
         args.docs_root / "index.html",

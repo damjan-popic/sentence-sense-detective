@@ -1,0 +1,3760 @@
+{
+  "cases": [
+    {
+      "answer_code": "S",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Straightforward direct mapping.",
+      "features": {},
+      "focus": "Sarah and her daughters",
+      "gold_mapping": "S",
+      "id": "SE-S-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "S — Subject",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 23,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Sarah and her daughters"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Direct subject relation maps to S.",
+      "sentence": "Sarah and her daughters arrived first.",
+      "teaching_note": null,
+      "ud_signal": "nsubj"
+    },
+    {
+      "answer_code": "S",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The UD head is woman, but the pedagogical span is the whole subject phrase.",
+      "features": {},
+      "focus": "The old woman living in the basement",
+      "gold_mapping": "S",
+      "id": "SE-S-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "S — Subject",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "The old woman living in the basement"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The whole subject phrase maps to S, not only the syntactic head.",
+      "sentence": "The old woman living in the basement needs help.",
+      "teaching_note": null,
+      "ud_signal": "nsubj with internal modifier"
+    },
+    {
+      "answer_code": "S",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The subordinate clause functions as the subject of the main clause.",
+      "features": {
+        "clause_type": "nominal relative clause",
+        "function": "S",
+        "structure": "finite"
+      },
+      "focus": "What he said",
+      "gold_mapping": "S = Subject",
+      "id": "SE-S-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "S — Subject",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 12,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "What he said"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A finite nominal relative clause in subject position maps to S.",
+      "sentence": "What he said cannot be denied.",
+      "teaching_note": "“What he said” is a nominal relative clause, not merely a generic finite wh-clause.",
+      "ud_signal": "csubj: finite nominal relative clause"
+    },
+    {
+      "answer_code": "S",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The infinitival clause fills the subject slot.",
+      "features": {
+        "clause_type": "to-infinitival clause",
+        "function": "S",
+        "structure": "perfect infinitive"
+      },
+      "focus": "To have seen him lose his temper",
+      "gold_mapping": "S = Subject",
+      "id": "SE-S-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "S — Subject",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 32,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "To have seen him lose his temper"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A perfect to-infinitival clause in subject position maps to S.",
+      "sentence": "To have seen him lose his temper was unexpected.",
+      "teaching_note": "Record the precise structure: a perfect to-infinitival clause, not just a generic non-finite clause.",
+      "ud_signal": "csubj: perfect to-infinitival clause"
+    },
+    {
+      "answer_code": "S",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The -ing clause fills the subject slot.",
+      "features": {
+        "clause_type": "gerundial clause",
+        "function": "S",
+        "structure": "-ing"
+      },
+      "focus": "Writing a letter of application",
+      "gold_mapping": "S = Subject",
+      "id": "SE-S-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "S — Subject",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 31,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Writing a letter of application"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A gerundial -ing clause in subject position maps to S.",
+      "sentence": "Writing a letter of application proved difficult.",
+      "teaching_note": "Distinguish the gerundial use here from participial -ing clauses.",
+      "ud_signal": "csubj: gerundial -ing clause"
+    },
+    {
+      "answer_code": "FORMAL_S+POSTPONED_S",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Keep this as a flagged construction rather than a plain nsubj -> S case.",
+      "features": {
+        "formal_subject": "it",
+        "postponed_subject": "to know the truth",
+        "structure": "to-infinitival clause"
+      },
+      "focus": "It / to know the truth",
+      "gold_mapping": "Formal S = it; postponed S = to know the truth",
+      "id": "SE-S-06",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Formal S + Postponed S",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          },
+          {
+            "end": 33,
+            "start": 16
+          }
+        ],
+        "target_texts": [
+          "It",
+          "to know the truth"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Keep formal “it” and the postponed to-infinitival subject as two linked pedagogical annotations.",
+      "sentence": "It is important to know the truth.",
+      "teaching_note": "The postponed clausal subject should be identified more precisely as a to-infinitival clause.",
+      "ud_signal": "expl + extraposed clause"
+    },
+    {
+      "answer_code": "P",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Imperative clause with an understood subject; Close is the predicator.",
+      "features": {},
+      "focus": "Close",
+      "gold_mapping": "P",
+      "id": "SE-P-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "P — Predicator",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Close"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Main lexical verb maps to the predicator nucleus.",
+      "sentence": "Close the door.",
+      "teaching_note": null,
+      "ud_signal": "root: lexical verb"
+    },
+    {
+      "answer_code": "OPERATOR+P",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The pedagogical predicator may be discontinuous.",
+      "features": {
+        "discontinuous": true,
+        "operator": "Did",
+        "predicator": "play"
+      },
+      "focus": "Did / play",
+      "gold_mapping": "Operator = Did; P = play",
+      "id": "SE-P-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Operator",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 3,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Did"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "In a split predicator, the finite auxiliary maps to Operator and the lexical verb maps to P.",
+      "sentence": "Did the children play?",
+      "teaching_note": "Do not merge the auxiliary into P in this construction: the auxiliary is the Operator.",
+      "ud_signal": "aux + root in a split predicator"
+    },
+    {
+      "answer_code": "P",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The remapping should keep the passive auxiliary in the predicator span.",
+      "features": {},
+      "focus": "was sent",
+      "gold_mapping": "P",
+      "id": "SE-P-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "P — Predicator",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 13,
+            "start": 5
+          }
+        ],
+        "target_texts": [
+          "was sent"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Passive auxiliary plus lexical verb together realize P.",
+      "sentence": "John was sent a copy of the letter to the president.",
+      "teaching_note": null,
+      "ud_signal": "aux:pass + root"
+    },
+    {
+      "answer_code": "P",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "UD usually makes the lexical predicate the head, so this is not a one-label rename.",
+      "features": {},
+      "focus": "is",
+      "gold_mapping": "P",
+      "id": "SE-P-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "P — Predicator",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 7,
+            "start": 5
+          }
+        ],
+        "target_texts": [
+          "is"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "In copular clauses, the copula realizes P and the lexical predicate realizes SC.",
+      "sentence": "Paul is a good student.",
+      "teaching_note": null,
+      "ud_signal": "cop + lexical predicate"
+    },
+    {
+      "answer_code": "P",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The particle is part of the predicator span.",
+      "features": {},
+      "focus": "rang up",
+      "gold_mapping": "P",
+      "id": "SE-P-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "P — Predicator",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 11,
+            "start": 4
+          }
+        ],
+        "target_texts": [
+          "rang up"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Phrasal verb particle should be included in P.",
+      "sentence": "She rang up her mother to ask her to dinner.",
+      "teaching_note": null,
+      "ud_signal": "compound:prt with verb"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Straightforward direct object.",
+      "features": {},
+      "focus": "no harm",
+      "gold_mapping": "DO",
+      "id": "SE-DO-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 17,
+            "start": 10
+          }
+        ],
+        "target_texts": [
+          "no harm"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "UD obj maps directly to DO.",
+      "sentence": "She meant no harm.",
+      "teaching_note": null,
+      "ud_signal": "obj: noun phrase"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The reflexive form does not change the sentence-element label.",
+      "features": {},
+      "focus": "himself",
+      "gold_mapping": "DO",
+      "id": "SE-DO-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 14,
+            "start": 7
+          }
+        ],
+        "target_texts": [
+          "himself"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Reflexive obj maps to DO.",
+      "sentence": "He hit himself with a golf club.",
+      "teaching_note": null,
+      "ud_signal": "obj: reflexive pronoun"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Word order should not prevent the object mapping.",
+      "features": {},
+      "focus": "Whom",
+      "gold_mapping": "DO",
+      "id": "SE-DO-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 4,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Whom"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Wh-object maps to DO even when fronted.",
+      "sentence": "Whom did you see there?",
+      "teaching_note": null,
+      "ud_signal": "obj: wh-pronoun"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "This is derived from the attachment and matrix verb, not from ccomp alone.",
+      "features": {},
+      "focus": "that she had lost her purse",
+      "gold_mapping": "DO",
+      "id": "SE-DO-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 9
+          }
+        ],
+        "target_texts": [
+          "that she had lost her purse"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Content clause complement of a verb often functions as clausal DO.",
+      "sentence": "She said that she had lost her purse.",
+      "teaching_note": null,
+      "ud_signal": "ccomp: finite that-clause"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The absence of that should not block the mapping.",
+      "features": {},
+      "focus": "he had lost his mind",
+      "gold_mapping": "DO",
+      "id": "SE-DO-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 28,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "he had lost his mind"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A content clause without overt that can still function as clausal DO.",
+      "sentence": "He said he had lost his mind.",
+      "teaching_note": null,
+      "ud_signal": "ccomp: zero-that clause"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The wh-clause is selected by the matrix verb decided.",
+      "features": {},
+      "focus": "what you will study",
+      "gold_mapping": "DO",
+      "id": "SE-DO-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 17
+          }
+        ],
+        "target_texts": [
+          "what you will study"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Wh-complement clause can function as clausal DO.",
+      "sentence": "Have you decided what you will study?",
+      "teaching_note": null,
+      "ud_signal": "ccomp / wh-clause complement"
+    },
+    {
+      "answer_code": "DO_OR_CLAUSAL_COMPLEMENT_DEPENDING_ON_COURSE_POLICY",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "UD xcomp does not always map cleanly to DO; this should be policy-controlled.",
+      "features": {},
+      "focus": "reading the newspaper",
+      "gold_mapping": "DO or clausal complement, depending on course policy",
+      "id": "SE-DO-07",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 39,
+            "start": 18
+          }
+        ],
+        "target_texts": [
+          "reading the newspaper"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Some non-finite complements are pedagogically treated as clausal DO.",
+      "sentence": "Have you finished reading the newspaper?",
+      "teaching_note": null,
+      "ud_signal": "xcomp: -ing complement of a control verb"
+    },
+    {
+      "answer_code": "IO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Recipient/beneficiary object in a double-object pattern.",
+      "features": {},
+      "focus": "him",
+      "gold_mapping": "IO",
+      "id": "SE-IO-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "IO — Indirect Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 11,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "him"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "UD iobj maps to IO.",
+      "sentence": "I found him a vacant flat.",
+      "teaching_note": null,
+      "ud_signal": "iobj: double-object construction"
+    },
+    {
+      "answer_code": "IO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The span is clausal even though the sentence-element function is IO.",
+      "features": {},
+      "focus": "whoever rings me up",
+      "gold_mapping": "IO",
+      "id": "SE-IO-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "IO — Indirect Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 24,
+            "start": 5
+          }
+        ],
+        "target_texts": [
+          "whoever rings me up"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Fused relative recipient can function as IO.",
+      "sentence": "Tell whoever rings me up to call back later.",
+      "teaching_note": null,
+      "ud_signal": "clausal/fused relative recipient"
+    },
+    {
+      "answer_code": "IO",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The second object is the thing transferred; the recipient is IO.",
+      "features": {},
+      "focus": "his wife",
+      "gold_mapping": "IO",
+      "id": "SE-IO-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "IO — Indirect Object",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 16,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "his wife"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Recipient noun phrase in a double-object pattern maps to IO.",
+      "sentence": "He gave his wife what he had earned.",
+      "teaching_note": null,
+      "ud_signal": "double object after give"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "UD head is often the adjective, but pedagogically it is SC.",
+      "features": {},
+      "focus": "quite pleasant",
+      "gold_mapping": "SC",
+      "id": "SE-SC-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 16
+          }
+        ],
+        "target_texts": [
+          "quite pleasant"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Lexical predicate in a copular clause maps to SC.",
+      "sentence": "The journey was quite pleasant.",
+      "teaching_note": null,
+      "ud_signal": "copular adjective predicate"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The copula maps to P; the complement maps to SC.",
+      "features": {},
+      "focus": "a good student",
+      "gold_mapping": "SC",
+      "id": "SE-SC-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 22,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "a good student"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Predicate noun phrase after a copula maps to SC.",
+      "sentence": "Paul is a good student.",
+      "teaching_note": null,
+      "ud_signal": "copular noun phrase predicate"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "PP realization does not make it an adverbial here.",
+      "features": {},
+      "focus": "in bad condition",
+      "gold_mapping": "SC",
+      "id": "SE-SC-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 49,
+            "start": 33
+          }
+        ],
+        "target_texts": [
+          "in bad condition"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Predicative PP after a copula maps to SC.",
+      "sentence": "The furniture in their office is in bad condition.",
+      "teaching_note": null,
+      "ud_signal": "copular prepositional phrase predicate"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The clause is predicative, not adverbial.",
+      "features": {},
+      "focus": "to keep your mouth shut",
+      "gold_mapping": "SC",
+      "id": "SE-SC-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 13
+          }
+        ],
+        "target_texts": [
+          "to keep your mouth shut"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Infinitival predicate after a copula maps to SC.",
+      "sentence": "My advice is to keep your mouth shut.",
+      "teaching_note": null,
+      "ud_signal": "copular to-infinitival predicate"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The -ing clause identifies the subject.",
+      "features": {
+        "function": "SC",
+        "realization": "gerundial clause"
+      },
+      "focus": "collecting stamps",
+      "gold_mapping": "SC = Subject Complement",
+      "id": "SE-SC-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 13
+          }
+        ],
+        "target_texts": [
+          "collecting stamps"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A gerundial clause after the copula can realize SC.",
+      "sentence": "His hobby is collecting stamps.",
+      "teaching_note": "As with “Writing a letter …”, distinguish a gerundial clause from a participial -ing clause.",
+      "ud_signal": "copular gerundial clause"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The clause is predicative.",
+      "features": {},
+      "focus": "that he has no money left",
+      "gold_mapping": "SC",
+      "id": "SE-SC-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 40,
+            "start": 15
+          }
+        ],
+        "target_texts": [
+          "that he has no money left"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Finite content clause after a copula maps to SC.",
+      "sentence": "The trouble is that he has no money left.",
+      "teaching_note": null,
+      "ud_signal": "copular finite that-clause"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Requires a linking-verb rule, not a single UD relation rename.",
+      "features": {
+        "function": "SC",
+        "realization": "AdjP headed by an adjectivized past participle",
+        "verb_type": "linking verb"
+      },
+      "focus": "abandoned",
+      "gold_mapping": "SC = Subject Complement",
+      "id": "SE-SC-07",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 27,
+            "start": 18
+          }
+        ],
+        "target_texts": [
+          "abandoned"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A predicative adjectivized past participle after a linking verb maps to SC.",
+      "sentence": "The town appeared abandoned.",
+      "teaching_note": "A linking verb is not identical to the copula; “abandoned” is adjectival here, comparable to “happy” in “She appears happy”.",
+      "ud_signal": "linking verb + adjectivized past participle"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The adjective describes the subject, not an object.",
+      "features": {
+        "function": "SC",
+        "realization": "AdjP",
+        "verb_type": "linking verb"
+      },
+      "focus": "off",
+      "gold_mapping": "SC = Subject Complement",
+      "id": "SE-SC-08",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 18,
+            "start": 15
+          }
+        ],
+        "target_texts": [
+          "off"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A predicative adjective after a linking verb maps to SC.",
+      "sentence": "The milk seems off.",
+      "teaching_note": "Keep the distinction between a linking verb and the copula, even though both constructions license SC.",
+      "ud_signal": "linking verb + predicative adjective"
+    },
+    {
+      "answer_code": "OC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "him is DO; my friend describes him.",
+      "features": {},
+      "focus": "my friend",
+      "gold_mapping": "OC",
+      "id": "SE-OC-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "OC — Object Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 24,
+            "start": 15
+          }
+        ],
+        "target_texts": [
+          "my friend"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Predicative complement of an object maps to OC.",
+      "sentence": "I consider him my friend.",
+      "teaching_note": null,
+      "ud_signal": "object + nominal predication"
+    },
+    {
+      "answer_code": "OC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "white describes the object his hair.",
+      "features": {},
+      "focus": "white",
+      "gold_mapping": "OC",
+      "id": "SE-OC-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "OC — Object Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 29,
+            "start": 24
+          }
+        ],
+        "target_texts": [
+          "white"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Resultative adjective predicated of the object maps to OC.",
+      "sentence": "Worries turned his hair white.",
+      "teaching_note": null,
+      "ud_signal": "object + adjectival resultative"
+    },
+    {
+      "answer_code": "OC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The PP is not simply an adverbial of place.",
+      "features": {
+        "contrast_sensitive": true,
+        "function": "OC",
+        "realization": "predicative PP"
+      },
+      "focus": "in very good condition",
+      "gold_mapping": "OC = Object Complement",
+      "id": "SE-OC-03",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "OC — Object Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 40,
+            "start": 18
+          }
+        ],
+        "target_texts": [
+          "in very good condition"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A predicative PP describing a definite object maps to OC, but attachment must be checked against the intended reading.",
+      "sentence": "We found the flat in very good condition.",
+      "teaching_note": "Contrast-sensitive case: with “a flat”, the PP may instead be interpreted inside the DO. Keep this as a guarded rule and regression test.",
+      "ud_signal": "object + predicative PP"
+    },
+    {
+      "answer_code": "OC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Perception-verb constructions should be checked against the teaching convention.",
+      "features": {
+        "contrast_sensitive": true,
+        "function": "OC",
+        "structure": "bare infinitival clause"
+      },
+      "focus": "sing",
+      "gold_mapping": "OC = Object Complement (bare infinitival clause)",
+      "id": "SE-OC-04",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "OC — Object Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 16,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "sing"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "After a perception verb, a bare infinitive predicated of the object can map to OC.",
+      "sentence": "I heard her sing.",
+      "teaching_note": "The form matters: “I heard her sing” supports OC, whereas “I heard her singing” may be analysed as a gerundial clause functioning as DO.",
+      "ud_signal": "object + bare infinitival clause"
+    },
+    {
+      "answer_code": "OC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The -ing clause describes the object her.",
+      "features": {},
+      "focus": "sitting on the porch",
+      "gold_mapping": "OC",
+      "id": "SE-OC-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "OC — Object Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 33,
+            "start": 13
+          }
+        ],
+        "target_texts": [
+          "sitting on the porch"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "-ing predication after an object maps to OC.",
+      "sentence": "We found her sitting on the porch.",
+      "teaching_note": null,
+      "ud_signal": "object + -ing clause"
+    },
+    {
+      "answer_code": "OC",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The complement gives the name/description assigned to the object.",
+      "features": {},
+      "focus": "what you like",
+      "gold_mapping": "OC",
+      "id": "SE-OC-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "OC — Object Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 29,
+            "start": 16
+          }
+        ],
+        "target_texts": [
+          "what you like"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Predicative complement of object it maps to OC.",
+      "sentence": "You may call it what you like.",
+      "teaching_note": null,
+      "ud_signal": "object + wh-clause predicative complement"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Direct adverbial mapping.",
+      "features": {},
+      "focus": "bravely",
+      "gold_mapping": "A",
+      "id": "SE-A-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 19,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "bravely"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Adverbial modifier maps to A.",
+      "sentence": "They fought bravely.",
+      "teaching_note": null,
+      "ud_signal": "advmod"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Function is adverbial, regardless of PP form.",
+      "features": {},
+      "focus": "for joy",
+      "gold_mapping": "A",
+      "id": "SE-A-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 17,
+            "start": 10
+          }
+        ],
+        "target_texts": [
+          "for joy"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Non-core oblique PP maps to A when it modifies the event.",
+      "sentence": "He jumped for joy.",
+      "teaching_note": null,
+      "ud_signal": "obl: prepositional phrase"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Duration objects are a common edge case for automatic mapping.",
+      "features": {},
+      "focus": "an entire month",
+      "gold_mapping": "A",
+      "id": "SE-A-03",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 34,
+            "start": 19
+          }
+        ],
+        "target_texts": [
+          "an entire month"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Duration phrase maps to A even if UD treatment varies.",
+      "sentence": "The journey lasted an entire month.",
+      "teaching_note": null,
+      "ud_signal": "temporal/duration phrase"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Fronted position does not affect function.",
+      "features": {},
+      "focus": "Yesterday",
+      "gold_mapping": "A",
+      "id": "SE-A-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 9,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Yesterday"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Temporal adverbial maps to A.",
+      "sentence": "Yesterday I helped my brother prepare lunch.",
+      "teaching_note": null,
+      "ud_signal": "locative/directional adverbial"
+    },
+    {
+      "answer_code": "A+A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "Non-finite clause expresses purpose.",
+      "features": {
+        "functions": [
+          {
+            "function": "A",
+            "span": "home"
+          },
+          {
+            "function": "A",
+            "span": "to die",
+            "subtype": "purpose"
+          }
+        ]
+      },
+      "focus": "home / to die",
+      "gold_mapping": "A = home; A = to die",
+      "id": "SE-A-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "A + A — two Adverbials",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 26,
+            "start": 22
+          },
+          {
+            "end": 33,
+            "start": 27
+          }
+        ],
+        "target_texts": [
+          "home",
+          "to die"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Annotate two separate adverbials: the directional adverb “home” and the purpose to-infinitival clause “to die”.",
+      "sentence": "The emigrant returned home to die.",
+      "teaching_note": "The original validation row captured only the purpose clause; “home” must also be annotated as A.",
+      "ud_signal": "to-infinitival purpose clause"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "because marks a causal adverbial clause.",
+      "features": {},
+      "focus": "because the traffic was so dense",
+      "gold_mapping": "A",
+      "id": "SE-A-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 44,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "because the traffic was so dense"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Finite adverbial clause maps to A.",
+      "sentence": "He was late because the traffic was so dense.",
+      "teaching_note": null,
+      "ud_signal": "advcl: finite adverbial clause"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "sentence-element",
+      "dimension_label": "Sentence element",
+      "dimension_note": null,
+      "explanation": "The clause gives background/reason information.",
+      "features": {},
+      "focus": "Knowing my temper",
+      "gold_mapping": "A",
+      "id": "SE-A-07",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 17,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Knowing my temper"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Reduced adverbial clause maps to A.",
+      "sentence": "Knowing my temper, I didn't reply.",
+      "teaching_note": null,
+      "ud_signal": "non-finite/reduced adverbial clause"
+    },
+    {
+      "answer_code": "MAIN",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The subordinate clause is embedded under the main clause.",
+      "features": {},
+      "focus": "She telephoned",
+      "gold_mapping": "MAIN",
+      "id": "CL-MAIN-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Main clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 14,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "She telephoned"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The root clause maps to the main clause layer.",
+      "sentence": "She telephoned while you were out.",
+      "teaching_note": null,
+      "ud_signal": "root clause"
+    },
+    {
+      "answer_code": "NOMINAL+DO",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "ccomp alone is not enough; the higher verb decides the function.",
+      "features": {},
+      "focus": "that he spoke English with an Australian accent",
+      "gold_mapping": "Nominal clause functioning as DO",
+      "id": "CL-NOM-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal clause — function: DO",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 57,
+            "start": 10
+          }
+        ],
+        "target_texts": [
+          "that he spoke English with an Australian accent"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Finite content clause maps to nominal clause; function is derived from attachment.",
+      "sentence": "I noticed that he spoke English with an Australian accent.",
+      "teaching_note": null,
+      "ud_signal": "ccomp + mark=that"
+    },
+    {
+      "answer_code": "NOMINAL+DO",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The marker is zero, but the clause type remains nominal/content.",
+      "features": {},
+      "focus": "you have some influence on her",
+      "gold_mapping": "Nominal clause functioning as DO",
+      "id": "CL-NOM-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal clause — function: DO",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 38,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "you have some influence on her"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Zero-that content clause maps to nominal clause.",
+      "sentence": "I think you have some influence on her.",
+      "teaching_note": null,
+      "ud_signal": "ccomp without overt marker"
+    },
+    {
+      "answer_code": "NOMINAL+DO",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The remapper should not collapse coordinated subordinate clauses into one opaque span.",
+      "features": {},
+      "focus": "that you are a car mechanic / that your brother is a plumber",
+      "gold_mapping": "Two nominal clauses functioning together as DO",
+      "id": "CL-NOM-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal clause — function: DO",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 40,
+            "start": 13
+          },
+          {
+            "end": 75,
+            "start": 45
+          }
+        ],
+        "target_texts": [
+          "that you are a car mechanic",
+          "that your brother is a plumber"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Each coordinated content clause should be represented separately.",
+      "sentence": "I have heard that you are a car mechanic and that your brother is a plumber.",
+      "teaching_note": null,
+      "ud_signal": "coordinated ccomp clauses"
+    },
+    {
+      "answer_code": "NOMINAL_RELATIVE+S",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause fills the subject position.",
+      "features": {
+        "clause_type": "nominal relative clause",
+        "function": "S",
+        "structure": "finite"
+      },
+      "focus": "What you want",
+      "gold_mapping": "Nominal relative clause; FUNCTION: S",
+      "id": "CL-NOM-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal relative clause — function: S",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 13,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "What you want"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A finite nominal relative clause may fill the subject position.",
+      "sentence": "What you want is impossible.",
+      "teaching_note": "Use the course term “nominal relative clause” rather than the loose label “wh/fused relative”.",
+      "ud_signal": "csubj: finite nominal relative clause"
+    },
+    {
+      "answer_code": "DEPENDENT_VERBAL_QUESTION+S",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause is nominal in type and subject in function.",
+      "features": {
+        "clause_type": "dependent verbal question",
+        "function": "S",
+        "marker": "whether"
+      },
+      "focus": "Whether he will agree",
+      "gold_mapping": "Dependent verbal question; FUNCTION: S",
+      "id": "CL-NOM-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Dependent verbal question — function: S",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 21,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Whether he will agree"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A dependent verbal question introduced by “whether” may fill the subject position.",
+      "sentence": "Whether he will agree is not certain.",
+      "teaching_note": "Use the course term “dependent verbal question”.",
+      "ud_signal": "csubj: dependent verbal question introduced by whether"
+    },
+    {
+      "answer_code": "APPOSITIVE_CLAUSE",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause modifies fact.",
+      "features": {
+        "attachment": "content specification",
+        "clause_type": "appositive clause",
+        "host": "fact"
+      },
+      "focus": "that he is now old and weak",
+      "gold_mapping": "Appositive clause attached to the content noun “fact”",
+      "id": "CL-NOM-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Appositive clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 9
+          }
+        ],
+        "target_texts": [
+          "that he is now old and weak"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A content clause specifying the content of a noun such as “fact” maps to an appositive clause.",
+      "sentence": "The fact that he is now old and weak must be taken into consideration.",
+      "teaching_note": "This is an appositive clause, which should not be collapsed into an ordinary postmodifier.",
+      "ud_signal": "content noun + appositive that-clause"
+    },
+    {
+      "answer_code": "APPOSITIVE_CLAUSE",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause modifies question.",
+      "features": {
+        "clause_type": "appositive clause",
+        "host": "question",
+        "marker": "whether"
+      },
+      "focus": "whether the atom can or cannot be split",
+      "gold_mapping": "Appositive clause attached to the content noun “question”",
+      "id": "CL-NOM-07",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Appositive clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 52,
+            "start": 13
+          }
+        ],
+        "target_texts": [
+          "whether the atom can or cannot be split"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A clause specifying the content of a noun such as “question” maps to an appositive clause.",
+      "sentence": "The question whether the atom can or cannot be split has interested scientists for decades.",
+      "teaching_note": "As in the preceding case, this is appositive rather than an ordinary PostM.",
+      "ud_signal": "content noun + appositive whether-clause"
+    },
+    {
+      "answer_code": "NOMINAL+SC",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause is predicative after the copula.",
+      "features": {},
+      "focus": "that you should apply for the job",
+      "gold_mapping": "Nominal clause functioning as SC",
+      "id": "CL-NOM-08",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal clause — function: SC",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 46,
+            "start": 13
+          }
+        ],
+        "target_texts": [
+          "that you should apply for the job"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Predicative content clause maps to subject complement.",
+      "sentence": "My advice is that you should apply for the job.",
+      "teaching_note": null,
+      "ud_signal": "copular predicate content clause"
+    },
+    {
+      "answer_code": "NOMINAL_CLAUSE+POSTM_ADJ",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "This may not map cleanly to S/DO/SC/A/postmodifier.",
+      "features": {
+        "clause_type": "nominal clause",
+        "function": "PostM",
+        "host": "sure"
+      },
+      "focus": "what he wants",
+      "gold_mapping": "Nominal clause; FUNCTION: PostM of the adjective “sure”",
+      "id": "CL-NOM-09",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal clause — postmodifier of an adjective",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 27,
+            "start": 14
+          }
+        ],
+        "target_texts": [
+          "what he wants"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A clause complementing the adjective “sure” maps to PostM of that adjective.",
+      "sentence": "I am not sure what he wants.",
+      "teaching_note": "The function is PostM of “sure”, so this need not remain an unresolved adjective-complement label.",
+      "ud_signal": "adjective complement clause"
+    },
+    {
+      "answer_code": "NOMINAL_CLAUSE+POSTM_ADJ",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Course policy should decide how to label this function.",
+      "features": {
+        "clause_type": "nominal that-clause",
+        "function": "PostM",
+        "host": "sorry"
+      },
+      "focus": "that I couldn't meet you at the station",
+      "gold_mapping": "Nominal that-clause; FUNCTION: PostM of the adjective “sorry”",
+      "id": "CL-NOM-10",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Nominal clause — postmodifier of an adjective",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 50,
+            "start": 11
+          }
+        ],
+        "target_texts": [
+          "that I couldn't meet you at the station"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A that-clause complementing the adjective “sorry” maps to PostM of that adjective.",
+      "sentence": "I am sorry that I couldn't meet you at the station.",
+      "teaching_note": "The function is PostM of “sorry”.",
+      "ud_signal": "adjective complement that-clause"
+    },
+    {
+      "answer_code": "A_TIME",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The marker supplies temporal subtype.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "time"
+      },
+      "focus": "while you were out",
+      "gold_mapping": "A = temporal adverbial clause",
+      "id": "CL-ADV-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Temporal adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 33,
+            "start": 15
+          }
+        ],
+        "target_texts": [
+          "while you were out"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The temporal while-clause maps to A.",
+      "sentence": "She telephoned while you were out.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + mark=while"
+    },
+    {
+      "answer_code": "A_CAUSE",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause gives reason/cause.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "cause/reason"
+      },
+      "focus": "because I am studying this evening",
+      "gold_mapping": "A = causal adverbial clause",
+      "id": "CL-ADV-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Causal adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 58,
+            "start": 24
+          }
+        ],
+        "target_texts": [
+          "because I am studying this evening"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The because-clause maps to A.",
+      "sentence": "I can't go out with you because I am studying this evening.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + mark=because"
+    },
+    {
+      "answer_code": "A_CAUSE",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "since is causal here, not temporal.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "cause/reason"
+      },
+      "focus": "Since it is your fault",
+      "gold_mapping": "A = causal adverbial clause",
+      "id": "CL-ADV-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Causal adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 22,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Since it is your fault"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The causal since-clause maps to A.",
+      "sentence": "Since it is your fault, you should apologize.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + mark=since"
+    },
+    {
+      "answer_code": "A_CONDITION",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Marker gives conditional subtype.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "condition"
+      },
+      "focus": "If it weren't so cold",
+      "gold_mapping": "A = conditional adverbial clause",
+      "id": "CL-ADV-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Conditional adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 21,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "If it weren't so cold"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The conditional if-clause maps to A.",
+      "sentence": "If it weren't so cold, it would be nice.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + mark=if"
+    },
+    {
+      "answer_code": "A_NEG_CONDITION",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Marker gives negative condition subtype.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "negative condition"
+      },
+      "focus": "Unless she studies harder",
+      "gold_mapping": "A = negative-conditional adverbial clause",
+      "id": "CL-ADV-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Negative-conditional adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 25,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Unless she studies harder"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The unless-clause maps to A.",
+      "sentence": "Unless she studies harder, she won't pass the exam.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + mark=unless"
+    },
+    {
+      "answer_code": "A_CONCESSION",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Marker gives concessive subtype.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "concession"
+      },
+      "focus": "Although it was cold and rainy",
+      "gold_mapping": "A = concessive adverbial clause",
+      "id": "CL-ADV-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Concessive adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Although it was cold and rainy"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The although-clause maps to A.",
+      "sentence": "Although it was cold and rainy, we enjoyed the trip.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + mark=although"
+    },
+    {
+      "answer_code": "A_PURPOSE",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Subtype should be inferred from context and marker.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "purpose"
+      },
+      "focus": "so that they may open the subway at the scheduled time",
+      "gold_mapping": "A = purpose adverbial clause",
+      "id": "CL-ADV-07",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Purpose adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 85,
+            "start": 31
+          }
+        ],
+        "target_texts": [
+          "so that they may open the subway at the scheduled time"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "In this example, the so-that clause expresses purpose and maps to A.",
+      "sentence": "They are working night and day so that they may open the subway at the scheduled time.",
+      "teaching_note": "Do not merge purpose with result/consequence; those are distinct clause types.",
+      "ud_signal": "advcl + marker=so that"
+    },
+    {
+      "answer_code": "A_PLACE",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Marker gives place/free-choice subtype.",
+      "features": {
+        "clause_type": "adverbial clause",
+        "function": "A",
+        "subtype": "place/free choice"
+      },
+      "focus": "Wherever he went",
+      "gold_mapping": "A = place/free-choice adverbial clause",
+      "id": "CL-ADV-08",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Place / free-choice adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 16,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Wherever he went"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The wherever-clause maps to A.",
+      "sentence": "Wherever he went, he was welcome.",
+      "teaching_note": "The instructor reviewed this case; the accepted analysis is reflected in the gold mapping and rule above.",
+      "ud_signal": "advcl + marker=wherever"
+    },
+    {
+      "answer_code": "A_MANNER_COMPARISON",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Subtype should be retained if the course uses it.",
+      "features": {},
+      "focus": "as if he were rich",
+      "gold_mapping": "Adverbial clause functioning as A",
+      "id": "CL-ADV-09",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Manner / comparison adverbial clause",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 38,
+            "start": 20
+          }
+        ],
+        "target_texts": [
+          "as if he were rich"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Manner/comparison as-if clause maps to adverbial clause.",
+      "sentence": "He spends his money as if he were rich.",
+      "teaching_note": null,
+      "ud_signal": "advcl + marker=as if"
+    },
+    {
+      "answer_code": "COMPARATIVE+POSTM_ADJ",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Comparatives are often parsed differently and should be checked.",
+      "features": {
+        "clause_type": "comparative clause",
+        "function": "PostM",
+        "host": "friendly"
+      },
+      "focus": "as she had ever been",
+      "gold_mapping": "Comparative clause; FUNCTION: PostM of the adjective “friendly”",
+      "id": "CL-ADV-10",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Comparative clause — postmodifier of an adjective",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 40,
+            "start": 20
+          }
+        ],
+        "target_texts": [
+          "as she had ever been"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The comparative clause modifies the adjective “friendly” and maps to PostM, not to the sentence element A.",
+      "sentence": "She was as friendly as she had ever been.",
+      "teaching_note": "This clause does not itself function as A; it is PostM of the adjective.",
+      "ud_signal": "comparative clause"
+    },
+    {
+      "answer_code": "SUPPLEMENTIVE+A",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Non-finite structure should be recorded.",
+      "features": {
+        "clause_type": "supplementive clause",
+        "function": "A",
+        "structure": "non-finite -ing"
+      },
+      "focus": "Entering the room",
+      "gold_mapping": "Supplementive non-finite clause; FUNCTION: A",
+      "id": "CL-ADV-11",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Supplementive non-finite clause — function: A",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 17,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Entering the room"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "A supplementive -ing clause maps to A, while its semantic subtype may require interpretation.",
+      "sentence": "Entering the room, he noticed that the windows were open.",
+      "teaching_note": "Because this is a non-finite supplementive clause, the precise subtype of A may be difficult to determine automatically.",
+      "ud_signal": "supplementive non-finite -ing clause"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The preposition is part of the marker/structure cue.",
+      "features": {},
+      "focus": "On arriving at the cottage",
+      "gold_mapping": "Adverbial clause functioning as A",
+      "id": "CL-ADV-12",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Adverbial clause — function: A",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 26,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "On arriving at the cottage"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Prepositional -ing clause maps to adverbial clause.",
+      "sentence": "On arriving at the cottage, Tom found it burnt down.",
+      "teaching_note": null,
+      "ud_signal": "preposition + -ing clause"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Non-finite purpose clause.",
+      "features": {},
+      "focus": "to ask her to dinner",
+      "gold_mapping": "Adverbial clause functioning as A",
+      "id": "CL-ADV-13",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Adverbial clause — function: A",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 43,
+            "start": 23
+          }
+        ],
+        "target_texts": [
+          "to ask her to dinner"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Purpose infinitive maps to adverbial clause.",
+      "sentence": "She rang up her mother to ask her to dinner.",
+      "teaching_note": null,
+      "ud_signal": "to-infinitival purpose clause"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Automatic parsers may not expose this as a full clause consistently.",
+      "features": {},
+      "focus": "Although always helpful",
+      "gold_mapping": "Reduced adverbial clause functioning as A",
+      "id": "CL-ADV-14",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Adverbial clause — function: A",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 23,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Although always helpful"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Verbless concessive clause maps to adverbial clause.",
+      "sentence": "Although always helpful, he was not much liked.",
+      "teaching_note": null,
+      "ud_signal": "verbless/reduced clause"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Marker and missing verb make this a review case.",
+      "features": {},
+      "focus": "Even if still working",
+      "gold_mapping": "Reduced adverbial clause functioning as A",
+      "id": "CL-ADV-15",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Adverbial clause — function: A",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 21,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Even if still working"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Reduced conditional/concessive clause maps to adverbial clause.",
+      "sentence": "Even if still working, the engine is not reliable.",
+      "teaching_note": null,
+      "ud_signal": "reduced even-if clause"
+    },
+    {
+      "answer_code": "REL_RESTRICTIVE+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "who marks the relative clause; it restricts students.",
+      "features": {},
+      "focus": "who work hard",
+      "gold_mapping": "Restrictive relative clause functioning as postmodifier",
+      "id": "CL-REL-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Restrictive relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 22,
+            "start": 9
+          }
+        ],
+        "target_texts": [
+          "who work hard"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Relative clause maps to postmodifier of the noun.",
+      "sentence": "Students who work hard pass their exams.",
+      "teaching_note": null,
+      "ud_signal": "acl:relcl + who"
+    },
+    {
+      "answer_code": "REL_RESTRICTIVE+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Zero relatives require span recovery beyond the overt marker.",
+      "features": {},
+      "focus": "I am listening to",
+      "gold_mapping": "Restrictive zero relative clause functioning as postmodifier",
+      "id": "CL-REL-02",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Restrictive relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 28,
+            "start": 11
+          }
+        ],
+        "target_texts": [
+          "I am listening to"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Zero relative clause maps to relative postmodifier.",
+      "sentence": "The record I am listening to is a present from Moscow.",
+      "teaching_note": null,
+      "ud_signal": "acl:relcl with zero marker"
+    },
+    {
+      "answer_code": "REL+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The marker is complex: preposition + whom.",
+      "features": {},
+      "focus": "of whom we were very fond",
+      "gold_mapping": "Relative clause functioning as postmodifier",
+      "id": "CL-REL-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 11
+          }
+        ],
+        "target_texts": [
+          "of whom we were very fond"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Prepositional relative pronoun maps to relative clause.",
+      "sentence": "Our granny of whom we were very fond died unexpectedly.",
+      "teaching_note": null,
+      "ud_signal": "acl:relcl + prepositional relative pronoun"
+    },
+    {
+      "answer_code": "REL+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause modifies reason.",
+      "features": {},
+      "focus": "why I should refuse a drink",
+      "gold_mapping": "Relative clause functioning as postmodifier",
+      "id": "CL-REL-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 49,
+            "start": 22
+          }
+        ],
+        "target_texts": [
+          "why I should refuse a drink"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Relative adverb why maps to relative clause.",
+      "sentence": "I could see no reason why I should refuse a drink.",
+      "teaching_note": null,
+      "ud_signal": "acl:relcl + relative adverb why"
+    },
+    {
+      "answer_code": "REL+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "The clause modifies place.",
+      "features": {},
+      "focus": "where we could talk in peace",
+      "gold_mapping": "Relative clause functioning as postmodifier",
+      "id": "CL-REL-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 51,
+            "start": 23
+          }
+        ],
+        "target_texts": [
+          "where we could talk in peace"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Relative adverb where maps to relative clause.",
+      "sentence": "We could find no place where we could talk in peace.",
+      "teaching_note": null,
+      "ud_signal": "acl:relcl + relative adverb where"
+    },
+    {
+      "answer_code": "REL_RESTRICTIVE+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "which is the relative marker.",
+      "features": {},
+      "focus": "which Mrs. Thompson sent me",
+      "gold_mapping": "Restrictive relative clause functioning as postmodifier",
+      "id": "CL-REL-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Restrictive relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 47,
+            "start": 20
+          }
+        ],
+        "target_texts": [
+          "which Mrs. Thompson sent me"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Which-relative maps to relative postmodifier.",
+      "sentence": "I liked the present which Mrs. Thompson sent me.",
+      "teaching_note": null,
+      "ud_signal": "acl:relcl + which"
+    },
+    {
+      "answer_code": "REL+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Zero marker and predicative content make automatic recovery non-trivial.",
+      "features": {},
+      "focus": "he was",
+      "gold_mapping": "Relative clause functioning as postmodifier",
+      "id": "CL-REL-07",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 24
+          }
+        ],
+        "target_texts": [
+          "he was"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Zero relative clause maps to postmodifier.",
+      "sentence": "He is no longer the man he was.",
+      "teaching_note": null,
+      "ud_signal": "zero relative after noun"
+    },
+    {
+      "answer_code": "REL_RESTRICTIVE+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "No commas and semantic restriction support restrictive interpretation.",
+      "features": {
+        "clause_type": "relative clause",
+        "function": "PostM",
+        "restrictiveness": "restrictive"
+      },
+      "focus": "who wishes to see me",
+      "gold_mapping": "Restrictive relative clause; FUNCTION: PostM",
+      "id": "CL-REL-08",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Restrictive relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 31,
+            "start": 11
+          }
+        ],
+        "target_texts": [
+          "who wishes to see me"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The relative clause restricts the antecedent and functions as PostM.",
+      "sentence": "Any person who wishes to see me must take an appointment.",
+      "teaching_note": "The spreadsheet formula error represented Martin’s note “maps to PostM”; both function and restrictiveness are retained.",
+      "ud_signal": "restrictive relative"
+    },
+    {
+      "answer_code": "REL_NONRESTRICTIVE+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Commas and appositive meaning support non-restrictive interpretation.",
+      "features": {},
+      "focus": "which is to be found in the remote parts of China",
+      "gold_mapping": "Non-restrictive relative clause",
+      "id": "CL-REL-09",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Non-restrictive relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 66,
+            "start": 17
+          }
+        ],
+        "target_texts": [
+          "which is to be found in the remote parts of China"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Non-restrictive relatives add parenthetical information.",
+      "sentence": "The giant panda, which is to be found in the remote parts of China, lives exclusively on bamboo shoots.",
+      "teaching_note": null,
+      "ud_signal": "non-restrictive relative"
+    },
+    {
+      "answer_code": "REL_NONRESTRICTIVE+POSTM",
+      "dimension": "clause-classification",
+      "dimension_label": "Clause classification",
+      "dimension_note": null,
+      "explanation": "Do not rely only on punctuation for this exercise type.",
+      "features": {
+        "clause_type": "relative clause",
+        "function": "PostM",
+        "restrictiveness": "non-restrictive"
+      },
+      "focus": "which was Friday",
+      "gold_mapping": "Non-restrictive relative clause; FUNCTION: PostM",
+      "id": "CL-REL-10",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Non-restrictive relative clause — function: PostM",
+        "dimension": "clause_class",
+        "mode": "clauses",
+        "subskill": "Clause type",
+        "target_spans": [
+          {
+            "end": 34,
+            "start": 18
+          }
+        ],
+        "target_texts": [
+          "which was Friday"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The gold analysis is non-restrictive even though commas were removed from the exercise sentence.",
+      "sentence": "The following day which was Friday he left for Belgrade.",
+      "teaching_note": "Punctuation is deliberately unreliable here; semantic interpretation determines the gold label.",
+      "ud_signal": "relative clause with removed/uncertain punctuation"
+    },
+    {
+      "answer_code": "COMPLEMENTIZER",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "Marker type, not sentence-element function.",
+      "features": {},
+      "focus": "that",
+      "gold_mapping": "Complementizer",
+      "id": "CL-MARK-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Complementizer",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 13,
+            "start": 9
+          }
+        ],
+        "target_texts": [
+          "that"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "that in a content clause maps to complementizer marker.",
+      "sentence": "She said that she had lost her purse.",
+      "teaching_note": null,
+      "ud_signal": "mark=that"
+    },
+    {
+      "answer_code": "INTERROGATIVE_SUBORDINATOR",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "Keep marker type separate from clause function.",
+      "features": {},
+      "focus": "whether",
+      "gold_mapping": "Complementizer / interrogative subordinator",
+      "id": "CL-MARK-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Interrogative subordinator",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 22,
+            "start": 15
+          }
+        ],
+        "target_texts": [
+          "whether"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "whether marks an embedded interrogative/content clause.",
+      "sentence": "Time will show whether we are right or wrong.",
+      "teaching_note": null,
+      "ud_signal": "mark=whether"
+    },
+    {
+      "answer_code": "INTERROGATIVE_SUBORDINATOR",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "if must be distinguished from conditional if.",
+      "features": {},
+      "focus": "if",
+      "gold_mapping": "Complementizer / interrogative subordinator",
+      "id": "CL-MARK-03",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Interrogative subordinator",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 18,
+            "start": 16
+          }
+        ],
+        "target_texts": [
+          "if"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "if can mark an embedded interrogative/content clause.",
+      "sentence": "The question is if he feels up to the task.",
+      "teaching_note": null,
+      "ud_signal": "mark=if in nominal clause"
+    },
+    {
+      "answer_code": "SUBORDINATING_CONJUNCTION",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "Different function from nominal if.",
+      "features": {},
+      "focus": "If",
+      "gold_mapping": "Subordinating conjunction",
+      "id": "CL-MARK-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Subordinating conjunction",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "If"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "conditional if maps to subordinating conjunction marker.",
+      "sentence": "If it weren't so cold, it would be nice.",
+      "teaching_note": null,
+      "ud_signal": "mark=if in adverbial clause"
+    },
+    {
+      "answer_code": "SUBORDINATING_CONJUNCTION",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "The lexical marker helps infer adverbial subtype.",
+      "features": {},
+      "focus": "As",
+      "gold_mapping": "Subordinating conjunction",
+      "id": "CL-MARK-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Subordinating conjunction",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "As"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Causal adverbial markers map to subordinating conjunction.",
+      "sentence": "As it was raining, we stayed indoors all day.",
+      "teaching_note": null,
+      "ud_signal": "mark=because/since/as"
+    },
+    {
+      "answer_code": "SUBORDINATING_CONJUNCTION",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "while here is concessive, not temporal.",
+      "features": {},
+      "focus": "While",
+      "gold_mapping": "Subordinating conjunction",
+      "id": "CL-MARK-06",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Subordinating conjunction",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "While"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Concessive adverbial markers map to subordinating conjunction.",
+      "sentence": "While he has invested a lot of money in paintings, he doesn't understand very much about art.",
+      "teaching_note": null,
+      "ud_signal": "mark=although/while/even if"
+    },
+    {
+      "answer_code": "RELATIVE_PRONOUN",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "Marker type should be stored separately from clause function.",
+      "features": {},
+      "focus": "who",
+      "gold_mapping": "Relative pronoun",
+      "id": "CL-MARK-07",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Relative pronoun",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 12,
+            "start": 9
+          }
+        ],
+        "target_texts": [
+          "who"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Relative pronoun maps to relative marker type.",
+      "sentence": "Students who work hard pass their exams.",
+      "teaching_note": null,
+      "ud_signal": "relative pronoun"
+    },
+    {
+      "answer_code": "RELATIVE_ADVERB",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "The clause remains REL-CL; where is the marker type.",
+      "features": {},
+      "focus": "where",
+      "gold_mapping": "Relative adverb",
+      "id": "CL-MARK-08",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Relative adverb",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 28,
+            "start": 23
+          }
+        ],
+        "target_texts": [
+          "where"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Relative adverb maps to relative marker type.",
+      "sentence": "We could find no place where we could talk in peace.",
+      "teaching_note": null,
+      "ud_signal": "relative adverb"
+    },
+    {
+      "answer_code": "INFINITIVAL_MARKER",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "Marker type should not be confused with preposition to.",
+      "features": {},
+      "focus": "to",
+      "gold_mapping": "Infinitival marker",
+      "id": "CL-MARK-09",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Infinitival marker",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 26,
+            "start": 24
+          }
+        ],
+        "target_texts": [
+          "to"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "to maps to infinitival marker when introducing a non-finite clause.",
+      "sentence": "The best thing would be to tell everybody.",
+      "teaching_note": null,
+      "ud_signal": "mark=to"
+    },
+    {
+      "answer_code": "ZERO_MARKER",
+      "dimension": "marker-type",
+      "dimension_label": "Marker type",
+      "dimension_note": "Marker type is a secondary analysis dimension. It records how subordination is signalled; it does not replace the clause-type or sentence-function label.",
+      "explanation": "Zero markers must be recovered; they are not explicit tokens.",
+      "features": {},
+      "focus": "zero",
+      "gold_mapping": "Zero marker",
+      "id": "CL-MARK-10",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Zero marker",
+        "dimension": "marker_type",
+        "mode": "clauses",
+        "subskill": "Clause marker",
+        "target_spans": [
+          {
+            "end": 9,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "∅"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Omitted complementizer or relative marker should be represented as zero.",
+      "sentence": "He said he had lost his mind.",
+      "teaching_note": null,
+      "ud_signal": "zero marker"
+    },
+    {
+      "answer_code": "FINITE_THAT",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Finite structure should be recorded independently of function.",
+      "features": {},
+      "focus": "that every question would be answered",
+      "gold_mapping": "finite that-clause",
+      "id": "CL-STR-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Finite that-clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 49,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "that every question would be answered"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "mark=that + finite verb maps to finite that-clause.",
+      "sentence": "He promised that every question would be answered.",
+      "teaching_note": null,
+      "ud_signal": "finite that-clause"
+    },
+    {
+      "answer_code": "FINITE_ZERO_THAT",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Requires zero-marker recovery.",
+      "features": {},
+      "focus": "you have some influence on her",
+      "gold_mapping": "finite zero-that clause",
+      "id": "CL-STR-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "Finite zero-that clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 38,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "you have some influence on her"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Finite content clause without overt that maps to zero-that structure.",
+      "sentence": "I think you have some influence on her.",
+      "teaching_note": null,
+      "ud_signal": "finite bare declarative content clause"
+    },
+    {
+      "answer_code": "FINITE_WH",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Function is S in this example.",
+      "features": {},
+      "focus": "How the accident happened",
+      "gold_mapping": "finite wh-clause",
+      "id": "CL-STR-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Finite wh-clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 25,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "How the accident happened"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Wh-word + finite verb maps to wh-clause structure.",
+      "sentence": "How the accident happened is a mystery.",
+      "teaching_note": null,
+      "ud_signal": "finite wh-clause"
+    },
+    {
+      "answer_code": "FINITE_Whether_IF",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Function requires context.",
+      "features": {},
+      "focus": "whether that will come out all right",
+      "gold_mapping": "finite whether/if-clause",
+      "id": "CL-STR-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Finite whether/if-clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 50,
+            "start": 14
+          }
+        ],
+        "target_texts": [
+          "whether that will come out all right"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "whether/if + finite verb maps to whether/if-clause structure.",
+      "sentence": "I am not sure whether that will come out all right.",
+      "teaching_note": null,
+      "ud_signal": "finite whether/if-clause"
+    },
+    {
+      "answer_code": "TO_INFINITIVE",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Function is SC in this example.",
+      "features": {},
+      "focus": "to tell everybody",
+      "gold_mapping": "to-infinitival clause",
+      "id": "CL-STR-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "To-infinitival clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 41,
+            "start": 24
+          }
+        ],
+        "target_texts": [
+          "to tell everybody"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "to + infinitive maps to to-infinitival structure.",
+      "sentence": "The best thing would be to tell everybody.",
+      "teaching_note": null,
+      "ud_signal": "to-infinitival clause"
+    },
+    {
+      "answer_code": "BARE_INFINITIVE",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "UD parser output and course policy may vary.",
+      "features": {},
+      "focus": "sing",
+      "gold_mapping": "bare infinitival clause",
+      "id": "CL-STR-06",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Bare infinitival clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 16,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "sing"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Bare infinitive after perception verb maps to bare infinitival structure.",
+      "sentence": "I heard her sing.",
+      "teaching_note": null,
+      "ud_signal": "bare infinitival clause"
+    },
+    {
+      "answer_code": "ING_CLAUSE",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Function is A in this example.",
+      "features": {},
+      "focus": "Knowing my temper",
+      "gold_mapping": "-ing clause",
+      "id": "CL-STR-07",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "-ing clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 17,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Knowing my temper"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "-ing verb form maps to -ing clause structure.",
+      "sentence": "Knowing my temper, I didn't reply.",
+      "teaching_note": null,
+      "ud_signal": "-ing clause"
+    },
+    {
+      "answer_code": "ING_CLAUSE",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Function is A in this example.",
+      "features": {},
+      "focus": "without saying goodbye",
+      "gold_mapping": "preposition + -ing clause",
+      "id": "CL-STR-08",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "Preposition + -ing clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "without saying goodbye"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Preposition plus -ing form maps to prepositional -ing clause structure.",
+      "sentence": "He left without saying goodbye.",
+      "teaching_note": null,
+      "ud_signal": "preposition + -ing clause"
+    },
+    {
+      "answer_code": "REDUCED_VERBLESS",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Automatic parsing may not yield a clean clause span.",
+      "features": {},
+      "focus": "Too nervous to reply",
+      "gold_mapping": "reduced/verbless clause",
+      "id": "CL-STR-09",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Reduced / verbless clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 20,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "Too nervous to reply"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Reduced adjective-based clause maps to reduced/verbless structure.",
+      "sentence": "Too nervous to reply, he stared at the floor.",
+      "teaching_note": null,
+      "ud_signal": "verbless/reduced clause"
+    },
+    {
+      "answer_code": "COMPARATIVE",
+      "dimension": "clause-structure",
+      "dimension_label": "Clause structure",
+      "dimension_note": "Clause structure is recorded independently of clause type and function (for example, finite that-clause or to-infinitival clause).",
+      "explanation": "Comparatives need rule support beyond basic dependency labels.",
+      "features": {},
+      "focus": "as she had ever been",
+      "gold_mapping": "comparative clause",
+      "id": "CL-STR-10",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Comparative clause",
+        "dimension": "clause_structure",
+        "mode": "clauses",
+        "subskill": "Clause structure",
+        "target_spans": [
+          {
+            "end": 40,
+            "start": 20
+          }
+        ],
+        "target_texts": [
+          "as she had ever been"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Comparative marker pattern maps to comparative clause structure.",
+      "sentence": "She was as friendly as she had ever been.",
+      "teaching_note": null,
+      "ud_signal": "comparative clause"
+    },
+    {
+      "answer_code": "S",
+      "dimension": "clause-function",
+      "dimension_label": "Clause function",
+      "dimension_note": "Clause function answers what the entire clause does in the higher construction (S, DO, SC, A, PostM, or OC).",
+      "explanation": "Clause type is nominal; sentence function is S.",
+      "features": {},
+      "focus": "That he is rich",
+      "gold_mapping": "S",
+      "id": "CL-FUNC-01",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "direct",
+      "public_contract": {
+        "answer": "S — Subject",
+        "dimension": "clause_function",
+        "mode": "clauses",
+        "subskill": "Clause function",
+        "target_spans": [
+          {
+            "end": 15,
+            "start": 0
+          }
+        ],
+        "target_texts": [
+          "That he is rich"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Subordinate clause functioning as subject maps to S.",
+      "sentence": "That he is rich doesn't mean anything to them.",
+      "teaching_note": null,
+      "ud_signal": "clausal subject"
+    },
+    {
+      "answer_code": "DO",
+      "dimension": "clause-function",
+      "dimension_label": "Clause function",
+      "dimension_note": "Clause function answers what the entire clause does in the higher construction (S, DO, SC, A, PostM, or OC).",
+      "explanation": "Clause type is nominal; sentence function is DO.",
+      "features": {},
+      "focus": "that every question would be answered",
+      "gold_mapping": "DO",
+      "id": "CL-FUNC-02",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "DO — Direct Object",
+        "dimension": "clause_function",
+        "mode": "clauses",
+        "subskill": "Clause function",
+        "target_spans": [
+          {
+            "end": 49,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "that every question would be answered"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Content clause selected by verb maps to DO.",
+      "sentence": "He promised that every question would be answered.",
+      "teaching_note": null,
+      "ud_signal": "clausal direct object"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "clause-function",
+      "dimension_label": "Clause function",
+      "dimension_note": "Clause function answers what the entire clause does in the higher construction (S, DO, SC, A, PostM, or OC).",
+      "explanation": "Clause type is nominal; sentence function is SC.",
+      "features": {},
+      "focus": "what he said",
+      "gold_mapping": "SC",
+      "id": "CL-FUNC-03",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "clause_function",
+        "mode": "clauses",
+        "subskill": "Clause function",
+        "target_spans": [
+          {
+            "end": 20,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "what he said"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Predicative content/wh-clause after copula maps to SC.",
+      "sentence": "This is what he said.",
+      "teaching_note": null,
+      "ud_signal": "clausal subject complement"
+    },
+    {
+      "answer_code": "A",
+      "dimension": "clause-function",
+      "dimension_label": "Clause function",
+      "dimension_note": "Clause function answers what the entire clause does in the higher construction (S, DO, SC, A, PostM, or OC).",
+      "explanation": "Clause type is adverbial; sentence function is A.",
+      "features": {},
+      "focus": "as she drove home",
+      "gold_mapping": "A",
+      "id": "CL-FUNC-04",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "A — Adverbial",
+        "dimension": "clause_function",
+        "mode": "clauses",
+        "subskill": "Clause function",
+        "target_spans": [
+          {
+            "end": 26,
+            "start": 9
+          }
+        ],
+        "target_texts": [
+          "as she drove home"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Adverbial clause maps to A.",
+      "sentence": "She sang as she drove home.",
+      "teaching_note": null,
+      "ud_signal": "clausal adverbial"
+    },
+    {
+      "answer_code": "POSTM",
+      "dimension": "clause-function",
+      "dimension_label": "Clause function",
+      "dimension_note": "Clause function answers what the entire clause does in the higher construction (S, DO, SC, A, PostM, or OC).",
+      "explanation": "Clause type is relative; phrase function is postmodifier.",
+      "features": {},
+      "focus": "I spoke to",
+      "gold_mapping": "postmodifier",
+      "id": "CL-FUNC-05",
+      "language": "English",
+      "manual_review": false,
+      "mapping_kind": "rule-based",
+      "public_contract": {
+        "answer": "PostM — Postmodifier",
+        "dimension": "clause_function",
+        "mode": "clauses",
+        "subskill": "Clause function",
+        "target_spans": [
+          {
+            "end": 18,
+            "start": 8
+          }
+        ],
+        "target_texts": [
+          "I spoke to"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Relative clause after a noun maps to postmodifier.",
+      "sentence": "The man I spoke to is an accountant in our firm.",
+      "teaching_note": null,
+      "ud_signal": "clausal postmodifier"
+    },
+    {
+      "answer_code": "OC_OR_CLAUSAL_OBJECT_ANALYSIS_DEPENDING_ON_COURSE_POLICY",
+      "dimension": "clause-function",
+      "dimension_label": "Clause function",
+      "dimension_note": "Clause function answers what the entire clause does in the higher construction (S, DO, SC, A, PostM, or OC).",
+      "explanation": "This should be a flagged construction.",
+      "features": {},
+      "focus": "sing",
+      "gold_mapping": "OC or clausal object analysis, depending on course policy",
+      "id": "CL-FUNC-06",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "OC / Clausal object",
+        "dimension": "clause_function",
+        "mode": "clauses",
+        "subskill": "Clause function",
+        "target_spans": [
+          {
+            "end": 16,
+            "start": 12
+          }
+        ],
+        "target_texts": [
+          "sing"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "Non-finite clause predicated of an object can function as OC.",
+      "sentence": "I heard her sing.",
+      "teaching_note": null,
+      "ud_signal": "clausal object complement"
+    },
+    {
+      "answer_code": "MANUAL",
+      "dimension": "quality-control",
+      "dimension_label": "Quality-control case",
+      "dimension_note": null,
+      "explanation": "Do not blindly map all obl/PP spans to A.",
+      "features": {},
+      "focus": "in his father's car",
+      "gold_mapping": "manual decision required",
+      "id": "REVIEW-01",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "Context needed",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 43,
+            "start": 24
+          }
+        ],
+        "target_texts": [
+          "in his father's car"
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "The same surface PP may be adverbial or nominal modifier depending on meaning.",
+      "sentence": "George smashed a window in his father's car.",
+      "teaching_note": null,
+      "ud_signal": "ambiguous PP attachment"
+    },
+    {
+      "answer_code": "SC",
+      "dimension": "quality-control",
+      "dimension_label": "Quality-control case",
+      "dimension_note": null,
+      "explanation": "This type is useful as a regression-test case for the remapper.",
+      "features": {
+        "function": "SC",
+        "realization": "temporal AdvP/PP sequence"
+      },
+      "focus": "tomorrow at 11 p.m.",
+      "gold_mapping": "SC = Subject Complement",
+      "id": "REVIEW-02",
+      "language": "English",
+      "manual_review": true,
+      "mapping_kind": "manual-review",
+      "public_contract": {
+        "answer": "SC — Subject Complement",
+        "dimension": "sentence_element",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements",
+        "target_spans": [
+          {
+            "end": 65,
+            "start": 46
+          }
+        ],
+        "target_texts": [
+          "tomorrow at 11 p.m."
+        ]
+      },
+      "review_status": "implemented",
+      "rule": "In the teaching analysis, the temporal expression after copular “be” functions as SC.",
+      "sentence": "The fight for the world championship title is tomorrow at 11 p.m.",
+      "teaching_note": "Keep this as a guarded regression case for the automatic remapper even though the gold label is SC.",
+      "ud_signal": "copular vs adverbial PP"
+    }
+  ],
+  "metadata": {
+    "case_count": 106,
+    "mapping_contract_sha256": "48d06c394bc733e30860e0088995291fe07f12202a78e8112c276d971622261f",
+    "private_review_fields_removed": [
+      "source_review_note_sl"
+    ],
+    "purpose": "Internal regression contract for the pedagogical remapper; never copied into docs/.",
+    "source_sha256": "ad548ea0c7a11ab745462a89c36085ab56ba2f1f8e6f1fe2e30c9a3cffa92da2",
+    "title": "UD Pedagogy Lab",
+    "version": "0.2.0-martin-reviewed"
+  }
+}

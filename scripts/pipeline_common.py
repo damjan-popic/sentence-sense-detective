@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import hashlib
+import gzip
+import io
 import json
 import os
 import re
 import tempfile
 from pathlib import Path
-from typing import Iterable, Iterator
+from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT / "config" / "corpus_10k.yaml"
@@ -34,8 +36,13 @@ def read_json(path: Path) -> dict | list:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def read_jsonl(path: Path) -> Iterator[dict]:
-    with path.open(encoding="utf-8") as handle:
+def read_jsonl(path: Path) -> list[dict]:
+    values = []
+    if path.suffix == ".gz":
+        handle_context = gzip.open(path, mode="rt", encoding="utf-8")
+    else:
+        handle_context = path.open(encoding="utf-8")
+    with handle_context as handle:
         for line_number, line in enumerate(handle, 1):
             if not line.strip():
                 continue
@@ -45,7 +52,8 @@ def read_jsonl(path: Path) -> Iterator[dict]:
                 raise ValueError(f"{path}:{line_number}: {error}") from error
             if not isinstance(value, dict):
                 raise ValueError(f"{path}:{line_number}: expected an object")
-            yield value
+            values.append(value)
+    return values
 
 
 def canonical_json_bytes(value: object, *, pretty: bool = False) -> bytes:
@@ -80,6 +88,17 @@ def write_json(path: Path, value: object, *, pretty: bool = True) -> None:
 
 def write_jsonl(path: Path, values: Iterable[dict]) -> None:
     content = b"".join(canonical_json_bytes(value) for value in values)
+    if path.suffix == ".gz":
+        compressed = io.BytesIO()
+        with gzip.GzipFile(
+            filename="",
+            mode="wb",
+            compresslevel=9,
+            fileobj=compressed,
+            mtime=0,
+        ) as handle:
+            handle.write(content)
+        content = compressed.getvalue()
     atomic_write(path, content)
 
 

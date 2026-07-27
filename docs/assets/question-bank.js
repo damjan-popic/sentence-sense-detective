@@ -44,13 +44,35 @@
     difficultyCounts,
     selectedIds,
     selectedSentences,
+    answerCounts,
+    subskillCounts,
     recentQuestionIds,
     recentSentenceIds,
     random,
-    relaxDifficulty = true
+    maxAnswerCount = 3,
+    maxSubskillCount = Number.POSITIVE_INFINITY,
+    relaxDifficulty = true,
+    relaxBalance = false
   }) {
     const chosen = [];
     const wanted = { ...difficultyCounts };
+    const withinBalance = question => (
+      (answerCounts.get(question.answer) || 0) < maxAnswerCount
+      && (subskillCounts.get(question.subskill) || 0) < maxSubskillCount
+    );
+    const add = question => {
+      selectedIds.add(question.id);
+      selectedSentences.add(question.sentence_id);
+      answerCounts.set(
+        question.answer,
+        (answerCounts.get(question.answer) || 0) + 1
+      );
+      subskillCounts.set(
+        question.subskill,
+        (subskillCounts.get(question.subskill) || 0) + 1
+      );
+      chosen.push(question);
+    };
     const passes = [
       question => (
         !recentQuestionIds.has(question.id)
@@ -67,12 +89,11 @@
           || selectedIds.has(question.id)
           || selectedSentences.has(question.sentence_id)
           || !acceptRecent(question)
+          || !withinBalance(question)
           || (wanted[question.difficulty] ?? 0) <= 0
         ) continue;
-        selectedIds.add(question.id);
-        selectedSentences.add(question.sentence_id);
         wanted[question.difficulty] -= 1;
-        chosen.push(question);
+        add(question);
       }
     }
     if (relaxDifficulty && chosen.length < target) {
@@ -83,10 +104,21 @@
           || !question?.sentence_id
           || selectedIds.has(question.id)
           || selectedSentences.has(question.sentence_id)
+          || !withinBalance(question)
         ) continue;
-        selectedIds.add(question.id);
-        selectedSentences.add(question.sentence_id);
-        chosen.push(question);
+        add(question);
+      }
+    }
+    if (relaxBalance && chosen.length < target) {
+      for (const question of shuffled(pool, random)) {
+        if (chosen.length >= target) break;
+        if (
+          !question?.id
+          || !question?.sentence_id
+          || selectedIds.has(question.id)
+          || selectedSentences.has(question.sentence_id)
+        ) continue;
+        add(question);
       }
     }
     return chosen;
@@ -134,9 +166,24 @@
     const difficultyBudget = requestedDifficultyCounts(manifest, roundSize, random);
     const selectedIds = new Set();
     const selectedSentences = new Set();
+    const answerCounts = new Map();
+    const subskillCounts = new Map();
     const recentQuestionIds = new Set(recent.questionIds || []);
     const recentSentenceIds = new Set(recent.sentenceIds || []);
     const selected = [];
+    const maxAnswerCount = Math.max(
+      1,
+      Number(manifest.sampling_policy?.max_answer_label_per_round) || 3
+    );
+    const availableSubskills = (
+      manifest.sampling_policy?.subskills_by_mode?.[modeId] || []
+    );
+    const maxSubskillCount = availableSubskills.length > 1
+      ? Math.max(
+        1,
+        Number(manifest.sampling_policy?.max_subskill_per_round) || 4
+      )
+      : roundSize;
 
     let goldQuestions = [];
     try {
@@ -152,9 +199,13 @@
       difficultyCounts: goldBudget,
       selectedIds,
       selectedSentences,
+      answerCounts,
+      subskillCounts,
       recentQuestionIds,
       recentSentenceIds,
       random,
+      maxAnswerCount,
+      maxSubskillCount,
       relaxDifficulty: true
     });
     selected.push(...selectedGold);
@@ -181,9 +232,13 @@
         difficultyCounts: difficultyBudget,
         selectedIds,
         selectedSentences,
+        answerCounts,
+        subskillCounts,
         recentQuestionIds,
         recentSentenceIds,
         random,
+        maxAnswerCount,
+        maxSubskillCount,
         relaxDifficulty: false
       });
       selected.push(...chosen);
@@ -205,10 +260,15 @@
         },
         selectedIds,
         selectedSentences,
+        answerCounts,
+        subskillCounts,
         recentQuestionIds,
         recentSentenceIds,
         random,
-        relaxDifficulty: true
+        maxAnswerCount,
+        maxSubskillCount,
+        relaxDifficulty: true,
+        relaxBalance: true
       }));
     }
     if (selected.length < roundSize) {

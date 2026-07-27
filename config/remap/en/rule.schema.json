@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/sentence-sense-detective/formal-remap-rule.schema.json",
+  "title": "Sentence Sense Detective formal remapping rule",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "version",
+    "language",
+    "layer",
+    "dimension",
+    "decision_class",
+    "priority",
+    "source_case_ids",
+    "match",
+    "target",
+    "output",
+    "action"
+  ],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]+$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "const": "en"
+    },
+    "layer": {
+      "enum": [
+        "word_class",
+        "sentence_element",
+        "clause_type",
+        "clause_marker",
+        "clause_structure",
+        "clause_function",
+        "quality_control"
+      ]
+    },
+    "dimension": {
+      "enum": [
+        "word_class",
+        "sentence_element",
+        "clause_type",
+        "clause_marker",
+        "clause_structure",
+        "clause_function",
+        "quality_control"
+      ]
+    },
+    "decision_class": {
+      "enum": [
+        "direct",
+        "rule-based",
+        "manual-review"
+      ]
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_case_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "match": {
+      "type": "object",
+      "description": "Declarative conditions over a Stanza/UD dependency graph. Codex must define and document the exact supported operators.",
+      "properties": {
+        "anchor": {
+          "type": "object"
+        },
+        "parent": {
+          "type": "object"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "ancestors": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "descendants": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "sentence": {
+          "type": "object"
+        },
+        "lexical_sets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "exclude": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "strategy"
+      ],
+      "properties": {
+        "strategy": {
+          "enum": [
+            "anchor-token",
+            "anchor-subtree",
+            "clause-subtree",
+            "predicate-complex",
+            "coordinated-units",
+            "discontinuous",
+            "custom"
+          ]
+        },
+        "include_relations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclude_relations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trim_punctuation": {
+          "type": "boolean"
+        },
+        "custom_handler": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "required": [
+        "label"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "enum": [
+            "parts-of-speech",
+            "sentence-elements",
+            "clauses"
+          ]
+        },
+        "subskill": {
+          "type": "string"
+        },
+        "secondary_annotations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "action": {
+      "enum": [
+        "publish",
+        "review",
+        "reject"
+      ]
+    },
+    "guards": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "explanation_template": {
+      "type": "string"
+    },
+    "teacher_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "implementation_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

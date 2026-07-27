@@ -1,0 +1,1437 @@
+{
+  "language": "en",
+  "profile_version": "1.0.0",
+  "rules": [
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-S-01, SE-S-02.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the subject: it identifies who or what the clause is about.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-S-01: Direct subject relation maps to S.",
+        "SE-S-02: The whole subject phrase maps to S, not only the syntactic head."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-subject-np",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "nsubj",
+            "nsubj with internal modifier"
+          ]
+        }
+      },
+      "output": {
+        "label": "S — Subject",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.subject.np",
+      "source_case_ids": [
+        "SE-S-01",
+        "SE-S-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from SE-S-03, SE-S-04, SE-S-05.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the subject: it identifies who or what the clause is about.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-S-03: Clausal subject maps to S.",
+        "SE-S-04: Non-finite clausal subject maps to S.",
+        "SE-S-05: Gerund-participial clausal subject maps to S."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-subject-clause",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "csubj: -ing clause",
+            "csubj: finite wh-clause",
+            "csubj: to-infinitival clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "S — Subject",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.subject.clause",
+      "source_case_ids": [
+        "SE-S-03",
+        "SE-S-04",
+        "SE-S-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-S-03: csubj: finite wh-clause (VS. nominal relative clause)",
+        "SE-S-04: V bistvu je tudi naslednji primer \"non-finite clause\" - tukaj bi moralo biti infinitival, ali še bolje perfect infinitive clause.",
+        "SE-S-05: Če bi se to dalo ločiti (bodisi gerundial bodisi participial - v tem primeru gerundial), bi bilo super, drugače pa ok."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-S-06.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The construction links formal “it” with a postponed clausal subject.",
+      "guards": [
+        {
+          "reason": "Formal it and the postponed clause must be confirmed as two linked subject annotations.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-S-06: Expletive it should not be treated like an ordinary lexical S without review."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-formal-postponed-subject",
+          "event_status": "needs-review",
+          "event_review_reason": "Formal it and the postponed clause must be confirmed as two linked subject annotations."
+        },
+        "sentence": {
+          "contract_signals": [
+            "expl + extraposed clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "Formal S + Postponed S",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.formal.postponed.subject",
+      "source_case_ids": [
+        "SE-S-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-S-06: A pri \"postponed clausal S\" bi se dalo, da bi bila analiza bolj precizna (i.e., da gre za infinitival clause)?"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "direct",
+      "description": "Formal registry rule compiled from SE-P-01.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted verb functions as the predicator of the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-P-01: Main lexical verb maps to the predicator nucleus."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-predicator-simple",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "root: lexical verb"
+          ]
+        }
+      },
+      "output": {
+        "label": "P — Predicator",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.predicator.simple",
+      "source_case_ids": [
+        "SE-P-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "predicate-complex",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-P-02.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted finite auxiliary is the Operator, separated from the lexical predicator in this construction.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-P-02: Auxiliary plus lexical verb together realize P."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-operator-finite-auxiliary",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "aux + root"
+          ]
+        }
+      },
+      "output": {
+        "label": "Operator",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.operator.finite.auxiliary",
+      "source_case_ids": [
+        "SE-P-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "predicate-complex",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-P-02: Aux v \"split predicator\" scenariju je operator."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-P-03.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted verb functions as the predicator of the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-P-03: Passive auxiliary plus lexical verb together realize P."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-predicator-passive",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "aux:pass + root"
+          ]
+        }
+      },
+      "output": {
+        "label": "P — Predicator",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.predicator.passive",
+      "source_case_ids": [
+        "SE-P-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "predicate-complex",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-P-04.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted verb functions as the predicator of the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-P-04: In copular clauses, the copula realizes P and the lexical predicate realizes SC."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-predicator-copula",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "cop + lexical predicate"
+          ]
+        }
+      },
+      "output": {
+        "label": "P — Predicator",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.predicator.copula",
+      "source_case_ids": [
+        "SE-P-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "predicate-complex",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-P-05.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted verb functions as the predicator of the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-P-05: Phrasal verb particle should be included in P."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-predicator-particle",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "compound:prt with verb"
+          ]
+        }
+      },
+      "output": {
+        "label": "P — Predicator",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.predicator.particle",
+      "source_case_ids": [
+        "SE-P-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "predicate-complex",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-DO-01, SE-DO-02, SE-DO-03.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the direct object: it is directly affected by the verb.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-DO-01: UD obj maps directly to DO.",
+        "SE-DO-02: Reflexive obj maps to DO.",
+        "SE-DO-03: Wh-object maps to DO even when fronted."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-direct-object",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "obj: noun phrase",
+            "obj: reflexive pronoun",
+            "obj: wh-pronoun"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.direct.object",
+      "source_case_ids": [
+        "SE-DO-01",
+        "SE-DO-02",
+        "SE-DO-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-DO-04, SE-DO-05, SE-DO-06.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the direct object: it is directly affected by the verb.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-DO-04: Content clause complement of a verb often functions as clausal DO.",
+        "SE-DO-05: A content clause without overt that can still function as clausal DO.",
+        "SE-DO-06: Wh-complement clause can function as clausal DO."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-clausal-direct-object",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "ccomp / wh-clause complement",
+            "ccomp: finite that-clause",
+            "ccomp: zero-that clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.clausal.direct.object.publish",
+      "source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-DO-04, SE-DO-05, SE-DO-06.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the direct object: it is directly affected by the verb.",
+      "guards": [
+        {
+          "reason": "The matrix verb does not license an automatic clausal-DO analysis.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-DO-04: Content clause complement of a verb often functions as clausal DO.",
+        "SE-DO-05: A content clause without overt that can still function as clausal DO.",
+        "SE-DO-06: Wh-complement clause can function as clausal DO."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-clausal-direct-object",
+          "event_status": "needs-review",
+          "event_review_reason": "The matrix verb does not license an automatic clausal-DO analysis."
+        },
+        "sentence": {
+          "contract_signals": [
+            "ccomp / wh-clause complement",
+            "ccomp: finite that-clause",
+            "ccomp: zero-that clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.clausal.direct.object.review",
+      "source_case_ids": [
+        "SE-DO-04",
+        "SE-DO-05",
+        "SE-DO-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-DO-07.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the direct object: it is directly affected by the verb.",
+      "guards": [
+        {
+          "reason": "The teaching treatment of this -ing complement as DO rather than a general clausal complement is policy-controlled.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-DO-07: Some non-finite complements are pedagogically treated as clausal DO."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-gerund-complement-review",
+          "event_status": "needs-review",
+          "event_review_reason": "The teaching treatment of this -ing complement as DO rather than a general clausal complement is policy-controlled."
+        },
+        "sentence": {
+          "contract_signals": [
+            "xcomp: -ing complement of a control verb"
+          ]
+        }
+      },
+      "output": {
+        "label": "DO — Direct Object",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.gerund.complement.review",
+      "source_case_ids": [
+        "SE-DO-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-IO-01, SE-IO-02, SE-IO-03.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is the indirect object: it identifies the recipient or beneficiary.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-IO-01: UD iobj maps to IO.",
+        "SE-IO-02: Fused relative recipient can function as IO.",
+        "SE-IO-03: Recipient noun phrase in a double-object pattern maps to IO."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-indirect-object",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "clausal/fused relative recipient",
+            "double object after give",
+            "iobj: double-object construction"
+          ]
+        }
+      },
+      "output": {
+        "label": "IO — Indirect Object",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.indirect.object",
+      "source_case_ids": [
+        "SE-IO-01",
+        "SE-IO-02",
+        "SE-IO-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-SC-01, SE-SC-02, SE-SC-03, SE-SC-04, SE-SC-05, SE-SC-06.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit completes the description or identification of the subject.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-SC-01: Lexical predicate in a copular clause maps to SC.",
+        "SE-SC-02: Predicate noun phrase after a copula maps to SC.",
+        "SE-SC-03: Predicative PP after a copula maps to SC.",
+        "SE-SC-04: Infinitival predicate after a copula maps to SC.",
+        "SE-SC-05: Gerund-participial predicate after a copula maps to SC.",
+        "SE-SC-06: Finite content clause after a copula maps to SC."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-subject-complement-copular",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "copular -ing predicate",
+            "copular adjective predicate",
+            "copular finite that-clause",
+            "copular noun phrase predicate",
+            "copular prepositional phrase predicate",
+            "copular to-infinitival predicate"
+          ]
+        }
+      },
+      "output": {
+        "label": "SC — Subject Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.subject.complement.copular",
+      "source_case_ids": [
+        "SE-SC-01",
+        "SE-SC-02",
+        "SE-SC-03",
+        "SE-SC-04",
+        "SE-SC-05",
+        "SE-SC-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-SC-05: #9"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-SC-07, SE-SC-08.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit completes the description or identification of the subject.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-SC-07: Predicate after a linking verb maps to SC.",
+        "SE-SC-08: Predicate after seem maps to SC."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-subject-complement-linking",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "linking verb + adjective",
+            "linking verb + predicative adjective/participle"
+          ]
+        }
+      },
+      "output": {
+        "label": "SC — Subject Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.subject.complement.linking",
+      "source_case_ids": [
+        "SE-SC-07",
+        "SE-SC-08"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-SC-07: Zgoraj je povsod \"copula\", tukaj pa se pojavi \"linking verb\". A to kaj vpliva na funkcionalnost? Pa še ena reč je, in sicer tukaj piše \"predicate\", v resnici gre pa za adjectivized past participle (e.g., She appears happy.)",
+        "SE-SC-08: ditto"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-OC-01, SE-OC-02, SE-OC-05, SE-OC-06.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is predicated of the object and functions as its complement.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-OC-01: Predicative complement of an object maps to OC.",
+        "SE-OC-02: Resultative adjective predicated of the object maps to OC.",
+        "SE-OC-05: -ing predication after an object maps to OC.",
+        "SE-OC-06: Predicative complement of object it maps to OC."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-object-complement",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "object + -ing clause",
+            "object + adjectival resultative",
+            "object + nominal predication",
+            "object + wh-clause predicative complement"
+          ]
+        }
+      },
+      "output": {
+        "label": "OC — Object Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.object.complement",
+      "source_case_ids": [
+        "SE-OC-01",
+        "SE-OC-02",
+        "SE-OC-05",
+        "SE-OC-06"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-OC-03.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit is predicated of the object and functions as its complement.",
+      "guards": [
+        {
+          "reason": "The PP may be predicated of the object, modify the object noun phrase, or function as an adverbial.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-OC-03: Predicative PP describing the object maps to OC."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-object-complement-pp-review",
+          "event_status": "needs-review",
+          "event_review_reason": "The PP may be predicated of the object, modify the object noun phrase, or function as an adverbial."
+        },
+        "sentence": {
+          "contract_signals": [
+            "object + predicative PP"
+          ]
+        }
+      },
+      "output": {
+        "label": "OC — Object Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.object.complement.pp.review",
+      "source_case_ids": [
+        "SE-OC-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-OC-03: Ta primer je ful zanimiv, ker če določni člen zamenjaš z nedoločnim (a flat), PP postane del DO. A bi to pravilno analiziral?"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Predicative PP after find with a definite object, implementing the reviewed article-sensitive guard.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit is predicated of the object and functions as its complement.",
+      "guards": [
+        {
+          "operator": "object-determiner-equals",
+          "value": "the"
+        }
+      ],
+      "implementation_notes": [
+        "SE-OC-03: Publish only when the object is definite; retain indefinite and structurally ambiguous PP attachments for review."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-object-complement-pp-review",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "object + predicative PP",
+            "definite object NP"
+          ]
+        }
+      },
+      "output": {
+        "label": "OC — Object Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 110,
+      "rule_id": "se.object.complement.pp.definite",
+      "source_case_ids": [
+        "SE-OC-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-OC-03: Ta primer je ful zanimiv, ker če določni člen zamenjaš z nedoločnim (a flat), PP postane del DO. A bi to pravilno analiziral?"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-OC-04.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit is predicated of the object and functions as its complement.",
+      "guards": [
+        {
+          "reason": "Bare infinitives after perception verbs depend on the course convention for OC versus clausal object.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-OC-04: Bare infinitival predication after an object can map to OC."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-object-complement-bare-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Bare infinitives after perception verbs depend on the course convention for OC versus clausal object."
+        },
+        "sentence": {
+          "contract_signals": [
+            "object + bare infinitival clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "OC — Object Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.object.complement.bare.review",
+      "source_case_ids": [
+        "SE-OC-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-OC-04: Podobno kot pri #36 - če sing zamenjaš z npr. singing, postane her singing DO."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-A-01, SE-A-02, SE-A-04.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit adds circumstantial information to the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-A-01: Adverbial modifier maps to A.",
+        "SE-A-02: Non-core oblique PP maps to A when it modifies the event.",
+        "SE-A-04: Temporal adverbial maps to A."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-adverbial-direct",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advmod",
+            "locative/directional adverbial",
+            "obl: prepositional phrase"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.adverbial.direct",
+      "source_case_ids": [
+        "SE-A-01",
+        "SE-A-02",
+        "SE-A-04"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-A-03.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit adds circumstantial information to the clause.",
+      "guards": [
+        {
+          "reason": "Duration noun phrases receive variable technical analyses and require confirmation as pedagogical A.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-A-03: Duration phrase maps to A even if UD treatment varies."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-adverbial-duration-review",
+          "event_status": "needs-review",
+          "event_review_reason": "Duration noun phrases receive variable technical analyses and require confirmation as pedagogical A."
+        },
+        "sentence": {
+          "contract_signals": [
+            "temporal/duration phrase"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.adverbial.duration.review",
+      "source_case_ids": [
+        "SE-A-03"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-A-05.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The two highlighted units are separate adverbials in the same clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-A-05: Purpose infinitive maps to A."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-two-adverbials",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "to-infinitival purpose clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "A + A — two Adverbials",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.two.adverbials",
+      "source_case_ids": [
+        "SE-A-05"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "discontinuous",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "SE-A-05: Tukaj bi moral biti tudi home označen kot A."
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "action": "publish",
+      "decision_class": "rule-based",
+      "description": "Formal registry rule compiled from SE-A-06, SE-A-07.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "auto-high-confidence"
+        }
+      ],
+      "explanation_template": "The highlighted unit adds circumstantial information to the clause.",
+      "guards": [],
+      "implementation_notes": [
+        "SE-A-06: Finite adverbial clause maps to A.",
+        "SE-A-07: Reduced adverbial clause maps to A."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-adverbial-clause",
+          "event_status": "auto-high-confidence"
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl: finite adverbial clause",
+            "non-finite/reduced adverbial clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 100,
+      "rule_id": "se.adverbial.clause.publish",
+      "source_case_ids": [
+        "SE-A-06",
+        "SE-A-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from SE-A-06, SE-A-07.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit adds circumstantial information to the clause.",
+      "guards": [
+        {
+          "reason": "An unmarked non-finite supplementive clause requires semantic review.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "SE-A-06: Finite adverbial clause maps to A.",
+        "SE-A-07: Reduced adverbial clause maps to A."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-adverbial-clause",
+          "event_status": "needs-review",
+          "event_review_reason": "An unmarked non-finite supplementive clause requires semantic review."
+        },
+        "sentence": {
+          "contract_signals": [
+            "advcl: finite adverbial clause",
+            "non-finite/reduced adverbial clause"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.adverbial.clause.review",
+      "source_case_ids": [
+        "SE-A-06",
+        "SE-A-07"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from REVIEW-01.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit adds circumstantial information to the clause.",
+      "guards": [
+        {
+          "reason": "A technical oblique relation does not decide whether the phrase is an adverbial or selected complement.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "REVIEW-01: The same surface PP may be adverbial or nominal modifier depending on meaning."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-ambiguous-pp-review",
+          "event_status": "needs-review",
+          "event_review_reason": "A technical oblique relation does not decide whether the phrase is an adverbial or selected complement."
+        },
+        "sentence": {
+          "contract_signals": [
+            "ambiguous PP attachment"
+          ]
+        }
+      },
+      "output": {
+        "label": "A — Adverbial",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.ambiguous.pp.review.review.a-adverbial-a-technical-oblique-relation-d",
+      "source_case_ids": [
+        "REVIEW-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from REVIEW-01.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The available sentence permits more than one defensible attachment or function, so a manual decision is required.",
+      "guards": [
+        {
+          "reason": "PP attachment is ambiguous between event adverbial, nominal modifier, and selected complement.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "REVIEW-01: The same surface PP may be adverbial or nominal modifier depending on meaning."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-ambiguous-pp-review",
+          "event_status": "needs-review",
+          "event_review_reason": "PP attachment is ambiguous between event adverbial, nominal modifier, and selected complement."
+        },
+        "sentence": {
+          "contract_signals": [
+            "ambiguous PP attachment"
+          ]
+        }
+      },
+      "output": {
+        "label": "Context needed",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.ambiguous.pp.review.review.context-needed-pp-attachment-is-ambiguous-",
+      "source_case_ids": [
+        "REVIEW-01"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [],
+      "version": "1.0.0"
+    },
+    {
+      "action": "review",
+      "decision_class": "manual-review",
+      "description": "Formal registry rule compiled from REVIEW-02.",
+      "dimension": "sentence_element",
+      "exclude": [
+        {
+          "operator": "event-status-not-equal",
+          "value": "needs-review"
+        }
+      ],
+      "explanation_template": "The highlighted unit completes the description or identification of the subject.",
+      "guards": [
+        {
+          "reason": "A temporal expression after copular be can be analysed as SC or A; the reviewed framework requires confirmation.",
+          "type": "manual-review"
+        }
+      ],
+      "implementation_notes": [
+        "REVIEW-02: Temporal predicate/adverbial cases need course-policy control."
+      ],
+      "language": "en",
+      "layer": "sentence_element",
+      "match": {
+        "anchor": {
+          "event_rule_id": "se-copular-temporal-review",
+          "event_status": "needs-review",
+          "event_review_reason": "A temporal expression after copular be can be analysed as SC or A; the reviewed framework requires confirmation."
+        },
+        "sentence": {
+          "contract_signals": [
+            "copular vs adverbial PP"
+          ]
+        }
+      },
+      "output": {
+        "label": "SC — Subject Complement",
+        "mode": "sentence-elements",
+        "subskill": "Sentence elements"
+      },
+      "priority": 200,
+      "rule_id": "se.copular.temporal.review",
+      "source_case_ids": [
+        "REVIEW-02"
+      ],
+      "target": {
+        "custom_handler": "adapter-target-spans",
+        "strategy": "anchor-subtree",
+        "trim_punctuation": true
+      },
+      "teacher_notes": [
+        "REVIEW-02: SC?"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "source_contract_sha256": "f62fcfcdc35d43d8425b63266b86ae54c3bd688d37ca5e47e0dab432f767a51d"
+}

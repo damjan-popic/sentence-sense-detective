@@ -16,7 +16,9 @@ from xml.etree import ElementTree as ET
 from pipeline_common import ROOT, read_json, read_jsonl, sha256_file, write_json, write_jsonl
 
 DEFAULT_WORKBOOK = ROOT / "data" / "review" / "review_pack.xlsx"
-DEFAULT_CANDIDATES = ROOT / "data" / "generated" / "question_candidates.jsonl"
+DEFAULT_CANDIDATES = (
+    ROOT / "data" / "generated" / "question_candidates.jsonl.gz"
+)
 DEFAULT_TAGSET = ROOT / "config" / "pedagogical_tagset_en.json"
 DEFAULT_OUTPUT = ROOT / "data" / "review" / "corrections"
 DECISIONS = {"accept", "correct", "reject"}
@@ -64,26 +66,49 @@ def cell_value(cell, strings: list[str]):
         return value
 
 
-def read_first_sheet(path: Path) -> list[dict]:
+def read_review_sheets(path: Path) -> list[dict]:
     with zipfile.ZipFile(path) as bundle:
         strings = shared_strings(bundle)
-        root = ET.fromstring(bundle.read("xl/worksheets/sheet1.xml"))
-    rows = []
-    for row in root.findall(".//m:sheetData/m:row", NS):
-        values = {}
-        for cell in row.findall("m:c", NS):
-            values[column_index(cell.attrib["r"])] = cell_value(cell, strings)
-        if values:
-            rows.append(
-                [values.get(index, "") for index in range(max(values) + 1)]
-            )
-    if not rows:
-        raise ValueError("review workbook contains no rows")
-    headers = [str(value).strip() for value in rows[0]]
-    result = []
-    for values in rows[1:]:
-        values += [""] * (len(headers) - len(values))
-        result.append(dict(zip(headers, values, strict=True)))
+        sheet_names = sorted(
+            (
+                name
+                for name in bundle.namelist()
+                if re.fullmatch(r"xl/worksheets/sheet\d+\.xml", name)
+            ),
+            key=lambda name: int(re.search(r"\d+", name).group()),
+        )
+        result = []
+        expected_headers = None
+        for sheet_name in sheet_names:
+            root = ET.fromstring(bundle.read(sheet_name))
+            rows = []
+            for row in root.findall(".//m:sheetData/m:row", NS):
+                values = {}
+                for cell in row.findall("m:c", NS):
+                    values[column_index(cell.attrib["r"])] = cell_value(
+                        cell, strings
+                    )
+                if values:
+                    rows.append(
+                        [
+                            values.get(index, "")
+                            for index in range(max(values) + 1)
+                        ]
+                    )
+            if not rows:
+                continue
+            headers = [str(value).strip() for value in rows[0]]
+            if expected_headers is None:
+                expected_headers = headers
+            elif headers != expected_headers:
+                raise ValueError(
+                    f"{sheet_name}: review headers differ from the first sheet"
+                )
+            for values in rows[1:]:
+                values += [""] * (len(headers) - len(values))
+                result.append(dict(zip(headers, values, strict=True)))
+    if not result:
+        raise ValueError("review workbook contains no candidate rows")
     return result
 
 
@@ -244,7 +269,7 @@ def main() -> int:
         digest = sha256_file(args.workbook)
         updated, accepted, log = apply_reviews(
             list(read_jsonl(args.candidates)),
-            read_first_sheet(args.workbook),
+            read_review_sheets(args.workbook),
             read_json(args.tagset),
             args.workbook,
         )
@@ -255,7 +280,10 @@ def main() -> int:
         write_json(args.output_dir / f"{stem}-changes.json", log)
         if args.apply:
             write_jsonl(DEFAULT_CANDIDATES, updated)
-            write_jsonl(ROOT / "data" / "generated" / "accepted_questions.jsonl", accepted)
+            write_jsonl(
+                ROOT / "data" / "generated" / "accepted_questions.jsonl.gz",
+                accepted,
+            )
         print(
             f"Imported {log['decision_count']} review decisions; "
             f"apply to generated data: {args.apply}."

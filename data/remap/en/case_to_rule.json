@@ -1,0 +1,1405 @@
+{
+  "contract_version": "1.0.0",
+  "profile_id": "en-1.0.0",
+  "profile_sha256": "5cee51d8a950b2e9bdf7133a6d97dcd20d2258c6fbb61e9d97b64b8e7249178d",
+  "rows": [
+    {
+      "case_id": "SE-S-01",
+      "correct_mapping": "S",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.np"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-S-02",
+      "correct_mapping": "S",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.np"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-S-03",
+      "correct_mapping": "S",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.clause"
+      ],
+      "teacher_comment": "csubj: finite wh-clause (VS. nominal relative clause)",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-S-04",
+      "correct_mapping": "S",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.clause"
+      ],
+      "teacher_comment": "V bistvu je tudi naslednji primer \"non-finite clause\" - tukaj bi moralo biti infinitival, ali še bolje perfect infinitive clause.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-S-05",
+      "correct_mapping": "S",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.clause"
+      ],
+      "teacher_comment": "Če bi se to dalo ločiti (bodisi gerundial bodisi participial - v tem primeru gerundial), bi bilo super, drugače pa ok.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-S-06",
+      "correct_mapping": "Formal S + postponed clausal S",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "se.formal.postponed.subject"
+      ],
+      "teacher_comment": "A pri \"postponed clausal S\" bi se dalo, da bi bila analiza bolj precizna (i.e., da gre za infinitival clause)?",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-P-01",
+      "correct_mapping": "P",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.predicator.simple"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-P-02",
+      "correct_mapping": "P",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.operator.finite.auxiliary"
+      ],
+      "teacher_comment": "Aux v \"split predicator\" scenariju je operator.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-P-03",
+      "correct_mapping": "P",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.predicator.passive"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-P-04",
+      "correct_mapping": "P",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.predicator.copula"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-P-05",
+      "correct_mapping": "P",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.predicator.particle"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-01",
+      "correct_mapping": "DO",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.direct.object"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-02",
+      "correct_mapping": "DO",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.direct.object"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-03",
+      "correct_mapping": "DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.direct.object"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-04",
+      "correct_mapping": "DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.clausal.direct.object.publish",
+        "se.clausal.direct.object.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-05",
+      "correct_mapping": "DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.clausal.direct.object.publish",
+        "se.clausal.direct.object.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-06",
+      "correct_mapping": "DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.clausal.direct.object.publish",
+        "se.clausal.direct.object.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-DO-07",
+      "correct_mapping": "DO or clausal complement, depending on course policy",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "se.gerund.complement.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-IO-01",
+      "correct_mapping": "IO",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.indirect.object"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-IO-02",
+      "correct_mapping": "IO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.indirect.object"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-IO-03",
+      "correct_mapping": "IO",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.indirect.object"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-SC-01",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-SC-02",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-SC-03",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-SC-04",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-SC-05",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "unresolved_teacher_comment",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "teacher_comment": "#9",
+      "teacher_comment_disposition": "Martin's comment is only “#9”; its intended referent is not recoverable from the supplied extraction.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-SC-06",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.copular"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-SC-07",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.linking"
+      ],
+      "teacher_comment": "Zgoraj je povsod \"copula\", tukaj pa se pojavi \"linking verb\". A to kaj vpliva na funkcionalnost? Pa še ena reč je, in sicer tukaj piše \"predicate\", v resnici gre pa za adjectivized past participle (e.g., She appears happy.)",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-SC-08",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.subject.complement.linking"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-OC-01",
+      "correct_mapping": "OC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.object.complement"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-OC-02",
+      "correct_mapping": "OC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.object.complement"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-OC-03",
+      "correct_mapping": "OC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.object.complement.pp.definite",
+        "se.object.complement.pp.review"
+      ],
+      "teacher_comment": "Ta primer je ful zanimiv, ker če določni člen zamenjaš z nedoločnim (a flat), PP postane del DO. A bi to pravilno analiziral?",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-OC-04",
+      "correct_mapping": "OC or clausal object analysis, depending on course policy",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "se.object.complement.bare.review"
+      ],
+      "teacher_comment": "Podobno kot pri #36 - če sing zamenjaš z npr. singing, postane her singing DO.",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-OC-05",
+      "correct_mapping": "OC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.object.complement"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-OC-06",
+      "correct_mapping": "OC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.object.complement"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-A-01",
+      "correct_mapping": "A",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.adverbial.direct"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-A-02",
+      "correct_mapping": "A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.adverbial.direct"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-A-03",
+      "correct_mapping": "A",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "se.adverbial.duration.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-A-04",
+      "correct_mapping": "A",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.adverbial.direct"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-A-05",
+      "correct_mapping": "A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.two.adverbials"
+      ],
+      "teacher_comment": "Tukaj bi moral biti tudi home označen kot A.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "SE-A-06",
+      "correct_mapping": "A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.adverbial.clause.publish",
+        "se.adverbial.clause.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "SE-A-07",
+      "correct_mapping": "A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "se.adverbial.clause.publish",
+        "se.adverbial.clause.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MAIN-01",
+      "correct_mapping": "MAIN",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.main",
+        "clause.main.complex.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-NOM-01",
+      "correct_mapping": "Nominal clause functioning as DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.do.publish",
+        "clause.nominal.do.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-NOM-02",
+      "correct_mapping": "Nominal clause functioning as DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.do.publish",
+        "clause.nominal.do.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-NOM-03",
+      "correct_mapping": "Two nominal clauses functioning together as DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.do.publish",
+        "clause.nominal.do.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-NOM-04",
+      "correct_mapping": "Nominal clause functioning as S",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.relative.subject"
+      ],
+      "teacher_comment": "\"Wh/fused relative\"? To je ponovno nominal relative clause (same as #7).",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-NOM-05",
+      "correct_mapping": "Nominal clause functioning as S",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.dependent.question.subject"
+      ],
+      "teacher_comment": "Mi to imenujemo dependent verbal question.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-NOM-06",
+      "correct_mapping": "Nominal content clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.appositive"
+      ],
+      "teacher_comment": "To je v bistvu appositive clause, ki se nekoliko razlikuje od klasičnih PostM.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-NOM-07",
+      "correct_mapping": "Nominal content clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.appositive"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-NOM-08",
+      "correct_mapping": "Nominal clause functioning as SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.subject.complement"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-NOM-09",
+      "correct_mapping": "Nominal clause complementing adjective sure",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.adjective.postmodifier"
+      ],
+      "teacher_comment": "V tem primeru ima funkcijo PostM (pridevnika sure).",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-NOM-10",
+      "correct_mapping": "Nominal clause complementing adjective sorry",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.nominal.adjective.postmodifier"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-01",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.temporal.adverbial"
+      ],
+      "teacher_comment": "Namesto \"maps to adverbial clause\" bi moralo biti \"maps to A\"?",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-02",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.causal.adverbial"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-03",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.causal.adverbial"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-04",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.conditional.adverbial"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-05",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.negative.conditional.adverbial"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-06",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.concessive.adverbial"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-07",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.purpose.adverbial.publish",
+        "clause.purpose.adverbial.review"
+      ],
+      "teacher_comment": "ditto + samo \"purpose\" (result/consequence je druga vrsta)",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-08",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.place.free.choice.adverbial"
+      ],
+      "teacher_comment": "ditto",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-09",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.manner.comparison.adverbial"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-ADV-10",
+      "correct_mapping": "Comparative subordinate clause functioning as A",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.comparative.adjective.postmodifier"
+      ],
+      "teacher_comment": "Ta v resnici nima funkcije stavčnega člena (A), ampak je PostM (pridevniku \"friendly\").",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-11",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.supplementive.initial",
+        "clause.supplementive.review"
+      ],
+      "teacher_comment": "Ker gre za supplementive clause (ki je non-finite), je včasih težko določiti vrsto A.",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-ADV-12",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.generic.adverbial.publish"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-ADV-13",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.generic.adverbial.publish"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-ADV-14",
+      "correct_mapping": "Reduced adverbial clause functioning as A",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.generic.adverbial.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-ADV-15",
+      "correct_mapping": "Reduced adverbial clause functioning as A",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.generic.adverbial.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-01",
+      "correct_mapping": "Restrictive relative clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.restrictive"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-02",
+      "correct_mapping": "Restrictive zero relative clause functioning as postmodifier",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.zero.review.review.relative-clause-function-postm-zero-relati",
+        "clause.relative.zero.review.review.restrictive-relative-clause-function-postm"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-03",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.generic"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-04",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.generic"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-05",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.generic"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-06",
+      "correct_mapping": "Restrictive relative clause functioning as postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.restrictive"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-07",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.zero.review.review.relative-clause-function-postm-zero-relati",
+        "clause.relative.zero.review.review.restrictive-relative-clause-function-postm"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-08",
+      "correct_mapping": "Restrictive relative clause",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.restrictive"
+      ],
+      "teacher_comment": " maps to PostM",
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-REL-09",
+      "correct_mapping": "Non-restrictive relative clause",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.nonrestrictive"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-REL-10",
+      "correct_mapping": "Probably non-restrictive, but manual review required",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "clause.relative.semantic.review"
+      ],
+      "teacher_comment": "Čeprav je brez vejic, gre za non-restrictive clause.",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-MARK-01",
+      "correct_mapping": "Complementizer",
+      "expected_decision": "OK",
+      "formalization_status": "unresolved_teacher_comment",
+      "notes": "",
+      "rule_ids": [
+        "marker.complementizer"
+      ],
+      "teacher_comment": "#82-#92 ne razumem 🤔",
+      "teacher_comment_disposition": "Martin's comment says he does not understand source items #82–#92; the supplied extraction contains no more specific correction.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-MARK-02",
+      "correct_mapping": "Complementizer / interrogative subordinator",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.interrogative.whether"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-03",
+      "correct_mapping": "Complementizer / interrogative subordinator",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "marker.interrogative.if.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-04",
+      "correct_mapping": "Subordinating conjunction",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.subordinating.conjunction"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-05",
+      "correct_mapping": "Subordinating conjunction",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.subordinating.conjunction"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-06",
+      "correct_mapping": "Subordinating conjunction",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.subordinating.conjunction"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-07",
+      "correct_mapping": "Relative pronoun",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.relative.pronoun"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-08",
+      "correct_mapping": "Relative adverb",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.relative.adverb"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-09",
+      "correct_mapping": "Infinitival marker",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.infinitival"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-MARK-10",
+      "correct_mapping": "Zero marker",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "marker.zero.not.highlightable"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-01",
+      "correct_mapping": "finite that-clause",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "unresolved_teacher_comment",
+      "notes": "",
+      "rule_ids": [
+        "structure.finite.that"
+      ],
+      "teacher_comment": "ditto @ #93-#102",
+      "teacher_comment_disposition": "The comment “ditto @ #93-#102” points to an unresolved source-level comment rather than a formal terminology correction.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-STR-02",
+      "correct_mapping": "finite zero-that clause",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "structure.finite.zero.that"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-03",
+      "correct_mapping": "finite wh-clause",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "structure.finite.wh"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-04",
+      "correct_mapping": "finite whether/if-clause",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "structure.finite.whether.if"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-05",
+      "correct_mapping": "to-infinitival clause",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "structure.to.infinitive"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-06",
+      "correct_mapping": "bare infinitival clause",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "structure.bare.infinitive.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-07",
+      "correct_mapping": "-ing clause",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "structure.ing"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-08",
+      "correct_mapping": "preposition + -ing clause",
+      "expected_decision": "OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "marker.preposition.ing",
+        "structure.preposition.ing"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-09",
+      "correct_mapping": "reduced/verbless clause",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "structure.reduced.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-STR-10",
+      "correct_mapping": "comparative clause",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "structure.comparative.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-FUNC-01",
+      "correct_mapping": "S",
+      "expected_decision": "OK",
+      "formalization_status": "unresolved_teacher_comment",
+      "notes": "",
+      "rule_ids": [
+        "function.clause.subject"
+      ],
+      "teacher_comment": "ditto @ #103-#108",
+      "teacher_comment_disposition": "The comment “ditto @ #103-#108” points to an unresolved source-level comment rather than a formal terminology correction.",
+      "unresolved_teacher_comment": true
+    },
+    {
+      "case_id": "CL-FUNC-02",
+      "correct_mapping": "DO",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "function.clause.direct.object.publish",
+        "function.clause.direct.object.review.do-direct-object-a-non-subject-fused-relat",
+        "function.clause.direct.object.review.do-direct-object-the-higher-clause-functio"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-FUNC-03",
+      "correct_mapping": "SC",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "function.clause.subject.complement"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-FUNC-04",
+      "correct_mapping": "A",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "function.clause.adverbial.publish",
+        "function.clause.adverbial.review"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-FUNC-05",
+      "correct_mapping": "postmodifier",
+      "expected_decision": "Rule-based OK",
+      "formalization_status": "covered_publishable",
+      "notes": "",
+      "rule_ids": [
+        "function.clause.postmodifier"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented in the rule output, structural condition, exclusion, or dimension separation.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "CL-FUNC-06",
+      "correct_mapping": "OC or clausal object analysis, depending on course policy",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "function.clause.object.complement.review.review.oc-clausal-object-a-non-subject-fused-rela",
+        "function.clause.object.complement.review.review.oc-clausal-object-the-non-finite-clause-ca"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "REVIEW-01",
+      "correct_mapping": "manual decision required",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "se.ambiguous.pp.review.review.a-adverbial-a-technical-oblique-relation-d",
+        "se.ambiguous.pp.review.review.context-needed-pp-attachment-is-ambiguous-"
+      ],
+      "teacher_comment": null,
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": false
+    },
+    {
+      "case_id": "REVIEW-02",
+      "correct_mapping": "manual decision required",
+      "expected_decision": "Needs manual review",
+      "formalization_status": "covered_manual_guard",
+      "notes": "",
+      "rule_ids": [
+        "se.copular.temporal.review"
+      ],
+      "teacher_comment": "SC?",
+      "teacher_comment_disposition": "Implemented as an explicit review guard.",
+      "unresolved_teacher_comment": true
+    }
+  ]
+}

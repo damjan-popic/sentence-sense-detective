@@ -1,0 +1,959 @@
+{
+  "contract_version": "1.0.0",
+  "rows": [
+    {
+      "case_id": "SE-S-01",
+      "expected_decision": "OK",
+      "correct_mapping": "S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-S-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-S-03",
+      "expected_decision": "OK",
+      "correct_mapping": "S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-S-04",
+      "expected_decision": "OK",
+      "correct_mapping": "S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-S-05",
+      "expected_decision": "OK",
+      "correct_mapping": "S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-S-06",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Formal S + postponed clausal S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-P-01",
+      "expected_decision": "OK",
+      "correct_mapping": "P",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-P-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "P",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-P-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "P",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-P-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "P",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-P-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "P",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-01",
+      "expected_decision": "OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-02",
+      "expected_decision": "OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-DO-07",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "DO or clausal complement, depending on course policy",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-IO-01",
+      "expected_decision": "OK",
+      "correct_mapping": "IO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-IO-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "IO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-IO-03",
+      "expected_decision": "OK",
+      "correct_mapping": "IO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-01",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-07",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-SC-08",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-OC-01",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "OC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-OC-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "OC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-OC-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "OC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-OC-04",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "OC or clausal object analysis, depending on course policy",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-OC-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "OC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-OC-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "OC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-01",
+      "expected_decision": "OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-03",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-04",
+      "expected_decision": "OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "SE-A-07",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MAIN-01",
+      "expected_decision": "OK",
+      "correct_mapping": "MAIN",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-01",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal clause functioning as DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal clause functioning as DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Two nominal clauses functioning together as DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal clause functioning as S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal clause functioning as S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal content clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-07",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal content clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-08",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Nominal clause functioning as SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-09",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Nominal clause complementing adjective sure",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-NOM-10",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Nominal clause complementing adjective sorry",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-01",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-07",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-08",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-09",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-10",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Comparative subordinate clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-11",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-12",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-13",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-14",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Reduced adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-ADV-15",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Reduced adverbial clause functioning as A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-01",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Restrictive relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-02",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Restrictive zero relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-06",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Restrictive relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-07",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Relative clause functioning as postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-08",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Restrictive relative clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-09",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "Non-restrictive relative clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-REL-10",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Probably non-restrictive, but manual review required",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-01",
+      "expected_decision": "OK",
+      "correct_mapping": "Complementizer",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-02",
+      "expected_decision": "OK",
+      "correct_mapping": "Complementizer / interrogative subordinator",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-03",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Complementizer / interrogative subordinator",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-04",
+      "expected_decision": "OK",
+      "correct_mapping": "Subordinating conjunction",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-05",
+      "expected_decision": "OK",
+      "correct_mapping": "Subordinating conjunction",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-06",
+      "expected_decision": "OK",
+      "correct_mapping": "Subordinating conjunction",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-07",
+      "expected_decision": "OK",
+      "correct_mapping": "Relative pronoun",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-08",
+      "expected_decision": "OK",
+      "correct_mapping": "Relative adverb",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-09",
+      "expected_decision": "OK",
+      "correct_mapping": "Infinitival marker",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-MARK-10",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "Zero marker",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-01",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "finite that-clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "finite zero-that clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-03",
+      "expected_decision": "OK",
+      "correct_mapping": "finite wh-clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-04",
+      "expected_decision": "OK",
+      "correct_mapping": "finite whether/if-clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-05",
+      "expected_decision": "OK",
+      "correct_mapping": "to-infinitival clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-06",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "bare infinitival clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-07",
+      "expected_decision": "OK",
+      "correct_mapping": "-ing clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-08",
+      "expected_decision": "OK",
+      "correct_mapping": "preposition + -ing clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-09",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "reduced/verbless clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-STR-10",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "comparative clause",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-FUNC-01",
+      "expected_decision": "OK",
+      "correct_mapping": "S",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-FUNC-02",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "DO",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-FUNC-03",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "SC",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-FUNC-04",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "A",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-FUNC-05",
+      "expected_decision": "Rule-based OK",
+      "correct_mapping": "postmodifier",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "CL-FUNC-06",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "OC or clausal object analysis, depending on course policy",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "REVIEW-01",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "manual decision required",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": false,
+      "notes": ""
+    },
+    {
+      "case_id": "REVIEW-02",
+      "expected_decision": "Needs manual review",
+      "correct_mapping": "manual decision required",
+      "rule_ids": [],
+      "formalization_status": "pending",
+      "unresolved_teacher_comment": true,
+      "notes": ""
+    }
+  ]
+}

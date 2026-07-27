@@ -1,6 +1,8 @@
 # Codex handover — Sentence Sense Detective
 
-`CODEX_HANDOVER_MASC_OANC_10K.md` supersedes this handover and `CODEX_HANDOVER_10K_OPEN_CORPUS.md`. Read `AGENTS.md`, this file, and the MASC/OANC handover in that order.
+`CODEX_HANDOVER_FORMAL_REMAP_ENGINE.md` is the newest authority for generated
+questions. Read `AGENTS.md`, this file, `CODEX_HANDOVER_MASC_OANC_10K.md`, and
+the formal-remap handover in that order.
 
 ## Current implemented baseline
 
@@ -12,7 +14,19 @@
 - Separate canonical sentence, machine-annotation, pedagogical-annotation, question, provenance, and public schemas.
 - Deterministic public manifest and lazy shards; no monolithic browser question payload.
 - Reviewed-core sampling, unique sentence/question selection, a bounded recent-history list, and two-shard browser cache.
-- Supplied-corpus ingestion, local pre-annotation entry point, conservative candidate/question building, file-based review corrections, validation, and a metadata-only 10,000-sentence capacity report.
+- Materialised 10,000-sentence MASC/OANC corpus and pinned local Stanza
+  annotation retained unchanged.
+- Versioned declarative remap registry and compiled profile, separate formal
+  engine, materialised remap output, and presentation-only question generator.
+- Exact 106/106 replay of the Martin-reviewed contract with the authoritative
+  26 direct / 60 rule-based / 20 manual-review inventory and zero manual cases
+  auto-published.
+- Separate provisional Parts of Speech profile; internal profile/rule/source
+  case/Stanza/model provenance on every generated candidate.
+- Quarantined 34,858-question legacy heuristic bank, complete old-versus-new,
+  coverage, replay, rule-distribution, and formal review reports.
+- Balanced public rounds, full six-sheet review pack, static manifest/shard
+  bank, and release packaging.
 - Supplied vector logo, complete favicon set, and the exact public methodology/aim copy.
 
 ## Locked pilot choices
@@ -26,4 +40,11 @@
 
 ## Current corpus authority
 
-The MASC/OANC handover authorizes local acquisition from the official ANC source, with MASC 3.0.0 first and written OANC only as a documented fallback. Its local-only dry-run stop condition remains in force.
+The MASC/OANC handover authorizes local acquisition from the official ANC
+source, with MASC 3.0.0 first and written OANC only as a documented fallback.
+The formal mapping layer is implemented locally and regression-replayed against
+all 106 reviewed cases. Four teacher comments whose referents cannot be
+recovered from the supplied extraction are recorded explicitly in
+`reports/remap_contract_coverage.*`; they were not silently guessed. The
+rebuild command never pushes or deploys; publication remains a separate
+explicit action after the formal reports and review sample are approved.

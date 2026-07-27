@@ -12,3 +12,7 @@ external/
 playwright-report/
 test-results/
 internal/
+outputs/
+data/generated/accepted_questions.jsonl
+data/generated/question_candidates.jsonl
+data/remap/en/pedagogical_candidates_10k.jsonl

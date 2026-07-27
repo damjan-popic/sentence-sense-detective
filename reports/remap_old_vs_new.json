@@ -1,0 +1,2020 @@
+{
+  "category_counts": {
+    "changed_label": 110,
+    "changed_span": 9393,
+    "newly_generated": 72174,
+    "newly_withheld_for_review": 221,
+    "removed_no_formal_rule": 50,
+    "retained_exact": 25084
+  },
+  "comparison_notes": [
+    "Exact retention requires the same sentence, analysis dimension, target spans, and answer.",
+    "Changed-span pairing is conservative: it uses the first deterministic formal candidate in the same sentence and dimension.",
+    "The quarantined bank remains unchanged and is not a public input."
+  ],
+  "formal_accepted_count": 102147,
+  "formal_review_count": 17114,
+  "legacy_accepted_count": 34858,
+  "legacy_source_commit": "a1ed4bdc00f8888feec5a3e8923bdc03cb24c550",
+  "sample_limit_per_category": 20,
+  "samples": {
+    "changed_label": [
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "After adjusting for\n        income and education, as well as age and former smoking,\n        the difference in BMI was no longer statistically\n        significant.",
+        "sentence_id": "masc-technical-technical-1468-6708-3-1-s0077",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "Turns out he had been a brilliant\nbiology student before losing derferment and going to Vietnam.",
+        "sentence_id": "masc-blog-blog-seedbombing-s0078",
+        "target_spans": [
+          {
+            "end": 56,
+            "start": 50
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "He did not speak to reporters in Jordan, but he told The Associated\n\t\t\t\tPress before leaving the United States that he hopes to \"separate the\n\t\t\t\thumanitarian work from the political issues.\"",
+        "sentence_id": "masc-newspaper-newspaper-20000415-apw-eng-new-s0003",
+        "target_spans": [
+          {
+            "end": 84,
+            "start": 78
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "Hall flies to Amman, Jordan, on Friday, where he'll spend the night\n\t\t\t\tbefore driving to Iraq.",
+        "sentence_id": "masc-newspaper-newspaper-20000410-nyt-new-s0008",
+        "target_spans": [
+          {
+            "end": 78,
+            "start": 72
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "Tell us what else -- after looking at that article, do you remember anything else that happened at the meeting?",
+        "sentence_id": "masc-court-court-day3pmsession-s0929",
+        "target_spans": [
+          {
+            "end": 26,
+            "start": 21
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "The owners will brew up a pot so you can taste before\n        making a choice.",
+        "sentence_id": "masc-travel-travel-whattohongkong-s0125",
+        "target_spans": [
+          {
+            "end": 53,
+            "start": 47
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "After undergoing sex change surgery in\n1992, she pursued a career as an exotic dancer.",
+        "sentence_id": "masc-newspaper-newspaper-20020731-nyt-s0268",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "After decrying the\nDisneyfication of Broadway for months, critics rave over the studio's Broadway\nadaptation of its cartoon movie.",
+        "sentence_id": "oanc-journal-slate-articleip-1305-s0025",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "The\n          location of the array of spots was delineated on the back\n          sides of the arrays with a diamond scribe (the spots\n          disappear after washing).",
+        "sentence_id": "oanc-technical-biomed-gb-2001-2-2-research0004-s0146",
+        "target_spans": [
+          {
+            "end": 160,
+            "start": 155
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "But our impression, after talking\n                    to serving officials, is that even this enlarged staff is consumed by meetings\n                    on day-to-day issues, sifting each day's threat information and trying to\n                    coordinate everyday operations.",
+        "sentence_id": "oanc-government-911report-chapter-13-1-s0075",
+        "target_spans": [
+          {
+            "end": 25,
+            "start": 20
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "The final rule has been issued after considering the 713\ncomments which were received in response to the interim rule.",
+        "sentence_id": "oanc-government-government-og98032-s0032",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 31
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "Their conclusion, after studying\n        professional codes from 23 other organizations: none contained guidelines for conducting\n        biohistorical research and analysis [7].",
+        "sentence_id": "oanc-technical-plos-pmed-0020060-s0063",
+        "target_spans": [
+          {
+            "end": 23,
+            "start": 18
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "It is published by the\nSpecialty Wine Retailers Association and upon reading through it, you should\nfind yourself feeling much cleaner and less soiled than after wading through\nthe misrepresentations of the new wholesaler-sponsored website on H.R.\n5034.",
+        "sentence_id": "masc-blog-blog-fermentation-hr5034-s0076",
+        "target_spans": [
+          {
+            "end": 161,
+            "start": 156
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "After washing, the membranes were incubated\n          with luminol based chemiluminescence reagent (DuPont NEN\n          Research Products, Boston, MA).",
+        "sentence_id": "masc-technical-technical-rr166-s0051",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "The road leaves the valley floor and takes\n        you past the small villages of Elterwater and Chapel Stile before\n        offering the first real views of the Langdale Fells.",
+        "sentence_id": "oanc-travel-berlitz1-wheretolakedistrict-s0229",
+        "target_spans": [
+          {
+            "end": 116,
+            "start": 110
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "Before purchasing, visitors should make sure of compatibility with\n        systems in their own countries.",
+        "sentence_id": "masc-travel-travel-whattohongkong-s0108",
+        "target_spans": [
+          {
+            "end": 6,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "In this issue, Leichert and Jakob (2004) report a general method\n        for detecting cellular proteins whose cysteinyl residues were modified after imposing an\n        oxidative stress.",
+        "sentence_id": "oanc-technical-plos-journal-pbio-0020400-s0077",
+        "target_spans": [
+          {
+            "end": 149,
+            "start": 144
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "Now, after finding the cave, there were no problems.",
+        "sentence_id": "masc-ficlets-ficlets-1400-s0455",
+        "target_spans": [
+          {
+            "end": 10,
+            "start": 5
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "What's with the top-of-the-front headline the LAT puts over its\npicture of Martina Hingis standing next to Venus Williams after beating her at\nthe U.S. Open--\"Venus Brought Back to Earth\"?",
+        "sentence_id": "masc-journal-journal-article247-400-s0022",
+        "target_spans": [
+          {
+            "end": 127,
+            "start": 122
+          }
+        ]
+      },
+      {
+        "category": "changed_label",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "The two major relics are a monumental statue of Ramses II lying\n        prostrate after losing its feet, and an alabaster sphinx dating from\n        1400 b.c.",
+        "sentence_id": "oanc-travel-berlitz1-wheretoegypt-s0168",
+        "target_spans": [
+          {
+            "end": 87,
+            "start": 82
+          }
+        ]
+      }
+    ],
+    "changed_span": [
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Relative pronoun",
+        "new_rule_id": "marker.relative.pronoun",
+        "new_target_spans": [
+          {
+            "end": 49,
+            "start": 44
+          }
+        ],
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "It retained, however, the same mission with which it had been\n      charged from its inception: to serve as a catalyst for effective,\n      coordinated, and collaborative service delivery to youth in our\n      community.",
+        "sentence_id": "masc-letters-letters-116cul034-s0004",
+        "target_spans": [
+          {
+            "end": 98,
+            "start": 96
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "new_target_spans": [
+          {
+            "end": 109,
+            "start": 107
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "sentence": "If doses of melatonin are combined with light exposure, the results are what you might expect: synergistic if both\nare administered to produce a time shift in the same direction (both earlier or both later); antagonistic otherwise.",
+        "sentence_id": "masc-blog-blog-blog-jet-lag-s0037",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "new_target_spans": [
+          {
+            "end": 16,
+            "start": 12
+          }
+        ],
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "It was here that he wrote what was to become\n        the final book of the New Testament, the Book of Revelation.",
+        "sentence_id": "masc-travel-travel-historygreek-s0063",
+        "target_spans": [
+          {
+            "end": 37,
+            "start": 35
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Relative adverb",
+        "new_rule_id": "marker.relative.adverb",
+        "new_target_spans": [
+          {
+            "end": 86,
+            "start": 82
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "The word rinches as used in the border area is almost equivalent to the word pig, when used in relation to their law enforcement responsibilities.",
+        "sentence_id": "oanc-nonfiction-oup-chr-s0203",
+        "target_spans": [
+          {
+            "end": 19,
+            "start": 17
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 67,
+            "start": 65
+          }
+        ],
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Both benzodiazepine and non-benzodiazepine\ndrugs have been shown to be effective in the first case; for the latter, the most common solution is to consume more coffee [PDF].",
+        "sentence_id": "masc-blog-blog-blog-jet-lag-s0046",
+        "target_spans": [
+          {
+            "end": 146,
+            "start": 144
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "new_target_spans": [
+          {
+            "end": 151,
+            "start": 147
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "On the other hand, one can think of the integer values on the edges around a face of a tetrahedron as associated with the area of the tetrahedron, such that larger integers correspond to larger areas.",
+        "sentence_id": "oanc-nonfiction-oup-ch10-s0257",
+        "target_spans": [
+          {
+            "end": 101,
+            "start": 99
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "new_target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "In conducting our inquiry, we took a careful look at HUD’s affordable housing \ngoals, as noted above, and the Community Reinvestment Act (CRA).",
+        "sentence_id": "masc-government-government-fcic-final-report-conclusions-s0276",
+        "target_spans": [
+          {
+            "end": 88,
+            "start": 86
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "new_target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-because",
+        "sentence": "As you might guess, hypnotic medications combat insomnia and stimulants fight off\ndaytime sleepiness pretty well, because by definition, that's what they do.",
+        "sentence_id": "masc-blog-blog-blog-jet-lag-s0045",
+        "target_spans": [
+          {
+            "end": 121,
+            "start": 114
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 156,
+            "start": 154
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "As you move further into the complex look for statues of\n        King Tutankhamun and his wife, one of only a few depicting the young\n        boy Pharaoh to be found at his capital.",
+        "sentence_id": "oanc-travel-berlitz1-wheretoegypt-s0252",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 41,
+            "start": 39
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "Please USE them on your correspondence to help get our name in front of as many people as possible.",
+        "sentence_id": "masc-letters-letters-aspca1-s0013",
+        "target_spans": [
+          {
+            "end": 89,
+            "start": 87
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 157,
+            "start": 155
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "As the fluxes to and from the pool change over time\ndue to changes in atmospheric deposition, the chemical equilibria\nbetween soil and soil solution shift to give changes in surface\nwater chemistry.",
+        "sentence_id": "oanc-government-government-tech-sectiong-s0056",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "new_target_spans": [
+          {
+            "end": 92,
+            "start": 90
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "It turns out that the above issues may bear on the problem of time in general relativity, as Lee Smolin realized from our conversations and as I return to shortly.",
+        "sentence_id": "oanc-nonfiction-oup-ch10-s0186",
+        "target_spans": [
+          {
+            "end": 142,
+            "start": 140
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 136,
+            "start": 134
+          }
+        ],
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Microarrays were constructed by\n          printing microscopic spots of either antibodies (to\n          detect antigens) or antigens (to detect antibodies) onto\n          a modified glass surface.",
+        "sentence_id": "oanc-technical-biomed-gb-2001-2-2-research0004-s0027",
+        "target_spans": [
+          {
+            "end": 93,
+            "start": 91
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "new_target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "As reinstalled in Washington, the\nkitchen should be as we all remember it from countless TV shows,\n\"right down to the toothpicks.\"",
+        "sentence_id": "masc-newspaper-newspaper-nytnewswire6-s0031",
+        "target_spans": [
+          {
+            "end": 54,
+            "start": 52
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "new_target_spans": [
+          {
+            "end": 54,
+            "start": 50
+          }
+        ],
+        "old_answer": "Interrogative subordinator",
+        "old_rule_id": "clause-marker-whether",
+        "sentence": "I always use two simple words when people tell me that one company--whether\nit is AOL or Microsoft or Disney--is in charge of all our destinies: Babylon\nwas.",
+        "sentence_id": "masc-journal-journal-article247-3500-s0027",
+        "target_spans": [
+          {
+            "end": 75,
+            "start": 68
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Relative pronoun",
+        "new_rule_id": "marker.relative.pronoun",
+        "new_target_spans": [
+          {
+            "end": 239,
+            "start": 234
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "sentence": "(f)\nAllocations and Auction Amounts.- (1) The Administrator\nshall promulgate regulations determiningthe allocations of sulfur\ndioxide allowances, nitrogen oxides allowances, and, if applicable,\nmercury allowances for each year during which a unit is an affected\nunit under subsection (e).",
+        "sentence_id": "oanc-government-government-bill-s0331",
+        "target_spans": [
+          {
+            "end": 181,
+            "start": 179
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Preposition",
+        "new_rule_id": "marker.preposition.ing",
+        "new_target_spans": [
+          {
+            "end": 15,
+            "start": 8
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-because",
+        "sentence": "Because without leaving officially sanctioned\nlanes of transportation, pedestrians can venture into and through outdoor kitchens, university\ndepartments, the central hallway of apartment buildings, and so on.",
+        "sentence_id": "masc-blog-blog-italy-s0024",
+        "target_spans": [
+          {
+            "end": 7,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "new_target_spans": [
+          {
+            "end": 25,
+            "start": 21
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-because",
+        "sentence": "Which is kind of sad that you can't do that anymore and it's not just because things are, there're bad people in the world but it's too much traffic.",
+        "sentence_id": "masc-spoken-spoken-napierdianne-s0045",
+        "target_spans": [
+          {
+            "end": 77,
+            "start": 70
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 65,
+            "start": 63
+          }
+        ],
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Action: Neil to investigate Netscape Navigator 3.0 plug-in SDK to see\nwhat improvements have been made to the api.",
+        "sentence_id": "masc-email-email-lists-046-12122969-s0053",
+        "target_spans": [
+          {
+            "end": 15,
+            "start": 13
+          }
+        ]
+      },
+      {
+        "category": "changed_span",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "new_target_spans": [
+          {
+            "end": 152,
+            "start": 150
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "sentence": "Implications and Extensions of Reinforcement\n        What if, when our assessment of the frequency of reinforcement is improved, it turns out\n        to have been a rare occurrence in the generation of current biological diversity?",
+        "sentence_id": "oanc-technical-plos-journal-pbio-0020420-s0060",
+        "target_spans": [
+          {
+            "end": 60,
+            "start": 58
+          }
+        ]
+      }
+    ],
+    "newly_generated": [
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "The new plant is part of IBM's push to gain a strong lead in\nchip-making beyond the personal computer business, where Intel and\nEast Asian chip producers hold the advantage.",
+        "sentence_id": "masc-newspaper-newspaper-nytnewswire3-s0013",
+        "target_spans": [
+          {
+            "end": 172,
+            "start": 112
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "A — Adverbial",
+        "new_rule_id": "function.clause.adverbial.publish",
+        "sentence": "Before the election, candidates should submit the names of selected members of\n                    their prospective transition teams to the FBI so that, if necessary, those team\n                    members can obtain security clearances immediately after the election is over.",
+        "sentence_id": "oanc-government-911report-chapter-13-1-s0411",
+        "target_spans": [
+          {
+            "end": 276,
+            "start": 145
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "The city is\n        not mentioned again in the Bible until the time of the great poet\n        warrior, King David, who captured the city from the Jebusites in about\n        1000 b.c.",
+        "sentence_id": "masc-travel-travel-historyjerusalem-s0007",
+        "target_spans": [
+          {
+            "end": 181,
+            "start": 115
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "A — Adverbial",
+        "new_rule_id": "function.clause.adverbial.publish",
+        "sentence": "Her dog scampers around at your feet as you wrap her into a tight hug.",
+        "sentence_id": "masc-ficlets-ficlets-1401-s0044",
+        "target_spans": [
+          {
+            "end": 69,
+            "start": 37
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "The judges who interpret the new law are basically the same as those who interpreted the old law.",
+        "sentence_id": "oanc-nonfiction-oup-ch6-s0004",
+        "target_spans": [
+          {
+            "end": 96,
+            "start": 69
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "A — Adverbial",
+        "new_rule_id": "function.clause.adverbial.publish",
+        "sentence": "I look forward to\n      hearing from you soon.",
+        "sentence_id": "oanc-letters-icic-107cyl010-s0011",
+        "target_spans": [
+          {
+            "end": 45,
+            "start": 15
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "A — Adverbial",
+        "new_rule_id": "function.clause.adverbial.publish",
+        "sentence": "We seek the financial support of the Foundation to help us be\n      successful in creating the atmosphere in our community where young people\n      can grow and develop well.",
+        "sentence_id": "masc-letters-letters-116cul034-s0019",
+        "target_spans": [
+          {
+            "end": 173,
+            "start": 79
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "DO — Direct Object",
+        "new_rule_id": "function.clause.direct.object.publish",
+        "sentence": "Let me know if you don't hear from her today.",
+        "sentence_id": "masc-email-email-enron-thread-159550-s0020",
+        "target_spans": [
+          {
+            "end": 44,
+            "start": 12
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "DO — Direct Object",
+        "new_rule_id": "function.clause.direct.object.publish",
+        "sentence": "Bob says that he told them that energy services was \namong the CSI recommendations and he recalls that CII said that they too have \nan interest.",
+        "sentence_id": "masc-email-email-173252-s0017",
+        "target_spans": [
+          {
+            "end": 82,
+            "start": 27
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "A — Adverbial",
+        "new_rule_id": "function.clause.adverbial.publish",
+        "sentence": "I look forward to working with you to develop such an\napproach to reduce emissions from power generation.",
+        "sentence_id": "masc-government-government-env-prot-agency-nov1-s0010",
+        "target_spans": [
+          {
+            "end": 104,
+            "start": 35
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "The U.S. government\n\t\t\t\tsays it wants to ensure that Iraq is not buying items that appear to be\n\t\t\t\thumanitarian in nature but that could be used for making weapons.",
+        "sentence_id": "masc-newspaper-newspaper-20000419-apw-eng-new-s0007",
+        "target_spans": [
+          {
+            "end": 122,
+            "start": 78
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "However, Chatterbox notes that NBC, like\nevery other responsible news organization that's covered this story, reported\nthat Norma Kelsey's father's killer was pardoned by Gov. Bill Clinton, and\nremains perplexed that the Journal editorial page won't.",
+        "sentence_id": "masc-journal-journal-article247-328-s0019",
+        "target_spans": [
+          {
+            "end": 108,
+            "start": 83
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "DO — Direct Object",
+        "new_rule_id": "function.clause.direct.object.publish",
+        "sentence": "And he told me I would have to write this paper.",
+        "sentence_id": "masc-spoken-spoken-reidsandra-s0066",
+        "target_spans": [
+          {
+            "end": 47,
+            "start": 15
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "S — Subject",
+        "new_rule_id": "function.clause.subject",
+        "sentence": "I have no Korean or Vietnamese dictionaries, but\nit seems clear to me that the guk of the Korean Myguk\n(Cragg) and the Vietnamese quoc are all derived from\nan earlier form of Chinese.",
+        "sentence_id": "oanc-journal-verbatim-vol16-2-s0348",
+        "target_spans": [
+          {
+            "end": 182,
+            "start": 70
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "The Appalachian Mountain Club is looking for men, women, and children who share our love of the outdoors—and our commitment to preserving our region’s natural beauty for future generations.",
+        "sentence_id": "masc-letters-letters-appalachian1-s0004",
+        "target_spans": [
+          {
+            "end": 104,
+            "start": 70
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "A — Adverbial",
+        "new_rule_id": "function.clause.adverbial.publish",
+        "sentence": "Clearly,\n          functional analysis of the KIF27 polypeptide will be\n          needed to determine the subcellular location of this\n          protein to determine whether it may add to the growing\n          number of kinesins that function in the nucleus.",
+        "sentence_id": "oanc-technical-biomed-1471-2164-4-22-s0119",
+        "target_spans": [
+          {
+            "end": 257,
+            "start": 153
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "Last year more than 1,000 members contributed more than 70,000 hours to our challenging and rewarding pro bono activities, in cooperation with state and municipal agencies, and other nonprofit groups that share our goals.",
+        "sentence_id": "masc-letters-letters-appalachian1-s0064",
+        "target_spans": [
+          {
+            "end": 220,
+            "start": 200
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "This is because there are such things as\ngateways which translate the SMTP octet-stream into anything.",
+        "sentence_id": "masc-email-email-lists-003-2137010-s0018",
+        "target_spans": [
+          {
+            "end": 101,
+            "start": 50
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "PostM — Postmodifier",
+        "new_rule_id": "function.clause.postmodifier",
+        "sentence": "Inside was a dark room that looked like a storage space for DJ equipment.",
+        "sentence_id": "masc-fiction-fiction-nathans-bylichka-s0797",
+        "target_spans": [
+          {
+            "end": 72,
+            "start": 23
+          }
+        ]
+      },
+      {
+        "category": "newly_generated",
+        "dimension": "clause_function",
+        "new_answer": "DO — Direct Object",
+        "new_rule_id": "function.clause.direct.object.publish",
+        "sentence": "The expansion of the human genome that resulted\n        from the mobilization of these transposable elements\n        suggests they hold secrets of our evolution and increase\n        the plasticity and variation in our genome.",
+        "sentence_id": "oanc-technical-biomed-gb-2003-4-5-r30-s0002",
+        "target_spans": [
+          {
+            "end": 224,
+            "start": 126
+          }
+        ]
+      }
+    ],
+    "newly_withheld_for_review": [
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "So we only had the one necklace and we, er, we decided, I don't know if it was jointly or if Kathy was just extremely nice of whatever, but she said I could wear it part of the time.",
+        "sentence_id": "masc-spoken-spoken-napierdianne-s0058",
+        "target_spans": [
+          {
+            "end": 71,
+            "start": 69
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "It if really is a game for\nO'Donnell, then what's the end game?",
+        "sentence_id": "masc-blog-blog-effing-idiot-s0212",
+        "target_spans": [
+          {
+            "end": 5,
+            "start": 3
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "o   If it is an operator, its types (prefix/infix/postfix) and the\n        associated left and right precedences.",
+        "sentence_id": "masc-email-email-lists-046-12122969-s0011",
+        "target_spans": [
+          {
+            "end": 6,
+            "start": 4
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "We do not know if these\n                    stereotypes match current reality; they may also be one more symptom of the\n                    civil-military misunderstandings we described in chapter 4.",
+        "sentence_id": "oanc-government-911report-chapter-13-1-s0289",
+        "target_spans": [
+          {
+            "end": 17,
+            "start": 15
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "“Only if you stop beginning every sentence with my name.”",
+        "sentence_id": "masc-fiction-fiction-nathans-bylichka-s0262",
+        "target_spans": [
+          {
+            "end": 8,
+            "start": 6
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "That is, if her computer will cooperate.",
+        "sentence_id": "masc-ficlets-ficlets-1403-s0058",
+        "target_spans": [
+          {
+            "end": 11,
+            "start": 9
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "She writes, “the final ‘lesson’ of the myth\n               often fades into the background and we retain the image of the erotic, strong,\n               unrepressed (if destructive) woman.”",
+        "sentence_id": "masc-essay-essay-madame-white-snake-s0066",
+        "target_spans": [
+          {
+            "end": 168,
+            "start": 166
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "Since the bombing I feel very displaced and my husband and I would really like to come back to Houston and was wondering if you could help me.",
+        "sentence_id": "masc-email-email-12030-s0014",
+        "target_spans": [
+          {
+            "end": 123,
+            "start": 121
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "In your family, do you remember if there was any storyteller?",
+        "sentence_id": "masc-spoken-spoken-polkmaria-s0036",
+        "target_spans": [
+          {
+            "end": 34,
+            "start": 32
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "I won’t even ask if you support this program.",
+        "sentence_id": "masc-letters-letters-ifaw1-s0024",
+        "target_spans": [
+          {
+            "end": 19,
+            "start": 17
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "calculation of marks and assigning of grades, but I don't know if she should be here.",
+        "sentence_id": "masc-spoken-spoken-bed012-s0766",
+        "target_spans": [
+          {
+            "end": 65,
+            "start": 63
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "\"Only if you feel no regret,\" he said.",
+        "sentence_id": "masc-blog-blog-blog-monastery-s0023",
+        "target_spans": [
+          {
+            "end": 8,
+            "start": 6
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "If – ”\n            “You know what I mean.",
+        "sentence_id": "masc-fiction-fiction-nathans-bylichka-s0298",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "I wondered if Adrienne would ask about that.",
+        "sentence_id": "masc-fiction-fiction-hotel-california-s0250",
+        "target_spans": [
+          {
+            "end": 13,
+            "start": 11
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "Ask if\n        automatic free insurance is provided.",
+        "sentence_id": "masc-travel-travel-whattohongkong-s0028",
+        "target_spans": [
+          {
+            "end": 6,
+            "start": 4
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "new_target_spans": [
+          {
+            "end": 5,
+            "start": 3
+          }
+        ],
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "As if this earth in fast thick pants were breathing.",
+        "sentence_id": "masc-journal-journal-vol15-3-s0007",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "If you'll\nfollow me.",
+        "sentence_id": "masc-movie-script-movie-script-jurassicparkiv-scene-5-s0017",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "To determine if the\n          orientation of neurites is altered by crushed sciatic\n          nerve tissue, the orientations of these neurites were\n          also compared (Fig. 6B).",
+        "sentence_id": "oanc-technical-biomed-1471-2202-2-8-s0055",
+        "target_spans": [
+          {
+            "end": 15,
+            "start": 13
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "Well, I do- I - See, I don't know if this is a  good idea or not.",
+        "sentence_id": "masc-spoken-spoken-bed012-s0313",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 34
+          }
+        ]
+      },
+      {
+        "category": "newly_withheld_for_review",
+        "dimension": "clause_marker",
+        "new_answer": "Interrogative subordinator",
+        "new_rule_id": "marker.interrogative.if.review",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "review_reason": "Embedded interrogative if must be distinguished from conditional if using the higher construction.",
+        "sentence": "Um, I don't know if they were farmers or not, but I know they were land owners, um, many acres and, um, her grandmother was raised in wealth.",
+        "sentence_id": "masc-spoken-spoken-rindnerbonnie-s0005",
+        "target_spans": [
+          {
+            "end": 19,
+            "start": 17
+          }
+        ]
+      }
+    ],
+    "removed_no_formal_rule": [
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-because",
+        "sentence": "Because turning welfare recipients into tax payers just makes\n      sense.",
+        "sentence_id": "masc-letters-letters-110cyl067-s0013",
+        "target_spans": [
+          {
+            "end": 7,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "God's ineffable name as told to Moses\nis unutterable [Exodus 6:3] so why make an issue of it?",
+        "sentence_id": "oanc-journal-verbatim-vol16-2-s0054",
+        "target_spans": [
+          {
+            "end": 23,
+            "start": 21
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "As you indicated would happen, Kalen Pieper called me mid-week.",
+        "sentence_id": "masc-email-email-9066-s0008",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-after",
+        "sentence": "I didn't hear\nabout it until the day after the match was played.",
+        "sentence_id": "oanc-journal-slate-article247-3419-s0014",
+        "target_spans": [
+          {
+            "end": 42,
+            "start": 37
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Action: Bruce to add a detailed schema for the character dictionary.",
+        "sentence_id": "masc-email-email-lists-046-12122969-s0013",
+        "target_spans": [
+          {
+            "end": 16,
+            "start": 14
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-while",
+        "sentence": "But the 1989 fall total of 80, while well below 1988 activity, shows \"a steady ratcheting up in citizen referenda and initiatives,\" says Patrick McGuigan, editor of Family, Law and Democracy Report.",
+        "sentence_id": "masc-newspaper-newspaper-wsj-0120-s0003",
+        "target_spans": [
+          {
+            "end": 36,
+            "start": 31
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "Just as the Bosphorus separates Asia from Europe, so the\n        inlet called the Golden Horn separates the old Istanbul from the new.",
+        "sentence_id": "oanc-travel-berlitz1-introistanbul-s0025",
+        "target_spans": [
+          {
+            "end": 7,
+            "start": 5
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "As you read my letter, somewhere -- perhaps not far from you --someone is inflicting pain on an innocent animal ... an animal like Astro.",
+        "sentence_id": "masc-letters-letters-aspca1-s0009",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "Difficulties arise, however, as conflicts between the traditional and modern and native languages and Spanish develop.",
+        "sentence_id": "masc-essay-essay-anth-essay-4-s0086",
+        "target_spans": [
+          {
+            "end": 31,
+            "start": 29
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "As being a student such\nblogs help me a lot.",
+        "sentence_id": "masc-blog-blog-fermentation-hr5034-s0119",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Action: Dave to post a proposal for the HTML-math tag names.",
+        "sentence_id": "masc-email-email-lists-046-12122969-s0017",
+        "target_spans": [
+          {
+            "end": 15,
+            "start": 13
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-because",
+        "sentence": "--\n      Donna\n      Because teaching a man to fish will keep him fed for his entire\n      life.",
+        "sentence_id": "masc-letters-letters-110cyl067-s0025",
+        "target_spans": [
+          {
+            "end": 28,
+            "start": 21
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-although",
+        "sentence": "although the identities of the latter are not divulged.",
+        "sentence_id": "masc-journal-journal-vol15-3-s0047",
+        "target_spans": [
+          {
+            "end": 8,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "The Development\n            As mentioned, the development is divided into three subsections.",
+        "sentence_id": "masc-essay-essay-bartok-s0107",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 28
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "sentence": "If the fertilizer in the mix is what I think it is, that\nwouldn't be pretty.",
+        "sentence_id": "masc-blog-blog-seedbombing-s0020",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "Not until the day before Tibbets and his crew flew to Hiroshima\nwas the 509th told what was happening.",
+        "sentence_id": "masc-newspaper-newspaper-nytnewswire9-s0072",
+        "target_spans": [
+          {
+            "end": 24,
+            "start": 18
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-though",
+        "sentence": "Still though black and white is seen as something of a\n               more sober tradition.",
+        "sentence_id": "masc-essay-essay-black-and-white-s0136",
+        "target_spans": [
+          {
+            "end": 12,
+            "start": 6
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-once",
+        "sentence": "Once upon a time there was this little girl and her family.",
+        "sentence_id": "masc-spoken-spoken-reidsandra-s0014",
+        "target_spans": [
+          {
+            "end": 4,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-before",
+        "sentence": "The small temple on the left-hand side just before you reach the village center has some of the strangest carved stone decoration in Bali — and some of the most secular, dating from the 1930s.",
+        "sentence_id": "oanc-travel-berlitz2-bali-wheretogo-s0430",
+        "target_spans": [
+          {
+            "end": 50,
+            "start": 44
+          }
+        ]
+      },
+      {
+        "category": "removed_no_formal_rule",
+        "dimension": "clause_marker",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Well how'dya know it weren't/wasn't divine providence\nwhat inspired you to *be* clever?",
+        "sentence_id": "masc-movie-script-movie-script-pirates-s0438",
+        "target_spans": [
+          {
+            "end": 74,
+            "start": 72
+          }
+        ]
+      }
+    ],
+    "retained_exact": [
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "old_answer": "Complementizer",
+        "old_rule_id": "clause-marker-complementizer-that",
+        "sentence": "Donaldson suggests that on 60 Minutes Clinton had admitted to\ninfidelity.",
+        "sentence_id": "masc-journal-journal-article247-66-s0019",
+        "target_spans": [
+          {
+            "end": 23,
+            "start": 19
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "I can't remember how to talk so I just kind of stare at him.",
+        "sentence_id": "masc-ficlets-ficlets-1400-s0047",
+        "target_spans": [
+          {
+            "end": 23,
+            "start": 21
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-although",
+        "sentence": "Although the evidence presented here demonstrates that there is a long way to go before\n        developing countries contribute a more equitable share to the international scientific\n        community, there are also reasons to be optimistic.",
+        "sentence_id": "masc-technical-technical-journal-pbio-0020001-s0079",
+        "target_spans": [
+          {
+            "end": 8,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "The airplane above will be tracking her ... in order to land and immediately gun her down .",
+        "sentence_id": "masc-letters-letters-defenders5-s0004",
+        "target_spans": [
+          {
+            "end": 55,
+            "start": 53
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Relative pronoun",
+        "new_rule_id": "marker.relative.pronoun",
+        "old_answer": "Relative pronoun",
+        "old_rule_id": "clause-marker-relative-pronoun",
+        "sentence": "The know-how is, in these terms, nothing but another view of the propagating closures of catalysis, work tasks, sensing, recording, and acting that we now recognize as inherent in the doings of autonomous agents.",
+        "sentence_id": "masc-nonfiction-nonfiction-ch5-s0045",
+        "target_spans": [
+          {
+            "end": 147,
+            "start": 143
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Relative pronoun",
+        "new_rule_id": "marker.relative.pronoun",
+        "old_answer": "Relative pronoun",
+        "old_rule_id": "clause-marker-relative-pronoun",
+        "sentence": "The result is an argument that is persuasive\nbut scarely convincing.",
+        "sentence_id": "masc-journal-journal-vol15-3-s0425",
+        "target_spans": [
+          {
+            "end": 30,
+            "start": 26
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "But I'm still going to think that her smile wasn't so much that she's in on\nthe joke as it was she really does think she knows what she's talking about.",
+        "sentence_id": "masc-blog-blog-effing-idiot-s0306",
+        "target_spans": [
+          {
+            "end": 87,
+            "start": 85
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-though",
+        "sentence": "To alleviate the problem, the government\n        has become the city’s major landlord with the construction of massive\n        apartment blocks that, though they have every modern facility, average\n        only 9 square m (100 square ft) in size.",
+        "sentence_id": "masc-travel-travel-introhongkong-s0020",
+        "target_spans": [
+          {
+            "end": 156,
+            "start": 150
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-as",
+        "sentence": "The number and severity of terrorist attacks\nworldwide has increased dramatically, as has the number of active terrorists.",
+        "sentence_id": "masc-blog-blog-anti-terrorist-s0006",
+        "target_spans": [
+          {
+            "end": 85,
+            "start": 83
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "old_answer": "Complementizer",
+        "old_rule_id": "clause-marker-complementizer-that",
+        "sentence": "I think that that is a good idea.",
+        "sentence_id": "masc-movie-script-movie-script-jurassicparkiv-int-s0071",
+        "target_spans": [
+          {
+            "end": 12,
+            "start": 8
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Subordinating conjunction",
+        "new_rule_id": "marker.subordinating.conjunction",
+        "old_answer": "Subordinating conjunction",
+        "old_rule_id": "clause-marker-if",
+        "sentence": "If you cannot assist this\nmember, please contact them or IOS.",
+        "sentence_id": "masc-email-email-9159-s0012",
+        "target_spans": [
+          {
+            "end": 2,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "This attempt to regain identity via translation is indicative of the intimate relationship between indigenous revitalization within a modern context and native language use.",
+        "sentence_id": "masc-essay-essay-anth-essay-4-s0085",
+        "target_spans": [
+          {
+            "end": 15,
+            "start": 13
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "old_answer": "Complementizer",
+        "old_rule_id": "clause-marker-complementizer-that",
+        "sentence": "I agree with you that it's a lesson people need to learn\nover and over again.",
+        "sentence_id": "masc-email-email-52201-s0006",
+        "target_spans": [
+          {
+            "end": 21,
+            "start": 17
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Relative pronoun",
+        "new_rule_id": "marker.relative.pronoun",
+        "old_answer": "Relative pronoun",
+        "old_rule_id": "clause-marker-relative-pronoun",
+        "sentence": "the picture in |fig4| contains two labels, `a' and `b', that identify\nsub-figures.",
+        "sentence_id": "masc-email-email-lists-046-11493928-s0055",
+        "target_spans": [
+          {
+            "end": 60,
+            "start": 56
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Complementizer",
+        "new_rule_id": "marker.complementizer",
+        "old_answer": "Complementizer",
+        "old_rule_id": "clause-marker-complementizer-that",
+        "sentence": "Sudaker told me that the GOI has gone through various phases of opposing the \nservices round to saying only agriculture to now who knows what.",
+        "sentence_id": "masc-email-email-173252-s0036",
+        "target_spans": [
+          {
+            "end": 20,
+            "start": 16
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "That’s why I hope you’ll also agree to help even more by making a tax-deductible gift to support this crucial initiative and all of Audubon’s vital conservation work to protect birds, other wildlife and habitat.",
+        "sentence_id": "masc-letters-letters-audubon1-s0027",
+        "target_spans": [
+          {
+            "end": 38,
+            "start": 36
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "In narrating a personal story with an unhappy ending, an individual might add, “Y de pilón me caí” (and to top it off, I fell down).",
+        "sentence_id": "oanc-nonfiction-oup-chp-s0177",
+        "target_spans": [
+          {
+            "end": 106,
+            "start": 104
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Wage hikes, although they helped to improve living conditions of steel workers\nin the US, made American steel far more expensive.",
+        "sentence_id": "masc-essay-essay-ohio-steel-s0070",
+        "target_spans": [
+          {
+            "end": 35,
+            "start": 33
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Relative pronoun",
+        "new_rule_id": "marker.relative.pronoun",
+        "old_answer": "Relative pronoun",
+        "old_rule_id": "clause-marker-relative-pronoun",
+        "sentence": "Over the past four years,\nfour judges have been suspended, including a Ukrainian who was\ntaped by a Canadian judge detailing the order of finish for the ice\ndancers before the 1998 Winter Games in Nagano, Japan.",
+        "sentence_id": "masc-newspaper-newspaper-nytnewswire2-s0014",
+        "target_spans": [
+          {
+            "end": 84,
+            "start": 81
+          }
+        ]
+      },
+      {
+        "category": "retained_exact",
+        "dimension": "clause_marker",
+        "new_answer": "Infinitival marker",
+        "new_rule_id": "marker.infinitival",
+        "old_answer": "Infinitival marker",
+        "old_rule_id": "clause-marker-infinitival-to",
+        "sentence": "Of that problem there will be more to say later.",
+        "sentence_id": "oanc-nonfiction-oup-ch9-s0104",
+        "target_spans": [
+          {
+            "end": 37,
+            "start": 35
+          }
+        ]
+      }
+    ]
+  }
+}

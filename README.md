@@ -42,10 +42,7 @@ make corpus-fetch-oanc
 make corpus-audit-oanc
 make corpus-select
 make corpus-annotate
-make corpus-generate
-make corpus-review-pack
-make corpus-build-public
-make corpus-package
+make remap-all
 ```
 
 MASC 3.0.0 is always tried first. The written OANC is used only for the
@@ -59,10 +56,15 @@ The materialised outputs are:
 data/corpus/sentences_10k.jsonl             selected sentences and provenance
 data/corpus/sentences_10k.annotations.jsonl local Stanza output
 data/corpus/sentences_10k.conllu             portable CoNLL-U export
-data/generated/                              candidates and accepted questions
+config/remap/en/                             versioned declarative remap source
+data/remap/en/compiled_rules.json            compiled executable profile
+data/remap/en/pedagogical_candidates_10k.jsonl.gz
+                                             materialised formal remap output
+data/generated/                              compressed candidates and accepted questions
 data/gold/                                   immutable 106-case reference index
 data/review/review_pack.xlsx                 full human-review workbook
-reports/review_sample_100.xlsx               deterministic review sample
+reports/remap_manual_review_sample.xlsx      stratified review-only sample
+reports/remap_*.json                         coverage, replay, impact reports
 reports/release/                             versioned corpus download artifact
 ```
 
@@ -71,13 +73,47 @@ controlled labels, target offsets, reviewer/date metadata, and conflicting
 duplicates. It performs no write without `--apply`, logs every applied change,
 and cannot modify the 106 reviewed gold cases.
 
+## Pedagogical remapping
+
+The formal remapper is a separate, versioned stage between Stanza and question
+presentation. Source rules live in JSON-compatible YAML under
+`config/remap/en/`; `scripts/compile_remap_rules.py` validates and compiles
+them, `scripts/formal_remap_engine.py` applies them to structural match events,
+and `scripts/remap_stanza_annotations.py` materialises the result. The question
+generator consumes only those materialised records and contains no direct
+UD-to-pedagogical label mappings.
+
+Each Sentence Elements or Clauses output records its formal rule, source case
+IDs, profile hash, matched Stanza evidence, and pinned model metadata. Parts of
+Speech uses a distinct provisional profile because the reviewed 106 cases are
+not a complete word-class gold set. Sentence element, clause type, marker,
+structure, and function remain separate dimensions.
+
+The imported Martin-reviewed contract contains exactly 106 cases with the
+authoritative 26 direct, 60 rule-based, and 20 manual-review decisions.
+Replaying the pinned Stanza 1.14.0 fixtures matches all 106 answers, actions,
+and spans. No manual-review case can publish automatically. `CL-MARK-10`
+remains an explicit zero-marker review guard; no synthetic `∅` is inserted
+into corpus text.
+
+Only high-confidence candidates enter the public shards. Constructional or
+lexical ambiguity stays in the full review workbook with a rule-specific
+reason; manual review is therefore an explicit output rather than hidden
+certainty.
+
+The former 34,858-question heuristic bank is preserved under
+`data/generated/legacy_handcoded_a1ed4bd/` for audit and comparison only. It is
+not an input to the formal public bank.
+
 ## Browser data architecture
 
 The static site loads `docs/data/manifest.json`, then only enough mode-specific
 files under `docs/data/shards/` to assemble a round. `docs/data/gold.json` keeps
 the reviewed cases available at the manifest’s 15% sampling weight. Each target
 uses Unicode code-point half-open offsets, each shard is at most 400 questions
-and below 500 KB uncompressed, and recent browser history is bounded.
+and below 500 KB uncompressed, and recent browser history is bounded. Ordinary
+rounds sample across available labels and subskills and cap any answer label at
+three when alternatives exist.
 
 The full selected corpus is kept out of the initial page and packaged as a
 versioned release artifact. Source, licence, attribution, and download details
@@ -90,8 +126,9 @@ make validate
 ```
 
 This checks the canonical corpus, all public files and hashes, the exact
-106-case gold contract, deterministic public output, Python tests, JavaScript
-syntax/tests, public terminology boundaries, and size budgets.
+106-case contract and replay, manual guards, formal provenance and conflicts,
+deterministic public output, Python tests, JavaScript syntax/tests, balanced
+round sampling, public terminology boundaries, and size budgets.
 
 ## Licensing
 

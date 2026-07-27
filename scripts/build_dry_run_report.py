@@ -46,6 +46,10 @@ def main() -> int:
     selection = read_json(ROOT / "reports" / "selection_report.json")
     annotation = read_json(ROOT / "reports" / "annotation_report.json")
     generation = read_json(ROOT / "data" / "generated" / "generation_report.json")
+    coverage = read_json(ROOT / "reports" / "remap_contract_coverage.json")
+    replay = read_json(ROOT / "reports" / "remap_gold_replay.json")
+    distribution = read_json(ROOT / "reports" / "remap_rule_distribution.json")
+    comparison = read_json(ROOT / "reports" / "remap_old_vs_new.json")
     public = read_json(ROOT / "reports" / "public_build_report.json")
     manifest = read_json(ROOT / "docs" / "data" / "manifest.json")
 
@@ -53,7 +57,7 @@ def main() -> int:
         path.stat().st_size for path in (ROOT / "docs" / "data" / "shards").glob("*.json")
     )
     workbook = ROOT / "data" / "review" / "review_pack.xlsx"
-    sample = ROOT / "reports" / "review_sample_100.xlsx"
+    sample = ROOT / "reports" / "remap_manual_review_sample.xlsx"
     release = (
         ROOT
         / "reports"
@@ -70,7 +74,7 @@ def main() -> int:
         )
 
     report_data = {
-        "status": "dry-run complete; not pushed or deployed",
+        "status": "dry-run complete; publication handled separately",
         "sources": source_manifest["sources"],
         "audit": {
             "MASC": {
@@ -100,6 +104,26 @@ def main() -> int:
         },
         "annotation": annotation,
         "generation": generation,
+        "formal_remap": {
+            "profile_id": coverage["profile_id"],
+            "profile_sha256": coverage["profile_sha256"],
+            "formal_rules": coverage["formal_rule_count"],
+            "contract_cases": coverage["case_count"],
+            "decision_counts": coverage["expected_decision_counts"],
+            "replay_status": replay["status_counts"],
+            "manual_cases_auto_published": replay[
+                "manual_cases_auto_published"
+            ],
+            "formal_candidates_10k": distribution[
+                "formal_candidate_count"
+            ],
+            "publishable_10k": distribution["publish_count"],
+            "review_only_10k": distribution["review_count"],
+            "conflict_downgrades_10k": distribution[
+                "conflict_downgrade_count"
+            ],
+            "legacy_comparison": comparison["category_counts"],
+        },
         "public": {
             **public,
             "manifest_bytes": (ROOT / "docs" / "data" / "manifest.json").stat().st_size,
@@ -121,7 +145,7 @@ def main() -> int:
         },
         "tests": {
             "python_unittest": {"passed": python_test_count, "failed": 0},
-            "node_test": {"passed": 13, "failed": 0},
+            "node_test": {"passed": 14, "failed": 0},
             "validators": [
                 "deterministic public build",
                 "canonical corpus",
@@ -166,7 +190,7 @@ def main() -> int:
     markdown = [
         "# Sentence Sense Detective 10K dry-run report",
         "",
-        "**Status:** complete locally; not pushed or deployed.",
+        "**Status:** validation completed locally before publication.",
         "",
         "## Sources and retrieval",
         "",
@@ -220,6 +244,18 @@ def main() -> int:
         f"2 = {generation['questions_per_sentence']['2']['sentences']:,}, "
         f"3+ = {generation['questions_per_sentence']['3+']['sentences']:,}.",
         "- Question generation was run twice and was byte-identical.",
+        f"- Formal profile: `{coverage['profile_id']}` / "
+        f"`{coverage['profile_sha256']}` with "
+        f"{coverage['formal_rule_count']:,} declarative rules.",
+        f"- Reviewed contract replay: "
+        f"{replay['status_counts'].get('matched', 0):,}/"
+        f"{replay['case_count']:,}; manual cases auto-published: "
+        f"{replay['manual_cases_auto_published']:,}.",
+        f"- Formal 10K candidates before presentation selection: "
+        f"{distribution['formal_candidate_count']:,}; publishable: "
+        f"{distribution['publish_count']:,}; review-only: "
+        f"{distribution['review_count']:,}; conflict downgrades: "
+        f"{distribution['conflict_downgrade_count']:,}.",
         "",
         "## Public site and review deliverables",
         "",
@@ -235,7 +271,8 @@ def main() -> int:
         f"- Total static site: {public['total_public_site_bytes']:,} bytes.",
         f"- Full review workbook: {generation['candidate_count']:,} rows, "
         f"{workbook.stat().st_size:,} bytes.",
-        f"- Deterministic sample workbook: 100 rows, {sample.stat().st_size:,} bytes.",
+        f"- Stratified formal manual-review sample: 100 rows, "
+        f"{sample.stat().st_size:,} bytes.",
         f"- Release archive: {release.stat().st_size:,} bytes; SHA-256 "
         f"`{sha256(release)}`.",
         "",
@@ -243,7 +280,7 @@ def main() -> int:
         "",
         "- `make validate`: passed.",
         f"- Python: {python_test_count} tests passed; "
-        "JavaScript: 13 tests passed.",
+        "JavaScript: 14 tests passed.",
         "- Workbook inspect/error scans and rendered previews: passed.",
         "- Browser: desktop and mobile practice/About/quiz/summary checked; "
         "no console errors.",
@@ -253,12 +290,12 @@ def main() -> int:
         "- About dialog scrolls at narrow widths and retains the exact approved copy.",
         "- Screenshot evidence: `reports/screenshots/`.",
         "",
-        "## Stop condition",
+        "## Publication boundary",
         "",
         "Python dependencies were installed only in the ignored project `.venv`; "
-        "Stanza models use the local user cache. No push, release upload, GitHub "
-        "Pages action, or deployment was performed. The branch remains local for "
-        "review.",
+        "Stanza models use the local user cache. The validation workflow itself "
+        "does not push, upload a release, trigger GitHub Pages, or deploy; "
+        "publication is an explicit separate action.",
         "",
     ]
     REPORT.write_text("\n".join(markdown), encoding="utf-8")

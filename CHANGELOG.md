@@ -1,5 +1,33 @@
 # Changelog
 
+## Unreleased
+
+- Imported and hash-locked the formal Martin-reviewed 106-case contract and its
+  exact 26 direct / 60 rule-based / 20 manual-review decision inventory.
+- Quarantined the 34,858-question heuristic bank at commit `a1ed4bd` and added
+  deterministic old-versus-new comparison reports.
+- Added a versioned declarative English remap registry, schema/compiler,
+  separate execution engine, pinned 106-case replay, 10K materialisation stage,
+  and formal provenance on every internal candidate.
+- Refactored question generation into a presentation-only consumer of
+  materialised remap output, with a static regression guard against direct
+  dependency-to-pedagogical mappings.
+- Kept Parts of Speech in a separate provisional profile and preserved manual
+  review, conflict downgrades, PP ambiguity, restrictiveness, zero-marker, and
+  span guards as explicit outputs.
+- Replayed all 106 reviewed cases exactly with no manual case auto-published,
+  then remapped all 10,000 pinned Stanza annotations.
+- Added contract-coverage, replay, rule-distribution, old-versus-new, and
+  stratified human-review reports; expanded the six-sheet workbook to include
+  rule/profile/model/Stanza evidence for every candidate.
+- Balanced ordinary public rounds across available answers and clause
+  subskills, with no answer label appearing more than three times when
+  alternatives exist.
+- Added `make remap-all` as the local, non-deploying formal rebuild and
+  validation entry point.
+- Stored the three expanded internal JSONL banks as deterministic gzip streams
+  so the reproducible artifacts remain below GitHub's per-file limit.
+
 ## 1.0.0
 
 - Guarded fused and nominal relatives, independent determinatives, and copular

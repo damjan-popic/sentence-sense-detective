@@ -15,11 +15,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import build_public_shards  # noqa: E402
 import select_sentences  # noqa: E402
 from build_question_bank import apply_corrections, build_questions  # noqa: E402
-from generate_questions import (  # noqa: E402
-    classify_pos,
-    clause_candidates,
-    contiguous_span,
-)
+from formal_remap_engine import FormalRemapEngine  # noqa: E402
+from generate_questions import contiguous_span  # noqa: E402
 from ingest_sentences import validate_and_transform  # noqa: E402
 
 
@@ -37,6 +34,14 @@ PROVISIONAL = read_jsonl(ROOT / "data/questions/en/provisional-0001.jsonl")
 TAGSET = json.loads(
     (ROOT / "config/pedagogical_tagset_en.json").read_text(encoding="utf-8")
 )
+REMAPPING_CONTRACT = json.loads(
+    (ROOT / "data/gold/remapping_contract_106.json").read_text(encoding="utf-8")
+)
+REMAPPING_FIXTURES = {
+    record["sentence"]: record
+    for record in read_jsonl(ROOT / "data/gold/remapping_stanza_1.14.0.jsonl")
+}
+FORMAL_ENGINE = FormalRemapEngine()
 
 
 class PipelineTests(unittest.TestCase):
@@ -74,11 +79,17 @@ class PipelineTests(unittest.TestCase):
              "xpos": ".", "head": 6, "deprel": "punct",
              "start_char": 34, "end_char": 35},
         ]
-        candidates = clause_candidates(
-            self.generated_sentence("test-nominal-relative-subject", text),
+        candidates = FORMAL_ENGINE.clause_specs(
             words,
-            TAGSET,
+            text,
+            {},
         )
+        candidates = [
+            candidate
+            for candidate in candidates
+            if candidate["dimension"] == "clause_type"
+            and candidate["answer"] == "Nominal relative clause — function: S"
+        ]
         self.assertEqual(1, len(candidates))
         self.assertEqual(
             "Nominal relative clause — function: S",
@@ -112,43 +123,132 @@ class PipelineTests(unittest.TestCase):
              "xpos": ".", "head": 2, "deprel": "punct",
              "start_char": 29, "end_char": 30},
         ]
-        candidates = clause_candidates(
-            self.generated_sentence("test-fused-relative-object", text),
+        candidates = FORMAL_ENGINE.clause_specs(
             words,
-            TAGSET,
+            text,
+            {},
         )
-        self.assertEqual([], candidates)
+        self.assertFalse(
+            any(
+                candidate["answer"] == "PostM — Postmodifier"
+                or "relative clause — function: PostM" in candidate["answer"]
+                for candidate in candidates
+            )
+        )
+        direct_object = [
+            candidate
+            for candidate in candidates
+            if candidate["dimension"] == "clause_function"
+            and candidate["answer"] == "DO — Direct Object"
+        ]
+        self.assertEqual(1, len(direct_object))
+        self.assertEqual("needs-review", direct_object[0]["review_status"])
+        self.assertTrue(direct_object[0]["review_reason"])
+
+    def test_relative_that_is_not_also_labeled_complementizer(self) -> None:
+        text = "The gift that ensures that people learn helps."
+        words = [
+            {"id": 1, "text": "The", "lemma": "the", "upos": "DET",
+             "xpos": "DT", "head": 2, "deprel": "det",
+             "start_char": 0, "end_char": 3},
+            {"id": 2, "text": "gift", "lemma": "gift", "upos": "NOUN",
+             "xpos": "NN", "head": 8, "deprel": "nsubj",
+             "start_char": 4, "end_char": 8},
+            {"id": 3, "text": "that", "lemma": "that", "upos": "SCONJ",
+             "xpos": "IN", "head": 4, "deprel": "nsubj",
+             "start_char": 9, "end_char": 13},
+            {"id": 4, "text": "ensures", "lemma": "ensure", "upos": "VERB",
+             "xpos": "VBZ", "head": 2, "deprel": "acl:relcl",
+             "start_char": 14, "end_char": 21},
+            {"id": 5, "text": "that", "lemma": "that", "upos": "SCONJ",
+             "xpos": "IN", "head": 7, "deprel": "mark",
+             "start_char": 22, "end_char": 26},
+            {"id": 6, "text": "people", "lemma": "person", "upos": "NOUN",
+             "xpos": "NNS", "head": 7, "deprel": "nsubj",
+             "start_char": 27, "end_char": 33},
+            {"id": 7, "text": "learn", "lemma": "learn", "upos": "VERB",
+             "xpos": "VBP", "head": 4, "deprel": "ccomp",
+             "start_char": 34, "end_char": 39},
+            {"id": 8, "text": "helps", "lemma": "help", "upos": "VERB",
+             "xpos": "VBZ", "head": 0, "deprel": "root",
+             "start_char": 40, "end_char": 45},
+            {"id": 9, "text": ".", "lemma": ".", "upos": "PUNCT",
+             "xpos": ".", "head": 8, "deprel": "punct",
+             "start_char": 45, "end_char": 46},
+        ]
+        markers = {
+            tuple(
+                (span["start"], span["end"])
+                for span in item["target_spans"]
+            ): item["answer"]
+            for item in FORMAL_ENGINE.clause_specs(words, text, {})
+            if item["dimension"] == "clause_marker"
+        }
+        self.assertEqual("Relative pronoun", markers[((9, 13),)])
+        self.assertEqual("Complementizer", markers[((22, 26),)])
+
+    def test_complete_remapper_reproduces_reviewed_106_contract(self) -> None:
+        cases = REMAPPING_CONTRACT["cases"]
+        self.assertEqual(106, len(cases))
+        coverage = json.loads(
+            (ROOT / "reports/remap_contract_coverage.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        replay = json.loads(
+            (ROOT / "reports/remap_gold_replay.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(106, coverage["case_count"])
+        self.assertEqual(
+            {"OK": 26, "Rule-based OK": 60, "Needs manual review": 20},
+            coverage["expected_decision_counts"],
+        )
+        self.assertEqual({"matched": 106}, replay["status_counts"])
+        self.assertEqual(0, replay["manual_cases_auto_published"])
 
     def test_pos_guards_copulas_and_independent_determiners(self) -> None:
         copula = {
             "id": 1, "text": "is", "lemma": "be", "upos": "AUX",
             "xpos": "VBZ", "head": 2, "deprel": "cop",
+            "start_char": 0, "end_char": 2,
         }
         auxiliary = {
             "id": 2, "text": "has", "lemma": "have", "upos": "AUX",
             "xpos": "VBZ", "head": 3, "deprel": "aux",
+            "start_char": 3, "end_char": 6,
         }
         independent_all = {
             "id": 3, "text": "All", "lemma": "all", "upos": "DET",
             "xpos": "DT", "head": 4, "deprel": "nsubj",
+            "start_char": 7, "end_char": 10,
         }
         attributive_all = {
             "id": 4, "text": "all", "lemma": "all", "upos": "DET",
             "xpos": "DT", "head": 5, "deprel": "det",
+            "start_char": 11, "end_char": 14,
         }
-        by_id = {
-            item["id"]: item
-            for item in (copula, auxiliary, independent_all, attributive_all)
-        }
-        self.assertIsNone(classify_pos(copula, by_id))
-        self.assertEqual(
-            ("Auxiliary verb", "pos-primary-auxiliary"),
-            classify_pos(auxiliary, by_id),
+        specs = FORMAL_ENGINE.word_class_specs(
+            [copula, auxiliary, independent_all, attributive_all],
+            {},
         )
-        self.assertIsNone(classify_pos(independent_all, by_id))
+        by_token_id = {
+            item["matched_evidence"]["token_ids"][0]: (
+                item["answer"],
+                item["rule_id"],
+            )
+            for item in specs
+        }
+        self.assertNotIn(1, by_token_id)
         self.assertEqual(
-            ("Determiner", "pos-det"),
-            classify_pos(attributive_all, by_id),
+            ("Auxiliary verb", "pos.primary.auxiliary"),
+            by_token_id[2],
+        )
+        self.assertNotIn(3, by_token_id)
+        self.assertEqual(
+            ("Determiner", "pos.det"),
+            by_token_id[4],
         )
 
     def test_generated_span_excludes_boundary_punctuation(self) -> None:

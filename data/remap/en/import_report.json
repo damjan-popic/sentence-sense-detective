@@ -1,0 +1,12 @@
+{
+  "case_count": 106,
+  "contract_sha256": "6b3be571df252b662e2df5f0f4ea8063714f71535728fccc878f35f056dc2e4f",
+  "contract_version": "1.0.0",
+  "decision_counts": {
+    "Needs manual review": 20,
+    "OK": 26,
+    "Rule-based OK": 60
+  },
+  "source_file": "Remapping_validation_all_instances_en (PREGLEDANO).xlsx",
+  "source_sha256": "f62fcfcdc35d43d8425b63266b86ae54c3bd688d37ca5e47e0dab432f767a51d"
+}
