@@ -21,7 +21,7 @@ JS = (ROOT / "docs/assets/app.js").read_text(encoding="utf-8")
 ROUND_STATE = (ROOT / "docs/assets/round-state.js").read_text(encoding="utf-8")
 QUESTION_BANK = (ROOT / "docs/assets/question-bank.js").read_text(encoding="utf-8")
 CSS = (ROOT / "docs/assets/styles.css").read_text(encoding="utf-8")
-REMAP_CSS = (ROOT / "docs/assets/remapping.css").read_text(encoding="utf-8")
+METHOD_CSS = (ROOT / "docs/assets/methodology.css").read_text(encoding="utf-8")
 MANIFEST = json.loads((ROOT / "docs/data/manifest.json").read_text(encoding="utf-8"))
 
 
@@ -87,9 +87,11 @@ class PublicSiteTests(unittest.TestCase):
     def test_about_methodology_is_exact_and_version_is_dynamic(self) -> None:
         self.assertEqual(1, HTML.count("<!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->"))
         self.assertEqual(1, HTML.count("<!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->"))
-        self.assertIn("The defining methodological feature of Sentence Sense Detective is a formal remapping layer", HTML)
-        self.assertIn("The current engine reproduces all 106 reviewed cases exactly", HTML)
-        self.assertIn("The current English release is built on 10,000 openly reusable corpus sentences", HTML)
+        self.assertIn("How we made the question bank", HTML)
+        self.assertIn("MASC 3.0.0 and the written Open American National Corpus", HTML)
+        self.assertIn("Stanza tokenised and lemmatised the sentences", HTML)
+        self.assertIn("A versioned grammar profile converts the technical annotations", HTML)
+        self.assertIn("106 examples prepared and reviewed by Martin Grad", HTML)
         self.assertIn("Martin Grad — Principal author and grammar lead", HTML)
         self.assertIn("Damjan Popič — Co-author and project lead", HTML)
         self.assertIn('href="credits.html"', HTML)
@@ -97,36 +99,53 @@ class PublicSiteTests(unittest.TestCase):
         self.assertIn("els.aboutVersion.textContent = loaded.version", JS)
         self.assertEqual([], validate_public_terms(HTML))
 
-    def test_remapping_is_prominent_and_placeholders_are_neutral(self) -> None:
-        self.assertIn('class="remap-feature"', HTML)
-        self.assertIn('href="handbook.html#remapping"', HTML)
-        self.assertIn("Formal remapping turns corpus annotation into classroom grammar.", HTML)
-        self.assertIn('id="remapping"', HANDBOOK)
-        self.assertIn("Remapping is the central methodological contribution", HANDBOOK)
+    def test_methodology_is_balanced_and_not_the_homepage_subject(self) -> None:
+        self.assertIn('class="build-note"', HTML)
+        self.assertIn('href="handbook.html#making"', HTML)
+        self.assertIn("Open corpus, automatic annotation, classroom grammar.", HTML)
+        self.assertLess(HTML.index('id="mode-grid"'), HTML.index('class="build-note"'))
+        self.assertLess(HTML.index('class="build-note"'), HTML.index('class="progress-panel"'))
+        self.assertNotIn('class="remap-feature"', HTML)
+        self.assertNotIn('class="remap-stats"', HTML)
+        self.assertNotIn("Remapping is the central methodological contribution", HTML + HANDBOOK)
+        self.assertIn(".build-note", METHOD_CSS)
+
+    def test_handbook_covers_the_complete_corpus_to_question_workflow(self) -> None:
+        self.assertIn("From corpus to classroom practice", HANDBOOK)
+        for section_id in (
+            "design", "making", "corpus", "annotation", "remapping",
+            "questions", "quality", "multilingual", "self-check",
+        ):
+            self.assertIn(f'id="{section_id}"', HANDBOOK)
+        self.assertIn("7,781 MASC sentences and 2,219 written-OANC sentences", HANDBOOK)
+        self.assertIn("same English <strong>Stanza</strong> pipeline", HANDBOOK)
+        self.assertIn("How the Stanza annotations were remapped", HANDBOOK)
+        self.assertIn("The project therefore uses a separate, versioned", HANDBOOK)
+        self.assertIn("How an analysis becomes a question", HANDBOOK)
         self.assertIn("Content in preparation", HANDBOOK)
         self.assertIn("Expanded content coming.", HANDBOOK)
-        self.assertIn(".remap-feature", REMAP_CSS)
+        self.assertIn(".method-pipeline", METHOD_CSS)
+        self.assertIn(".method-outcomes", METHOD_CSS)
+
+    def test_placeholders_are_neutral(self) -> None:
         combined = HTML + HANDBOOK
         for forbidden in (
             "To be expanded by Martin Grad",
             "To be amended by Martin Grad",
+            "will be expanded by Martin Grad",
             "[MARTIN:",
         ):
             self.assertNotIn(forbidden, combined)
 
     def test_technical_methodology_stays_out_of_exercise_code(self) -> None:
         self.assertEqual(
-            {
-                Path("docs/index.html"),
-                Path("docs/handbook.html"),
-                Path("docs/assets/remapping.css"),
-            },
+            {Path("docs/index.html"), Path("docs/handbook.html")},
             TECHNICAL_EXPLANATION_PATHS,
         )
         for public_exercise_code in (JS, ROUND_STATE, QUESTION_BANK):
             self.assertNotIn("Stanza", public_exercise_code)
             self.assertNotIn("Universal Dependencies", public_exercise_code)
-            self.assertNotIn("formal remapping", public_exercise_code.casefold())
+            self.assertNotIn("pedagogical remapping", public_exercise_code.casefold())
 
     def test_required_interactions_and_recoverable_loading_exist(self) -> None:
         for element_id in (
@@ -173,6 +192,7 @@ class PublicSiteTests(unittest.TestCase):
         self.assertIn("max-height: min(86vh, 760px)", CSS)
         self.assertIn("@media (max-width: 360px)", CSS)
         self.assertIn(".author-cards { grid-template-columns: 1fr; }", CSS)
+        self.assertIn("@media (max-width: 680px)", METHOD_CSS)
 
 
 if __name__ == "__main__":

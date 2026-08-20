@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Validate the locked English pilot and the public content boundary.
 
-The public site may explain Stanza, Universal Dependencies, and formal
-pedagogical remapping on the About and Handbook pages. Raw dependency labels,
-internal rule/status fields, private review material, and implementation jargon
-must never leak into exercises or public question data.
+The public explanatory pages may describe the complete corpus-to-question
+workflow: source selection, Stanza/UD annotation, pedagogical remapping,
+question construction, and quality control. Raw dependency labels, internal
+rules/statuses, and private review material must never leak into exercises or
+public question data.
 """
 
 from __future__ import annotations
@@ -33,19 +34,17 @@ REVIEWED_CONTRACT_HASH = "a6a15b586f8542e9792194e8f745951ef19c6030abf1fe1c71cdc8
 HIGHLIGHT_CONTRACT_HASH = "3688077b0bf6e345e98ef88e85afc734660a79cf893ff2a1c9ffbe09a92d3a39"
 QUESTION_CONTRACT_HASH = "e8a660c6e98830cdd272ccf665e8783b2771788bd27fd11ab05e03052fdb35ca"
 
-METHODOLOGY_SECTION = (
-    '<section id="about-methodology">\n'
-    "      <h3>Formal pedagogical remapping</h3>\n"
-    "      <p>The defining methodological feature of Sentence Sense Detective is a formal "
-    "remapping layer between computational annotation and classroom grammar. Stanza and "
-    "Universal Dependencies provide the source analysis, but their labels are neither shown "
-    "to students nor renamed one by one. A versioned profile derived from 106 examples "
-    "prepared and reviewed by Martin Grad combines structural evidence, reconstructs complete "
-    "target spans, assigns the grammatical categories used in teaching, and routes unresolved "
-    "constructions to expert review. The current engine reproduces all 106 reviewed cases "
-    "exactly and records the rule and evidence behind every generated analysis.</p>\n"
-    "    </section>"
-)
+METHODOLOGY_SECTION = """<section id="about-methodology">
+      <h3>How we made the question bank</h3>
+      <p>The current English release was built in four connected stages:</p>
+      <ol class="about-method-list">
+        <li><strong>Corpus.</strong> We selected 10,000 sentences from MASC 3.0.0 and the written Open American National Corpus, retaining source and licence information for every sentence.</li>
+        <li><strong>Annotation.</strong> Stanza tokenised and lemmatised the sentences, assigned parts of speech, and produced dependency analyses in the Universal Dependencies framework.</li>
+        <li><strong>Remapping.</strong> A versioned grammar profile converts the technical annotations into the categories used in teaching. It reconstructs complete target spans, uses 106 examples prepared and reviewed by Martin Grad as its reference set, and withholds unresolved constructions for expert review.</li>
+        <li><strong>Practice.</strong> Approved analyses become highlighted multiple-choice questions with controlled alternatives and concise grammatical explanations.</li>
+      </ol>
+      <p>Students work only with classroom grammar; the technical annotation remains part of corpus preparation.</p>
+    </section>"""
 ALLOWLIST_START = "<!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->"
 ALLOWLIST_END = "<!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->"
 
@@ -81,7 +80,6 @@ TECHNICAL_EXPLANATION_PATTERNS = (
 TECHNICAL_EXPLANATION_PATHS = {
     Path("docs/index.html"),
     Path("docs/handbook.html"),
-    Path("docs/assets/remapping.css"),
 }
 NAMED_PLACEHOLDER_PATTERNS = (
     re.compile(r"to be (?:expanded|amended) by Martin Grad", re.IGNORECASE),
@@ -114,7 +112,7 @@ def validate_public_terms(index_html: str) -> list[str]:
         _, remainder = index_html.split(ALLOWLIST_START, 1)
         allowed_block, _ = remainder.split(ALLOWLIST_END, 1)
         if allowed_block.strip() != METHODOLOGY_SECTION:
-            errors.append("the About remapping section differs from the authoritative copy")
+            errors.append("the About methodology section differs from the authoritative copy")
 
     public_text_files = {
         ".html", ".js", ".css", ".json", ".webmanifest", ".txt", ".svg"
@@ -122,7 +120,9 @@ def validate_public_terms(index_html: str) -> list[str]:
     for path in DOCS.rglob("*"):
         if not path.is_file() or path.suffix.casefold() not in public_text_files:
             continue
-        text = path.read_text(encoding="utf-8", errors="replace")
+        text = index_html if path == DOCS / "index.html" else path.read_text(
+            encoding="utf-8", errors="replace"
+        )
         relative = path.relative_to(ROOT)
 
         if path != DOCS / "index.html" and (
@@ -278,8 +278,13 @@ def main() -> int:
     else:
         handbook_html = handbook_path.read_text(encoding="utf-8")
         for required in (
+            "From corpus to classroom practice",
+            'id="making"',
+            'id="corpus"',
+            'id="annotation"',
             'id="remapping"',
-            "Formal pedagogical remapping",
+            'id="questions"',
+            'id="quality"',
             "Content in preparation",
             "Expanded content coming.",
         ):
@@ -287,13 +292,22 @@ def main() -> int:
                 errors.append(f"handbook.html is missing required content: {required!r}")
 
     for required in (
-        'class="remap-feature"',
-        'href="handbook.html#remapping"',
-        'href="assets/remapping.css?v=1.0.0"',
-        "Formal pedagogical remapping",
+        'class="build-note"',
+        'href="handbook.html#making"',
+        'href="assets/methodology.css?v=1.0.0"',
+        "Open corpus, automatic annotation, classroom grammar.",
     ):
         if required not in index_html:
-            errors.append(f"index.html is missing the public remapping feature: {required!r}")
+            errors.append(f"index.html is missing the balanced methodology signpost: {required!r}")
+
+    for forbidden in (
+        'class="remap-feature"',
+        'class="remap-stats"',
+        'href="assets/remapping.css?v=1.0.0"',
+        "Remapping is the central methodological contribution",
+    ):
+        if forbidden in index_html or forbidden in handbook_html:
+            errors.append(f"obsolete remapping-heavy presentation remains: {forbidden!r}")
 
     required_assets = (
         "assets/brand/logo-mark.svg",
@@ -304,11 +318,13 @@ def main() -> int:
         "assets/brand/icon-192.png",
         "assets/brand/icon-512.png",
         "assets/brand/site.webmanifest",
-        "assets/remapping.css",
+        "assets/methodology.css",
     )
     for relative in required_assets:
         if not (DOCS / relative).exists():
             errors.append(f"missing public asset: docs/{relative}")
+    if (DOCS / "assets" / "remapping.css").exists():
+        errors.append("obsolete docs/assets/remapping.css still exists")
 
     for reference in (
         'src="assets/brand/logo-mark.svg"',

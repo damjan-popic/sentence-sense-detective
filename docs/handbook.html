@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The Sentence Sense Detective handbook: grammatical analysis, formal pedagogical remapping, worked examples, and quality principles.">
+  <meta name="description" content="The Sentence Sense Detective handbook: corpus sources, automatic annotation, pedagogical remapping, question design, and quality control.">
   <meta name="theme-color" content="#24324a">
   <title>Grammar handbook · Sentence Sense Detective</title>
   <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
@@ -13,7 +13,7 @@
   <link rel="manifest" href="assets/brand/site.webmanifest">
   <link rel="stylesheet" href="assets/styles.css?v=1.0.0">
   <link rel="stylesheet" href="assets/handbook.css?v=1.0.0">
-  <link rel="stylesheet" href="assets/remapping.css?v=1.0.0">
+  <link rel="stylesheet" href="assets/methodology.css?v=1.0.0">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to the handbook</a>
@@ -38,8 +38,8 @@
     <article class="credits-card handbook-card">
       <header class="chapter-header">
         <p class="eyebrow">Methodological introduction</p>
-        <h1>From sentence to analysis — and through remapping</h1>
-        <p class="chapter-lead">Sentence Sense Detective asks students to analyse a highlighted word, phrase, or clause and then compare their decision with a concise explanation. This chapter introduces the grammatical levels used in the tool and the formal remapping process that turns corpus annotation into classroom-ready questions.</p>
+        <h1>From corpus to classroom practice</h1>
+        <p class="chapter-lead">This chapter explains how Sentence Sense Detective was built: where the example sentences came from, how they were selected and annotated, how the Stanza analyses were remapped into the grammatical categories used in teaching, and how approved analyses became practice questions.</p>
         <p class="chapter-note">Additional chapters on word classes, sentence elements, subordination, and terminological policy are in preparation.</p>
       </header>
 
@@ -47,12 +47,14 @@
         <strong>In this chapter</strong>
         <ol>
           <li><a href="#goals">Learning goals</a></li>
-          <li><a href="#levels">Three levels of analysis</a></li>
-          <li><a href="#remapping">Formal pedagogical remapping</a></li>
-          <li><a href="#interpretation">Why interpretation is needed</a></li>
-          <li><a href="#examples">Worked examples</a></li>
-          <li><a href="#quality">Quality and uncertainty</a></li>
+          <li><a href="#design">Learning design</a></li>
+          <li><a href="#corpus">Corpus sources</a></li>
+          <li><a href="#annotation">Automatic annotation</a></li>
+          <li><a href="#remapping">Pedagogical remapping</a></li>
+          <li><a href="#questions">Question construction</a></li>
+          <li><a href="#quality">Quality control</a></li>
           <li><a href="#multilingual">Multilingual direction</a></li>
+          <li><a href="#self-check">Check your understanding</a></li>
         </ol>
       </nav>
 
@@ -60,125 +62,166 @@
         <h2>Learning goals</h2>
         <p>After working through this chapter, you should be able to:</p>
         <ul class="goal-list">
-          <li>distinguish <strong>word class</strong>, <strong>sentence element</strong>, and <strong>clause analysis</strong>;</li>
-          <li>define <strong>pedagogical remapping</strong> and explain why it is more than renaming labels;</li>
-          <li>distinguish direct correspondences, structurally derived analyses, and cases requiring expert review;</li>
-          <li>explain why a learning target may be a whole phrase, clause, or discontinuous unit;</li>
-          <li>understand how the project expands a question bank without presenting uncertainty as fact.</li>
+          <li>identify the corpora used for the English question bank and explain why provenance matters;</li>
+          <li>describe what the Stanza pipeline adds to each sentence;</li>
+          <li>explain why technical annotation cannot simply be displayed as classroom grammar;</li>
+          <li>describe the role of pedagogical remapping and expert review;</li>
+          <li>explain how an approved grammatical analysis becomes a practice question.</li>
         </ul>
       </section>
 
-      <section id="levels">
-        <h2>1. Three levels of grammatical analysis</h2>
-        <p>One expression can receive several compatible descriptions because different questions are being asked. In <em>Sarah and her daughters arrived first</em>, for example, <em>Sarah</em> is a proper noun, <em>daughters</em> is a noun, the complete sequence is a coordinated noun phrase, and the whole phrase functions as the <strong>Subject (S)</strong>.</p>
-        <div class="table-wrap" role="region" aria-label="Analytical levels" tabindex="0">
+      <section id="design">
+        <h2>1. The learning design</h2>
+        <p>Sentence Sense Detective is a practice resource, not an annotation viewer. Students see one highlighted target, choose among four answers, receive immediate feedback, and complete short ten-question rounds. The current English profile separates three related but distinct levels of analysis.</p>
+
+        <div class="table-wrap" role="region" aria-label="Practice modes" tabindex="0">
           <table class="handbook-table">
-            <thead><tr><th>Level</th><th>Central question</th><th>Typical answers</th></tr></thead>
+            <thead><tr><th>Practice mode</th><th>Central question</th><th>Examples of answers</th></tr></thead>
             <tbody>
-              <tr><td><strong>Parts of speech</strong></td><td>What kind of word is highlighted?</td><td>noun, pronoun, adjective, lexical verb, auxiliary, preposition</td></tr>
-              <tr><td><strong>Sentence elements</strong></td><td>What function does the highlighted unit have?</td><td>S, P, Operator, DO, IO, SC, OC, A</td></tr>
-              <tr><td><strong>Clauses</strong></td><td>What kind of clause is it, how is it formed, and what function does it have?</td><td>nominal, adverbial, relative; finite, infinitival, -ing; S, DO, A, PostM</td></tr>
+              <tr><td><strong>Parts of Speech</strong></td><td>What kind of word is highlighted?</td><td>noun, pronoun, adjective, lexical verb, auxiliary, preposition</td></tr>
+              <tr><td><strong>Sentence Elements</strong></td><td>What function does the highlighted unit have?</td><td>S, P, Operator, DO, IO, SC, OC, A</td></tr>
+              <tr><td><strong>Clauses</strong></td><td>What kind of clause is highlighted, how is it formed, and what function does it have?</td><td>nominal, adverbial, relative; finite, infinitival, -ing; S, DO, A, PostM</td></tr>
             </tbody>
           </table>
         </div>
+
         <aside class="chapter-box key-box">
-          <h3>Key principle</h3>
-          <p>Grammatical <strong>form</strong> and grammatical <strong>function</strong> are related, but they are not identical. A word-class label cannot by itself determine a sentence-element function, and a clause structure cannot by itself determine the function of that clause in the larger sentence.</p>
+          <h3>Form and function</h3>
+          <p>A word class, a phrase type, and a sentence function are different descriptions. In <em>Sarah and her daughters arrived first</em>, individual words have word-class labels, the complete sequence is a coordinated noun phrase, and the whole phrase functions as the Subject.</p>
+        </aside>
+      </section>
+
+      <section id="making">
+        <h2>2. How the question bank was made</h2>
+        <p>The English release follows one documented pipeline. Each stage has a separate purpose, and the output of one stage becomes the input to the next.</p>
+
+        <div class="method-pipeline" aria-label="Corpus-to-question workflow">
+          <article class="method-step"><small>1 · Corpus</small><strong>Select usable sentences</strong><p>Keep original wording, provenance, and licence information.</p></article>
+          <article class="method-step"><small>2 · Annotation</small><strong>Analyse with Stanza</strong><p>Add tokens, lemmas, word classes, grammatical features, and dependency structure.</p></article>
+          <article class="method-step"><small>3 · Remapping</small><strong>Apply the teaching profile</strong><p>Convert technical evidence into classroom categories and full target spans.</p></article>
+          <article class="method-step"><small>4 · Practice</small><strong>Build the question</strong><p>Add a prompt, plausible alternatives, feedback, and a concise explanation.</p></article>
+        </div>
+      </section>
+
+      <section id="corpus">
+        <h2>3. Where the sentences came from</h2>
+        <p>The current English corpus contains exactly 10,000 unique sentences. The primary source is <strong>MASC 3.0.0</strong>, the Manually Annotated Sub-Corpus of the Open American National Corpus. When the filtered MASC material did not supply the full target, the remaining sentences were selected from the <strong>written Open American National Corpus</strong>.</p>
+        <p>The resulting collection contains 7,781 MASC sentences and 2,219 written-OANC sentences. It covers a range of written and spoken genres while remaining a contemporary American-English profile. A later British-English or other regional profile can be added without changing the practice interface.</p>
+
+        <h3>Selection and filtering</h3>
+        <p>Sentences were retained only when they were complete enough to be understood independently and suitable for a general university learning resource. The pipeline removed duplicates, fragments, broken sentence boundaries, code-like material, private information, and content that depended too heavily on unavailable context. It also limited the contribution of individual documents so that the question bank would not be dominated by a small number of sources.</p>
+
+        <aside class="chapter-box reminder-box">
+          <h3>Why provenance matters</h3>
+          <p>Every selected sentence keeps its source corpus, document, genre, licence, and attribution. The public <a href="credits.html">Sources and licences page</a> records the corpus-level information, while the fuller provenance remains in the project data.</p>
+        </aside>
+      </section>
+
+      <section id="annotation">
+        <h2>4. How the sentences were annotated</h2>
+        <p>All 10,000 sentences were processed locally with the same English <strong>Stanza</strong> pipeline. The pipeline tokenised the text, handled multiword tokens, assigned parts of speech and grammatical features, produced lemmas, and calculated dependency relations. The analysis was stored in both a portable CoNLL-U representation and a JSONL form that preserves exact character offsets.</p>
+        <p>The dependency analysis follows the <strong>Universal Dependencies</strong> framework. This gives the project a consistent technical representation of words and their structural relations, but it is not the terminology students are expected to learn. Its purpose is to provide reproducible evidence for the next stage.</p>
+
+        <aside class="chapter-box key-box">
+          <h3>One reproducible analysis path</h3>
+          <p>Even where a source corpus already contains linguistic annotation, the project runs the same Stanza pipeline over the selected material. This keeps the workflow repeatable and makes it easier to apply the same architecture to additional languages later.</p>
         </aside>
       </section>
 
       <section id="remapping">
-        <h2>2. Formal pedagogical remapping</h2>
-        <p><strong>Remapping is the central methodological contribution of Sentence Sense Detective.</strong> It is the explicit, versioned process that connects a computational description of a sentence to the grammatical categories used in teaching. Stanza and Universal Dependencies supply the source analysis; the target layer contains the word classes, sentence elements, clause types, markers, structures, and functions practised by students.</p>
-        <p>This is not front-end relabelling. A rule may need to inspect several words and relations, recognise a clause pattern, recover the complete phrase or clause to be highlighted, apply an exclusion, resolve rule priority, and decide that the evidence is insufficient for automatic publication.</p>
+        <h2>5. How the Stanza annotations were remapped</h2>
+        <p>The technical analysis and the teaching analysis answer different questions. A dependency representation identifies structural heads and relations; a grammar exercise may require the complete phrase, a clause-level function, a distinction such as Operator versus Predicator, or a construction that cannot be decided from one technical label alone.</p>
+        <p>The project therefore uses a separate, versioned <strong>pedagogical remapping profile</strong>. The profile specifies what evidence supports a teaching category, what evidence blocks it, how the complete highlighted target is reconstructed, and whether the result may be published automatically or should be sent for expert review.</p>
 
-        <div class="remap-flow" aria-label="Formal remapping workflow">
-          <article class="remap-step"><small>1 · Source</small><strong>Corpus sentence</strong><p>An authentic sentence with preserved wording, licence, and provenance.</p></article>
-          <article class="remap-step"><small>2 · Analysis</small><strong>Stanza and UD</strong><p>Tokens, lemmas, features, heads, relations, and exact character offsets.</p></article>
-          <article class="remap-step"><small>3 · Remapping</small><strong>Pedagogical profile</strong><p>Versioned rules reconstruct the teaching analysis and its full target span.</p></article>
-          <article class="remap-step"><small>4 · Learning</small><strong>Practice question</strong><p>An approved annotation becomes a highlighted question with feedback.</p></article>
+        <div class="method-outcomes">
+          <article><h3>Direct correspondence</h3><p>The source analysis and the classroom category align cleanly, and the target span is unambiguous.</p></article>
+          <article><h3>Structural interpretation</h3><p>Several pieces of evidence must be combined, for example to recognise a copular pattern, an Operator, or a clause functioning inside a larger clause.</p></article>
+          <article><h3>Expert review</h3><p>The analysis depends on context, attachment, meaning, or a theoretical choice. The item is withheld rather than forced into the public bank.</p></article>
         </div>
 
-        <h3>Three possible outcomes</h3>
-        <div class="remap-decision-grid">
-          <article><h3>Direct correspondence</h3><p>The source evidence, target extent, and classroom category align without a construction-specific inference.</p></article>
-          <article><h3>Structurally derived analysis</h3><p>The result is licensed only when an explicit grammatical configuration, lexical condition, and span strategy are satisfied.</p></article>
-          <article><h3>Expert review</h3><p>The evidence is incomplete or the construction depends on context or theoretical policy, so the candidate is withheld.</p></article>
-        </div>
+        <h3>The reviewed reference set</h3>
+        <p>The English profile is anchored in 106 examples prepared and reviewed by Martin Grad. They include 26 direct correspondences, 60 structurally derived cases, and 20 cases that require expert review. The implemented remapper reproduces the labels, target spans, and publication decisions of all 106 reference cases exactly.</p>
 
-        <div class="remap-evidence">
-          <strong>The reviewed contract.</strong> The English profile is grounded in 106 cases prepared and reviewed by Martin Grad: 26 direct correspondences, 60 structurally derived analyses, and 20 cases requiring expert review. With the pinned Stanza pipeline, the implemented remapper reproduces all 106 labels, target spans, and publication decisions exactly. No review-only case is automatically published.
-        </div>
-
-        <p>The formal profile was applied to 10,000 openly reusable corpus sentences. It generated 274,198 pedagogical candidates, cleared 257,084 for presentation, and routed 17,114 to review. The presentation stage then produced 102,147 corpus-derived questions while keeping the 106 reviewed reference questions visible in the public bank.</p>
-
-        <aside class="chapter-box key-box">
-          <h3>Why remapping matters</h3>
-          <p>Without a separate remapping layer, an exercise generator would either expose technical annotation labels that students are not expected to learn or hide untested grammatical assumptions inside application code. Formal remapping makes those assumptions explicit, testable, correctable, and reusable.</p>
-        </aside>
-      </section>
-
-      <section id="interpretation">
-        <h2>3. Why remapping requires grammatical interpretation</h2>
-        <h3>A head word is not always the complete target</h3>
+        <h3>Why remapping is not simple renaming</h3>
         <blockquote><strong>The old woman living in the basement</strong> needs help.</blockquote>
-        <p>The source analysis identifies a structural head, but the useful Subject target is the complete phrase, including its determiner, adjective, and postmodifier.</p>
-
-        <h3>Similar source structures may have different functions</h3>
-        <p>A prepositional phrase may be an Adverbial, a selected complement, a postmodifier, a predicative unit, or an ambiguous attachment. A shortcut such as “every oblique phrase is A” would create neat-looking but unreliable questions.</p>
-
-        <h3>A classroom category may combine several pieces of evidence</h3>
-        <blockquote>Paul <strong>is</strong> <strong>a good student</strong>.</blockquote>
-        <p>The copular configuration licenses two pedagogical units: <em>is</em> as <strong>P</strong> and <em>a good student</em> as <strong>SC</strong>. No single source label supplies the full analysis.</p>
-
-        <h3>Some units are discontinuous</h3>
-        <blockquote><strong>Did</strong> the children <strong>play</strong>?</blockquote>
-        <p>The auxiliary is <strong>Operator</strong>, while the lexical verb is <strong>P</strong>. The data model must therefore support more than one target span.</p>
+        <p>A technical analysis identifies a structural centre, but the useful Subject target is the complete noun phrase. Likewise, in <em>Did the children play?</em>, the auxiliary and the lexical verb must be separated into Operator and Predicator. In other cases, such as ambiguous prepositional phrases or reduced clauses, the system must abstain and request review.</p>
       </section>
 
-      <section id="examples">
-        <h2>4. Worked examples</h2>
+      <section id="questions">
+        <h2>6. How an analysis becomes a question</h2>
+        <p>Once a pedagogical annotation is approved, the presentation layer creates the exercise. It does not decide the grammar. It receives a sentence, one or more exact target spans, the answer category, and an explanation, then adds a prompt and three alternatives from the same analytical dimension.</p>
+        <p>One sentence can support more than one valid question, but an ordinary round never repeats the same sentence. Questions are divided into small files and loaded only when a student starts a round, which keeps the static GitHub Pages site responsive even with a large bank.</p>
+
         <article class="worked-example">
-          <p class="example-label">Direct correspondence</p>
+          <p class="example-label">From annotation to exercise</p>
           <blockquote>She meant <strong>no harm</strong>.</blockquote>
-          <p><strong>Answer:</strong> DO — Direct Object. The complete noun phrase is a continuous and unambiguous object target.</p>
-        </article>
-        <article class="worked-example">
-          <p class="example-label">Structurally derived analysis</p>
-          <blockquote>The milk <strong>seems</strong> <strong>off</strong>.</blockquote>
-          <p><strong>Answer:</strong> <em>off</em> is SC. The analysis depends on recognising a linking-verb pattern and the predicative relation to the Subject.</p>
-        </article>
-        <article class="worked-example">
-          <p class="example-label">Clause functioning as a sentence element</p>
-          <blockquote><strong>To have seen him lose his temper</strong> was unexpected.</blockquote>
-          <p><strong>Answer:</strong> S — Subject. The whole perfect infinitival clause fills the Subject position in the larger clause.</p>
-        </article>
-        <article class="worked-example">
-          <p class="example-label">Expert-review guard</p>
-          <blockquote><strong>It</strong> is important <strong>to know the truth</strong>.</blockquote>
-          <p>The construction contains a formal Subject and a postponed infinitival Subject. Treating <em>it</em> as an ordinary lexical Subject would conceal the construction.</p>
+          <p><strong>Prompt:</strong> What is the function of the highlighted phrase?</p>
+          <p><strong>Answer:</strong> DO — Direct Object</p>
+          <p><strong>Feedback:</strong> The highlighted noun phrase is directly selected by the verb and functions as its Direct Object.</p>
         </article>
       </section>
 
       <section id="quality">
-        <h2>5. Quality, uncertainty, and the reviewed core</h2>
-        <p>The 106 reviewed cases are not merely examples. They form an executable contract: they establish terminology, target extent, exceptions, and non-automation policies. Later versions must reproduce them exactly or document an approved correction.</p>
+        <h2>7. Quality control and correction</h2>
+        <p>The large question bank is not treated as finished merely because it was generated successfully. The reviewed reference set acts as a regression test, lower-confidence constructions remain in a review workbook, and every public question can be reported through GitHub. Corrections are versioned rather than silently replacing earlier analyses.</p>
+
+        <div class="method-stats" aria-label="Current English release figures">
+          <div><strong>10,000</strong><span>selected corpus sentences</span></div>
+          <div><strong>106</strong><span>reviewed reference cases</span></div>
+          <div><strong>102,147</strong><span>corpus-derived questions published</span></div>
+          <div><strong>17,114</strong><span>candidates retained for review</span></div>
+        </div>
+
         <ol class="principle-list">
-          <li><strong>Do not confuse frequency with certainty.</strong> Common patterns may still be ambiguous.</li>
-          <li><strong>Do not generalise from one attractive example.</strong> A rule must survive contrasting cases.</li>
-          <li><strong>Do not use a confidence score as grammatical proof.</strong> Numerical confidence is not theoretical justification.</li>
-          <li><strong>Prefer omission to misinformation.</strong> Unresolved cases belong in expert review, not in a student quiz.</li>
+          <li><strong>Preserve the source.</strong> Accepted corpus sentences are not rewritten to make the analysis easier.</li>
+          <li><strong>Separate evidence from presentation.</strong> The interface displays an already justified analysis.</li>
+          <li><strong>Prefer omission to misinformation.</strong> Uncertain cases are reviewed rather than published with false confidence.</li>
+          <li><strong>Keep corrections traceable.</strong> Rule changes, reviewed decisions, and data versions remain inspectable in the repository.</li>
         </ol>
-        <p>The current review set includes difficult prepositional attachments, duration phrases, formal and postponed Subjects, object complements, reduced clauses, zero relatives, restrictive and non-restrictive relatives, comparative clauses, purpose–result ambiguity, and clauses whose higher function depends on the matrix predicate.</p>
       </section>
 
       <section id="multilingual">
-        <h2>6. From English to a multilingual resource</h2>
-        <p>The longer-term aim is not to impose the English profile on every language. The reusable architecture consists of corpus ingestion, a machine-readable source analysis, a formal rule schema, target spans, review workflow, question formats, and the practice interface. Each new language still requires its own approved teaching vocabulary, grammar profile, reviewed reference cases, explanations, and expert validation.</p>
+        <h2>8. From English to a multilingual resource</h2>
+        <p>The reusable part of Sentence Sense Detective is the architecture: corpus ingestion, automatic annotation, a versioned remapping profile, exact target spans, review workflow, question delivery, and the practice interface. The grammar itself is not assumed to be identical across languages.</p>
+        <p>Each additional language will need its own corpus sources, automatic processing pipeline, approved classroom terminology, reviewed examples, grammatical rules, and explanations. This makes it possible to share the platform while respecting the grammatical traditions of the languages taught at the Department of Translation Studies and across the Faculty of Arts.</p>
+
         <aside class="chapter-box key-box">
           <h3>Transfer principle</h3>
-          <p>The platform is shared; the grammar is language-specific.</p>
+          <p>The technical workflow can be shared; the pedagogical grammar must be developed for each language.</p>
         </aside>
+      </section>
+
+      <section id="self-check">
+        <h2>9. Check your understanding</h2>
+        <ol>
+          <li>Why were both MASC and the written OANC used?</li>
+          <li>What information does Stanza add to a sentence?</li>
+          <li>Why is a Universal Dependencies analysis not itself a classroom answer?</li>
+          <li>What are the three possible outcomes of the remapping stage?</li>
+          <li>Why does the question generator remain separate from the grammatical remapper?</li>
+        </ol>
+        <details class="answer-details">
+          <summary>Suggested answers</summary>
+          <ol>
+            <li>MASC was the primary source, while written OANC supplied the documented shortfall needed to reach 10,000 suitable unique sentences.</li>
+            <li>It adds tokenisation, lemmas, word-class and feature information, dependency structure, and exact offsets.</li>
+            <li>The technical representation is designed for computational consistency; classroom analysis may require different categories, complete target spans, and construction-level interpretation.</li>
+            <li>A direct correspondence, a structurally derived analysis, or expert review.</li>
+            <li>The presentation layer should display a justified analysis, not make grammatical decisions through interface code.</li>
+          </ol>
+        </details>
+      </section>
+
+      <section>
+        <h2>10. Chapter summary</h2>
+        <ul class="summary-list">
+          <li>The English bank is based on 10,000 licensed MASC and written-OANC sentences.</li>
+          <li>Every sentence was processed through the same local Stanza and Universal Dependencies pipeline.</li>
+          <li>A separate pedagogical profile remaps technical evidence into classroom grammar and reconstructs the full target.</li>
+          <li>The 106 reviewed cases anchor the profile, while uncertain constructions remain outside the public bank.</li>
+          <li>The question layer adds prompts, alternatives, feedback, and scoring without deciding the grammar.</li>
+          <li>The same architecture can support additional languages through language-specific profiles.</li>
+        </ul>
       </section>
 
       <section class="coming-section">

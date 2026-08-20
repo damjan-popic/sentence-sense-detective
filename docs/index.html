@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Sentence Sense Detective is a free English grammar practice tool built on a formal remapping layer from corpus annotation to classroom grammar.">
+  <meta name="description" content="Sentence Sense Detective is a free English grammar practice tool built from open corpora, automatic annotation, and pedagogical review.">
   <meta name="theme-color" content="#24324a">
   <title>Sentence Sense Detective</title>
   <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
   <link rel="manifest" href="assets/brand/site.webmanifest">
   <link rel="stylesheet" href="assets/styles.css?v=1.0.0">
-  <link rel="stylesheet" href="assets/remapping.css?v=1.0.0">
+  <link rel="stylesheet" href="assets/methodology.css?v=1.0.0">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to practice</a>
@@ -50,22 +50,6 @@
         </div>
       </div>
 
-      <section class="remap-feature" aria-labelledby="remap-feature-title">
-        <div class="remap-feature-copy">
-          <p class="eyebrow">The work behind the practice</p>
-          <h2 id="remap-feature-title">Formal remapping turns corpus annotation into classroom grammar.</h2>
-          <p>Sentence Sense Detective does not display raw computational labels and does not merely rename them. Stanza and Universal Dependencies provide a reproducible source analysis; a separate, versioned remapping profile reconstructs complete targets and converts structural evidence into the grammatical categories used in teaching.</p>
-          <p>The English profile is grounded in 106 examples prepared and reviewed by Martin Grad. The formal engine reproduces all 106 reference cases exactly, while constructions that cannot be resolved safely are withheld for expert review rather than forced into the question bank.</p>
-          <p><a class="secondary-button inline-button" href="handbook.html#remapping">Read the remapping chapter</a></p>
-        </div>
-        <div class="remap-stats" aria-label="Remapping project figures">
-          <div><strong>106/106</strong><span>reviewed cases replayed exactly</span></div>
-          <div><strong>10,000</strong><span>open-corpus sentences analysed</span></div>
-          <div><strong>102,147</strong><span>generated questions cleared for publication</span></div>
-          <div><strong>17,114</strong><span>uncertain candidates held for review</span></div>
-        </div>
-      </section>
-
       <div class="section-heading">
         <div>
           <p class="eyebrow">Choose a mode</p>
@@ -79,6 +63,17 @@
         <h2 id="home-load-title">Loading practice…</h2>
         <p id="home-load-message">Checking which question sets are available.</p>
         <button id="manifest-retry" class="secondary-button" type="button" hidden>Retry</button>
+      </section>
+
+      <section class="build-note" aria-labelledby="build-note-title">
+        <div class="build-note-copy">
+          <p class="eyebrow">How this was made</p>
+          <h2 id="build-note-title">Open corpus, automatic annotation, classroom grammar.</h2>
+          <p>We selected 10,000 sentences from MASC and the written OANC, analysed them with Stanza, and remapped the resulting Universal Dependencies annotations into the categories used in teaching. The English profile is anchored in 106 examples prepared and reviewed by Martin Grad.</p>
+        </div>
+        <div class="build-note-action">
+          <a class="secondary-button inline-button" href="handbook.html#making">Read the methodology</a>
+        </div>
       </section>
 
       <section class="progress-panel" aria-labelledby="progress-title">
@@ -201,19 +196,26 @@
 
     <!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->
     <section id="about-methodology">
-      <h3>Formal pedagogical remapping</h3>
-      <p>The defining methodological feature of Sentence Sense Detective is a formal remapping layer between computational annotation and classroom grammar. Stanza and Universal Dependencies provide the source analysis, but their labels are neither shown to students nor renamed one by one. A versioned profile derived from 106 examples prepared and reviewed by Martin Grad combines structural evidence, reconstructs complete target spans, assigns the grammatical categories used in teaching, and routes unresolved constructions to expert review. The current engine reproduces all 106 reviewed cases exactly and records the rule and evidence behind every generated analysis.</p>
+      <h3>How we made the question bank</h3>
+      <p>The current English release was built in four connected stages:</p>
+      <ol class="about-method-list">
+        <li><strong>Corpus.</strong> We selected 10,000 sentences from MASC 3.0.0 and the written Open American National Corpus, retaining source and licence information for every sentence.</li>
+        <li><strong>Annotation.</strong> Stanza tokenised and lemmatised the sentences, assigned parts of speech, and produced dependency analyses in the Universal Dependencies framework.</li>
+        <li><strong>Remapping.</strong> A versioned grammar profile converts the technical annotations into the categories used in teaching. It reconstructs complete target spans, uses 106 examples prepared and reviewed by Martin Grad as its reference set, and withholds unresolved constructions for expert review.</li>
+        <li><strong>Practice.</strong> Approved analyses become highlighted multiple-choice questions with controlled alternatives and concise grammatical explanations.</li>
+      </ol>
+      <p>Students work only with classroom grammar; the technical annotation remains part of corpus preparation.</p>
     </section>
     <!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->
 
     <section>
       <h3>Grammar handbook</h3>
-      <p>The <a href="handbook.html">grammar handbook</a> explains the analytical levels, the formal remapping process, target-span recovery, quality safeguards, and worked examples that support the practice rounds. Additional chapters on word classes, sentence elements, subordination, and terminological policy are in preparation.</p>
+      <p>The <a href="handbook.html">grammar handbook</a> gives a fuller account of the corpus, automatic annotation, remapping process, question design, and quality safeguards. Additional chapters on word classes, sentence elements, subordination, and terminological policy are in preparation.</p>
     </section>
 
     <section>
       <h3>Our aim</h3>
-      <p>The current English release is built on 10,000 openly reusable corpus sentences and a formally remapped question bank. Our next aim is sustained expert correction, classroom evaluation, and expansion of the grammatical coverage. In the longer term, we want Sentence Sense Detective to become a reusable multilingual learning tool for the languages taught at the Department of Translation Studies and across the Faculty of Arts.</p>
+      <p>Our immediate aim is to refine the English resource through expert correction and classroom use. In the longer term, we want Sentence Sense Detective to become a reusable multilingual learning tool for the languages taught at the Department of Translation Studies and across the Faculty of Arts.</p>
     </section>
 
     <section>
