@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Validate the locked English pilot and public-facing content boundaries."""
+"""Validate the locked English pilot and the public content boundary.
+
+The public site may explain Stanza, Universal Dependencies, and formal
+pedagogical remapping on the About and Handbook pages. Raw dependency labels,
+internal rule/status fields, private review material, and implementation jargon
+must never leak into exercises or public question data.
+"""
 
 from __future__ import annotations
 
@@ -26,32 +32,29 @@ EXPECTED_SENTENCES = 92
 REVIEWED_CONTRACT_HASH = "a6a15b586f8542e9792194e8f745951ef19c6030abf1fe1c71cdc8f41ff5d9a8"
 HIGHLIGHT_CONTRACT_HASH = "3688077b0bf6e345e98ef88e85afc734660a79cf893ff2a1c9ffbe09a92d3a39"
 QUESTION_CONTRACT_HASH = "e8a660c6e98830cdd272ccf665e8783b2771788bd27fd11ab05e03052fdb35ca"
+
 METHODOLOGY_SECTION = (
     '<section id="about-methodology">\n'
-    "      <h3>How the question bank is built</h3>\n"
-    "      <p>The English pilot began with 106 examples prepared and reviewed by Martin "
-    "Grad. To expand the bank, we use openly licensed language corpora and automatic "
-    "linguistic analysis with Stanza and Universal Dependencies to identify candidate "
-    "words, sentence elements, and clauses. These candidates are converted into the "
-    "grammatical terminology used in teaching, filtered, tested, and corrected over time. "
-    "The technical annotation is part of corpus preparation only: it is not the terminology "
-    "students are expected to learn.</p>\n"
+    "      <h3>Formal pedagogical remapping</h3>\n"
+    "      <p>The defining methodological feature of Sentence Sense Detective is a formal "
+    "remapping layer between computational annotation and classroom grammar. Stanza and "
+    "Universal Dependencies provide the source analysis, but their labels are neither shown "
+    "to students nor renamed one by one. A versioned profile derived from 106 examples "
+    "prepared and reviewed by Martin Grad combines structural evidence, reconstructs complete "
+    "target spans, assigns the grammatical categories used in teaching, and routes unresolved "
+    "constructions to expert review. The current engine reproduces all 106 reviewed cases "
+    "exactly and records the rule and evidence behind every generated analysis.</p>\n"
     "    </section>"
 )
 ALLOWLIST_START = "<!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->"
 ALLOWLIST_END = "<!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->"
+
 RAW_RELATIONS = re.compile(
     r"\b(?:nsubj|csubj|iobj|obj|obl|ccomp|xcomp|advcl|advmod|nmod|acl|amod)\b"
 )
-PUBLIC_PROHIBITED_PATTERNS = (
-    ("Stanza", re.compile(r"\bStanza\b", re.IGNORECASE)),
-    ("Universal Dependencies", re.compile(r"\bUniversal Dependencies\b", re.IGNORECASE)),
-    ("UD abbreviation", re.compile(r"\bUD\b")),
-    ("mapping terminology", re.compile(r"\b(?:re)?mapping\b", re.IGNORECASE)),
-    ("parser terminology", re.compile(r"\bparser\b", re.IGNORECASE)),
-    ("provisional terminology", re.compile(r"\bprovisional\b", re.IGNORECASE)),
-    ("manual review terminology", re.compile(r"\bmanual review\b", re.IGNORECASE)),
-    ("rule-based terminology", re.compile(r"\brule-based\b", re.IGNORECASE)),
+INTERNAL_PUBLIC_PATTERNS = (
+    ("manual-review implementation label", re.compile(r"\bmanual[- ]review\b", re.IGNORECASE)),
+    ("rule-based implementation label", re.compile(r"\brule[- ]based\b", re.IGNORECASE)),
     (
         "internal review status",
         re.compile(
@@ -59,7 +62,30 @@ PUBLIC_PROHIBITED_PATTERNS = (
             re.IGNORECASE,
         ),
     ),
+    (
+        "private preparation artifact",
+        re.compile(
+            r"\b(?:reviewer comment|private note|validation row|source spreadsheet|confidence class)\b",
+            re.IGNORECASE,
+        ),
+    ),
     ("raw dependency relation", RAW_RELATIONS),
+)
+TECHNICAL_EXPLANATION_PATTERNS = (
+    ("Stanza", re.compile(r"\bStanza\b", re.IGNORECASE)),
+    ("Universal Dependencies", re.compile(r"\bUniversal Dependencies\b", re.IGNORECASE)),
+    ("UD abbreviation", re.compile(r"\bUD\b")),
+    ("remapping", re.compile(r"\bremap(?:ping|ped|s)?\b", re.IGNORECASE)),
+    ("parser", re.compile(r"\bparser\b", re.IGNORECASE)),
+)
+TECHNICAL_EXPLANATION_PATHS = {
+    Path("docs/index.html"),
+    Path("docs/handbook.html"),
+}
+NAMED_PLACEHOLDER_PATTERNS = (
+    re.compile(r"to be (?:expanded|amended) by Martin Grad", re.IGNORECASE),
+    re.compile(r"(?:expanded|amended) by Martin Grad", re.IGNORECASE),
+    re.compile(r"\[MARTIN(?::|\])", re.IGNORECASE),
 )
 
 
@@ -78,17 +104,16 @@ def target_contract(sentence: str, spans: list[dict]) -> list[dict]:
 
 
 def validate_public_terms(index_html: str) -> list[str]:
-    """Validate the single exact methodology allowance and scan all other public text."""
+    """Check the exact About copy and prevent technical leakage into exercises."""
     errors: list[str] = []
+
     if index_html.count(ALLOWLIST_START) != 1 or index_html.count(ALLOWLIST_END) != 1:
-        errors.append("the About methodology allowlist markers must each occur once")
-        stripped_index = index_html
+        errors.append("the About methodology markers must each occur once")
     else:
-        before, remainder = index_html.split(ALLOWLIST_START, 1)
-        allowed_block, after = remainder.split(ALLOWLIST_END, 1)
+        _, remainder = index_html.split(ALLOWLIST_START, 1)
+        allowed_block, _ = remainder.split(ALLOWLIST_END, 1)
         if allowed_block.strip() != METHODOLOGY_SECTION:
-            errors.append("the About methodology section differs from the authoritative copy")
-        stripped_index = before + after
+            errors.append("the About remapping section differs from the authoritative copy")
 
     public_text_files = {
         ".html", ".js", ".css", ".json", ".webmanifest", ".txt", ".svg"
@@ -96,37 +121,61 @@ def validate_public_terms(index_html: str) -> list[str]:
     for path in DOCS.rglob("*"):
         if not path.is_file() or path.suffix.casefold() not in public_text_files:
             continue
-        text = stripped_index if path == DOCS / "index.html" else path.read_text(
-            encoding="utf-8", errors="replace"
-        )
+        text = path.read_text(encoding="utf-8", errors="replace")
+        relative = path.relative_to(ROOT)
+
         if path != DOCS / "index.html" and (
             ALLOWLIST_START in text or ALLOWLIST_END in text
         ):
             errors.append(
-                f"{path.relative_to(ROOT)}: methodology allowlist markers are only permitted in docs/index.html"
+                f"{relative}: About methodology markers are only permitted in docs/index.html"
             )
-        for label, pattern in PUBLIC_PROHIBITED_PATTERNS:
-            if pattern.search(text):
-                errors.append(f"{path.relative_to(ROOT)}: {label} appears outside the allowlist")
+
+        for pattern in NAMED_PLACEHOLDER_PATTERNS:
+            match = pattern.search(text)
+            if match:
+                errors.append(
+                    f"{relative}: named author placeholder is not permitted: {match.group(0)!r}"
+                )
                 break
+
+        for label, pattern in INTERNAL_PUBLIC_PATTERNS:
+            match = pattern.search(text)
+            if match:
+                errors.append(f"{relative}: {label} appears publicly: {match.group(0)!r}")
+                break
+
+        if relative not in TECHNICAL_EXPLANATION_PATHS:
+            for label, pattern in TECHNICAL_EXPLANATION_PATTERNS:
+                match = pattern.search(text)
+                if match:
+                    errors.append(
+                        f"{relative}: {label} is permitted only in the public methodology pages"
+                    )
+                    break
+
     return errors
 
 
 def main() -> int:
     errors: list[str] = []
+
     sentence_records = []
     for path in sorted((ROOT / "data" / "corpus" / "en").glob("sentences-*.jsonl")):
         sentence_records.extend(read_jsonl(path))
     sentence_by_id = {record["id"]: record for record in sentence_records}
+
     annotations = read_jsonl(
         ROOT / "data" / "annotations" / "en" / "pedagogical-annotations.jsonl"
     )
     annotation_by_id = {record["id"]: record for record in annotations}
+
     reviewed = read_jsonl(ROOT / "data" / "questions" / "en" / "reviewed-core.jsonl")
     provisional = []
     for path in sorted((ROOT / "data" / "questions" / "en").glob("provisional-*.jsonl")):
         provisional.extend(read_jsonl(path))
     questions = provisional + reviewed
+
     config = json.loads(
         (ROOT / "data" / "questions" / "en" / "config.json").read_text(encoding="utf-8")
     )
@@ -139,6 +188,7 @@ def main() -> int:
         errors.append(f"expected {EXPECTED_REVIEWED} reviewed questions, found {len(reviewed)}")
     if len(provisional) != EXPECTED_PROVISIONAL:
         errors.append(f"expected {EXPECTED_PROVISIONAL} provisional questions, found {len(provisional)}")
+
     mode_counts = Counter(question["mode"] for question in questions)
     if dict(mode_counts) != EXPECTED_MODE_COUNTS:
         errors.append(f"unexpected mode counts: {dict(mode_counts)}")
@@ -160,6 +210,7 @@ def main() -> int:
                 "targets": target_contract(sentence, spans),
             }
         )
+
     highlight_contract = [
         {"id": q["id"], "sentence": q["sentence"], "targets": q["targets"]}
         for q in joined
@@ -185,6 +236,7 @@ def main() -> int:
         for q in joined
         if q["review_status"] == "teacher-reviewed"
     ]
+
     if compact_hash(highlight_contract) != HIGHLIGHT_CONTRACT_HASH:
         errors.append("one or more of the 156 migrated highlights changed")
     if compact_hash(full_contract) != QUESTION_CONTRACT_HASH:
@@ -197,13 +249,14 @@ def main() -> int:
         {"text": "Did", "occurrence": 0}
     ]:
         errors.append("SE-P-02 must retain Operator and highlight Did only")
+
     review_guard = next((question for question in joined if question["id"] == "REVIEW-01"), None)
     if (
         not review_guard
         or review_guard["answer"] != "Context needed"
         or "More context is needed" not in review_guard["explanation"]
     ):
-        errors.append("the manual-review guard in REVIEW-01 must remain visible")
+        errors.append("the expert-review guard in REVIEW-01 must remain visible")
 
     expected_scoring = {
         "first_attempt_correct": 1,
@@ -218,6 +271,29 @@ def main() -> int:
     index_html = index_path.read_text(encoding="utf-8")
     errors.extend(validate_public_terms(index_html))
 
+    handbook_path = DOCS / "handbook.html"
+    if not handbook_path.exists():
+        errors.append("docs/handbook.html is missing")
+    else:
+        handbook_html = handbook_path.read_text(encoding="utf-8")
+        for required in (
+            'id="remapping"',
+            "Formal pedagogical remapping",
+            "Content in preparation",
+            "Expanded content coming.",
+        ):
+            if required not in handbook_html:
+                errors.append(f"handbook.html is missing required content: {required!r}")
+
+    for required in (
+        'class="remap-feature"',
+        'href="handbook.html#remapping"',
+        'href="assets/remapping.css?v=1.0.0"',
+        "Formal pedagogical remapping",
+    ):
+        if required not in index_html:
+            errors.append(f"index.html is missing the public remapping feature: {required!r}")
+
     required_assets = (
         "assets/brand/logo-mark.svg",
         "assets/brand/favicon.svg",
@@ -227,10 +303,12 @@ def main() -> int:
         "assets/brand/icon-192.png",
         "assets/brand/icon-512.png",
         "assets/brand/site.webmanifest",
+        "assets/remapping.css",
     )
     for relative in required_assets:
         if not (DOCS / relative).exists():
-            errors.append(f"missing supplied brand asset: docs/{relative}")
+            errors.append(f"missing public asset: docs/{relative}")
+
     for reference in (
         'src="assets/brand/logo-mark.svg"',
         'href="assets/brand/favicon.svg"',
@@ -241,6 +319,7 @@ def main() -> int:
     ):
         if reference not in index_html:
             errors.append(f"index.html does not reference {reference}")
+
     if "🔎" in index_html:
         errors.append("the old emoji brand mark is still present")
     if 'src="data/questions.js"' in index_html:
@@ -255,6 +334,7 @@ def main() -> int:
         errors.append("the manifest-and-shards loader is missing")
     if not (ROOT / ".github" / "ISSUE_TEMPLATE" / "content-correction.md").exists():
         errors.append("the content-correction issue template is missing")
+
     for path in ROOT.rglob("*"):
         if path.is_file() and "Zone.Identifier" in path.name:
             errors.append(f"Windows Zone.Identifier artefact remains: {path.relative_to(ROOT)}")
@@ -264,6 +344,7 @@ def main() -> int:
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
+
     print("Sentence Sense Detective pilot validation passed.")
     print(f"- Sentences: {len(sentence_records)}")
     print(f"- Questions: {len(questions)}")
