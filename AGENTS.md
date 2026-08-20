@@ -1,6 +1,6 @@
 # AGENTS.md — Sentence Sense Detective
 
-These instructions apply to every task in this repository. `CODEX_HANDOVER_FORMAL_REMAP_ENGINE.md` is the newest authority for the formal remapping architecture; read it after this file, `CODEX_HANDOVER.md`, and `CODEX_HANDOVER_MASC_OANC_10K.md` before changing the corpus architecture, rule profile, or public site.
+These instructions apply to every task in this repository. `CODEX_HANDOVER_FORMAL_REMAP_ENGINE.md` remains the authority for the internal remapping architecture; read it after this file, `CODEX_HANDOVER.md`, and `CODEX_HANDOVER_MASC_OANC_10K.md` before changing the corpus architecture, rule profile, or public site.
 
 ## Product and content locks
 
@@ -8,15 +8,17 @@ These instructions apply to every task in this repository. `CODEX_HANDOVER_FORMA
 - Preserve all 106 teacher-reviewed mappings exactly once. `Operator` remains a separate category, and the visible expert-review guard remains a valid output.
 - Never silently change a reviewed ID, source ID, answer, target, prompt, explanation, terminology choice, or review guard. A reviewed change requires a written rationale, changelog entry, and regression test.
 - Keep word class, sentence element, clause class, marker type, clause structure, and clause function as separate pedagogical dimensions.
-- Use “formal pedagogical remapping”, “pedagogical grammar layer”, “pedagogical analysis”, or “Universal Pedagogical Tag Set”; never call it a departmental schema.
+- Use “pedagogical remapping”, “pedagogical grammar layer”, “pedagogical analysis”, or “Universal Pedagogical Tag Set”; never call it a departmental schema.
 - Do not imply that technical annotation labels are classroom grammar labels.
 
-## Public explanation of remapping
+## Public methodology framing
 
-- Formal pedagogical remapping is a principal scientific and methodological contribution of the project. It must be described prominently and accurately on the home page, in the About dialog, and in the Grammar Handbook.
-- The public explanation may name Stanza and Universal Dependencies and may describe the high-level sequence: corpus sentence → source analysis → versioned pedagogical remapping profile → reviewed or publishable pedagogical annotation → practice question.
-- The public explanation may report verified aggregate results, including the 106-case reviewed contract, exact replay, 10,000-sentence corpus, publish/review counts, and the distinction between direct correspondence, structurally derived analysis, and expert review.
-- Do not reduce remapping to front-end relabelling. Explain that it may combine structural evidence, lexical conditions, exclusions, complete target-span reconstruction, rule priority, conflict handling, provenance, and abstention.
+- Present the complete workflow in a balanced sequence: **corpus selection → automatic annotation → pedagogical remapping → question construction → quality control**.
+- The home page may contain one compact **How this was made** signpost after the practice modes. Do not place a large methodology or statistics panel before the learning task.
+- The About dialog should give a short, formatted account of the four main production stages: corpus, annotation, remapping, and practice.
+- The Grammar Handbook should explain the full workflow in handbook style. Remapping deserves a substantive section, but it is one stage in the larger corpus-to-question process rather than the sole subject of the page.
+- The public explanation may name MASC, written OANC, Stanza, and Universal Dependencies and may describe verified aggregate figures where useful.
+- Explain remapping accurately: it is not front-end relabelling and may combine structural evidence, lexical conditions, exclusions, target-span reconstruction, rule priority, conflict handling, provenance, and abstention.
 - Do not use named drafting placeholders such as “to be expanded/amended by Martin Grad” or `[MARTIN: ...]`. Use neutral wording such as **Content in preparation**, **Expanded content coming**, or **Section in development**.
 
 ## Public boundary
@@ -60,4 +62,4 @@ node --check docs/assets/app.js
 node --test tests/test_round_state.js tests/test_question_bank.js
 ```
 
-For UI changes, serve `docs/` and inspect desktop practice, the public remapping feature, the About methodology view, the Handbook remapping chapter, mobile practice at 390 × 844, keyboard operation, reduced motion, all scoring paths, the browser console, and page errors.
+For UI changes, serve `docs/` and inspect desktop practice, the compact methodology signpost, the formatted About methodology, the full Handbook workflow, mobile practice at 390 × 844, keyboard operation, reduced motion, all scoring paths, the browser console, and page errors.
