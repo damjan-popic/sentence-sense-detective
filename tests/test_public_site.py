@@ -10,12 +10,18 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from validate_data import validate_public_terms  # noqa: E402
+from validate_data import (  # noqa: E402
+    TECHNICAL_EXPLANATION_PATHS,
+    validate_public_terms,
+)
+
 HTML = (ROOT / "docs/index.html").read_text(encoding="utf-8")
+HANDBOOK = (ROOT / "docs/handbook.html").read_text(encoding="utf-8")
 JS = (ROOT / "docs/assets/app.js").read_text(encoding="utf-8")
 ROUND_STATE = (ROOT / "docs/assets/round-state.js").read_text(encoding="utf-8")
 QUESTION_BANK = (ROOT / "docs/assets/question-bank.js").read_text(encoding="utf-8")
 CSS = (ROOT / "docs/assets/styles.css").read_text(encoding="utf-8")
+REMAP_CSS = (ROOT / "docs/assets/remapping.css").read_text(encoding="utf-8")
 MANIFEST = json.loads((ROOT / "docs/data/manifest.json").read_text(encoding="utf-8"))
 
 
@@ -81,8 +87,9 @@ class PublicSiteTests(unittest.TestCase):
     def test_about_methodology_is_exact_and_version_is_dynamic(self) -> None:
         self.assertEqual(1, HTML.count("<!-- PUBLIC_METHODOLOGY_ALLOWLIST_START -->"))
         self.assertEqual(1, HTML.count("<!-- PUBLIC_METHODOLOGY_ALLOWLIST_END -->"))
-        self.assertIn("The English pilot began with 106 examples prepared and reviewed by Martin Grad.", HTML)
-        self.assertIn("Our immediate aim is an open English practice corpus based on approximately 10,000 sentences", HTML)
+        self.assertIn("The defining methodological feature of Sentence Sense Detective is a formal remapping layer", HTML)
+        self.assertIn("The current engine reproduces all 106 reviewed cases exactly", HTML)
+        self.assertIn("The current English release is built on 10,000 openly reusable corpus sentences", HTML)
         self.assertIn("Martin Grad — Principal author and grammar lead", HTML)
         self.assertIn("Damjan Popič — Co-author and project lead", HTML)
         self.assertIn('href="credits.html"', HTML)
@@ -90,10 +97,36 @@ class PublicSiteTests(unittest.TestCase):
         self.assertIn("els.aboutVersion.textContent = loaded.version", JS)
         self.assertEqual([], validate_public_terms(HTML))
 
-    def test_methodology_allowlist_does_not_weaken_public_scan(self) -> None:
-        injected = HTML.replace("</main>", "<p>Stanza must stay out of exercises.</p></main>")
-        errors = validate_public_terms(injected)
-        self.assertTrue(any("appears outside the allowlist" in error for error in errors))
+    def test_remapping_is_prominent_and_placeholders_are_neutral(self) -> None:
+        self.assertIn('class="remap-feature"', HTML)
+        self.assertIn('href="handbook.html#remapping"', HTML)
+        self.assertIn("Formal remapping turns corpus annotation into classroom grammar.", HTML)
+        self.assertIn('id="remapping"', HANDBOOK)
+        self.assertIn("Remapping is the central methodological contribution", HANDBOOK)
+        self.assertIn("Content in preparation", HANDBOOK)
+        self.assertIn("Expanded content coming.", HANDBOOK)
+        self.assertIn(".remap-feature", REMAP_CSS)
+        combined = HTML + HANDBOOK
+        for forbidden in (
+            "To be expanded by Martin Grad",
+            "To be amended by Martin Grad",
+            "[MARTIN:",
+        ):
+            self.assertNotIn(forbidden, combined)
+
+    def test_technical_methodology_stays_out_of_exercise_code(self) -> None:
+        self.assertEqual(
+            {
+                Path("docs/index.html"),
+                Path("docs/handbook.html"),
+                Path("docs/assets/remapping.css"),
+            },
+            TECHNICAL_EXPLANATION_PATHS,
+        )
+        for public_exercise_code in (JS, ROUND_STATE, QUESTION_BANK):
+            self.assertNotIn("Stanza", public_exercise_code)
+            self.assertNotIn("Universal Dependencies", public_exercise_code)
+            self.assertNotIn("formal remapping", public_exercise_code.casefold())
 
     def test_required_interactions_and_recoverable_loading_exist(self) -> None:
         for element_id in (
