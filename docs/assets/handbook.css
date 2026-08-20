@@ -1,0 +1,57 @@
+.handbook-link { text-decoration: none; display: inline-flex; align-items: center; }
+.handbook-card { max-width: 940px; }
+.chapter-header { padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+.chapter-header h1 { max-width: 760px; }
+.chapter-lead { max-width: 780px; color: var(--ink-soft); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+.chapter-note { display: inline-block; margin: .5rem 0 0; padding: .65rem .85rem; border-radius: 12px; background: var(--lavender); font-weight: 800; }
+.chapter-nav { margin: 1.5rem 0 2.5rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(135deg, rgba(207, 238, 229, .45), rgba(255, 234, 166, .28)); }
+.chapter-nav strong { display: block; margin-bottom: .55rem; }
+.chapter-nav ol { margin: 0; columns: 2; column-gap: 2rem; padding-left: 1.25rem; }
+.chapter-nav li { break-inside: avoid; margin: .25rem 0; }
+.chapter-nav a { color: var(--navy); font-weight: 750; }
+.handbook-card section { scroll-margin-top: 1rem; }
+.handbook-card h2 { margin-top: 2.8rem; }
+.handbook-card h3 { margin: 1.6rem 0 .45rem; }
+.handbook-card blockquote { margin: 1rem 0; padding: 1rem 1.15rem; border-left: 5px solid var(--mint-strong); border-radius: 0 14px 14px 0; background: #fff; font-family: Georgia, "Times New Roman", serif; font-size: 1.08rem; }
+.goal-list li, .stage-list li, .principle-list li, .summary-list li { margin: .55rem 0; }
+.chapter-box { margin: 1.35rem 0; padding: 1rem 1.15rem; border: 1px solid var(--line); border-radius: 18px; }
+.chapter-box h3 { margin-top: 0; }
+.key-box { background: rgba(207, 238, 229, .48); }
+.reminder-box { background: rgba(222, 217, 255, .45); }
+.caution-box { background: rgba(255, 234, 166, .46); }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; }
+.handbook-table { width: 100%; border-collapse: collapse; min-width: 680px; background: #fff; }
+.handbook-table th, .handbook-table td { padding: .9rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.handbook-table th { background: rgba(207, 238, 229, .55); }
+.handbook-table tr:last-child td { border-bottom: 0; }
+.path-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+.path-card { position: relative; padding: 1.1rem; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+.path-card h3 { margin-top: .45rem; }
+.path-number { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 12px; background: var(--yellow); font-weight: 950; }
+.path-card:nth-child(2) .path-number { background: var(--mint); }
+.path-card:nth-child(3) .path-number { background: var(--lavender); }
+.path-card blockquote { font-size: 1rem; padding: .7rem .8rem; }
+.worked-example { margin: 1rem 0; padding: 1.15rem; border: 1px solid var(--line); border-radius: 20px; background: #fff; }
+.worked-example blockquote { margin: .65rem 0; }
+.example-label { margin: 0; color: var(--mint-strong); text-transform: uppercase; letter-spacing: .08em; font-size: .76rem; font-weight: 900; }
+.stage-list { counter-reset: stage; list-style: none; padding-left: 0; }
+.stage-list li { position: relative; padding: .9rem 1rem .9rem 3.6rem; border-bottom: 1px solid var(--line); }
+.stage-list li::before { counter-increment: stage; content: counter(stage); position: absolute; left: .5rem; top: .75rem; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 12px; background: var(--mint); font-weight: 950; }
+.two-column-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.two-column-list > div { padding: 1rem; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.two-column-list h3 { margin-top: 0; }
+.principle-list { padding-left: 1.35rem; }
+.answer-details { margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.answer-details summary { cursor: pointer; color: var(--navy); font-weight: 900; }
+.martin-section { margin-top: 3rem; padding: 1.3rem; border: 2px dashed rgba(36, 50, 74, .22); border-radius: 24px; background: rgba(222, 217, 255, .22); }
+.martin-section h2 { margin-top: 0; }
+.martin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.martin-grid article { padding: 1rem; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+.martin-grid h3 { margin-top: 0; }
+.chapter-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+@media (max-width: 760px) {
+  .chapter-nav ol { columns: 1; }
+  .path-grid, .two-column-list, .martin-grid { grid-template-columns: 1fr; }
+  .handbook-card { padding: 1.15rem; }
+}
