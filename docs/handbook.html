@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A concise grammar handbook for Sentence Sense Detective: analytical levels, worked examples, quality principles, and study guidance.">
+  <meta name="description" content="The Sentence Sense Detective handbook: grammatical analysis, formal pedagogical remapping, worked examples, and quality principles.">
   <meta name="theme-color" content="#24324a">
   <title>Grammar handbook · Sentence Sense Detective</title>
   <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
@@ -13,6 +13,7 @@
   <link rel="manifest" href="assets/brand/site.webmanifest">
   <link rel="stylesheet" href="assets/styles.css?v=1.0.0">
   <link rel="stylesheet" href="assets/handbook.css?v=1.0.0">
+  <link rel="stylesheet" href="assets/remapping.css?v=1.0.0">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to the handbook</a>
@@ -37,9 +38,9 @@
     <article class="credits-card handbook-card">
       <header class="chapter-header">
         <p class="eyebrow">Methodological introduction</p>
-        <h1>From sentence to analysis</h1>
-        <p class="chapter-lead">Sentence Sense Detective is built around a simple learning task: look closely at a highlighted word, phrase, or clause; decide what it is or what function it has; then compare your analysis with a concise explanation. This chapter explains how authentic corpus examples become classroom-ready grammar questions.</p>
-        <p class="chapter-note">The fuller grammatical account of word classes, sentence elements, and clauses will be expanded by Martin Grad.</p>
+        <h1>From sentence to analysis — and through remapping</h1>
+        <p class="chapter-lead">Sentence Sense Detective asks students to analyse a highlighted word, phrase, or clause and then compare their decision with a concise explanation. This chapter introduces the grammatical levels used in the tool and the formal remapping process that turns corpus annotation into classroom-ready questions.</p>
+        <p class="chapter-note">Additional chapters on word classes, sentence elements, subordination, and terminological policy are in preparation.</p>
       </header>
 
       <nav class="chapter-nav" aria-label="Handbook contents">
@@ -47,13 +48,11 @@
         <ol>
           <li><a href="#goals">Learning goals</a></li>
           <li><a href="#levels">Three levels of analysis</a></li>
+          <li><a href="#remapping">Formal pedagogical remapping</a></li>
           <li><a href="#interpretation">Why interpretation is needed</a></li>
-          <li><a href="#paths">Three analytical paths</a></li>
           <li><a href="#examples">Worked examples</a></li>
-          <li><a href="#workflow">From corpus sentence to question</a></li>
-          <li><a href="#uncertainty">Quality and uncertainty</a></li>
+          <li><a href="#quality">Quality and uncertainty</a></li>
           <li><a href="#multilingual">Multilingual direction</a></li>
-          <li><a href="#self-check">Check your understanding</a></li>
         </ol>
       </nav>
 
@@ -62,281 +61,135 @@
         <p>After working through this chapter, you should be able to:</p>
         <ul class="goal-list">
           <li>distinguish <strong>word class</strong>, <strong>sentence element</strong>, and <strong>clause analysis</strong>;</li>
-          <li>explain why a machine-produced analysis cannot always be converted by simply renaming one label;</li>
-          <li>distinguish straightforward correspondences from cases that require structural interpretation or expert checking;</li>
-          <li>understand why a highlighted target may be a whole phrase, a clause, or a discontinuous unit rather than a single word;</li>
-          <li>use feedback as a grammatical explanation rather than as a bare statement of the correct answer;</li>
-          <li>understand how a large question bank can grow while preserving scholarly and pedagogical quality.</li>
+          <li>define <strong>pedagogical remapping</strong> and explain why it is more than renaming labels;</li>
+          <li>distinguish direct correspondences, structurally derived analyses, and cases requiring expert review;</li>
+          <li>explain why a learning target may be a whole phrase, clause, or discontinuous unit;</li>
+          <li>understand how the project expands a question bank without presenting uncertainty as fact.</li>
         </ul>
-
-        <aside class="chapter-box reminder-box">
-          <h3>What you should already know</h3>
-          <p>You should be familiar with the basic difference between a <strong>word</strong> and a <strong>phrase</strong>, a phrase and a <strong>clause</strong>, and the <strong>form</strong> of an expression and its <strong>function</strong> in a sentence. You do not need to know how the source analysis is represented internally.</p>
-        </aside>
       </section>
 
       <section id="levels">
-        <h2>1. One sentence can be described at several levels</h2>
-        <p>Consider the sentence:</p>
-        <blockquote><strong>Sarah and her daughters</strong> arrived first.</blockquote>
-        <p>The highlighted sequence can be described in more than one compatible way:</p>
-        <ul>
-          <li><em>Sarah</em> is a proper noun;</li>
-          <li><em>daughters</em> is a noun;</li>
-          <li><em>Sarah and her daughters</em> is a coordinated noun phrase;</li>
-          <li>the whole phrase functions as the <strong>Subject (S)</strong> of the clause.</li>
-        </ul>
-        <p>These statements answer different questions. The practice tool therefore separates three analytical levels.</p>
-
+        <h2>1. Three levels of grammatical analysis</h2>
+        <p>One expression can receive several compatible descriptions because different questions are being asked. In <em>Sarah and her daughters arrived first</em>, for example, <em>Sarah</em> is a proper noun, <em>daughters</em> is a noun, the complete sequence is a coordinated noun phrase, and the whole phrase functions as the <strong>Subject (S)</strong>.</p>
         <div class="table-wrap" role="region" aria-label="Analytical levels" tabindex="0">
           <table class="handbook-table">
-            <thead>
-              <tr><th>Level</th><th>Central question</th><th>Typical answers</th></tr>
-            </thead>
+            <thead><tr><th>Level</th><th>Central question</th><th>Typical answers</th></tr></thead>
             <tbody>
               <tr><td><strong>Parts of speech</strong></td><td>What kind of word is highlighted?</td><td>noun, pronoun, adjective, lexical verb, auxiliary, preposition</td></tr>
-              <tr><td><strong>Sentence elements</strong></td><td>What function does the highlighted word, phrase, or clause have?</td><td>S, P, Operator, DO, IO, SC, OC, A</td></tr>
-              <tr><td><strong>Clauses</strong></td><td>What kind of clause is highlighted, how is it formed, and what function does it have?</td><td>nominal clause, adverbial clause, relative clause, finite clause, infinitival clause, PostM</td></tr>
+              <tr><td><strong>Sentence elements</strong></td><td>What function does the highlighted unit have?</td><td>S, P, Operator, DO, IO, SC, OC, A</td></tr>
+              <tr><td><strong>Clauses</strong></td><td>What kind of clause is it, how is it formed, and what function does it have?</td><td>nominal, adverbial, relative; finite, infinitival, -ing; S, DO, A, PostM</td></tr>
             </tbody>
           </table>
         </div>
+        <aside class="chapter-box key-box">
+          <h3>Key principle</h3>
+          <p>Grammatical <strong>form</strong> and grammatical <strong>function</strong> are related, but they are not identical. A word-class label cannot by itself determine a sentence-element function, and a clause structure cannot by itself determine the function of that clause in the larger sentence.</p>
+        </aside>
+      </section>
+
+      <section id="remapping">
+        <h2>2. Formal pedagogical remapping</h2>
+        <p><strong>Remapping is the central methodological contribution of Sentence Sense Detective.</strong> It is the explicit, versioned process that connects a computational description of a sentence to the grammatical categories used in teaching. Stanza and Universal Dependencies supply the source analysis; the target layer contains the word classes, sentence elements, clause types, markers, structures, and functions practised by students.</p>
+        <p>This is not front-end relabelling. A rule may need to inspect several words and relations, recognise a clause pattern, recover the complete phrase or clause to be highlighted, apply an exclusion, resolve rule priority, and decide that the evidence is insufficient for automatic publication.</p>
+
+        <div class="remap-flow" aria-label="Formal remapping workflow">
+          <article class="remap-step"><small>1 · Source</small><strong>Corpus sentence</strong><p>An authentic sentence with preserved wording, licence, and provenance.</p></article>
+          <article class="remap-step"><small>2 · Analysis</small><strong>Stanza and UD</strong><p>Tokens, lemmas, features, heads, relations, and exact character offsets.</p></article>
+          <article class="remap-step"><small>3 · Remapping</small><strong>Pedagogical profile</strong><p>Versioned rules reconstruct the teaching analysis and its full target span.</p></article>
+          <article class="remap-step"><small>4 · Learning</small><strong>Practice question</strong><p>An approved annotation becomes a highlighted question with feedback.</p></article>
+        </div>
+
+        <h3>Three possible outcomes</h3>
+        <div class="remap-decision-grid">
+          <article><h3>Direct correspondence</h3><p>The source evidence, target extent, and classroom category align without a construction-specific inference.</p></article>
+          <article><h3>Structurally derived analysis</h3><p>The result is licensed only when an explicit grammatical configuration, lexical condition, and span strategy are satisfied.</p></article>
+          <article><h3>Expert review</h3><p>The evidence is incomplete or the construction depends on context or theoretical policy, so the candidate is withheld.</p></article>
+        </div>
+
+        <div class="remap-evidence">
+          <strong>The reviewed contract.</strong> The English profile is grounded in 106 cases prepared and reviewed by Martin Grad: 26 direct correspondences, 60 structurally derived analyses, and 20 cases requiring expert review. With the pinned Stanza pipeline, the implemented remapper reproduces all 106 labels, target spans, and publication decisions exactly. No review-only case is automatically published.
+        </div>
+
+        <p>The formal profile was applied to 10,000 openly reusable corpus sentences. It generated 274,198 pedagogical candidates, cleared 257,084 for presentation, and routed 17,114 to review. The presentation stage then produced 102,147 corpus-derived questions while keeping the 106 reviewed reference questions visible in the public bank.</p>
 
         <aside class="chapter-box key-box">
-          <h3>Key idea</h3>
-          <p>Grammatical <strong>form</strong> and grammatical <strong>function</strong> are related, but they are not the same thing. A word-class label cannot by itself determine a sentence-element function, and the internal structure of a clause does not by itself determine the function of that clause in the larger sentence.</p>
+          <h3>Why remapping matters</h3>
+          <p>Without a separate remapping layer, an exercise generator would either expose technical annotation labels that students are not expected to learn or hide untested grammatical assumptions inside application code. Formal remapping makes those assumptions explicit, testable, correctable, and reusable.</p>
         </aside>
       </section>
 
       <section id="interpretation">
-        <h2>2. Why interpretation is needed</h2>
-        <p>A machine can process thousands of sentences consistently and identify words, lemmas, grammatical features, heads, dependants, and clause-like structures. Its representation is designed for computational consistency, however, not for any one classroom tradition. Four differences are especially important.</p>
-
-        <h3>2.1 A head word is not always the full learning target</h3>
+        <h2>3. Why remapping requires grammatical interpretation</h2>
+        <h3>A head word is not always the complete target</h3>
         <blockquote><strong>The old woman living in the basement</strong> needs help.</blockquote>
-        <p>One word acts as the structural centre of the Subject phrase, but the useful target is the whole phrase, including its determiner, adjective, and postmodifier. A reliable exercise must recover the complete unit rather than highlight only its head.</p>
+        <p>The source analysis identifies a structural head, but the useful Subject target is the complete phrase, including its determiner, adjective, and postmodifier.</p>
 
-        <h3>2.2 Similar source structures can have different classroom functions</h3>
-        <p>A complement, modifier, or prepositional phrase cannot always receive one fixed sentence-element label. The answer may depend on the governing verb, the clause pattern, whether the unit is obligatory, its meaning, and where it attaches.</p>
-        <p>That is why a shortcut such as “every prepositional phrase is an Adverbial” would create many neat-looking but incorrect questions.</p>
+        <h3>Similar source structures may have different functions</h3>
+        <p>A prepositional phrase may be an Adverbial, a selected complement, a postmodifier, a predicative unit, or an ambiguous attachment. A shortcut such as “every oblique phrase is A” would create neat-looking but unreliable questions.</p>
 
-        <h3>2.3 A classroom category may combine several pieces of evidence</h3>
+        <h3>A classroom category may combine several pieces of evidence</h3>
         <blockquote>Paul <strong>is</strong> <strong>a good student</strong>.</blockquote>
-        <p>For teaching purposes, <em>is</em> is analysed as <strong>P</strong>, while <em>a good student</em> is <strong>SC</strong>. The result follows from the whole copular configuration rather than from one isolated label.</p>
+        <p>The copular configuration licenses two pedagogical units: <em>is</em> as <strong>P</strong> and <em>a good student</em> as <strong>SC</strong>. No single source label supplies the full analysis.</p>
 
-        <h3>2.4 Some grammatical units are discontinuous</h3>
+        <h3>Some units are discontinuous</h3>
         <blockquote><strong>Did</strong> the children <strong>play</strong>?</blockquote>
-        <p>The auxiliary occupies the Operator position, while the lexical verb supplies the predicator nucleus. A robust resource must support single words, continuous phrases and clauses, more than one highlighted unit, and—where the teaching task requires it—discontinuous units.</p>
-      </section>
-
-      <section id="paths">
-        <h2>3. Three analytical paths</h2>
-        <div class="path-grid">
-          <article class="path-card">
-            <span class="path-number">1</span>
-            <h3>Straightforward correspondence</h3>
-            <blockquote>She meant <strong>no harm</strong>.</blockquote>
-            <p>The highlighted noun phrase is a clear <strong>Direct Object (DO)</strong>. Its extent is continuous and no competing analysis is plausible in the sentence.</p>
-          </article>
-          <article class="path-card">
-            <span class="path-number">2</span>
-            <h3>Structural interpretation</h3>
-            <blockquote>The milk <strong>seems</strong> <strong>off</strong>.</blockquote>
-            <p>The analysis must recognize a linking verb and a predicative complement. <em>Off</em> functions as <strong>SC</strong> here; its answer follows from the clause pattern, not from surface form alone.</p>
-          </article>
-          <article class="path-card">
-            <span class="path-number">3</span>
-            <h3>Expert check</h3>
-            <blockquote><strong>It</strong> is important <strong>to know the truth</strong>.</blockquote>
-            <p>The sentence contains a formal subject and a postponed infinitival subject. Treating <em>it</em> as an ordinary lexical Subject would hide the construction.</p>
-          </article>
-        </div>
-
-        <aside class="chapter-box caution-box">
-          <h3>Quality principle</h3>
-          <p>Uncertainty is not repaired by forcing an answer. A doubtful example should be held back for expert checking rather than published with false confidence.</p>
-        </aside>
+        <p>The auxiliary is <strong>Operator</strong>, while the lexical verb is <strong>P</strong>. The data model must therefore support more than one target span.</p>
       </section>
 
       <section id="examples">
         <h2>4. Worked examples</h2>
-
         <article class="worked-example">
-          <p class="example-label">Example 1 · Recovering the whole Subject phrase</p>
-          <blockquote><strong>Sarah and her daughters</strong> arrived first.</blockquote>
-          <p><strong>Question:</strong> What is the function of the highlighted phrase?</p>
-          <p><strong>Answer:</strong> S — Subject</p>
-          <p>The target is the complete coordinated phrase, not only one of its nouns.</p>
+          <p class="example-label">Direct correspondence</p>
+          <blockquote>She meant <strong>no harm</strong>.</blockquote>
+          <p><strong>Answer:</strong> DO — Direct Object. The complete noun phrase is a continuous and unambiguous object target.</p>
         </article>
-
         <article class="worked-example">
-          <p class="example-label">Example 2 · Separating Operator and Predicator</p>
-          <blockquote><strong>Did</strong> the children <strong>play</strong>?</blockquote>
-          <p><strong>Analysis:</strong> <em>Did</em> is Operator; <em>play</em> is P — Predicator.</p>
-          <p>The inversion makes the distinction visible: the auxiliary carries the operator function, while the lexical verb provides the predicator nucleus.</p>
+          <p class="example-label">Structurally derived analysis</p>
+          <blockquote>The milk <strong>seems</strong> <strong>off</strong>.</blockquote>
+          <p><strong>Answer:</strong> <em>off</em> is SC. The analysis depends on recognising a linking-verb pattern and the predicative relation to the Subject.</p>
         </article>
-
         <article class="worked-example">
-          <p class="example-label">Example 3 · Reconstructing a copular analysis</p>
-          <blockquote>Paul <strong>is</strong> <strong>a good student</strong>.</blockquote>
-          <p><strong>Analysis:</strong> <em>is</em> is P; <em>a good student</em> is SC.</p>
-          <p>The complement identifies the Subject. The useful classroom analysis therefore separates the copular verb from the Subject Complement.</p>
-        </article>
-
-        <article class="worked-example">
-          <p class="example-label">Example 4 · A clause functioning as Subject</p>
+          <p class="example-label">Clause functioning as a sentence element</p>
           <blockquote><strong>To have seen him lose his temper</strong> was unexpected.</blockquote>
-          <p><strong>Answer:</strong> S — Subject</p>
-          <p>The target is a perfect infinitival clause, and the whole clause fills the Subject position in the larger clause.</p>
+          <p><strong>Answer:</strong> S — Subject. The whole perfect infinitival clause fills the Subject position in the larger clause.</p>
         </article>
-
         <article class="worked-example">
-          <p class="example-label">Example 5 · A clause functioning as Adverbial</p>
-          <blockquote>She telephoned <strong>while you were out</strong>.</blockquote>
-          <p><strong>Answer:</strong> A — Adverbial</p>
-          <p>The clause adds a temporal circumstance. Its type, structure, marker, and function are separate dimensions of analysis.</p>
-        </article>
-
-        <article class="worked-example">
-          <p class="example-label">Example 6 · A relative clause functioning as Postmodifier</p>
-          <blockquote>Students <strong>who work hard</strong> pass their exams.</blockquote>
-          <p><strong>Answer:</strong> PostM — Postmodifier</p>
-          <p>The clause narrows the reference of <em>students</em>. A fuller analysis also records its relative-clause type and restrictive interpretation.</p>
+          <p class="example-label">Expert-review guard</p>
+          <blockquote><strong>It</strong> is important <strong>to know the truth</strong>.</blockquote>
+          <p>The construction contains a formal Subject and a postponed infinitival Subject. Treating <em>it</em> as an ordinary lexical Subject would conceal the construction.</p>
         </article>
       </section>
 
-      <section id="workflow">
-        <h2>5. How a corpus sentence becomes a question</h2>
-        <ol class="stage-list">
-          <li><strong>Sentence selection.</strong> Openly usable corpus material is filtered to remove fragments, broken boundaries, duplicates, private information, and unsuitable content.</li>
-          <li><strong>Source analysis.</strong> Each sentence receives a reproducible machine description that helps locate words, phrases, verbal structures, and clause-like units.</li>
-          <li><strong>Pedagogical interpretation.</strong> A separate grammatical profile states what evidence supports a classroom category, what blocks it, how the full target is recovered, and whether the result should be published or checked.</li>
-          <li><strong>Question construction.</strong> An accepted analysis is given a clear prompt, a highlighted target, three alternatives from the same category set, and a concise explanation.</li>
-          <li><strong>Quality control.</strong> The project checks target extent, answer terminology, the plausibility of alternatives, duplication, and the accuracy of the explanation.</li>
-          <li><strong>Classroom correction.</strong> Teacher feedback, student reports, and expert revision become recorded changes to the data and grammatical profile.</li>
-        </ol>
-
-        <aside class="chapter-box key-box">
-          <h3>The presentation does not decide the grammar</h3>
-          <p>The web page displays an already justified analysis. Scoring, answer order, and visual design must never determine the grammatical label.</p>
-        </aside>
-      </section>
-
-      <section>
-        <h2>6. What students are expected to learn</h2>
-        <div class="two-column-list">
-          <div>
-            <h3>Students are expected to learn how to:</h3>
-            <ul>
-              <li>identify a word class in context;</li>
-              <li>recognize the complete unit performing a sentence function;</li>
-              <li>distinguish Subjects, Predicators, Operators, Objects, Complements, and Adverbials;</li>
-              <li>distinguish clause type, structure, marker, and function;</li>
-              <li>justify an analysis from the sentence rather than from a memorized surface cue.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Students are not expected to:</h3>
-            <ul>
-              <li>memorize the internal labels used during corpus preparation;</li>
-              <li>treat every phrase with the same form as having the same function;</li>
-              <li>accept a score without reading the explanation;</li>
-              <li>assume that one analytical tradition exhausts every possible grammatical description.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>7. Why the reviewed core matters</h2>
-        <p>The English pilot began with 106 examples reviewed by Martin Grad. They establish the teaching terminology, specify the correct highlighted units, expose cases where simple correspondence is insufficient, and identify constructions that should be withheld for expert checking.</p>
-        <p>A large bank is valuable only if expansion does not silently change the grammar. The reviewed core therefore acts as a stable reference: later versions must reproduce its accepted analyses or document why a correction has been made.</p>
-      </section>
-
-      <section id="uncertainty">
-        <h2>8. How the project handles uncertainty</h2>
+      <section id="quality">
+        <h2>5. Quality, uncertainty, and the reviewed core</h2>
+        <p>The 106 reviewed cases are not merely examples. They form an executable contract: they establish terminology, target extent, exceptions, and non-automation policies. Later versions must reproduce them exactly or document an approved correction.</p>
         <ol class="principle-list">
-          <li><strong>Do not confuse frequency with certainty.</strong> A common pattern may still be structurally ambiguous.</li>
-          <li><strong>Do not generalize from one attractive example.</strong> A generalization must survive contrasting cases.</li>
-          <li><strong>Do not use a score as a substitute for grammatical justification.</strong> A high numerical value does not make an analysis theoretically correct.</li>
-          <li><strong>Prefer omission to misinformation.</strong> A smaller accurate bank is more useful than a larger bank filled with doubtful examples.</li>
+          <li><strong>Do not confuse frequency with certainty.</strong> Common patterns may still be ambiguous.</li>
+          <li><strong>Do not generalise from one attractive example.</strong> A rule must survive contrasting cases.</li>
+          <li><strong>Do not use a confidence score as grammatical proof.</strong> Numerical confidence is not theoretical justification.</li>
+          <li><strong>Prefer omission to misinformation.</strong> Unresolved cases belong in expert review, not in a student quiz.</li>
         </ol>
-        <p>Special care is required for formal and postponed Subjects, object-complement constructions, prepositional phrase attachment, linking verbs and copular clauses, reduced and non-finite clauses, zero relative clauses, restrictive and non-restrictive relatives, comparative clauses, and clauses complementing adjectives.</p>
+        <p>The current review set includes difficult prepositional attachments, duration phrases, formal and postponed Subjects, object complements, reduced clauses, zero relatives, restrictive and non-restrictive relatives, comparative clauses, purpose–result ambiguity, and clauses whose higher function depends on the matrix predicate.</p>
       </section>
 
       <section id="multilingual">
-        <h2>9. From English to a multilingual resource</h2>
-        <p>The longer-term aim is not to impose English categories mechanically on every language. The reusable part is the architecture:</p>
-        <ol>
-          <li>a source analysis for the language;</li>
-          <li>a language-specific grammatical profile;</li>
-          <li>an approved teaching vocabulary;</li>
-          <li>reviewed examples and safeguards;</li>
-          <li>a common practice interface.</li>
-        </ol>
-        <p>Each language taught at the Department of Translation Studies and across the Faculty of Arts can preserve its own grammatical tradition while using the same open technical infrastructure.</p>
+        <h2>6. From English to a multilingual resource</h2>
+        <p>The longer-term aim is not to impose the English profile on every language. The reusable architecture consists of corpus ingestion, a machine-readable source analysis, a formal rule schema, target spans, review workflow, question formats, and the practice interface. Each new language still requires its own approved teaching vocabulary, grammar profile, reviewed reference cases, explanations, and expert validation.</p>
         <aside class="chapter-box key-box">
           <h3>Transfer principle</h3>
-          <p>The platform is shared; the grammar is not assumed to be identical.</p>
+          <p>The platform is shared; the grammar is language-specific.</p>
         </aside>
       </section>
 
-      <section>
-        <h2>10. How to use the practice tool effectively</h2>
-        <h3>Before answering</h3>
-        <ol>
-          <li>What is the highlighted unit made of?</li>
-          <li>What job does it perform in this sentence?</li>
-        </ol>
-        <h3>After an incorrect answer</h3>
-        <p>Do not focus only on the correct label. Compare it with the full highlighted unit. Many mistakes arise because the learner identifies the right head word but the wrong complete phrase or clause.</p>
-        <h3>During review rounds</h3>
-        <p>Group mistakes by type: word class, form versus function, clause type versus function, target extent, or complement versus Adverbial. This makes the score diagnostically useful rather than merely competitive.</p>
-      </section>
-
-      <section id="self-check">
-        <h2>11. Check your understanding</h2>
-        <ol>
-          <li>Why is the head word of a phrase not always an adequate highlighted target?</li>
-          <li>In <em>Did the children play?</em>, why should <em>Did</em> and <em>play</em> not receive the same function label?</li>
-          <li>Why can a prepositional phrase not always be assigned the same sentence-element function?</li>
-          <li>What evidence may be needed to distinguish a Subject Complement from an Adverbial?</li>
-          <li>Why should a doubtful automatically prepared example be withheld rather than published with a high confidence score?</li>
-          <li>What part of the project can be shared across languages, and what must remain language-specific?</li>
-        </ol>
-        <details class="answer-details">
-          <summary>Suggested answers</summary>
-          <ol>
-            <li>The pedagogical unit is often the full phrase, including modifiers and complements, while the source analysis may identify only its head.</li>
-            <li><em>Did</em> occupies the Operator position, while <em>play</em> is the lexical Predicator.</li>
-            <li>Its function depends on attachment, the governing verb, obligatoriness, meaning, and the wider clause structure.</li>
-            <li>The governing verb, the relationship between the phrase and the Subject, and the role of the phrase in completing the clause pattern.</li>
-            <li>A numerical score describes system behaviour, not grammatical truth; uncertain constructions require expert judgement.</li>
-            <li>The corpus-processing and practice architecture can be shared, while terminology, constructions, reviewed examples, and explanations must be developed for each language.</li>
-          </ol>
-        </details>
-      </section>
-
-      <section>
-        <h2>12. Chapter summary</h2>
-        <ul class="summary-list">
-          <li>Sentence Sense Detective separates word class, sentence element, and clause analysis.</li>
-          <li>Machine analysis supplies evidence, but classroom grammar requires a separate interpretive layer.</li>
-          <li>Some correspondences are straightforward; others depend on structural patterns; some must be checked by an expert.</li>
-          <li>Correct target extent is as important as the correct label.</li>
-          <li>The presentation layer displays justified analyses; it does not make grammatical decisions.</li>
-          <li>The 106 reviewed examples provide a stable reference core for expansion.</li>
-          <li>A multilingual platform can share infrastructure while preserving language-specific grammatical traditions.</li>
-        </ul>
-      </section>
-
-      <section class="martin-section">
-        <p class="eyebrow">To be expanded by Martin Grad</p>
-        <h2>Grammar theory still to be added</h2>
-        <div class="martin-grid">
-          <article><h3>Word classes</h3><p>The adopted inventory; lexical and grammatical classes; auxiliaries, particles, determiners, and multifunctional forms.</p></article>
-          <article><h3>Sentence elements</h3><p>The clause-pattern model; diagnostics for S, P, Operator, DO, IO, SC, OC, and A; complementation versus modification.</p></article>
-          <article><h3>Subordination</h3><p>Clause type, marker, structure, and function; nominal, adverbial, relative, comparative, supplementive, reduced, and non-finite clauses.</p></article>
-          <article><h3>Terminological policy</h3><p>Preferred labels, acceptable variants, labels to avoid, and alignment with the terminology used in the course.</p></article>
+      <section class="coming-section">
+        <p class="eyebrow">Content in preparation</p>
+        <h2>Further grammar chapters</h2>
+        <p>The methodological foundation is in place. The following chapters will provide the fuller grammatical account and additional contrastive examples.</p>
+        <div class="coming-grid">
+          <article><h3>Word classes</h3><p>The adopted inventory, lexical and grammatical classes, auxiliaries, particles, determiners, and multifunctional forms.</p><span class="coming-note">Expanded content coming.</span></article>
+          <article><h3>Sentence elements</h3><p>The clause-pattern model and diagnostics for S, P, Operator, DO, IO, SC, OC, and A.</p><span class="coming-note">Expanded content coming.</span></article>
+          <article><h3>Subordination</h3><p>Clause type, marker, structure, and function across finite, non-finite, relative, comparative, and supplementive clauses.</p><span class="coming-note">Expanded content coming.</span></article>
+          <article><h3>Terminological policy</h3><p>Preferred labels, acceptable variants, labels to avoid, and alignment with course terminology.</p><span class="coming-note">Expanded content coming.</span></article>
         </div>
       </section>
 
