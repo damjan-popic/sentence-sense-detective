@@ -81,6 +81,7 @@ TECHNICAL_EXPLANATION_PATTERNS = (
 TECHNICAL_EXPLANATION_PATHS = {
     Path("docs/index.html"),
     Path("docs/handbook.html"),
+    Path("docs/assets/remapping.css"),
 }
 NAMED_PLACEHOLDER_PATTERNS = (
     re.compile(r"to be (?:expanded|amended) by Martin Grad", re.IGNORECASE),
